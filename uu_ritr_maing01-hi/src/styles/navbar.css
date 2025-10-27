@@ -1,0 +1,78 @@
+body, html, .page {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+}
+
+.panel {
+  width: 600px;
+  margin: 50px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.panel-header {
+  background-color: #ff7300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.logo {
+  border: 2px solid #000;
+  padding: 6px 14px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+.nav a {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 24px;
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* Content */
+.panel-content {
+  background-color: #000;
+  color: #ff7300;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.panel-content h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.panel-content p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.panel-content button {
+  background-color: #ff7300;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.panel-content button:hover {
+  background-color: #ff9100;
+}

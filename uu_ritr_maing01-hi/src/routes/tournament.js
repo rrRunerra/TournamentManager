@@ -6,6 +6,14 @@ import DarkVeil from "../bricks/DarkVeil.js";
 import { Card, CardDescription, CardTitle, CardFooter } from "../bricks/cards.js";
 import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
+import Navbar from "../bricks/navbar.js";
+
+const createTournament = ({ name, description, startDate, endDate, teamSize }) => {
+  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize });
+
+  return Calls.createTournament({ name, description, startDate, endDate, teamSize });
+  // Here you would typically make an API call to create the tournament
+}
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -16,7 +24,6 @@ export default function TournamentsPage() {
 
   const isTeacher = user.role === "teacher";
 
-  console.log(user);
 
   useEffect(() => {
     async function fetchTournaments() {
@@ -32,6 +39,7 @@ export default function TournamentsPage() {
 
   return (
     <div>
+      <Navbar />
       <h2>Tournaments</h2>
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>
@@ -59,10 +67,9 @@ export default function TournamentsPage() {
           Create New Tournament
         </button>
       )}
-              <button className="create-tournament-button" onClick={() => setIsOpen(false)}>a </button>
 
 
-      <CreateModal key=" create"isOpen={isOpen} onClose={() => {setIsOpen(false)}} onSave={() => {console.log("save")}} />
+      <CreateModal isOpen={isOpen} onClose={() => {setIsOpen(false)}} onSave={createTournament} />
     </div>
   );
 }
