@@ -1,26 +1,45 @@
 import "../styles/navbar.css";
+import { useEffect, useState } from "react";
+import { useRoute } from "uu5g05";
 
 export default function Navbar() {
+  const [activeLink, setActiveLink] = useState("tournaments");
+  const [route, setRoute] = useRoute();
 
-    return (
-    <div className="page">
-      <div className="panel">
-        <header className="panel-header">
-          <div className="logo">LOGO</div>
-          <nav className="nav">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-          </nav>
-        </header>
+  useEffect(() => {
+    setActiveLink(route.uu5Route);
+  }, []);
 
-        <main className="panel-content">
-          <h1>HEADING</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button>READ MORE</button>
-        </main>
+  return (
+    <header className="panel-header">
+      <div>
+        <img
+          src="/assets/MatchUPlogo.png"
+          alt="Logo"
+          className="logo-image"
+          style={{ width: "25px", height: "auto" }}
+        />
       </div>
-    </div>
+      <nav className="nav">
+        <p
+          className={activeLink === "tournaments" ? "active" : ""}
+          onClick={() => {
+            setActiveLink("tournaments");
+            setRoute("tournaments");
+          }}
+        >
+          Tournaments
+        </p>
+        <p
+          className={activeLink === "about" ? "active" : ""}
+          onClick={() => {
+            setActiveLink("about");
+            setRoute("about");
+          }}
+        >
+          About
+        </p>
+      </nav>
+    </header>
   );
 }
