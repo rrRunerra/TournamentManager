@@ -38,7 +38,7 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={{ width: "100%", marginBottom: "8px" }}
-		  required
+          required
         />
 
         <label>Description</label>
@@ -46,7 +46,7 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           style={{ width: "100%", marginBottom: "8px" }}
-		  required
+          required
         />
 
         <label>Start Date</label>
@@ -67,24 +67,21 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
 
         <label>Team Size</label>
         <input
-		type="number"
-		  value={teamSize}
-		  onChange={(e) => setTeamSize(e.target.value)}
-		  style={{ width: "100%", marginBottom: "8px" }}
-		  min="1"
-		  required
-		/>
+          type="number"
+          value={teamSize}
+          onChange={(e) => setTeamSize(e.target.value)}
+          style={{ width: "100%", marginBottom: "8px" }}
+          min="1"
+          required
+        />
 
         <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
           <button onClick={onClose}>Cancel</button>
           <button
             onClick={() => {
-
-				onSave({ name, description, startDate, endDate, teamSize })
-				onClose()
-			}
-			  
-            }
+              onSave({ name, description, startDate, endDate, teamSize });
+              onClose();
+            }}
           >
             Save
           </button>

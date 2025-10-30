@@ -39,7 +39,6 @@ export default function TournamentsPage() {
 
   return (
     <div>
-      <Navbar />
       <h2>Tournaments</h2>
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>
