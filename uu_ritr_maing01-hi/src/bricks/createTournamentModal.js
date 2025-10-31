@@ -6,8 +6,20 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [teamSize, setTeamSize] = useState("4");
+  const [teams, setTeams] = useState([]);
+  const [teamName, setTeamName] = useState("");
 
   if (!isOpen) return null;
+
+  const addTeam = () => {
+    if (!teamName.trim()) return;
+    setTeams([...teams, teamName.trim()]);
+    setTeamName("");
+  };
+
+  const removeTeam = (index) => {
+    setTeams(teams.filter((_, i) => i !== index));
+  };
 
   return (
     <div
@@ -75,12 +87,43 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
           required
         />
 
+        <label>Teams</label>
+        <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
+          <input
+            type="text"
+            value={teamName}
+            onChange={(e) => setTeamName(e.target.value)}
+            placeholder="Enter team name"
+            style={{ flex: 1 }}
+          />
+          <button onClick={addTeam}>Add</button>
+        </div>
+
+        <ul style={{ marginBottom: "12px", paddingLeft: "20px" }}>
+          {teams.map((team, index) => (
+            <li key={index} style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>{team}</span>
+              <button onClick={() => removeTeam(index)} style={{ marginLeft: "8px" }}>
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+
         <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
           <button onClick={onClose}>Cancel</button>
           <button
             onClick={() => {
-              onSave({ name, description, startDate, endDate, teamSize });
+              onSave({ name, description, startDate, endDate, teamSize, teams });
               onClose();
+              setTeams([]);
+              setTeamName("");
+              setName("");
+              setDescription("");
+              setStartDate("");
+              setEndDate("");
+              setTeamSize("4");
+              
             }}
           >
             Save

@@ -75,6 +75,7 @@ class PlayerAbl {
       role: user.role
     })
     }
+    await edupage.exit()
     return user
 
   }

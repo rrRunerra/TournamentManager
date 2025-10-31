@@ -5,13 +5,10 @@ const TournamentCreateDtoInType = shape({
     description: uu5String(1000),
     startDate: uu5String(255).isRequired(),
     endDate: uu5String(255).isRequired(),
-    status: oneOf(["ongoing", "finished", "cancelled", "upcoming", "registration"]).isRequired(),
-    teamSize: integer().isRequired(),
-    teams:
-        shape({
-            id: uu5String(255).isRequired()
-
-        })
+    status: uu5String(255).isRequired(),
+    teamSize: uu5String(255).isRequired(),
+    teams: array()
+        
 
 })
 

@@ -18,14 +18,14 @@ export default function TournamentDetailPage() {
   }, [id]);
 
   if (!info) return <p>Loading...</p>;
-
+  console.log(info)
   return (
     <div style={{ padding: "20px", maxWidth: "600px", fontFamily: "sans-serif" }}>
       <h2>{info.name}</h2>
       <p><strong>Description:</strong> {info.description}</p>
       <p>
         <strong>Start Date:</strong>{" "}
-        {new Date(Number(info.startDate)).toLocaleString()}
+        {new Date(info.startDate).toLocaleString()}
       </p>
       <p>
         <strong>End Date:</strong>{" "}

@@ -6,9 +6,16 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState("tournaments");
   const [route, setRoute] = useRoute();
 
+  const user = JSON.parse(sessionStorage.getItem("player"));
+
+  if (!user) {
+    return 
+  }
   useEffect(() => {
     setActiveLink(route.uu5Route);
   }, []);
+
+
 
   return (
     <header className="panel-header">
@@ -28,7 +35,7 @@ export default function Navbar() {
             setRoute("tournaments");
           }}
         >
-          Tournaments
+          Turnaje
         </p>
         <p
           className={activeLink === "about" ? "active" : ""}
@@ -37,7 +44,7 @@ export default function Navbar() {
             setRoute("about");
           }}
         >
-          About
+          O nás
         </p>
       </nav>
     </header>

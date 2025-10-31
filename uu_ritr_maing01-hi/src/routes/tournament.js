@@ -8,11 +8,11 @@ import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Navbar from "../bricks/navbar.js";
 
-const createTournament = ({ name, description, startDate, endDate, teamSize }) => {
+const createTournament = ({ name, description, startDate, endDate, teamSize, teams }) => {
   console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize });
+  const status = "upcoming";
 
-  return Calls.createTournament({ name, description, startDate, endDate, teamSize });
-  // Here you would typically make an API call to create the tournament
+  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams });
 }
 
 export default function TournamentsPage() {
@@ -21,6 +21,11 @@ export default function TournamentsPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const user = JSON.parse(sessionStorage.getItem("player"));
+
+  if (!user) {
+    setRoute("login");
+    return 
+  }
 
   const isTeacher = user.role === "teacher";
 
