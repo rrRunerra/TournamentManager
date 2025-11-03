@@ -23,9 +23,25 @@ class TournamentAbl {
     if (!validationResult.isValid()) {
       throw new Error("InvalidDtoIn");
     }
-    const out = await this.dao.get(awid, dtoIn.id);
 
-    return out;
+    const teamdb = DaoFactory.getDao("team");
+    const data = await this.dao.get(awid, dtoIn.id);
+
+    // Resolve team details
+    const teams = await Promise.all(
+      data.teams.map(async (team) => {
+        const t = await teamdb.findOne({ awid, id: team });
+        return {
+          name: t.name,
+          id: t.id,
+          players: t.players
+        };
+      }),
+    );
+
+    data.teams = teams;
+
+    return data;
   }
 
   async update(awid, dtoIn) {
@@ -63,33 +79,34 @@ class TournamentAbl {
     if (!dtoIn.teams) {
       throw new Error(Errors.Create.TeamsMissing);
     }
-
-    const teams  = dtoIn.teams.map((team) => {
+    const tId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    const teams = dtoIn.teams.map((team) => {
       return {
         id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-        name: team
-      }
-    })
+        name: team,
+        players: [],
+        tournamentId: tId
+      };
+    });
 
     const teamdb = DaoFactory.getDao("team");
-    
+
     for (const team of teams) {
       await teamdb.create({
         awid,
-        ...team
-      })
+        ...team,
+      });
     }
 
+    dtoIn.teams = teams.map((team) => team.id);
+    dtoIn.id = tId;
 
 
-
-    dtoIn.teams = teams.map(team => team.id);
-  
     console.log("Creating tournament with data:", dtoIn);
     const out = await this.dao.create({
       awid,
-      ...dtoIn
-    })
+      ...dtoIn,
+    });
     return out;
   }
 }

@@ -6,31 +6,28 @@ import DarkVeil from "../bricks/DarkVeil.js";
 import { Card, CardDescription, CardTitle, CardFooter } from "../bricks/cards.js";
 import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
-import Navbar from "../bricks/navbar.js";
 
 const createTournament = ({ name, description, startDate, endDate, teamSize, teams }) => {
   console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize });
   const status = "upcoming";
 
   return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams });
-}
+};
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState([]);
   const [route, setRoute] = useRoute();
   const [isOpen, setIsOpen] = useState(false);
-
-  const user = JSON.parse(sessionStorage.getItem("player"));
-
-  if (!user) {
-    setRoute("login");
-    return 
-  }
-
-  const isTeacher = user.role === "teacher";
+  const [user, setUser] = useState(null);
 
 
   useEffect(() => {
+      const user = JSON.parse(sessionStorage.getItem("player"));
+    if (!user) {
+      setRoute("login");
+      return;
+    }
+    setUser(user);
     async function fetchTournaments() {
       try {
         const response = await Calls.listTournaments();
@@ -39,8 +36,14 @@ export default function TournamentsPage() {
         console.error("Error fetching tournaments:", error);
       }
     }
+
     fetchTournaments();
-  }, []);
+  }, [
+  ]); // depend on `user`
+
+  if (!user) return null;
+    const isTeacher = user?.role === "teacher";
+
 
   return (
     <div>
@@ -48,22 +51,20 @@ export default function TournamentsPage() {
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>
       ) : (
-        tournaments.map((tournament) => {
-          return (
-            <Card
-              key={tournament.id}
-              className="tournament-card"
-              onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
-            >
-              <CardTitle className="tournament-title">{tournament.name}</CardTitle>
-              <CardDescription className="tournament-description">{tournament.description}</CardDescription>
-              <CardFooter className="tournament-footer">
-                {new Date(tournament.startDate).toLocaleDateString()} –{" "}
-                {new Date(tournament.endDate).toLocaleDateString()}
-              </CardFooter>
-            </Card>
-          );
-        })
+        tournaments.map((tournament) => (
+          <Card
+            key={tournament.id}
+            className="tournament-card"
+            onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
+          >
+            <CardTitle className="tournament-title">{tournament.name}</CardTitle>
+            <CardDescription className="tournament-description">{tournament.description}</CardDescription>
+            <CardFooter className="tournament-footer">
+              {new Date(tournament.startDate).toLocaleDateString()} –{" "}
+              {new Date(tournament.endDate).toLocaleDateString()}
+            </CardFooter>
+          </Card>
+        ))
       )}
 
       {isTeacher && (
@@ -72,8 +73,8 @@ export default function TournamentsPage() {
         </button>
       )}
 
-
-      <CreateModal isOpen={isOpen} onClose={() => {setIsOpen(false)}} onSave={createTournament} />
+      <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={createTournament} />
     </div>
   );
 }
+

@@ -27,13 +27,10 @@ class TeamMongo extends UuObjectDao {
   }
 
 
-  async update(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.findOneAndUpdate(filter, uuObject, "NONE");
-  }
+  async update(filter, updateObject) {
+  return await super.findOneAndUpdate(filter, updateObject, "NONE");
+}
+
 
   async remove(uuObject) {
     let filter = {

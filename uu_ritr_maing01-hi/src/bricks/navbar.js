@@ -5,13 +5,15 @@ import { useRoute } from "uu5g05";
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("tournaments");
   const [route, setRoute] = useRoute();
+  const [user, setUser] = useState(null);
 
-  const user = JSON.parse(sessionStorage.getItem("player"));
-
-  if (!user) {
-    return 
-  }
   useEffect(() => {
+      const user = JSON.parse(sessionStorage.getItem("player"));
+    if (!user) {
+      setRoute("login");
+      return;
+    }
+    setUser(user);
     setActiveLink(route.uu5Route);
   }, []);
 
@@ -46,6 +48,12 @@ export default function Navbar() {
         >
           O nás
         </p>
+        <button onClick={()=> {
+          sessionStorage.removeItem("player")
+          setRoute("login")
+        }}>
+          Logout
+        </button>
       </nav>
     </header>
   );

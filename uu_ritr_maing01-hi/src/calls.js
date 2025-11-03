@@ -67,6 +67,11 @@ const Calls = {
   createTournament(dtoIn) {
     const commandUri = Calls.getCommandUri("tournament/create");
     return Calls.call("post", commandUri, dtoIn);
+  },
+
+  joinTeam(dtoIn) {
+    const commandUri = Calls.getCommandUri("team/update");
+    return Calls.call("post", commandUri, dtoIn);
   }
 
 
