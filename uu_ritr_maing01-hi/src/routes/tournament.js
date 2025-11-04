@@ -7,11 +7,11 @@ import { Card, CardDescription, CardTitle, CardFooter } from "../bricks/cards.js
 import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
 
-const createTournament = ({ name, description, startDate, endDate, teamSize, teams }) => {
-  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize });
+const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner }) => {
+  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize, owner });
   const status = "upcoming";
 
-  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams });
+  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner });
 };
 
 export default function TournamentsPage() {
@@ -20,30 +20,33 @@ export default function TournamentsPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
 
+  // fetch tournaments
+  const fetchTournaments = async () => {
+    try {
+      const response = await Calls.listTournaments();
+      setTournaments(response.itemList);
+    } catch (error) {
+      console.error("Error fetching tournaments:", error);
+    }
+  };
 
   useEffect(() => {
-      const user = JSON.parse(sessionStorage.getItem("player"));
+    const user = JSON.parse(sessionStorage.getItem("player"));
     if (!user) {
       setRoute("login");
       return;
     }
     setUser(user);
-    async function fetchTournaments() {
-      try {
-        const response = await Calls.listTournaments();
-        setTournaments(response.itemList);
-      } catch (error) {
-        console.error("Error fetching tournaments:", error);
-      }
-    }
-
     fetchTournaments();
-  }, [
-  ]); // depend on `user`
+  }, []);
 
   if (!user) return null;
-    const isTeacher = user?.role === "teacher";
+  const isTeacher = user?.role === "teacher";
 
+  const handleCreateTournament = async (data) => {
+    await createTournament(data);
+    await fetchTournaments(); // refresh after saving
+  };
 
   return (
     <div>
@@ -58,7 +61,9 @@ export default function TournamentsPage() {
             onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
           >
             <CardTitle className="tournament-title">{tournament.name}</CardTitle>
-            <CardDescription className="tournament-description">{tournament.description}</CardDescription>
+            <CardDescription className="tournament-description">
+              {tournament.description}
+            </CardDescription>
             <CardFooter className="tournament-footer">
               {new Date(tournament.startDate).toLocaleDateString()} –{" "}
               {new Date(tournament.endDate).toLocaleDateString()}
@@ -73,8 +78,14 @@ export default function TournamentsPage() {
         </button>
       )}
 
-      <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={createTournament} />
+      <CreateModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onSave={handleCreateTournament}
+        owner={user.id}
+      />
     </div>
   );
 }
+
 

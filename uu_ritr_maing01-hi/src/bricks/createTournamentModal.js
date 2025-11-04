@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CreateModal({ isOpen, onClose, onSave }) {
+export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -114,7 +114,7 @@ export default function CreateModal({ isOpen, onClose, onSave }) {
           <button onClick={onClose}>Cancel</button>
           <button
             onClick={() => {
-              onSave({ name, description, startDate, endDate, teamSize, teams });
+              onSave({ name, description, startDate, endDate, teamSize, teams, owner });
               onClose();
               setTeams([]);
               setTeamName("");

@@ -7,7 +7,8 @@ const TournamentCreateDtoInType = shape({
     endDate: uu5String(255).isRequired(),
     status: uu5String(255).isRequired(),
     teamSize: uu5String(255).isRequired(),
-    teams: array()
+    teams: array(),
+    owner: uu5String(255).isRequired()
         
 
 })

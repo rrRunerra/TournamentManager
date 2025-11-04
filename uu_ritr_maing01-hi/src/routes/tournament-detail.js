@@ -31,8 +31,9 @@ export default function TournamentDetailPage() {
     setJoiningTeam(teamId);
 
     try {
-      await Calls.joinTeam({ tournamentId, id: teamId, players: { id: userId } });
-
+      // returned errors: TeamIsFull
+      const res = await Calls.joinTeam({ tournamentId, id: teamId, players: { id: userId }, teamSize: info.teamSize });
+      
       // Refetch the tournament data to update all team counts
       const updatedTournament = await Calls.getTournament({ id });
       setInfo(updatedTournament);

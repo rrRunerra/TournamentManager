@@ -20,7 +20,8 @@ const TeamUpdateDtoInType = shape({
 
         }
     ),
-    tournamentId: uu5String(255)
+    tournamentId: uu5String(255),
+    teamSize: uu5String()
 })
 
 const TeamGetDtoInType = shape({

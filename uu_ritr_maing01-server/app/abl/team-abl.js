@@ -38,11 +38,55 @@ class TeamAbl {
       throw new Error("TeamNotFound");
     }
 
+    const userInAnotherTeam = await this.dao.findOne({
+      awid,
+      tournamentId: dtoIn.tournamentId,
+      players: dtoIn.players.id,
+    });
+
+    if (userInAnotherTeam?.id && userInAnotherTeam?.id !== dtoIn.id) {
+      await Promise.allSettled([
+        this.dao.update(
+          { awid, id: userInAnotherTeam.id },
+          {
+            players: userInAnotherTeam.players.filter((p) => p !== dtoIn.players.id),
+          },
+        ),
+
+        this.dao.update(
+          { awid, id: dtoIn.id },
+          {
+            players: [...team.players, dtoIn.players.id],
+          },
+        )
+      ])
+      return 
+    }
+
     const updatedPlayers = [...team.players];
+
+    // add player to team
     if (!updatedPlayers.includes(dtoIn.players.id)) {
       updatedPlayers.push(dtoIn.players.id);
     } else {
-      throw new Error("PlayerAlreadyInTeam");
+      // remove player from team
+      const index = updatedPlayers.indexOf(dtoIn.players.id);
+      if (index > -1) {
+        updatedPlayers.splice(index, 1);
+        const u = this.dao.update(
+          { awid, id: dtoIn.id },
+          {
+            players: updatedPlayers,
+          },
+        );
+        return u;
+      }
+
+      return;
+    }
+
+    if (dtoIn.teamSize && updatedPlayers.length > parseInt(dtoIn.teamSize)) {
+      throw new Error("TeamIsFull");
     }
 
     const updatedTeam = await this.dao.update(
