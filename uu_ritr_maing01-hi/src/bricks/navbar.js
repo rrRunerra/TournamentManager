@@ -48,12 +48,12 @@ export default function Navbar() {
         >
           O nás
         </p>
-        <button onClick={()=> {
+        <p onClick={()=> {
           sessionStorage.removeItem("player")
           setRoute("login")
         }}>
           Logout
-        </button>
+        </p>
       </nav>
     </header>
   );

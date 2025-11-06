@@ -8,6 +8,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [teamSize, setTeamSize] = useState("4");
   const [teams, setTeams] = useState([]);
   const [teamName, setTeamName] = useState("");
+  const [errors, setErrors] = useState({});
 
   if (!isOpen) return null;
 
@@ -114,8 +115,32 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           <button onClick={onClose}>Cancel</button>
           <button
             onClick={() => {
+              const newErrors = {};
+              if (!name.trim()) newErrors.name = true;
+              if (!description.trim()) newErrors.description = true;
+              if (!startDate) newErrors.startDate = true;
+              if (!endDate) newErrors.endDate = true;
+              if (!teamSize) newErrors.teamSize = true;
+              if (teams.length < 2) newErrors.teams = true;
+
+              if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors);
+                const errorMessages = [];
+
+                if (newErrors.name) errorMessages.push("Name is required.");
+                if (newErrors.description) errorMessages.push("Description is required.");
+                if (newErrors.startDate) errorMessages.push("Start Date is required.");
+                if (newErrors.endDate) errorMessages.push("End Date is required.");
+                if (newErrors.teamSize) errorMessages.push("Team Size is required.");
+                if (newErrors.teams) errorMessages.push("At least 2 teams are required.");
+
+                alert(errorMessages.join("\n"));
+                return;
+              }
+
               onSave({ name, description, startDate, endDate, teamSize, teams, owner });
               onClose();
+              setErrors({});
               setTeams([]);
               setTeamName("");
               setName("");
@@ -123,7 +148,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               setStartDate("");
               setEndDate("");
               setTeamSize("4");
-              
             }}
           >
             Save

@@ -41,11 +41,24 @@ export default function TournamentsPage() {
   }, []);
 
   if (!user) return null;
-  const isTeacher = user?.role === "teacher";
+  const isTeacher = user?.role.toLowerCase() === "teacher";
 
   const handleCreateTournament = async (data) => {
+    if (
+      !data.name?.trim() ||
+      !data.description?.trim() ||
+      !data.startDate ||
+      !data.endDate ||
+      !data.teamSize ||
+      !Array.isArray(data.teams) ||
+      data.teams.length < 2
+    ) {
+      alert("All fields are required and at least 2 teams must be added.");
+      return;
+    }
+
     await createTournament(data);
-    await fetchTournaments(); // refresh after saving
+    await fetchTournaments();
   };
 
   return (
@@ -61,9 +74,7 @@ export default function TournamentsPage() {
             onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
           >
             <CardTitle className="tournament-title">{tournament.name}</CardTitle>
-            <CardDescription className="tournament-description">
-              {tournament.description}
-            </CardDescription>
+            <CardDescription className="tournament-description">{tournament.description}</CardDescription>
             <CardFooter className="tournament-footer">
               {new Date(tournament.startDate).toLocaleDateString()} –{" "}
               {new Date(tournament.endDate).toLocaleDateString()}
@@ -73,19 +84,12 @@ export default function TournamentsPage() {
       )}
 
       {isTeacher && (
-        <button className="create-tournament-button" onClick={() => setIsOpen(true)}>
-          Create New Tournament
+        <button className="fab" onClick={() => setIsOpen(true)}>
+          +
         </button>
       )}
 
-      <CreateModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onSave={handleCreateTournament}
-        owner={user.id}
-      />
+      <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={handleCreateTournament} owner={user.id} />
     </div>
   );
 }
-
-
