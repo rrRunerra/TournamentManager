@@ -20,7 +20,7 @@ export default function Navbar() {
 
 
   return (
-    <header className="panel-header">
+    <header className="panel-header" >
       <div>
         <img
           src="/assets/MatchUPlogo.png"

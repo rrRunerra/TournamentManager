@@ -62,7 +62,7 @@ export default function TournamentsPage() {
   };
 
   return (
-    <div>
+    <div style={{backgroundColor: "black"}}> 
       <h2>Tournaments</h2>
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>
@@ -72,6 +72,7 @@ export default function TournamentsPage() {
             key={tournament.id}
             className="tournament-card"
             onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
+            style={{ backgroundColor: "#1b1b1b"}}
           >
             <CardTitle className="tournament-title">{tournament.name}</CardTitle>
             <CardDescription className="tournament-description">{tournament.description}</CardDescription>
