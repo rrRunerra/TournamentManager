@@ -36,11 +36,13 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
     >
       <div
         style={{
-          background: "white",
+          background: "#1b1b1b",
+          color: "#ff7300",
           borderRadius: "8px",
           padding: "20px",
           width: "400px",
           boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+          
         }}
       >
         <h3 style={{ marginBottom: "16px" }}>Create Tournament</h3>
