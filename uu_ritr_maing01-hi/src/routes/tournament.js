@@ -31,7 +31,7 @@ export default function TournamentsPage() {
   };
 
   useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("player"));
+    const user = JSON.parse(localStorage.getItem("player"));
     if (!user) {
       setRoute("login");
       return;

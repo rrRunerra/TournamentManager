@@ -5,7 +5,14 @@ const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/tournament-error.js");
 
+
+
 const WARNINGS = {};
+
+async function generateFullBracket(teams, awid) {
+  
+}
+
 
 class TournamentAbl {
   constructor() {
@@ -57,13 +64,51 @@ class TournamentAbl {
   }
 
   async update(awid, dtoIn) {
-    const validationResult = this.validator.validate("TournamentUpdateDtoInType", dtoIn);
+    const validationResult = this.validator.validate("TournamentUpdateDtoInType", dtoIn)
+    if (!validationResult.isValid()) throw new Error("InvalidDtoIn")
 
-    if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+    const tournament = await this.dao.get(awid, dtoIn.id)
+    if (!tournament) throw new Error("TournamentNotFound")
+
+    if (dtoIn?.status) {
+      tournament.status = dtoIn.status
+
+      if (dtoIn.status === "ongoing") {
+        const teams = tournament.teams || []
+        if (teams.length < 2) throw new Error("NotEnoughTeams")
+
+        const a = await generateFullBracket(teams, awid)
+        
+        const upper = a.upper
+        const lower = a.lower
+
+        const matchdb = DaoFactory.getDao("match")
+
+        for (const match of upper) {
+          await matchdb.create({
+            awid,
+            ...match,
+            tournamentId: tournament.id,
+            bracket: "upper",
+          })
+        }
+
+        for (const match of lower) {
+          await matchdb.create({
+            awid,
+            ...match,
+            tournamentId: tournament.id,
+            bracket: "lower",
+          })
+        }
+
+      }
     }
 
+    const out = await this.dao.update({ awid, tournament })
+    return out
   }
+
 
   async create(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentCreateDtoInType", dtoIn);

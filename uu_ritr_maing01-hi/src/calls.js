@@ -86,6 +86,11 @@ const Calls = {
   removeTeam(dtoIn) {
     const commandUri = Calls.getCommandUri("team/remove");
     return Calls.call("post", commandUri, dtoIn);
+  },
+
+  getMatches(dtoIn) {
+    const commandUri = Calls.getCommandUri("match/list");
+    return Calls.call("get", commandUri, dtoIn);
   }
 
 

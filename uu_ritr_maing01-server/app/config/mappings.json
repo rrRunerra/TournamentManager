@@ -90,6 +90,16 @@
         "realization": "api/controllers/TournamentController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "match/create": {
+        "realization": "api/controllers/MatchController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "match/list": {
+        "realization": "api/controllers/MatchController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

@@ -134,7 +134,7 @@ export default function LoginPage() {
   const [route, setRoute] = useRoute();
 
   // useEffect(() => {
-  //   const player = sessionStorage.getItem("player");
+  //   const player = localStorage.getItem("player");
   //   if (player) {
   //     setRoute("tournaments");
   //   }
@@ -147,7 +147,7 @@ export default function LoginPage() {
 
     try {
       const res = await Calls.PlayerCreate({ name: username, password: password });
-      sessionStorage.setItem("player", JSON.stringify(res));
+      localStorage.setItem("player", JSON.stringify(res));
       setRoute("tournaments");
     } catch (e) {
       console.log(e);

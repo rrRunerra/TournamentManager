@@ -8,7 +8,7 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-      const user = JSON.parse(sessionStorage.getItem("player"));
+      const user = JSON.parse(localStorage.getItem("player"));
     if (!user) {
       setRoute("login");
       return;
@@ -25,7 +25,9 @@ export default function Navbar() {
 
   return (
     <header className="panel-header" >
-      <div>
+      <div onClick={() => {
+        setRoute("tournaments")
+      }}>
         <img
           src="/assets/MatchUPlogo.png"
           alt="Logo"
@@ -53,7 +55,7 @@ export default function Navbar() {
           O nás
         </p>
         <p onClick={()=> {
-          sessionStorage.removeItem("player")
+          localStorage.removeItem("player")
           setRoute("login")
         }}>
           Logout

@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Calls from "../calls.js";
 import { Card, CardTitle, CardDescription, CardFooter } from "../bricks/cards.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournamentDetail.css";
 
+
 export default function TournamentDetailPage() {
   const [info, setInfo] = useState(null);
   const [user, setUser] = useState(null);
   const [joiningTeam, setJoiningTeam] = useState(null);
+  const [matches, setMatches] = useState([]);
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
-
 
   useEffect(() => {
     async function fetchTournamentDetail() {
@@ -22,19 +23,29 @@ export default function TournamentDetailPage() {
       }
     }
     fetchTournamentDetail();
-
-    const storedUser = sessionStorage.getItem("player");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    const storedUser = localStorage.getItem("player");
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, [id]);
 
-  async function joinTeam(tournamentId, teamId, userId) {
-    if (!userId) return;
-    setJoiningTeam(teamId);
+  useEffect(() => {
+    async function fetchMatches() {
+      try {
+        const response = await Calls.getMatches({ tournamentId: id });
+        setMatches(prev => JSON.stringify(prev) === JSON.stringify(response) ? prev : response);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    }
+    fetchMatches();
+  }, [id]);
 
+  
+
+  async function joinTeam(tournamentId, teamId, userId) {
+    if (!userId || info.status !== "upcoming") return;
+    setJoiningTeam(teamId);
     try {
-      const res = await Calls.joinTeam({ tournamentId, id: teamId, players: { id: userId }, teamSize: info.teamSize });
+      await Calls.joinTeam({ tournamentId, id: teamId, players: { id: userId }, teamSize: info.teamSize });
       const updatedTournament = await Calls.getTournament({ id });
       setInfo(updatedTournament);
     } catch (error) {
@@ -45,15 +56,17 @@ export default function TournamentDetailPage() {
     }
   }
 
-  const handleBack = () => {
-    setRoute("tournaments");
-  };
+  const handleBack = () => setRoute("tournaments");
 
   if (!info || !user) return <p className="loading">Loading...</p>;
 
   const isOwner = info?.owner === user?.id;
 
-
+  if (info.status === "ongoing") {
+    return (
+      <p>Ongoing</p>
+    )
+  }
 
   return (
     <div className="tournament-container">
@@ -65,7 +78,7 @@ export default function TournamentDetailPage() {
       <p><strong>Team Size:</strong> {info.teamSize}</p>
 
       <div className="team-grid">
-        {info.teams.map((team) => (
+        {info.teams.map(team => (
           <Card
             key={team.id}
             className={`team-card ${joiningTeam === team.id ? "joining" : ""}`}
@@ -80,39 +93,9 @@ export default function TournamentDetailPage() {
         ))}
       </div>
 
-      {/* {
-  "awid": "22222222222222222222222222222222",
-  "name": "Test",
-  "description": "sgdfgdsf",
-  "startDate": "2025-11-11T12:11",
-  "endDate": "2025-11-28T08:00",
-  "teamSize": "4",
-  "status": "upcoming",
-  "teams": [
-    {
-      "name": "J",
-      "id": "wczplmgk1a7vitvki7ie5",
-      "players": []
-    },
-    {
-      "name": "C",
-      "id": "w72vi7qz2v9bwysxtgu7g",
-      "players": []
-    }
-  ],
-  "owner": "408089",
-  "sys": {
-    "cts": "2025-11-09T17:13:49.527Z",
-    "mts": "2025-11-09T17:13:49.527Z",
-    "rev": 0
-  },
-  "id": "fwxp12r1vg4wt0m4ywg3e"
-} */}
-
       {isOwner && (
         <div className="owner-panel">
           <h3 className="owner-title">Tournament Controls</h3>
-
           <div className="owner-actions">
             {info.status === "upcoming" && (
               <button
@@ -120,9 +103,8 @@ export default function TournamentDetailPage() {
                 onClick={async () => {
                   if (window.confirm("Start this tournament? Teams will be locked.")) {
                     try {
-                      await Calls.updateTournament({ id, status: "active" });
-                      const updated = await Calls.getTournament({ id });
-                      setInfo(updated);
+                      await Calls.updateTournament({ id, status: "ongoing" });
+                      setInfo(await Calls.getTournament({ id }));
                       alert("Tournament started!");
                     } catch (error) {
                       console.error("Error starting tournament:", error);
@@ -134,7 +116,6 @@ export default function TournamentDetailPage() {
                 Start Tournament
               </button>
             )}
-
             <button
               className="btn btn-danger"
               onClick={async () => {
@@ -160,9 +141,7 @@ export default function TournamentDetailPage() {
               <div key={team.id} className="team-management-item">
                 <div className="team-info">
                   <strong>{team.name}</strong>
-                  <span className="player-count">
-                    ({team.players?.length || 0}/{info.teamSize} players)
-                  </span>
+                  <span className="player-count">({team.players?.length || 0}/{info.teamSize} players)</span>
                 </div>
                 <button
                   className="btn btn-small btn-outline"
@@ -170,8 +149,7 @@ export default function TournamentDetailPage() {
                     if (window.confirm(`Remove team "${team.name}"?`)) {
                       try {
                         await Calls.removeTeam({ tournamentId: id, teamId: team.id });
-                        const updated = await Calls.getTournament({ id });
-                        setInfo(updated);
+                        setInfo(await Calls.getTournament({ id }));
                       } catch (error) {
                         console.error("Error removing team:", error);
                         alert("Failed to remove team.");
@@ -187,7 +165,6 @@ export default function TournamentDetailPage() {
         </div>
       )}
 
-      {/* Back arrow button in bottom-right corner */}
       <button
         onClick={handleBack}
         style={{
@@ -208,22 +185,11 @@ export default function TournamentDetailPage() {
         }}
         aria-label="Go back to tournaments"
       >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="black"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5" />
           <path d="M12 19l-7-7 7-7" />
         </svg>
       </button>
     </div>
-
-
   );
 }

@@ -7,6 +7,7 @@
   "namespace": "UuRitr",
   "spec": "uu5-app; uu_appg01_devkit@5.22.1",
   "dependencies": {
+    "@g-loot/react-tournament-brackets": "^1.0.31-rc",
     "ogl": "^1.0.11",
     "uu_plus4u5g02": "^1.22.2",
     "uu_plus4u5g02-app": "^1.22.2",

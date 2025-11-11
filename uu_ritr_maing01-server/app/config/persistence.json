@@ -15,6 +15,9 @@
         },
         "team": {
           "realization": "dao/TeamMongo"
+        },
+        "match": {
+          "realization": "dao/MatchMongo"
         }
       }
     }

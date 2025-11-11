@@ -76,6 +76,14 @@
       "tournament/delete": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "match/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "match/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
