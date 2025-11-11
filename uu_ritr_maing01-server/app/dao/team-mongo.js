@@ -33,11 +33,8 @@ class TeamMongo extends UuObjectDao {
 
 
   async remove(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.deleteOne(filter);
+
+    return await super.deleteOne(uuObject);
   }
 
 }

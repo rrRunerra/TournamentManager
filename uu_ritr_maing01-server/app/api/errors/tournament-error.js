@@ -105,7 +105,13 @@ const List = {
 
 };
 
+const Delete = {
+  UC_CODE: `${TOURNAMENT_ERROR_PREFIX}delete/`,
+
+};
+
 module.exports = {
+  Delete,
   List,
   Get,
   Update,

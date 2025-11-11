@@ -17,6 +17,10 @@ export default function Navbar() {
     setActiveLink(route.uu5Route);
   }, []);
 
+  
+  if (route.uu5Route == "login") {
+    return
+  }
 
 
   return (
@@ -54,6 +58,7 @@ export default function Navbar() {
         }}>
           Logout
         </p>
+        
       </nav>
     </header>
   );

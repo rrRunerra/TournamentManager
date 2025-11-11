@@ -22,7 +22,7 @@ const Calls = {
 
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
-    return Calls.call("get", commandUri);
+    return Calls.call("deleteTournamentget", commandUri);
   },
 
   initWorkspace(dtoInData) {
@@ -69,8 +69,22 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
+  deleteTournament(dtoIn) {
+    const commandUri = Calls.getCommandUri("tournament/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  updateTournament(dtoIn) {
+    const commandUri = Calls.getCommandUri("tournament/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   joinTeam(dtoIn) {
     const commandUri = Calls.getCommandUri("team/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  removeTeam(dtoIn) {
+    const commandUri = Calls.getCommandUri("team/remove");
     return Calls.call("post", commandUri, dtoIn);
   }
 

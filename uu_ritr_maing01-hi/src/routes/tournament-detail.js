@@ -11,6 +11,7 @@ export default function TournamentDetailPage() {
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
 
+
   useEffect(() => {
     async function fetchTournamentDetail() {
       try {
@@ -50,6 +51,10 @@ export default function TournamentDetailPage() {
 
   if (!info || !user) return <p className="loading">Loading...</p>;
 
+  const isOwner = info?.owner === user?.id;
+
+
+
   return (
     <div className="tournament-container">
       <h2 className="tournament-title">{info.name}</h2>
@@ -74,6 +79,113 @@ export default function TournamentDetailPage() {
           </Card>
         ))}
       </div>
+
+      {/* {
+  "awid": "22222222222222222222222222222222",
+  "name": "Test",
+  "description": "sgdfgdsf",
+  "startDate": "2025-11-11T12:11",
+  "endDate": "2025-11-28T08:00",
+  "teamSize": "4",
+  "status": "upcoming",
+  "teams": [
+    {
+      "name": "J",
+      "id": "wczplmgk1a7vitvki7ie5",
+      "players": []
+    },
+    {
+      "name": "C",
+      "id": "w72vi7qz2v9bwysxtgu7g",
+      "players": []
+    }
+  ],
+  "owner": "408089",
+  "sys": {
+    "cts": "2025-11-09T17:13:49.527Z",
+    "mts": "2025-11-09T17:13:49.527Z",
+    "rev": 0
+  },
+  "id": "fwxp12r1vg4wt0m4ywg3e"
+} */}
+
+      {isOwner && (
+        <div className="owner-panel">
+          <h3 className="owner-title">Tournament Controls</h3>
+
+          <div className="owner-actions">
+            {info.status === "upcoming" && (
+              <button
+                className="btn btn-primary"
+                onClick={async () => {
+                  if (window.confirm("Start this tournament? Teams will be locked.")) {
+                    try {
+                      await Calls.updateTournament({ id, status: "active" });
+                      const updated = await Calls.getTournament({ id });
+                      setInfo(updated);
+                      alert("Tournament started!");
+                    } catch (error) {
+                      console.error("Error starting tournament:", error);
+                      alert("Failed to start tournament.");
+                    }
+                  }
+                }}
+              >
+                Start Tournament
+              </button>
+            )}
+
+            <button
+              className="btn btn-danger"
+              onClick={async () => {
+                if (window.confirm("Delete this tournament? This cannot be undone.")) {
+                  try {
+                    await Calls.deleteTournament({ id });
+                    alert("Tournament deleted!");
+                    setRoute("tournaments");
+                  } catch (error) {
+                    console.error("Error deleting tournament:", error);
+                    alert("Failed to delete tournament.");
+                  }
+                }
+              }}
+            >
+              Delete Tournament
+            </button>
+          </div>
+
+          <div className="team-management">
+            <h4>Manage Teams</h4>
+            {info.teams.map(team => (
+              <div key={team.id} className="team-management-item">
+                <div className="team-info">
+                  <strong>{team.name}</strong>
+                  <span className="player-count">
+                    ({team.players?.length || 0}/{info.teamSize} players)
+                  </span>
+                </div>
+                <button
+                  className="btn btn-small btn-outline"
+                  onClick={async () => {
+                    if (window.confirm(`Remove team "${team.name}"?`)) {
+                      try {
+                        await Calls.removeTeam({ tournamentId: id, teamId: team.id });
+                        const updated = await Calls.getTournament({ id });
+                        setInfo(updated);
+                      } catch (error) {
+                        console.error("Error removing team:", error);
+                        alert("Failed to remove team.");
+                      }
+                    }
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Back arrow button in bottom-right corner */}
       <button
@@ -111,5 +223,7 @@ export default function TournamentDetailPage() {
         </svg>
       </button>
     </div>
+
+
   );
 }

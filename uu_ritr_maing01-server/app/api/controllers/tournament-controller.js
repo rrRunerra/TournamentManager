@@ -3,6 +3,10 @@ const TournamentAbl = require("../../abl/tournament-abl.js");
 
 class TournamentController {
 
+  delete(ucEnv) {
+    return TournamentAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   list(ucEnv) {
     return TournamentAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }

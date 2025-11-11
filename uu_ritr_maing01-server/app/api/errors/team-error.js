@@ -55,7 +55,13 @@ const List = {
 
 };
 
+const Remove = {
+  UC_CODE: `${TEAM_ERROR_PREFIX}remove/`,
+
+};
+
 module.exports = {
+  Remove,
   List,
   Get,
   Update,

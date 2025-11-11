@@ -28,6 +28,11 @@ const TeamGetDtoInType = shape({
     id: uu5String(255).isRequired()
 })
 
+const TeamRemoveDtoInType = shape({
+    tournamentId: uu5String(255).isRequired(),
+    teamId: uu5String(255).isRequired()
+})
+
 
 
 

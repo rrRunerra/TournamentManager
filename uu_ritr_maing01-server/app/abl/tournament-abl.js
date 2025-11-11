@@ -13,6 +13,18 @@ class TournamentAbl {
     this.dao = DaoFactory.getDao("tournament");
   }
 
+  async delete(awid, dtoIn) {
+    const validationResult = this.validator.validate("TournamentDeleteDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    //dtoIn.id
+    const out = await this.dao.remove({ awid, id: dtoIn.id });
+    return out;
+  }
+
   async list(awid) {
     return this.dao.list(awid);
   }
@@ -32,9 +44,9 @@ class TournamentAbl {
       data.teams.map(async (team) => {
         const t = await teamdb.findOne({ awid, id: team });
         return {
-          name: t.name,
-          id: t.id,
-          players: t.players
+          name: t?.name,
+          id: t?.id,
+          players: t?.players
         };
       }),
     );
@@ -50,6 +62,7 @@ class TournamentAbl {
     if (!validationResult.isValid()) {
       throw new Error("InvalidDtoIn");
     }
+
   }
 
   async create(awid, dtoIn) {

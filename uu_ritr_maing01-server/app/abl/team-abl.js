@@ -13,7 +13,32 @@ class TeamAbl {
     this.dao = DaoFactory.getDao("team");
   }
 
-  async list(awid) {}
+  async remove(awid, dtoIn) {
+    const validationResult = this.validator.validate("TeamRemoveDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    // dtoIn.tournamentId
+    // dtoIn.teamId
+
+    const tournament = await DaoFactory.getDao("tournament").get(awid, dtoIn.tournamentId);
+
+
+    tournament.teams = tournament.teams.filter((team) => team !== dtoIn.teamId)
+
+
+
+    const o = await DaoFactory.getDao("tournament").update({ awid, tournament })
+
+
+    const out = await this.dao.remove({ awid, tournamentId: dtoIn.tournamentId, id: dtoIn.teamId });
+    return out;
+
+  }
+
+  async list(awid) { }
 
   async get(awid, dtoIn) {
     const validationResult = this.validator.validate("TeamGetDtoInType", dtoIn);
@@ -60,7 +85,7 @@ class TeamAbl {
           },
         )
       ])
-      return 
+      return
     }
 
     const updatedPlayers = [...team.players];

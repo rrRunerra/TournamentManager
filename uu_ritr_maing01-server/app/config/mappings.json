@@ -80,6 +80,16 @@
         "realization": "api/controllers/TeamController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "team/remove": {
+        "realization": "api/controllers/TeamController.remove",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "tournament/delete": {
+        "realization": "api/controllers/TournamentController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

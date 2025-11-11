@@ -29,9 +29,10 @@ class TournamentMongo extends UuObjectDao {
   async update(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      id: uuObject.id,
+      id: uuObject.tournament.id,
     };
-    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+
+    return await super.findOneAndUpdate(filter, uuObject.tournament, "NONE");
   }
 
   async remove(uuObject) {
