@@ -156,8 +156,7 @@ const AboutPageWithHover = () => {
           O našom <span style={styles.orangeText}>tíme</span>
         </h1>
         <p style={styles.subtitle}>
-          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          MatchUP je študentský projekt v spolupráci s firmou Unicorn. Náš tím je zložený z troch žiakov Strednej Priemyslenej školy v Snine.
         </p>
       </div>
 
