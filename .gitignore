@@ -29,9 +29,3 @@ package-lock.json
 gradle-app.setting
 gradlew
 gradlew.bat
-uu_ritr_maing01-server/env
-uu_ritr_maing01-hi/env
-uu_ritr_maing01-server/app/config/secretstore.json
-uu_ritr_maing01-server/test/insomnia/insomnia-workspace.json
-uu_ritr_maing01-server/pnpm-lock.yaml
-uu_ritr_maing01-hi/pnpm-lock.yaml
