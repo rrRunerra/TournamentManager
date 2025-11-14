@@ -18,7 +18,7 @@ const TournamentUpdateDtoInType = shape({
     description: uu5String(1000),
     startDate: date(),
     endDate: date(),
-    status: oneOf(["ongoing", "finished", "cancelled", "upcoming", "registration"]),
+    status: oneOf(["ongoing", "finished", "cancelled", "upcoming"]),
     teamSize: integer(),
     teams:
         shape({
