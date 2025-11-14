@@ -7,11 +7,11 @@ import { Card, CardDescription, CardTitle, CardFooter } from "../bricks/cards.js
 import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
 
-const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner }) => {
-  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize, owner });
+const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
+  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize, owner, bracketType  });
   const status = "upcoming";
 
-  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner });
+  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner, bracketType  });
 };
 
 export default function TournamentsPage() {

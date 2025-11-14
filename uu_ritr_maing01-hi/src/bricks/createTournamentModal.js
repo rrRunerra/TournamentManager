@@ -9,6 +9,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [teams, setTeams] = useState([]);
   const [teamName, setTeamName] = useState("");
   const [errors, setErrors] = useState({});
+  const [bracketType, setBracketType] = useState("single")
 
   if (!isOpen) return null;
 
@@ -42,7 +43,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           padding: "20px",
           width: "400px",
           boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-          
+
         }}
       >
         <h3 style={{ marginBottom: "16px" }}>Create Tournament</h3>
@@ -79,6 +80,18 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           onChange={(e) => setEndDate(e.target.value)}
           style={{ width: "100%", marginBottom: "8px" }}
         />
+
+        <label >Bracket Type</label>
+        <select
+          id="bracketType"
+          value={bracketType}
+          onChange={(e) => setBracketType(e.target.value)}
+          style={{ width: "100%", marginBottom: "8px" }}
+        >
+          <option value="single">Single Elimination</option>
+          <option value="double">Double Elimination</option>
+        </select>
+
 
         <label>Team Size</label>
         <input
@@ -140,7 +153,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 return;
               }
 
-              onSave({ name, description, startDate, endDate, teamSize, teams, owner });
+              onSave({ name, description, startDate, endDate, teamSize, teams, owner, bracketType });
               onClose();
               setErrors({});
               setTeams([]);
@@ -150,6 +163,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               setStartDate("");
               setEndDate("");
               setTeamSize("4");
+              setBracketType("single")
             }}
           >
             Save

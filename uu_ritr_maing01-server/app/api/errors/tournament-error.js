@@ -62,6 +62,13 @@ const Create = {
       this.message = "Teams are missing.";
     }
   },
+  BracketTypeMissing: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}bracketTypeMissing`;
+      this.message = "Bracket type is missing.";
+    }
+  },
 
 };
 

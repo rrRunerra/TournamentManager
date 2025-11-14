@@ -1,0 +1,47 @@
+.owner-panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #4c4c4c;
+  border-radius: 8px;
+  border: 1px solid #4c4c4c;
+}
+
+.owner-title {
+  margin-top: 0;
+  color: orange;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+}
+
+.owner-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.team-management {
+  margin-top: 1.5rem;
+}
+
+.team-management h4 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.team-management-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: grey;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  border: 1px solid grey;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
