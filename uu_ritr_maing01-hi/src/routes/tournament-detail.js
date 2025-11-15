@@ -3,9 +3,28 @@ import Calls from "../calls.js";
 import { Card, CardTitle, CardDescription, CardFooter } from "../bricks/cards.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournamentDetail.css";
-import { DoubleEliminationBracket, Match, SingleEliminationBracket, SVGViewer } from "@g-loot/react-tournament-brackets"
+import { DoubleEliminationBracket, Match, SingleEliminationBracket, SVGViewer, createTheme } from "@g-loot/react-tournament-brackets"
 import OwnerControls from "../bricks/ownerControls.js";
 import OngoingTournamentNav from "../bricks/OngoingTournamentNav.js";
+
+
+const OrangeTheme = createTheme({
+  textColor: { main: '#FFFFFF', highlighted: '#CCCCCC', dark: '#AAAAAA' },
+  matchBackground: { wonColor: '#1A1A1A', lostColor: '#2A2A2A' },
+  score: {
+    background: { wonColor: '#333333', lostColor: '#333333' },
+    text: { highlightedWonColor: '#FFFFFF', highlightedLostColor: '#FFFFFF' },
+  },
+  border: {
+    color: '#444444',
+    highlightedColor: '#555555',
+  },
+  roundHeader: { backgroundColor: '#222222', fontColor: '#FFFFFF' },
+  connectorColor: '#FFA500',
+  connectorColorHighlight: '#FF8C00',
+  svgBackground: '#000000',
+});
+
 
 
 
@@ -40,7 +59,41 @@ export default function TournamentDetailPage() {
     async function fetchMatches() {
       try {
         const response = await Calls.getMatches({ tournamentId: id });
-        setMatches(prev => JSON.stringify(prev) === JSON.stringify(response) ? prev : response);
+
+
+        setMatches(prev => {
+          // Check if this is a double bracket tournament
+          const hasBrackets = response.some(match => match.bracket);
+
+          let processedData;
+
+          if (hasBrackets) {
+            // Double bracket - group by bracket
+            processedData = response.reduce((acc, match) => {
+              if (match.bracket) {
+                const bracket = match.bracket;
+                const updatedMatch = {
+                  ...match,
+                  id: match.matchId
+                };
+
+                if (!acc[bracket]) {
+                  acc[bracket] = [];
+                }
+                acc[bracket].push(updatedMatch);
+              }
+              return acc;
+            }, { upper: [], lower: [] });
+          } else {
+            // Single bracket - just replace id with matchId
+            processedData = response.map(match => ({
+              ...match,
+              id: match.matchId
+            }));
+          }
+
+          return JSON.stringify(prev) === JSON.stringify(processedData) ? prev : processedData;
+        });
       } catch (error) {
         console.error("Error fetching matches:", error);
       }
@@ -48,7 +101,7 @@ export default function TournamentDetailPage() {
 
     fetchMatches();
 
-  }, [id]);
+  }, [info, setInfo]);
 
 
 
@@ -74,325 +127,8 @@ export default function TournamentDetailPage() {
   const isOwner = info?.owner === user?.id;
   const bracketsType = info?.bracketType
 
-  console.log(info)
-
-
   if (info.status === "ongoing") {
     // current-match brackets  owner-controls
-
-    const double_matches = {
-      upper: [
-        {
-          id: 252203,
-          name: "Upper Round 1 - Match 1",
-          nextMatchId: 671199,
-          nextLooserMatchId: 59536,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: [
-            {
-              id: "somuwfq39hda48n5v83l",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "1"
-            },
-            {
-              id: "76xmmdkdwesntok92frlug",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "2"
-            }
-          ]
-        },
-        {
-          id: 301254,
-          name: "Upper Round 1 - Match 2",
-          nextMatchId: 671199,
-          nextLooserMatchId: 59536,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: [
-            {
-              id: "rp6h2vsvwirunj5szrudf8",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "3"
-            },
-            {
-              id: "wyxnrpu3541ea3xxhrwvy",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "4"
-            }
-          ]
-        },
-        {
-          id: 522043,
-          name: "Upper Round 1 - Match 3",
-          nextMatchId: 566145,
-          nextLooserMatchId: 637037,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: [
-            {
-              id: "5j5m2d0w9i4d12oqyidrhn",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "5"
-            },
-            {
-              id: "mp0s8g7y3rf5u6tlt69j9t",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "6"
-            }
-          ]
-        },
-        {
-          id: 240901,
-          name: "Upper Round 1 - Match 4",
-          nextMatchId: 566145,
-          nextLooserMatchId: 637037,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: [
-            {
-              id: "rcsxdfwvw0r9mi6u0fd3s",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "7"
-            },
-            {
-              id: "rv281yo4pjejhakci5far",
-              resultText: null,
-              isWinner: false,
-              status: null,
-              name: "8"
-            }
-          ]
-        },
-        {
-          id: 671199,
-          name: "Upper Round 2 - Match 1",
-          nextMatchId: 947302,
-          nextLooserMatchId: 546758,
-          tournamentRoundText: "2",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 566145,
-          name: "Upper Round 2 - Match 2",
-          nextMatchId: 947302,
-          nextLooserMatchId: 546758,
-          tournamentRoundText: "2",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 947302,
-          name: "Grand Final",
-          nextMatchId: null,
-          nextLooserMatchId: 503581,
-          tournamentRoundText: "3",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        }
-      ],
-      lower: [
-        {
-          id: 59536,
-          name: "Lower Round 1 - Match 1",
-          nextMatchId: 546758,
-          nextLooserMatchId: null,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 637037,
-          name: "Lower Round 1 - Match 2",
-          nextMatchId: 546758,
-          nextLooserMatchId: null,
-          tournamentRoundText: "1",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 546758,
-          name: "Lower Round 2 - Match 1",
-          nextMatchId: 503581,
-          nextLooserMatchId: null,
-          tournamentRoundText: "2",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 417799,
-          name: "Lower Round 2 - Match 2",
-          nextMatchId: 503581,
-          nextLooserMatchId: null,
-          tournamentRoundText: "2",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        },
-        {
-          id: 503581,
-          name: "Lower Bracket Final",
-          nextMatchId: 947302,
-          nextLooserMatchId: null,
-          tournamentRoundText: "3",
-          startTime: null,
-          state: "SCHEDULED",
-          participants: []
-        }
-      ]
-    }
-
-    const single_matches = [
-      {
-        id: 995887,
-        name: "Round 1 - Match 1",
-        nextMatchId: 776344,
-        tournamentRoundText: "1",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: [
-          {
-            id: "somuwfq39hda48n5v83l",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "1"
-          },
-          {
-            id: "76xmmdkdwesntok92frlug",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "2"
-          }
-        ]
-      },
-      {
-        id: 961894,
-        name: "Round 1 - Match 2",
-        nextMatchId: 776344,
-        tournamentRoundText: "1",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: [
-          {
-            id: "rp6h2vsvwirunj5szrudf8",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "3"
-          },
-          {
-            id: "wyxnrpu3541ea3xxhrwvy",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "4"
-          }
-        ]
-      },
-      {
-        id: 650876,
-        name: "Round 1 - Match 3",
-        nextMatchId: 278235,
-        tournamentRoundText: "1",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: [
-          {
-            id: "5j5m2d0w9i4d12oqyidrhn",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "5"
-          },
-          {
-            id: "mp0s8g7y3rf5u6tlt69j9t",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "6"
-          }
-        ]
-      },
-      {
-        id: 742437,
-        name: "Round 1 - Match 4",
-        nextMatchId: 278235,
-        tournamentRoundText: "1",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: [
-          {
-            id: "rcsxdfwvw0r9mi6u0fd3s",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "7"
-          },
-          {
-            id: "rv281yo4pjejhakci5far",
-            resultText: null,
-            isWinner: false,
-            status: null,
-            name: "8"
-          }
-        ]
-      },
-      {
-        id: 776344,
-        name: "Round 2 - Match 1",
-        nextMatchId: 675111,
-        tournamentRoundText: "2",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: []
-      },
-      {
-        id: 278235,
-        name: "Round 2 - Match 2",
-        nextMatchId: 675111,
-        tournamentRoundText: "2",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: []
-      },
-      {
-        id: 675111,
-        name: "Final - Match",
-        nextMatchId: null,
-        tournamentRoundText: "3",
-        startTime: null,
-        state: "SCHEDULED",
-        participants: []
-      }
-    ]
-
     return (
       <div>
         <OngoingTournamentNav
@@ -411,10 +147,21 @@ export default function TournamentDetailPage() {
           bracketsType == 'double' ? (
             <div>
               <DoubleEliminationBracket
-                matches={double_matches}
+                matches={matches}
                 matchComponent={Match}
+                theme={OrangeTheme}
+                options={{
+                  style: {
+                    roundHeader: {
+                      backgroundColor: OrangeTheme.roundHeader.backgroundColor,
+                      fontColor: OrangeTheme.roundHeader.fontColor,
+                    },
+                    connectorColor: OrangeTheme.connectorColor,
+                    connectorColorHighlight: OrangeTheme.connectorColorHighlight,
+                  },
+                }}
                 svgWrapper={({ children, ...props }) => (
-                  <SVGViewer width={window.innerWidth} height={window.innerHeight} {...props}>
+                  <SVGViewer width={window.innerWidth} height={window.innerHeight} background={OrangeTheme.svgBackground} SVGBackground={OrangeTheme.svgBackground} {...props}>
                     {children}
                   </SVGViewer>
                 )}
@@ -423,10 +170,21 @@ export default function TournamentDetailPage() {
           ) : (
             <div>
               <SingleEliminationBracket
-                matches={single_matches}
+                matches={matches}
                 matchComponent={Match}
+                theme={OrangeTheme}
+                options={{
+                  style: {
+                    roundHeader: {
+                      backgroundColor: OrangeTheme.roundHeader.backgroundColor,
+                      fontColor: OrangeTheme.roundHeader.fontColor,
+                    },
+                    connectorColor: OrangeTheme.connectorColor,
+                    connectorColorHighlight: OrangeTheme.connectorColorHighlight,
+                  },
+                }}
                 svgWrapper={({ children, ...props }) => (
-                  <SVGViewer width={window.innerWidth} height={window.innerHeight} {...props}>
+                  <SVGViewer width={window.innerWidth} height={window.innerHeight} background={OrangeTheme.svgBackground} SVGBackground={OrangeTheme.svgBackground} {...props}>
                     {children}
                   </SVGViewer>
                 )}
