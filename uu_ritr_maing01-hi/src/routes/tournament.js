@@ -73,7 +73,8 @@ export default function TournamentsPage() {
             <h2 class="tournament-title">Aktuálny turnaj</h2>
             <p class="tournament-details">
                 <strong>{tournament.name}</strong><br/>
-                📅 15. - 30. november 2025<br/>
+                {/* finish date */}
+                📅 {new Date(tournament.startDate).getDay()}. - {new Date(tournament.endDate).getDay()}. november 2025<br/>
                 👥 {tournament.teams.length} tímov v súťaži
             </p>
             <div class="tournament-status">Prebieha prihlasovanie</div>
