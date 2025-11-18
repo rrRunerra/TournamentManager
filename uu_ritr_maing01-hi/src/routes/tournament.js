@@ -63,26 +63,24 @@ export default function TournamentsPage() {
 
   return (
     <div style={{backgroundColor: "black"}}> 
-      <h2>Tournaments</h2>
+      <section class="tournaments-section">
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>
       ) : (
         tournaments.map((tournament) => (
-          <Card
-            key={tournament.id}
-            className="tournament-card"
-            onClick={() => setRoute("tournamentDetail", { id: tournament.id })}
-            style={{ backgroundColor: "#1b1b1b"}}
-          >
-            <CardTitle className="tournament-title">{tournament.name}</CardTitle>
-            <CardDescription className="tournament-description">{tournament.description}</CardDescription>
-            <CardFooter className="tournament-footer">
-              {new Date(tournament.startDate).toLocaleDateString()} –{" "}
-              {new Date(tournament.endDate).toLocaleDateString()}
-            </CardFooter>
-          </Card>
+          <div class="tournament-card">
+            <div class="tournament-icon">🏆</div>
+            <h2 class="tournament-title">Aktuálny turnaj</h2>
+            <p class="tournament-details">
+                <strong>{tournament.name}</strong><br/>
+                📅 15. - 30. november 2025<br/>
+                👥 {tournament.teams.length} tímov v súťaži
+            </p>
+            <div class="tournament-status">Prebieha prihlasovanie</div>
+        </div>
         ))
       )}
+    </section>
 
       {isTeacher && (
         <button className="fab" onClick={() => setIsOpen(true)}>
