@@ -16,6 +16,8 @@ const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.
 const Login = Utils.Component.lazy(() => import("../routes/login.js"));
 const Tournaments = Utils.Component.lazy(() => import("../routes/tournament.js"));
 const Tournament = Utils.Component.lazy(() => import("../routes/tournament-detail.js"));
+const History = Utils.Component.lazy(() => import("../routes/history.js"));
+
 
 
 const ROUTE_MAP = {
@@ -32,6 +34,7 @@ const ROUTE_MAP = {
       Not Found
     </Uu5Elements.Text>
   ),
+  history: (props) => <History {...props} />,
 };
 //@@viewOff:constants
 
