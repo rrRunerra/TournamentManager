@@ -1,20 +1,26 @@
-/* Tournament Cards Section - both cards aligned to the far left, larger size but smaller text */
 .tournaments-section {
     padding: 1rem 1rem 2rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    flex-grow: 1;
     gap: 2rem;
     margin-left: 2rem;
 }
 
+/* dynamic columns:
+   large screens → 3 per row
+   medium screens → 2 per row
+   small screens → 1 per row
+*/
 .tournament-card {
+    flex: 1 1 calc(33.333% - 2rem);
+    max-width: 380px;
+    min-width: 280px;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     border-radius: 18px;
     padding: 2.2rem;
     border: 1px solid #3a3a5a;
-    width: 380px;
     height: 320px;
     text-align: left;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
@@ -23,6 +29,22 @@
     display: flex;
     flex-direction: column;
 }
+
+/* medium screens */
+@media (max-width: 1200px) {
+    .tournament-card {
+        flex: 1 1 calc(50% - 2rem);
+    }
+}
+
+/* small screens */
+@media (max-width: 700px) {
+    .tournament-card {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+}
+
 
 .tournament-card::before {
     content: '';

@@ -51,7 +51,7 @@ const Spa = createVisualComponent({
               <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
             </main>
             <footer className="app-footer">
-              <p>© 2025 Pekný Dizajn Stránky – Všetky práva vyhradené</p>
+              <p>©{new Date().getFullYear()} Všetky práva vyhradené</p>
             </footer>
           </div>
         </Uu5Elements.ModalBus>
