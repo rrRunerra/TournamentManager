@@ -62,7 +62,7 @@ export default function TournamentsPage() {
   };
 
   return (
-    <div style={{backgroundColor: "black"}}> 
+    <div class="background">
       <section class="tournaments-section">
       {tournaments.length === 0 ? (
         <p>No tournaments available.</p>

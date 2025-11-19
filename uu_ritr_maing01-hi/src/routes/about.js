@@ -1,172 +1,92 @@
 import React from "react";
 
-const team = [
-  { initials: "SS", name: "Sebastián Savary", role: "", bio: "" },
-  { initials: "BB", name: "Branislav Bobrik", role: "", bio: "" },
-  { initials: "LS", name: "Lukáš Salaj", role: "", bio: "" },
-];
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    backgroundColor: "#000",
-    color: "#fff",
-    padding: "20px",
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-  },
-  headerSection: {
-    textAlign: "center",
-    marginBottom: "4rem",
-  },
-  mainTitle: {
-    fontSize: "3rem",
-    fontWeight: "700",
-    marginBottom: "1rem",
-    lineHeight: "1",
-  },
-  orangeText: {
-    color: "#f97316",
-  },
-  subtitle: {
-    color: "#d1d5db",
-    maxWidth: "48rem",
-    margin: "0 auto",
-    fontSize: "1.125rem",
-    lineHeight: "1.75rem",
-  },
-  missionVisionContainer: {
-    maxWidth: "64rem",
-    margin: "0 auto 5rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "2.5rem",
-  },
-  missionVisionItem: {
-    textAlign: "center",
-  },
-  sectionTitle: {
-    fontSize: "1.5rem",
-    fontWeight: "600",
-    marginBottom: "0.75rem",
-    lineHeight: "2rem",
-  },
-  description: {
-    color: "#9ca3af",
-    maxWidth: "32rem",
-    margin: "0 auto",
-    fontSize: "1rem",
-    lineHeight: "1.5rem",
-  },
-  teamHeaderSection: {
-    textAlign: "center",
-    marginBottom: "4rem",
-  },
-  teamTitle: {
-    fontSize: "1.875rem",
-    fontWeight: "700",
-    marginBottom: "1.5rem",
-    lineHeight: "2.25rem",
-  },
-  teamSubtitle: {
-    color: "#d1d5db",
-    maxWidth: "32rem",
-    margin: "0 auto 2.5rem",
-    fontSize: "1.125rem",
-    lineHeight: "1.75rem",
-  },
-  teamGrid: {
-    justifyContent: "center",
-  },
-  teamCard: {
-    backgroundColor: "#111827",
-    border: "1px solid #1f2937",
-    borderRadius: "1rem",
-    padding: "2rem 1rem",
-    height: "100%",
-    width: "16rem",
-    textAlign: "center",
-    margin: "1rem",
-    transition: "all 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
-  },
-  teamCardHover: {
-    borderColor: "#f97316",
-  },
-  avatar: {
-    width: "4rem",
-    height: "4rem",
-    borderRadius: "9999px",
-    backgroundColor: "#1f2937",
-    color: "#f97316",
-    fontSize: "1.5rem",
-    fontWeight: "700",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "0 auto 1rem",
-  },
-  memberName: {
-    fontSize: "1.125rem",
-    fontWeight: "600",
-    color: "#fb923c",
-    marginBottom: "0.5rem",
-    lineHeight: "1.75rem",
-  },
-  memberRole: {
-    fontSize: "0.875rem",
-    color: "#9ca3af",
-    marginBottom: "0.5rem",
-    lineHeight: "1.25rem",
-  },
-  memberBio: {
-    fontSize: "0.875rem",
-    color: "#d1d5db",
-    lineHeight: "1.25rem",
-    maxWidth: "20rem",
-    margin: "0 auto",
-  },
-};
-
-// Add hover effect with inline styles
-const TeamCard = ({ member }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+const AboutPage = () => {
+  const team = [
+    { 
+      initials: "SS", 
+      name: "Sebastián Savary", 
+      role: "Backend Developer", 
+      bio: "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu."
+    },
+    { 
+      initials: "BB", 
+      name: "Branislav Bobrik", 
+      role: "Frontend Developer", 
+      bio: "Zodpovedný za vývoj používateľského rozhrania a interaktívnych komponentov." 
+    },
+    { 
+      initials: "LS", 
+      name: "Lukáš Salaj", 
+      role: "UI/UX Designer", 
+      bio: "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť." 
+    },
+  ];
 
   return (
-    <div
-      style={{
-        ...styles.teamCard,
-        borderColor: isHovered ? "#f97316" : "#1f2937",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div style={styles.avatar}>{member.initials}</div>
-      <h3 style={styles.memberName}>{member.name}</h3>
-      <p style={styles.memberRole}>{member.role}</p>
-      <p style={styles.memberBio}>{member.bio}</p>
-    </div>
-  );
-};
+    <div className="about-page" style={{
+      backgroundColor: '#0d0d0d',
+      color: '#d1d5db',
+      fontFamily: "'Space Mono', monospace",
+      minHeight: '100vh',
+      padding: '2rem'
+    }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Nadpis */}
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '4rem',
+          padding: '0 1rem'
+        }}>
+          <h1 style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: '3rem',
+            fontWeight: '700',
+            marginBottom: '1.5rem',
+            lineHeight: '1.2'
+          }}>
+            O našom <span style={{
+              color: '#ff8e53',
+              background: 'linear-gradient(90deg, #ff8e53, #ffd166)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>tíme</span>
+          </h1>
+          <p style={{
+            color: '#9ca3af',
+            fontSize: '1.25rem',
+            lineHeight: '1.8',
+            maxWidth: '700px',
+            margin: '0 auto'
+          }}>
+            MatchUP je študentský projekt v spolupráci s firmou Unicorn. Náš tím je zložený z troch žiakov Strednej Priemyslenej školy v Snine.
+          </p>
+        </div>
 
-const AboutPageWithHover = () => {
-  return (
-    <div style={styles.container}>
-      {/* Nadpis */}
-      <div style={styles.headerSection}>
-        <h1 style={styles.mainTitle}>
-          O našom <span style={styles.orangeText}>tíme</span>
-        </h1>
-        <p style={styles.subtitle}>
-          MatchUP je študentský projekt v spolupráci s firmou Unicorn. Náš tím je zložený z troch žiakov Strednej Priemyslenej školy v Snine.
-        </p>
-      </div>
+        {/* Sekcia tímu */}
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: '2.5rem',
+            fontWeight: '700',
+            color: '#ff8e53',
+            background: 'linear-gradient(90deg, #ff8e53, #ffd166)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            margin: 0
+          }}>
+            Náš tím
+          </h2>
+        </div>
 
-      {/* Sekcia tímu */}
-      <div style={styles.teamHeaderSection}>
-        <h2 style={styles.teamTitle}>Náš tím</h2>
-      </div>
-
-      <div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '2rem',
+          flexWrap: 'wrap',
+          padding: '0 1rem'
+        }}>
           {team.map((member, index) => (
             <TeamCard key={index} member={member} />
           ))}
@@ -176,4 +96,95 @@ const AboutPageWithHover = () => {
   );
 };
 
-export default AboutPageWithHover;
+const TeamCard = ({ member }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <div
+      style={{
+        backgroundColor: '#141414',
+        border: `1px solid ${isHovered ? '#ff6b35' : '#2a2a2a'}`,
+        borderRadius: '12px',
+        padding: '2rem 1.5rem',
+        width: '280px',
+        textAlign: 'center',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        position: 'relative',
+        transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+        boxShadow: isHovered ? '0 12px 24px -6px rgba(255, 107, 53, 0.3)' : 'none',
+        backgroundColor: isHovered ? '#1a1a1a' : '#141414'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Top gradient line */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '2px',
+        background: 'linear-gradient(90deg, #ff6b35, #ffd166)',
+        transform: isHovered ? 'scaleX(1)' : 'scaleX(0)',
+        transformOrigin: 'left',
+        transition: 'transform 0.3s ease',
+        borderRadius: '12px 12px 0 0'
+      }} />
+      
+      <div style={{
+        width: '80px',
+        height: '80px',
+        borderRadius: '50%',
+        background: isHovered 
+          ? 'linear-gradient(135deg, #1f1f1f, #3a3a3a)' 
+          : 'linear-gradient(135deg, #1a1a1a, #2a2a2a)',
+        color: '#ff8e53',
+        fontFamily: "'Space Grotesk', sans-serif",
+        fontSize: '2rem',
+        fontWeight: '700',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '0 auto 1.5rem',
+        border: `2px solid ${isHovered ? '#ff6b35' : '#2a2a2a'}`,
+        transition: 'all 0.3s ease',
+        transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+        boxShadow: isHovered ? '0 0 20px rgba(255, 138, 83, 0.3)' : 'none'
+      }}>
+        {member.initials}
+      </div>
+      
+      <h3 style={{
+        fontFamily: "'Space Grotesk', sans-serif",
+        fontSize: '1.3rem',
+        fontWeight: '600',
+        color: isHovered ? '#ffd166' : '#ff8e53',
+        marginBottom: '0.5rem',
+        transition: 'all 0.3s ease',
+        textShadow: isHovered ? '0 0 8px rgba(255, 209, 102, 0.4)' : 'none'
+      }}>
+        {member.name}
+      </h3>
+      
+      <p style={{
+        color: '#9ca3af',
+        fontSize: '0.95rem',
+        marginBottom: '0.8rem',
+        fontStyle: 'italic'
+      }}>
+        {member.role}
+      </p>
+      
+      <p style={{
+        color: '#d1d5db',
+        fontSize: '0.9rem',
+        lineHeight: '1.5',
+        opacity: '0.9'
+      }}>
+        {member.bio}
+      </p>
+    </div>
+  );
+};
+
+export default AboutPage;

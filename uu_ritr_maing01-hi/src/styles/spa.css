@@ -1,0 +1,32 @@
+/* Zabezpečí, že layout zaberie celú výšku okna */
+.spa-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Ak máš globálne margin/padding, môžeš ho resetnúť */
+  margin: 0;
+}
+
+/* Hlavný obsah (SPA) sa rozťahuje */
+.spa-content {
+  flex: 1;
+  /* Zabráni tomu, aby sa footer "nalepil" pri veľkom obsahu */
+  overflow: auto;
+}
+
+/* Štýl footera – prispôsob podľa potreby */
+.app-footer {
+  padding: 0.8rem;
+  background-color: #141414;
+  border-top: 1px solid #2a2a2a;
+  text-align: center;
+}
+
+.app-footer p {
+  font-size: 0.78rem;
+  color: #ffd166;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
