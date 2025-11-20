@@ -33,7 +33,9 @@ const AboutPage = () => {
             O našom <span className="text-gradient">tíme</span>
           </h1>
           <p className="subtitle">
-            MatchUP je študentský projekt v spolupráci s firmou Unicorn. Náš tím je zložený z troch žiakov Strednej Priemyslenej školy v Snine.
+            Sme trojica študentov zo Strednej priemyselnej školy v Snine, ktorí spájajú vášeň pre technológie, kódovanie a tvorbu. Naším cieľom je rozvíjať projekty, ktoré majú význam nielen pre nás, ale aj pre našu školu a komunitu okolo nej. Spoločne tvoríme MatchUP – študentský projekt, ktorý vznikol v spolupráci s firmou Unicorn a ktorý nás posúva vpred nielen vo vedomostiach, ale aj v tímovej spolupráci a reálnom riešení úloh.   
+
+Veríme, že aj malý tím s veľkými nápadmi môže niečo zmeniť. 
           </p>
         </div>
 
@@ -50,7 +52,7 @@ const AboutPage = () => {
 
         {/* --- MOTIVATION SECTION --- */}
         <div className="section-header">
-          <h2 className="section-title">Čo nás motívuje</h2>
+          <h2 className="section-title">Čo nás motivuje</h2>
         </div>
 
         <div className="motivation-grid">
