@@ -1,48 +1,160 @@
 .tournament-container {
-  max-width: 700px;
+  padding: 1.5rem 1rem;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: orange;
+  color: #f0f0f0;
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
 .tournament-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
 }
 
 .tournament-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #d0d0d0;
   margin-bottom: 1.5rem;
-  color: white;
+  text-align: center;
 }
 
+.tournament-container p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #c0c0c0;
+}
+
+.tournament-container strong {
+  color: #ff8e53;
+}
+
+/* Team Grid */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+  justify-items: center;
 }
 
 .team-card {
-  border: 1px solid #4c4c4c;
-  border-radius: 0.5rem;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
   padding: 1rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-  background-color: #4c4c4c;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.team-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background-color: #eff6ff;
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ffd166);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
+.team-card:hover,
 .team-card.joining {
-  opacity: 0.6;
-  pointer-events: none;
+  border-color: #ff6b35;
+  box-shadow: 0 8px 16px -4px rgba(255, 107, 53, 0.25);
+  transform: translateY(-3px);
+  background-color: #1f1f1f;
+}
+
+.team-card:hover::before,
+.team-card.joining::before {
+  transform: scaleX(1);
+}
+
+.team-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #ff8e53;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.team-card p {
+  font-size: 0.95rem;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+.team-card .CardFooter {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #ffd166;
+  font-weight: 600;
+}
+
+/* Back Button — matches your floating button style */
+.tournament-container button[aria-label="Go back to tournaments"] {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tournament-container button[aria-label="Go back to tournaments"]:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+/* Owner Controls (if used as a section) */
+.owner-controls-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tournament-container {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .tournament-title {
+    font-size: 1.5rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .team-card {
+    padding: 1.1rem 0.8rem;
+  }
 }
 
 .alert {
