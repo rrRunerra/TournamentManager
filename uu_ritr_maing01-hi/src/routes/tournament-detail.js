@@ -244,7 +244,7 @@ export default function TournamentDetailPage() {
           width: '50px',
           height: '50px',
           borderRadius: '50%',
-          backgroundColor: 'white',
+          backgroundColor: 'orange',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
