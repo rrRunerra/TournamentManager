@@ -122,7 +122,8 @@ export default function TournamentDetailPage() {
   }
 
 
-  if (!info || !user) return <p className="loading">Loading...</p>;
+  // Renamed class "loading" to "tournament-detail-loading"
+  if (!info || !user) return <p className="tournament-detail-loading">Loading...</p>;
 
   const isOwner = info?.owner === user?.id;
   const bracketsType = info?.bracketType
@@ -207,28 +208,35 @@ export default function TournamentDetailPage() {
   }
 
   return (
-    <div className="tournament-container">
-      <h2 className="tournament-title">{info.name}</h2>
-      <p className="tournament-description">{info.description}</p>
+    // Renamed class "tournament-container" to "tournament-detail-container"
+    <div className="tournament-detail-container">
+      {/* Renamed class "tournament-title" to "tournament-detail-title" */}
+      <h2 className="tournament-detail-title">{info.name}</h2>
+      {/* Renamed class "tournament-description" to "tournament-detail-description" */}
+      <p className="tournament-detail-description">{info.description}</p>
       <p><strong>Start Date:</strong> {new Date(info.startDate).toLocaleString()}</p>
       <p><strong>End Date:</strong> {new Date(info.endDate).toLocaleString()}</p>
       <p><strong>Status:</strong> {info.status}</p>
       <p><strong>Team Size:</strong> {info.teamSize}</p>
 
-      <div className="team-grid">
+      {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
+      <div className="tournament-detail-team-grid">
         {info.teams.map(team => {
           const isJoined = team.players?.includes(user.id)
           console.log(team)
           return (
             <Card
               key={team.id}
-              className={`team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`} 
+              // Renamed class "team-card" to "tournament-detail-team-card"
+              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`} 
               onClick={() => joinTeam(id, team.id, user.id)}
             >
               <CardTitle>{team.name}</CardTitle>
               <CardDescription>
                 Players: {team.players?.length || 0} / {info.teamSize}
               </CardDescription>
+              {/* Note: CardFooter content doesn't have a direct class change, 
+                  but its container selector was updated in the CSS. */}
               <CardFooter>{joiningTeam === team.id ? "Joining..." : ""}</CardFooter>
             </Card>
           )

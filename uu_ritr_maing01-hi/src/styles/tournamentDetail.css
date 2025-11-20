@@ -1,4 +1,5 @@
-.tournament-container {
+/* Unique Identifier: .tournament-detail-container */
+.tournament-detail-container {
   padding: 1.5rem 1rem;
   max-width: 800px;
   margin: 0 auto;
@@ -8,7 +9,8 @@
   position: relative;
 }
 
-.tournament-title {
+/* Namespaced Class */
+.tournament-detail-title {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
@@ -19,7 +21,8 @@
   text-align: center;
 }
 
-.tournament-description {
+/* Namespaced Class */
+.tournament-detail-description {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #d0d0d0;
@@ -27,18 +30,20 @@
   text-align: center;
 }
 
-.tournament-container p {
+/* Updated Selector: Targeting elements only within the namespaced container */
+.tournament-detail-container p {
   margin: 0.6rem 0;
   font-size: 1rem;
   color: #c0c0c0;
 }
 
-.tournament-container strong {
+/* Updated Selector: Targeting elements only within the namespaced container */
+.tournament-detail-container strong {
   color: #ff8e53;
 }
 
-/* Team Grid */
-.team-grid {
+/* Team Grid - Namespaced Class */
+.tournament-detail-team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.2rem;
@@ -46,7 +51,8 @@
   justify-items: center;
 }
 
-.team-card {
+/* Namespaced Class */
+.tournament-detail-team-card {
   background-color: #1a1a1a;
   border: 1px solid #2a2a2a;
   border-radius: 12px;
@@ -59,7 +65,7 @@
   overflow: hidden;
 }
 
-.team-card::before {
+.tournament-detail-team-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -73,9 +79,9 @@
 }
 
 /* Update 1: The main card style (Border, Shadow, Lift) */
-.team-card:hover,
-.team-card.joining,
-.team-card.joined { /* <--- Add this line */
+.tournament-detail-team-card:hover,
+.tournament-detail-team-card.joining,
+.tournament-detail-team-card.joined {
   border-color: #ff6b35;
   box-shadow: 0 8px 16px -4px rgba(255, 107, 53, 0.25);
   transform: translateY(-3px);
@@ -83,13 +89,13 @@
 }
 
 /* Update 2: The top gradient line */
-.team-card:hover::before,
-.team-card.joining::before,
-.team-card.joined::before { /* <--- Add this line */
+.tournament-detail-team-card:hover::before,
+.tournament-detail-team-card.joining::before,
+.tournament-detail-team-card.joined::before {
   transform: scaleX(1);
 }
 
-.team-card h3 {
+.tournament-detail-team-card h3 {
   font-size: 1.15rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
@@ -97,13 +103,13 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
-.team-card p {
+.tournament-detail-team-card p {
   font-size: 0.95rem;
   color: #d0d0d0;
   margin: 0;
 }
 
-.team-card .CardFooter {
+.tournament-detail-team-card .tournament-detail-card-footer { /* Namespaced CardFooter */
   margin-top: 0.6rem;
   font-size: 0.9rem;
   color: #ffd166;
@@ -111,7 +117,7 @@
 }
 
 /* Back Button — matches your floating button style */
-.tournament-container button[aria-label="Go back to tournaments"] {
+.tournament-detail-container button[aria-label="Go back to tournaments"] {
   background: white;
   border: none;
   border-radius: 50%;
@@ -129,13 +135,13 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.tournament-container button[aria-label="Go back to tournaments"]:hover {
+.tournament-detail-container button[aria-label="Go back to tournaments"]:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
 
-/* Owner Controls (if used as a section) */
-.owner-controls-section {
+/* Owner Controls (if used as a section) - Namespaced Class */
+.tournament-detail-owner-controls-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid #2a2a2a;
@@ -143,56 +149,60 @@
 
 /* Responsive */
 @media (max-width: 600px) {
-  .tournament-container {
+  .tournament-detail-container {
     padding: 1.2rem 0.8rem;
   }
 
-  .tournament-title {
+  /* Namespaced Class */
+  .tournament-detail-title {
     font-size: 1.5rem;
   }
 
-  .team-grid {
+  /* Namespaced Class */
+  .tournament-detail-team-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .team-card {
+  /* Namespaced Class */
+  .tournament-detail-team-card {
     padding: 1.1rem 0.8rem;
   }
 }
 
-.alert {
+/* Namespaced Alert */
+.tournament-detail-alert {
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
-.alert.success {
+.tournament-detail-alert.success {
   background-color: #d1fae5;
   color: #065f46;
 }
 
-.alert.error {
+.tournament-detail-alert.error {
   background-color: #fee2e2;
   color: #b91c1c;
 }
 
-.loading {
+/* Namespaced Loading */
+.tournament-detail-loading {
   text-align: center;
   font-size: 1.2rem;
   color: #6b7280;
 }
 
-
-
-.player-count {
+/* Namespaced Player Count */
+.tournament-detail-player-count {
   font-size: 0.85rem;
   color: white;
 }
 
-/* Button styles */
-.btn {
+/* Button styles - Namespaced */
+.tournament-detail-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
@@ -201,36 +211,36 @@
   transition: all 0.2s;
 }
 
-.btn-primary {
+.tournament-detail-btn-primary {
   background: #007bff;
   color: white;
 }
 
-.btn-primary:hover {
+.tournament-detail-btn-primary:hover {
   background: #0056b3;
 }
 
-.btn-danger {
+.tournament-detail-btn-danger {
   background: #dc3545;
   color: white;
 }
 
-.btn-danger:hover {
+.tournament-detail-btn-danger:hover {
   background: #c82333;
 }
 
-.btn-outline {
+.tournament-detail-btn-outline {
   background: transparent;
   border: 1px solid #dc3545;
   color: #dc3545;
 }
 
-.btn-outline:hover {
+.tournament-detail-btn-outline:hover {
   background: #dc3545;
   color: white;
 }
 
-.btn-small {
+.tournament-detail-btn-small {
   padding: 0.25rem 0.75rem;
   font-size: 0.8rem;
 }

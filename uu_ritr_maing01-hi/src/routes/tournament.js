@@ -89,9 +89,8 @@ export default function TournamentsPage() {
               setRoute("tournamentDetail", { id: tournament.id })
             }}>
               <div class="tournament-icon">🏆</div>
-              <h2 class="tournament-title">Aktuálny turnaj</h2>
+              <h2 class="tournament-title">{tournament.name}</h2>
               <p class="tournament-details">
-                <strong>{tournament.name}</strong><br />
                 {/* finish date */}
                 📅 {new Date(tournament.startDate).getDay()}. - {new Date(tournament.endDate).getDay()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
                 👥 {tournament.teams.length} tímov v súťaži

@@ -1,47 +1,136 @@
-.owner-panel {
+/* Panel container */
+.owner-controls-panel {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: #4c4c4c;
-  border-radius: 8px;
-  border: 1px solid #4c4c4c;
+  background: #141414;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
-.owner-title {
+/* Title */
+.owner-controls-title {
   margin-top: 0;
-  color: orange;
-  border-bottom: 2px solid #007bff;
+  color: #ff8e53;
+  border-bottom: 2px solid #ff6b35;
   padding-bottom: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.owner-actions {
+/* Action buttons container */
+.owner-controls-actions {
   display: flex;
   gap: 1rem;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.team-management {
+/* Base button style */
+.owner-controls-btn {
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+  font-family: 'Space Grotesk', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.owner-controls-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.owner-controls-btn:active {
+  transform: translateY(0);
+  scale: 0.98;
+}
+
+/* Primary button (Start Tournament) */
+.owner-controls-btn--primary {
+  background: linear-gradient(90deg, #ff8e53, #ff6b35);
+  color: white;
+  box-shadow: 0 2px 6px rgba(255, 138, 83, 0.3);
+}
+
+.owner-controls-btn--primary:hover {
+  background: linear-gradient(90deg, #ff9a60, #ff7840);
+}
+
+/* Danger button (Delete Tournament) */
+.owner-controls-btn--danger {
+  background: linear-gradient(90deg, #ff4d4d, #dc3545);
+  color: white;
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+}
+
+.owner-controls-btn--danger:hover {
+  background: linear-gradient(90deg, #ff5a5a, #e04050);
+}
+
+/* Outline button (Remove Team) */
+.owner-controls-btn--outline {
+  background-color: transparent;
+  color: #ff8e53;
+  border: 1px solid #ff8e53;
+  box-shadow: inset 0 0 0 1px rgba(255, 142, 83, 0.2);
+}
+
+.owner-controls-btn--outline:hover {
+  background-color: rgba(255, 142, 83, 0.1);
+  box-shadow: 0 2px 6px rgba(255, 142, 83, 0.2);
+}
+
+/* Team management section */
+.owner-controls-team-management {
   margin-top: 1.5rem;
 }
 
-.team-management h4 {
+.owner-controls-team-management h4 {
   margin-bottom: 1rem;
-  color: white;
+  color: #ff8e53;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
 }
 
-.team-management-item {
+/* Individual team item */
+.owner-controls-team-management-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
-  background: grey;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  border: 1px solid grey;
+  padding: 0.85rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  border: 1px solid #2a2a2a;
+  transition: all 0.25s ease;
 }
 
-.team-info {
+.owner-controls-team-management-item:hover {
+  background: #202020;
+  border-color: #ff6b35;
+  transform: translateY(-1px);
+}
+
+/* Team info (name + player count) */
+.owner-controls-team-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.owner-controls-player-count {
+  font-size: 0.875rem;
+  color: #aaa;
+  font-family: 'Space Mono', monospace;
 }
