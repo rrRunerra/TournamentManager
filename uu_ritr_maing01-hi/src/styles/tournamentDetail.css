@@ -72,16 +72,20 @@
   transition: transform 0.3s ease;
 }
 
+/* Update 1: The main card style (Border, Shadow, Lift) */
 .team-card:hover,
-.team-card.joining {
+.team-card.joining,
+.team-card.joined { /* <--- Add this line */
   border-color: #ff6b35;
   box-shadow: 0 8px 16px -4px rgba(255, 107, 53, 0.25);
   transform: translateY(-3px);
   background-color: #1f1f1f;
 }
 
+/* Update 2: The top gradient line */
 .team-card:hover::before,
-.team-card.joining::before {
+.team-card.joining::before,
+.team-card.joined::before { /* <--- Add this line */
   transform: scaleX(1);
 }
 

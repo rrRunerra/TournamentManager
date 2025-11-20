@@ -216,19 +216,24 @@ export default function TournamentDetailPage() {
       <p><strong>Team Size:</strong> {info.teamSize}</p>
 
       <div className="team-grid">
-        {info.teams.map(team => (
-          <Card
-            key={team.id}
-            className={`team-card ${joiningTeam === team.id ? "joining" : ""}`}
-            onClick={() => joinTeam(id, team.id, user.id)}
-          >
-            <CardTitle>{team.name}</CardTitle>
-            <CardDescription>
-              Players: {team.players?.length || 0} / {info.teamSize}
-            </CardDescription>
-            <CardFooter>{joiningTeam === team.id ? "Joining..." : ""}</CardFooter>
-          </Card>
-        ))}
+        {info.teams.map(team => {
+          const isJoined = team.players?.includes(user.id)
+          console.log(team)
+          return (
+            <Card
+              key={team.id}
+              className={`team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`} 
+              onClick={() => joinTeam(id, team.id, user.id)}
+            >
+              <CardTitle>{team.name}</CardTitle>
+              <CardDescription>
+                Players: {team.players?.length || 0} / {info.teamSize}
+              </CardDescription>
+              <CardFooter>{joiningTeam === team.id ? "Joining..." : ""}</CardFooter>
+            </Card>
+          )
+
+        })}
       </div>
 
       {isOwner && (
