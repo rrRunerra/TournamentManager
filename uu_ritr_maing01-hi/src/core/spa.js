@@ -51,7 +51,9 @@ const Spa = createVisualComponent({
               <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
             </main>
             <footer className="app-footer">
-              <p>©{new Date().getFullYear()} Všetky práva vyhradené</p>
+              <p>© 2025 MatchUP. Všetky práva vyhradené.
+                <br/>
+                Študentský projekt v spolupráci s firmou Unicorn</p>
             </footer>
           </div>
         </Uu5Elements.ModalBus>
