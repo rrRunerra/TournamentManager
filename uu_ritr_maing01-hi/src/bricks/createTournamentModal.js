@@ -97,7 +97,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
             placeholder="Enter team name"
             className="team-input"
           />
-          <button onClick={addTeam}>Add</button>
+          <button className="btn" onClick={addTeam}>Add</button>
         </div>
 
         <ul className="teams-list">
