@@ -228,14 +228,14 @@ export default function TournamentDetailPage() {
             <Card
               key={team.id}
               // Renamed class "team-card" to "tournament-detail-team-card"
-              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`} 
+              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`}
               onClick={() => joinTeam(id, team.id, user.id)}
             >
               <CardTitle>{team.name}</CardTitle>
               <CardDescription>
                 Players: {team.players?.length || 0} / {info.teamSize}
               </CardDescription>
-              {/* Note: CardFooter content doesn't have a direct class change, 
+              {/* Note: CardFooter content doesn't have a direct class change,
                   but its container selector was updated in the CSS. */}
               <CardFooter>{joiningTeam === team.id ? "Joining..." : ""}</CardFooter>
             </Card>
@@ -257,7 +257,7 @@ export default function TournamentDetailPage() {
           width: '50px',
           height: '50px',
           borderRadius: '50%',
-          backgroundColor: 'orange',
+          backgroundColor: '#ff8e53',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
