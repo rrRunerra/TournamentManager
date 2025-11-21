@@ -62,7 +62,7 @@
 .match-pair {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     gap: 20px;
     position: relative;
     flex: 1;
