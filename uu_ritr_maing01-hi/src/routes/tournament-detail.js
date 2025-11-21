@@ -228,7 +228,7 @@ export default function TournamentDetailPage() {
             <Card
               key={team.id}
               // Renamed class "team-card" to "tournament-detail-team-card"
-              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`} 
+              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`}
               onClick={() => joinTeam(id, team.id, user.id)}
             >
               <CardTitle>{team.name}</CardTitle>

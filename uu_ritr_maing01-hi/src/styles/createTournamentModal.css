@@ -1,0 +1,57 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #1b1b1b;
+    color: #ff7300;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    margin-bottom: 16px;
+}
+
+.form-control {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.team-input-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.team-input {
+    flex: 1;
+}
+
+.teams-list {
+    margin-bottom: 12px;
+    padding-left: 20px;
+}
+
+.team-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.remove-team-btn {
+    margin-left: 8px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}

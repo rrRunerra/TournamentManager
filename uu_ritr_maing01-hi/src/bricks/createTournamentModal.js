@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/createTournamentModal.css";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -25,35 +26,19 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.5)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999,
-      }}
+      className="modal-overlay"
     >
       <div
-        style={{
-          background: "#1b1b1b",
-          color: "#ff7300",
-          borderRadius: "8px",
-          padding: "20px",
-          width: "400px",
-          boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-
-        }}
+        className="modal-content"
       >
-        <h3 style={{ marginBottom: "16px" }}>Create Tournament</h3>
+        <h3 className="modal-header">Create Tournament</h3>
 
         <label>Name</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
           required
         />
 
@@ -61,7 +46,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
           required
         />
 
@@ -70,7 +55,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           type="datetime-local"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
         />
 
         <label>End Date</label>
@@ -78,7 +63,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           type="datetime-local"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
         />
 
         <label >Bracket Type</label>
@@ -86,7 +71,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           id="bracketType"
           value={bracketType}
           onChange={(e) => setBracketType(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
         >
           <option value="single">Single Elimination</option>
           <option value="double">Double Elimination</option>
@@ -98,35 +83,35 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           type="number"
           value={teamSize}
           onChange={(e) => setTeamSize(e.target.value)}
-          style={{ width: "100%", marginBottom: "8px" }}
+          className="form-control"
           min="1"
           required
         />
 
         <label>Teams</label>
-        <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
+        <div className="team-input-container">
           <input
             type="text"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
             placeholder="Enter team name"
-            style={{ flex: 1 }}
+            className="team-input"
           />
           <button onClick={addTeam}>Add</button>
         </div>
 
-        <ul style={{ marginBottom: "12px", paddingLeft: "20px" }}>
+        <ul className="teams-list">
           {teams.map((team, index) => (
-            <li key={index} style={{ display: "flex", justifyContent: "space-between" }}>
+            <li key={index} className="team-item">
               <span>{team}</span>
-              <button onClick={() => removeTeam(index)} style={{ marginLeft: "8px" }}>
+              <button onClick={() => removeTeam(index)} className="remove-team-btn">
                 ✕
               </button>
             </li>
           ))}
         </ul>
 
-        <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+        <div className="modal-actions">
           <button onClick={onClose}>Cancel</button>
           <button
             onClick={() => {
@@ -135,8 +120,12 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               if (!description.trim()) newErrors.description = true;
               if (!startDate) newErrors.startDate = true;
               if (!endDate) newErrors.endDate = true;
+
+              if (startDate > endDate) newErrors.invalidDate = true
+
+
               if (!teamSize) newErrors.teamSize = true;
-              if (teams.length < 2) newErrors.teams = true;
+              if (teams.length < 3) newErrors.teams = true;
 
               if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors);
@@ -147,7 +136,8 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 if (newErrors.startDate) errorMessages.push("Start Date is required.");
                 if (newErrors.endDate) errorMessages.push("End Date is required.");
                 if (newErrors.teamSize) errorMessages.push("Team Size is required.");
-                if (newErrors.teams) errorMessages.push("At least 2 teams are required.");
+                if (newErrors.teams) errorMessages.push("At least 3 teams are required.");
+                if (newErrors.invalidDate) errorMessages.push("Start date cannot be sooner than end date")
 
                 alert(errorMessages.join("\n"));
                 return;

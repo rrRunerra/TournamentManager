@@ -240,31 +240,31 @@ async function generateSingleBracket(teams) {
 
   // Create matches array
   const matches = [];
-  
+
   // First, create all matches we'll need
   let currentTeams = [...teams];
   let roundNumber = 1;
-  
+
   // We'll store matches by round for easier connection
   const rounds = [];
-  
+
   while (currentTeams.length > 1) {
     const roundMatches = [];
     const nextRoundTeams = [];
-    
+
     // Create matches for this round
     for (let i = 0; i < currentTeams.length; i += 2) {
       // Check if we have a team for this position
       const team1 = currentTeams[i];
       const team2 = currentTeams[i + 1];
-      
+
       // Only create a match if we have at least one team
       if (team1 || team2) {
         const isFinalRound = currentTeams.length <= 2;
-        const matchName = isFinalRound ? 
-          "Final - Match" : 
+        const matchName = isFinalRound ?
+          "Final - Match" :
           `Round ${roundNumber} - Match ${roundMatches.length + 1}`;
-        
+
         const match = {
           id: generateMatchId(),
           name: matchName,
@@ -274,7 +274,7 @@ async function generateSingleBracket(teams) {
           state: "SCHEDULED",
           participants: []
         };
-        
+
         // Add participants
         if (team1) {
           match.participants.push({
@@ -285,7 +285,7 @@ async function generateSingleBracket(teams) {
             name: team1.name
           });
         }
-        
+
         if (team2) {
           match.participants.push({
             id: team2.id || generateParticipantId(),
@@ -295,7 +295,7 @@ async function generateSingleBracket(teams) {
             name: team2.name
           });
         }
-        
+
         // Handle byes (only one team)
         if (match.participants.length === 1) {
           match.participants[0].resultText = "WALK_OVER";
@@ -303,10 +303,10 @@ async function generateSingleBracket(teams) {
           match.participants[0].status = "WALK_OVER";
           match.state = "WALK_OVER";
         }
-        
+
         roundMatches.push(match);
         matches.push(match);
-        
+
         // Track that a winner will come from this match
         nextRoundTeams.push({ type: 'winner', matchId: match.id });
       } else if (i < currentTeams.length) {
@@ -314,53 +314,53 @@ async function generateSingleBracket(teams) {
         nextRoundTeams.push(currentTeams[i]);
       }
     }
-    
+
     rounds.push({
       roundNumber,
       matches: roundMatches,
       nextRoundTeams
     });
-    
+
     // Prepare teams for next round
     currentTeams = nextRoundTeams;
     roundNumber++;
   }
-  
+
   // Now connect the matches with nextMatchId
   for (let i = 0; i < rounds.length - 1; i++) {
     const currentRound = rounds[i];
     const nextRound = rounds[i + 1];
-    
+
     // For each winner reference in current round, connect it to the appropriate match in next round
     let nextMatchIndex = 0;
-    
+
     for (let j = 0; j < currentRound.nextRoundTeams.length; j += 2) {
       if (nextMatchIndex < nextRound.matches.length) {
         const nextMatch = nextRound.matches[nextMatchIndex];
-        
+
         // Connect the two winners from current round to this next match
         const team1Ref = currentRound.nextRoundTeams[j];
         const team2Ref = currentRound.nextRoundTeams[j + 1];
-        
+
         if (team1Ref && team1Ref.type === 'winner') {
           const sourceMatch = currentRound.matches.find(m => m.id === team1Ref.matchId);
           if (sourceMatch) {
             sourceMatch.nextMatchId = nextMatch.id;
           }
         }
-        
+
         if (team2Ref && team2Ref.type === 'winner') {
           const sourceMatch = currentRound.matches.find(m => m.id === team2Ref.matchId);
           if (sourceMatch) {
             sourceMatch.nextMatchId = nextMatch.id;
           }
         }
-        
+
         nextMatchIndex++;
       }
     }
   }
-  
+
   // Ensure final match has no nextMatchId
   if (rounds.length > 0) {
     const finalRound = rounds[rounds.length - 1];
@@ -368,7 +368,7 @@ async function generateSingleBracket(teams) {
       finalRound.matches[0].nextMatchId = null;
     }
   }
-  
+
   return matches;
 }
 
