@@ -17,7 +17,7 @@ class MatchAbl {
   }
 
   async list(awid, dtoIn) {
-    
+
 
     if (dtoIn.tournamentId) {
       const out = await this.dao.getAll(awid, dtoIn.tournamentId)
@@ -28,7 +28,7 @@ class MatchAbl {
   }
 
   async create(awid, dtoIn) {
-    
+
   }
 
 }
