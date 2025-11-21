@@ -3,27 +3,13 @@ import Calls from "../calls.js";
 import { Card, CardTitle, CardDescription, CardFooter } from "../bricks/cards.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournamentDetail.css";
-import { DoubleEliminationBracket, Match, SingleEliminationBracket, SVGViewer, createTheme } from "@g-loot/react-tournament-brackets"
+import "../styles/tournamentDetail.css";
+import CustomBracket from "../bricks/CustomBracket.js";
 import OwnerControls from "../bricks/ownerControls.js";
 import OngoingTournamentNav from "../bricks/OngoingTournamentNav.js";
 
 
-const OrangeTheme = createTheme({
-  textColor: { main: '#FFFFFF', highlighted: '#CCCCCC', dark: '#AAAAAA' },
-  matchBackground: { wonColor: '#1A1A1A', lostColor: '#2A2A2A' },
-  score: {
-    background: { wonColor: '#333333', lostColor: '#333333' },
-    text: { highlightedWonColor: '#FFFFFF', highlightedLostColor: '#FFFFFF' },
-  },
-  border: {
-    color: '#444444',
-    highlightedColor: '#555555',
-  },
-  roundHeader: { backgroundColor: '#222222', fontColor: '#FFFFFF' },
-  connectorColor: '#FFA500',
-  connectorColorHighlight: '#FF8C00',
-  svgBackground: '#000000',
-});
+
 
 
 
@@ -130,6 +116,8 @@ export default function TournamentDetailPage() {
 
   if (info.status === "ongoing") {
     // current-match brackets  owner-controls
+    console.log(matches)
+    console.log(bracketsType)
     return (
       <div>
         <OngoingTournamentNav
@@ -145,53 +133,7 @@ export default function TournamentDetailPage() {
         )}
 
         {activeTab == "brackets" && (
-          bracketsType == 'double' ? (
-            <div>
-              <DoubleEliminationBracket
-                matches={matches}
-                matchComponent={Match}
-                theme={OrangeTheme}
-                options={{
-                  style: {
-                    roundHeader: {
-                      backgroundColor: OrangeTheme.roundHeader.backgroundColor,
-                      fontColor: OrangeTheme.roundHeader.fontColor,
-                    },
-                    connectorColor: OrangeTheme.connectorColor,
-                    connectorColorHighlight: OrangeTheme.connectorColorHighlight,
-                  },
-                }}
-                svgWrapper={({ children, ...props }) => (
-                  <SVGViewer width={window.innerWidth} height={window.innerHeight} background={OrangeTheme.svgBackground} SVGBackground={OrangeTheme.svgBackground} {...props}>
-                    {children}
-                  </SVGViewer>
-                )}
-              />
-            </div>
-          ) : (
-            <div>
-              <SingleEliminationBracket
-                matches={matches}
-                matchComponent={Match}
-                theme={OrangeTheme}
-                options={{
-                  style: {
-                    roundHeader: {
-                      backgroundColor: OrangeTheme.roundHeader.backgroundColor,
-                      fontColor: OrangeTheme.roundHeader.fontColor,
-                    },
-                    connectorColor: OrangeTheme.connectorColor,
-                    connectorColorHighlight: OrangeTheme.connectorColorHighlight,
-                  },
-                }}
-                svgWrapper={({ children, ...props }) => (
-                  <SVGViewer width={window.innerWidth} height={window.innerHeight} background={OrangeTheme.svgBackground} SVGBackground={OrangeTheme.svgBackground} {...props}>
-                    {children}
-                  </SVGViewer>
-                )}
-              />
-            </div>
-          )
+          <CustomBracket matches={matches} bracketType={bracketsType} />
         )}
 
         {activeTab == "owner-controls" && (
