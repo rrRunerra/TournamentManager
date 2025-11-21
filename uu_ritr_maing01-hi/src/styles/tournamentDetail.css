@@ -109,7 +109,8 @@
   margin: 0;
 }
 
-.tournament-detail-team-card .tournament-detail-card-footer { /* Namespaced CardFooter */
+.tournament-detail-team-card .tournament-detail-card-footer {
+  /* Namespaced CardFooter */
   margin-top: 0.6rem;
   font-size: 0.9rem;
   color: #ffd166;
@@ -127,7 +128,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -137,7 +138,7 @@
 
 .tournament-detail-container button[aria-label="Go back to tournaments"]:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Owner Controls (if used as a section) - Namespaced Class */

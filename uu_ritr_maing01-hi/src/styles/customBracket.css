@@ -1,0 +1,182 @@
+/* Custom Bracket Styles */
+.custom-bracket-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    overflow-x: auto;
+    background-color: #0d0d0d;
+    min-height: 400px;
+}
+
+.bracket-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bracket-title {
+    color: #ff8e53;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.bracket-rounds {
+    display: flex;
+    gap: 60px;
+    padding: 20px;
+}
+
+.round-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 250px;
+}
+
+.round-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.round-title {
+    color: #d0d0d0;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.round-matches {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    gap: 40px;
+}
+
+/* Match Pair Container */
+.match-pair {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    flex: 1;
+    /* Distribute space evenly */
+}
+
+/* Connectors */
+/* Connectors */
+.match-pair-connector {
+    position: absolute;
+    right: -30px;
+    top: 25%;
+    /* Adjust based on match card height */
+    bottom: 25%;
+    width: 30px;
+    border-right: 2px solid #ff8e53;
+    border-top: 2px solid #ff8e53;
+    border-bottom: 2px solid #ff8e53;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    pointer-events: none;
+}
+
+.match-pair-connector::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    width: 30px;
+    height: 2px;
+    background-color: #ff8e53;
+    transform: translateY(-50%);
+}
+
+/* Straight connector for single matches (e.g. final) */
+.match-connector-straight {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    width: 60px;
+    height: 2px;
+    background-color: #ff8e53;
+    transform: translateY(-50%);
+}
+
+.match-card {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+
+.match-card:hover {
+    border-color: #ff8e53;
+    box-shadow: 0 0 10px rgba(255, 142, 83, 0.2);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #888;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+
+.match-team {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background-color: #222;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.match-team.winner {
+    background-color: #2a2a2a;
+    color: #ff8e53;
+    font-weight: bold;
+    border-left: 3px solid #ff8e53;
+}
+
+.match-team.loser {
+    color: #888;
+}
+
+.match-team.placeholder {
+    color: #555;
+    font-style: italic;
+}
+
+.team-score-box {
+    background-color: #000;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    min-width: 24px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.match-team.winner .team-score-box {
+    background-color: #ff8e53;
+    color: #000;
+    border-color: #ff8e53;
+}
