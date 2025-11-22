@@ -2,10 +2,9 @@
     padding: 1rem 1rem 2rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     gap: 2rem;
-    margin-left: 2rem;
 }
 
 /* dynamic columns:
@@ -144,21 +143,21 @@
 }
 
 .section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  width: 100%;
+    text-align: center;
+    margin-bottom: 3rem;
+    width: 100%;
 }
 
 .section-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0;
-  margin-bottom: 1rem;
-  /* Gradient Text */
-  background: linear-gradient(90deg, #ff8e53, #ffd166);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 1rem;
+    /* Gradient Text */
+    background: linear-gradient(90deg, #ff8e53, #ffd166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
 }

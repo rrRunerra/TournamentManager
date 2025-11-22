@@ -3,83 +3,15 @@ import Calls from "../calls.js";
 import { withRoute } from "uu_plus4u5g02-app";
 import { useRoute } from "uu5g05";
 import DarkVeil from "../bricks/DarkVeil.js";
-// ======================
-// 🎨 ŠTÝLY
-// ======================
-const styles = {
-  page: {
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "#fff",
-    fontFamily: "Arial, sans-serif",
-  },
-  card: {
-    backgroundColor: "#111",
-    padding: "40px",
-    borderRadius: "16px",
-    boxShadow: "0 0 40px rgba(0, 0, 0, 0.5)",
-    width: "100%",
-    maxWidth: "360px",
-    textAlign: "center",
-  },
-  logo: {
-    width: "150px",
-    marginBottom: "20px",
-  },
-  title: {
-    fontSize: "42px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-  },
-  subtitle: {
-    color: "#ccc",
-    fontSize: "20px",
-    marginBottom: "20px",
-  },
-  input: {
-    width: "100%",
-    padding: "12px 16px",
-    marginBottom: "16px",
-    border: "none",
-    borderRadius: "10px",
-    backgroundColor: "#222",
-    color: "white",
-    fontSize: "16px",
-    outline: "none",
-        fontFamily: "Figtree, sans-serif",
-
-  },
-  button: {
-    width: "100%",
-    backgroundColor: "#f7931e",
-    border: "none",
-    borderRadius: "10px",
-    padding: "12px 0",
-    color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    transition: "background-color 0.3s",
-    fontFamily: "Figtree, sans-serif",
-  },
-  buttonHover: {
-    backgroundColor: "#ffa733",
-  },
-  error: {
-    color: "#ff5555",
-    marginBottom: "10px",
-  },
-};
+import "../styles/login.css";
 
 // ======================
 // 🧩 CUSTOM KOMPONENTY
 // ======================
 const LoginLogo = () => (
   <div>
-    <img src="../assets/MatchUPlogo.png" alt="MatchUP Logo" style={styles.logo} />
-    <div style={styles.title}>MatchUP</div>
+    <img src="../assets/MatchUPlogo.png" alt="MatchUP Logo" className="login-logo" />
+    <div className="login-title">MatchUP</div>
   </div>
 );
 
@@ -89,21 +21,15 @@ const LoginInput = ({ type = "text", placeholder, value, onChange }) => (
     placeholder={placeholder}
     value={value}
     onChange={(e) => onChange(e.target.value)}
-    style={styles.input}
+    className="login-input"
   />
 );
 
 const LoginButton = ({ text, onClick, loading }) => {
-  const [hover, setHover] = useState(false);
   return (
     <button
       onClick={onClick}
-      style={{
-        ...styles.button,
-        ...(hover ? styles.buttonHover : {}),
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      className="login-button"
       disabled={loading}
     >
       {loading ? "Loading..." : text}
@@ -111,7 +37,7 @@ const LoginButton = ({ text, onClick, loading }) => {
   );
 };
 
-const LoginError = ({ message }) => (message ? <div style={styles.error}>{message}</div> : null);
+const LoginError = ({ message }) => (message ? <div className="login-error">{message}</div> : null);
 
 const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading }) => (
   <form onSubmit={onSubmit}>
@@ -158,9 +84,9 @@ export default function LoginPage() {
   }
 
   return (
-  <div style={{ position: "relative", width: "100%", height: "100vh", overflow: "hidden" }}>
+  <div className="login-container">
     {/* Background */}
-    <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+    <div className="login-background">
       <DarkVeil
         speed={1.5}
         hueShift={213}
@@ -172,8 +98,8 @@ export default function LoginPage() {
     </div>
 
     {/* Foreground */}
-    <div style={{ ...styles.page, position: "relative", zIndex: 1 }}>
-      <div style={styles.card}>
+    <div className="login-page">
+      <div className="login-card">
         <LoginLogo />
         <LoginForm
           onSubmit={handleSubmit}
@@ -190,3 +116,4 @@ export default function LoginPage() {
 );
 
 }
+

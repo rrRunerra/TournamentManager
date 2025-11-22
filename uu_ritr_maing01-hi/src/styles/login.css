@@ -1,0 +1,92 @@
+.login-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.login-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card {
+    background-color: #111;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.login-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.login-title {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    color: #ccc;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    font-family: "Figtree", sans-serif;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 100%;
+    background-color: #f7931e;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Figtree", sans-serif;
+}
+
+.login-button:hover {
+    background-color: #ffa733;
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-error {
+    color: #ff5555;
+    margin-bottom: 10px;
+}
