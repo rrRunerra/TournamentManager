@@ -91,6 +91,11 @@ const Calls = {
   getMatches(dtoIn) {
     const commandUri = Calls.getCommandUri("match/list");
     return Calls.call("get", commandUri, dtoIn);
+  },
+
+  updateMatchScore(dtoIn) {
+    const commandUri = Calls.getCommandUri("match/update");
+    return Calls.call("post", commandUri, dtoIn);
   }
 
 

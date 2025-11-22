@@ -3,7 +3,7 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class MatchMongo extends UuObjectDao {
 
-  async createSchema(){
+  async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
   }
 
@@ -11,10 +11,11 @@ class MatchMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, id) {
+  async get(awid, id, tournamentId) {
     let filter = {
       awid: awid,
-      id: id,
+      matchId: id,
+      tournamentId: tournamentId
     };
     return await super.findOne(filter);
   }

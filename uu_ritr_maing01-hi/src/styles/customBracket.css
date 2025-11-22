@@ -180,3 +180,218 @@
     color: #000;
     border-color: #ff8e53;
 }
+
+/* Popup Styles */
+.match-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.match-popup-content {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.match-popup-content h3 {
+    color: #ff8e53;
+    text-align: center;
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+}
+
+.match-popup-teams {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.match-popup-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.team-name {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.match-popup-vs {
+    color: #666;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.score-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-control button {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.score-control button:hover {
+    background-color: #444;
+    border-color: #ff8e53;
+    color: #ff8e53;
+}
+
+.score-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    min-width: 40px;
+    text-align: center;
+    font-family: monospace;
+}
+
+.score-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    font-family: monospace;
+}
+
+.match-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.save-btn {
+    background-color: #ff8e53;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background-color: #ffa733;
+}
+
+.save-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.close-btn {
+    background-color: transparent;
+    color: #ccc;
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.status-select {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 150px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.status-display {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.winner-selection {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-selection label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.winner-selection input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff8e53;
+    cursor: pointer;
+}
+
+.winner-badge {
+    background-color: #ff8e53;
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+.match-not-ready-warning {
+    color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ff4444;
+}

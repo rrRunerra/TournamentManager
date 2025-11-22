@@ -1,7 +1,205 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "../styles/customBracket.css";
+import Calls from "../calls.js";
 
-const MatchCard = ({ match }) => {
+const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
+
+const MatchDetailPopup = ({ match, onClose, isOwner }) => {
+    const [score1, setScore1] = useState(match.participants[0]?.resultText || "0");
+    const [score2, setScore2] = useState(match.participants[1]?.resultText || "0");
+    const [status1, setStatus1] = useState(match.participants[0]?.status || null);
+    const [status2, setStatus2] = useState(match.participants[1]?.status || null);
+    console.log(match)
+    // Determine initial winner
+    const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
+    const [winnerId, setWinnerId] = useState(initialWinnerId);
+
+    const [loading, setLoading] = useState(false);
+
+    // Check if both participants are present
+    const isMatchReady = match.participants && match.participants[0]?.id && match.participants[1]?.id;
+
+    const handleScoreChange = (participantIndex, increment) => {
+        if (!isMatchReady) return;
+
+        if (participantIndex === 0) {
+            const currentScore = parseInt(score1);
+            const newScoreVal = increment ? currentScore + 1 : Math.max(0, currentScore - 1);
+            setScore1(String(newScoreVal));
+            if (newScoreVal >= 1) {
+                setStatus1('PLAYED');
+            }
+        } else {
+            const currentScore = parseInt(score2);
+            const newScoreVal = increment ? currentScore + 1 : Math.max(0, currentScore - 1);
+            setScore2(String(newScoreVal));
+            if (newScoreVal >= 1) {
+                setStatus2('PLAYED');
+            }
+        }
+    };
+
+    const handleWinnerChange = (id) => {
+        if (!isMatchReady) return;
+        setWinnerId(prev => prev === id ? null : id);
+    };
+
+    const handleSave = async () => {
+        if (!isMatchReady) return;
+
+        // Validation: Check if winner has lower score
+        if (winnerId) {
+            const s1 = parseInt(score1) || 0;
+            const s2 = parseInt(score2) || 0;
+            const p1Name = match.participants[0]?.name || "Participant 1";
+            const p2Name = match.participants[1]?.name || "Participant 2";
+
+            if (winnerId === match.participants[0]?.id && s1 < s2) {
+                if (!window.confirm(`${p1Name} is marked as winner but has a lower score (${s1} vs ${s2}). Are you sure you want to save?`)) {
+                    return;
+                }
+            } else if (winnerId === match.participants[1]?.id && s2 < s1) {
+                if (!window.confirm(`${p2Name} is marked as winner but has a lower score (${s2} vs ${s1}). Are you sure you want to save?`)) {
+                    return;
+                }
+            }
+        }
+
+        setLoading(true);
+        try {
+            await Calls.updateMatchScore({
+                matchId: match.id,
+                tournamentId: match.tournamentId,
+                participants: [
+                    {
+                        ...match.participants[0],
+                        resultText: score1,
+                        status: status1,
+                        isWinner: match.participants[0]?.id === winnerId
+                    },
+                    {
+                        ...match.participants[1],
+                        resultText: score2,
+                        status: status2,
+                        isWinner: match.participants[1]?.id === winnerId
+                    }
+                ]
+            });
+            // Ideally, we should trigger a refresh of the matches here.
+            // For now, we'll just close the popup and let the user refresh or rely on live updates if implemented.
+            // A better approach would be to pass a refresh callback.
+            window.location.reload(); // Simple reload to fetch new data
+        } catch (error) {
+            console.error("Failed to update score", error);
+            alert("Failed to update score");
+        } finally {
+            setLoading(false);
+            onClose();
+        }
+    };
+
+    return (
+        <div className="match-popup-overlay" onClick={onClose}>
+            <div className="match-popup-content" onClick={e => e.stopPropagation()}>
+                <h3>{match.name || `Match #${match.id}`}</h3>
+                {!isMatchReady && <div className="match-not-ready-warning">Waiting for opponent</div>}
+                <div className="match-popup-teams">
+                    <div className="match-popup-team">
+                        <span className="team-name">{match.participants[0]?.name || "TBD"}</span>
+                        {isOwner ? (
+                            <>
+                                <div className="score-control">
+                                    <button onClick={() => handleScoreChange(0, false)} disabled={!isMatchReady}>-</button>
+                                    <span className="score-value">{score1}</span>
+                                    <button onClick={() => handleScoreChange(0, true)} disabled={!isMatchReady}>+</button>
+                                </div>
+                                <div className="winner-selection">
+                                    <label style={{ opacity: isMatchReady ? 1 : 0.5, cursor: isMatchReady ? 'pointer' : 'not-allowed' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={winnerId === match.participants[0]?.id}
+                                            onChange={() => handleWinnerChange(match.participants[0]?.id)}
+                                            disabled={!isMatchReady}
+                                        />
+                                        Winner
+                                    </label>
+                                </div>
+                                <select
+                                    className="status-select"
+                                    value={status1 || ""}
+                                    onChange={(e) => setStatus1(e.target.value || null)}
+                                    disabled={!isMatchReady}
+                                >
+                                    <option value="">Status: None</option>
+                                    {STATUS_OPTIONS.filter(s => s).map(status => (
+                                        <option key={status} value={status}>{status}</option>
+                                    ))}
+                                </select>
+                            </>
+                        ) : (
+                            <>
+                                <span className="score-display">{score1}</span>
+                                {status1 && <span className="status-display">{status1}</span>}
+                                {match.participants[0]?.isWinner && <span className="winner-badge">WINNER</span>}
+                            </>
+                        )}
+                    </div>
+                    <div className="match-popup-vs">VS</div>
+                    <div className="match-popup-team">
+                        <span className="team-name">{match.participants[1]?.name || "TBD"}</span>
+                        {isOwner ? (
+                            <>
+                                <div className="score-control">
+                                    <button onClick={() => handleScoreChange(1, false)} disabled={!isMatchReady}>-</button>
+                                    <span className="score-value">{score2}</span>
+                                    <button onClick={() => handleScoreChange(1, true)} disabled={!isMatchReady}>+</button>
+                                </div>
+                                <div className="winner-selection">
+                                    <label style={{ opacity: isMatchReady ? 1 : 0.5, cursor: isMatchReady ? 'pointer' : 'not-allowed' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={winnerId === match.participants[1]?.id}
+                                            onChange={() => handleWinnerChange(match.participants[1]?.id)}
+                                            disabled={!isMatchReady}
+                                        />
+                                        Winner
+                                    </label>
+                                </div>
+                                <select
+                                    className="status-select"
+                                    value={status2 || ""}
+                                    onChange={(e) => setStatus2(e.target.value || null)}
+                                    disabled={!isMatchReady}
+                                >
+                                    <option value="">Status: None</option>
+                                    {STATUS_OPTIONS.filter(s => s).map(status => (
+                                        <option key={status} value={status}>{status}</option>
+                                    ))}
+                                </select>
+                            </>
+                        ) : (
+                            <>
+                                <span className="score-display">{score2}</span>
+                                {status2 && <span className="status-display">{status2}</span>}
+                                {match.participants[1]?.isWinner && <span className="winner-badge">WINNER</span>}
+                            </>
+                        )}
+                    </div>
+                </div>
+                <div className="match-popup-actions">
+                    {isOwner && (
+                        <button className="save-btn" onClick={handleSave} disabled={loading || !isMatchReady}>
+                            {loading ? "Saving..." : "Save Score"}
+                        </button>
+                    )}
+                    <button className="close-btn" onClick={onClose}>Close</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const MatchCard = ({ match, onClick }) => {
     const { participants, id, startTime, name } = match;
     const topParticipant = participants[0] || {};
     const bottomParticipant = participants[1] || {};
@@ -10,7 +208,7 @@ const MatchCard = ({ match }) => {
     const isBottomWinner = bottomParticipant.isWinner;
 
     return (
-        <div className="match-card">
+        <div className="match-card" onClick={() => onClick(match)}>
             <div className="match-header">
                 <span>Match #{id}</span>
                 <span>{startTime ? new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD'}</span>
@@ -29,16 +227,13 @@ const MatchCard = ({ match }) => {
     );
 };
 
-const MatchPair = ({ matches, isLastRound }) => {
-    // matches is an array of 1 or 2 matches that feed into the same next match
-    // If it's a single match (e.g. final or weird structure), we render it without the pair connector
-
+const MatchPair = ({ matches, isLastRound, onMatchClick }) => {
     if (matches.length === 0) return <div className="match-pair"></div>;
 
     return (
         <div className="match-pair">
             {matches.map(match => (
-                <MatchCard key={match.id} match={match} />
+                <MatchCard key={match.id} match={match} onClick={onMatchClick} />
             ))}
             {!isLastRound && matches.length > 1 && <div className="match-pair-connector"></div>}
             {!isLastRound && matches.length === 1 && <div className="match-connector-straight"></div>}
@@ -46,25 +241,17 @@ const MatchPair = ({ matches, isLastRound }) => {
     );
 };
 
-const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches }) => {
-    // Group matches into pairs based on nextMatchId
+const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches, onMatchClick }) => {
     const pairs = useMemo(() => {
         if (roundIndex === totalRounds - 1) {
-            // Last round (Finals), just return matches as single items in a pair wrapper
             return matches.map(m => [m]);
         }
 
         const pairsMap = new Map();
 
-        // Initialize map with next round match IDs to preserve order if possible
-        // But we don't know the order of next round matches easily without looking ahead
-        // So let's just group by nextMatchId
-
         matches.forEach(match => {
             const nextId = match.nextMatchId;
             if (!nextId) {
-                // No next match (e.g. final or loose end), treat as standalone
-                // Use a unique key
                 pairsMap.set(`standalone-${match.id}`, [match]);
             } else {
                 if (!pairsMap.has(nextId)) {
@@ -74,8 +261,6 @@ const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches
             }
         });
 
-        // We need to sort these pairs to match the visual order of the next round
-        // If nextRoundMatches is provided, we can use it to order our pairs
         if (nextRoundMatches) {
             const orderedPairs = [];
             const remainingPairs = new Map(pairsMap);
@@ -87,7 +272,6 @@ const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches
                 }
             });
 
-            // Add any remaining pairs (orphans)
             remainingPairs.forEach(pair => orderedPairs.push(pair));
             return orderedPairs;
         }
@@ -106,6 +290,7 @@ const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches
                         key={index}
                         matches={pair}
                         isLastRound={roundIndex === totalRounds - 1}
+                        onMatchClick={onMatchClick}
                     />
                 ))}
             </div>
@@ -124,15 +309,10 @@ const getRoundName = (roundKey, totalRounds, index) => {
     return `Round ${roundKey}`;
 };
 
-// Progression Logic Helper
 const processMatches = (matches) => {
-    // Create a map of matches by ID
-    const matchMap = new Map(matches.map(m => [m.id, { ...m }])); // Shallow copy to mutate participants
+    const matchMap = new Map(matches.map(m => [m.id, { ...m }]));
 
-    // Sort matches by round to process progression in order
-    // Assuming round is numeric or sortable
     const sortedMatches = [...matchMap.values()].sort((a, b) => {
-        // Try numeric round
         const rA = parseInt(a.tournamentRoundText || a.round);
         const rB = parseInt(b.tournamentRoundText || b.round);
         if (!isNaN(rA) && !isNaN(rB)) return rA - rB;
@@ -140,22 +320,16 @@ const processMatches = (matches) => {
     });
 
     sortedMatches.forEach(match => {
-        // Check if this match has a winner or walkover
         const winner = match.participants.find(p => p.isWinner);
-
-        // If no explicit winner but one participant is missing/null and the other is present? 
-        // Actually, walkovers usually have isWinner=true.
 
         if (winner && match.nextMatchId) {
             const nextMatch = matchMap.get(match.nextMatchId);
             if (nextMatch) {
-                // Check if winner is already in next match
                 const alreadyIn = nextMatch.participants.some(p => p.id === winner.id);
                 if (!alreadyIn) {
-                    // Find an empty slot or placeholder
                     const emptySlotIndex = nextMatch.participants.findIndex(p => !p.name || p.name === "TBD");
                     if (emptySlotIndex !== -1) {
-                        nextMatch.participants[emptySlotIndex] = { ...winner, resultText: null, isWinner: false }; // Reset winner status for next round
+                        nextMatch.participants[emptySlotIndex] = { ...winner, resultText: null, isWinner: false };
                     } else if (nextMatch.participants.length < 2) {
                         nextMatch.participants.push({ ...winner, resultText: null, isWinner: false });
                     }
@@ -167,12 +341,7 @@ const processMatches = (matches) => {
     return Array.from(matchMap.values());
 };
 
-
-const BracketView = ({ matches }) => {
-    // Process matches for progression (optional, if backend doesn't handle it fully)
-    // For now, let's assume backend data might be incomplete for walkovers as per user request
-    // But strictly speaking, modifying props is bad. We should compute derived state.
-
+const BracketView = ({ matches, onMatchClick }) => {
     const processedMatches = useMemo(() => processMatches(matches), [matches]);
 
     const rounds = useMemo(() => {
@@ -207,6 +376,7 @@ const BracketView = ({ matches }) => {
                         roundIndex={index}
                         totalRounds={rounds.length}
                         nextRoundMatches={rounds[index + 1]?.matches}
+                        onMatchClick={onMatchClick}
                     />
                 ))}
             </div>
@@ -214,39 +384,52 @@ const BracketView = ({ matches }) => {
     );
 };
 
-export default function CustomBracket({ matches, bracketType }) {
+export default function CustomBracket({ matches, bracketType, isOwner }) {
+    const [selectedMatch, setSelectedMatch] = useState(null);
+
     if (!matches) return null;
 
-    if (bracketType === 'double') {
-        // For double elimination, we have upper and lower arrays.
-        // We can render two BracketViews.
-        return (
-            <div className="custom-bracket-container">
-                <div className="bracket-section">
-                    <h3 className="bracket-title">Upper Bracket</h3>
-                    {/* We need to extract the inner BracketView logic to reuse it properly without the container wrapper if we want them stacked */}
-                    {/* But BracketView returns a container. Let's just use it. */}
-                    <div className="bracket-rounds">
-                        {/* We need to duplicate the logic or refactor BracketView to be a pure component that takes rounds */}
-                        {/* Let's just instantiate BracketView's logic here for Upper */}
-                        <BracketInner matches={matches.upper || []} />
-                    </div>
-                </div>
-                <div className="bracket-section">
-                    <h3 className="bracket-title">Lower Bracket</h3>
-                    <div className="bracket-rounds">
-                        <BracketInner matches={matches.lower || []} />
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    const handleMatchClick = (match) => {
+        setSelectedMatch(match);
+    };
 
-    return <BracketView matches={matches} />;
+    const handleClosePopup = () => {
+        setSelectedMatch(null);
+    };
+
+    return (
+        <>
+            {selectedMatch && (
+                <MatchDetailPopup
+                    match={selectedMatch}
+                    onClose={handleClosePopup}
+                    isOwner={isOwner}
+                />
+            )}
+
+            {bracketType === 'double' ? (
+                <div className="custom-bracket-container">
+                    <div className="bracket-section">
+                        <h3 className="bracket-title">Upper Bracket</h3>
+                        <div className="bracket-rounds">
+                            <BracketInner matches={matches.upper || []} onMatchClick={handleMatchClick} />
+                        </div>
+                    </div>
+                    <div className="bracket-section">
+                        <h3 className="bracket-title">Lower Bracket</h3>
+                        <div className="bracket-rounds">
+                            <BracketInner matches={matches.lower || []} onMatchClick={handleMatchClick} />
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <BracketView matches={matches} onMatchClick={handleMatchClick} />
+            )}
+        </>
+    );
 }
 
-// Extracted inner component to reuse logic without the container
-const BracketInner = ({ matches }) => {
+const BracketInner = ({ matches, onMatchClick }) => {
     const processedMatches = useMemo(() => processMatches(matches), [matches]);
 
     const rounds = useMemo(() => {
@@ -280,6 +463,7 @@ const BracketInner = ({ matches }) => {
                     roundIndex={index}
                     totalRounds={rounds.length}
                     nextRoundMatches={rounds[index + 1]?.matches}
+                    onMatchClick={onMatchClick}
                 />
             ))}
         </>

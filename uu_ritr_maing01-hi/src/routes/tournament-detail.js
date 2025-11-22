@@ -117,7 +117,6 @@ export default function TournamentDetailPage() {
   if (info.status === "ongoing") {
     // current-match brackets  owner-controls
     console.log(matches)
-    console.log(bracketsType)
     return (
       <div>
         <OngoingTournamentNav
@@ -133,7 +132,7 @@ export default function TournamentDetailPage() {
         )}
 
         {activeTab == "brackets" && (
-          <CustomBracket matches={matches} bracketType={bracketsType} />
+          <CustomBracket matches={matches} bracketType={bracketsType} isOwner={isOwner} />
         )}
 
         {activeTab == "owner-controls" && (
@@ -165,7 +164,7 @@ export default function TournamentDetailPage() {
       <div className="tournament-detail-team-grid">
         {info.teams.map(team => {
           const isJoined = team.players?.includes(user.id)
-          console.log(team)
+          
           return (
             <Card
               key={team.id}

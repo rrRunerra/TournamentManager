@@ -13,7 +13,13 @@ const List = {
 
 };
 
+const Update = {
+  UC_CODE: `${MATCH_ERROR_PREFIX}update/`,
+
+};
+
 module.exports = {
+  Update,
   List,
   Create
 };
