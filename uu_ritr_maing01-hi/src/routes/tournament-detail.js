@@ -119,27 +119,14 @@ export default function TournamentDetailPage() {
     console.log(matches)
     return (
       <div>
-        <OngoingTournamentNav
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
+
+        <CustomBracket
+          matches={matches}
+          bracketType={bracketsType}
           isOwner={isOwner}
+          currentUserId={user?.id}
+          tournamentInfo={info}
         />
-
-        {activeTab == "current-match" && (
-          <div>
-
-          </div>
-        )}
-
-        {activeTab == "brackets" && (
-          <CustomBracket matches={matches} bracketType={bracketsType} isOwner={isOwner} />
-        )}
-
-        {activeTab == "owner-controls" && (
-          <div>
-
-          </div>
-        )}
 
 
       </div>
@@ -164,7 +151,7 @@ export default function TournamentDetailPage() {
       <div className="tournament-detail-team-grid">
         {info.teams.map(team => {
           const isJoined = team.players?.includes(user.id)
-          
+
           return (
             <Card
               key={team.id}

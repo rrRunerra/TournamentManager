@@ -1,8 +1,46 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import "../styles/customBracket.css";
 import Calls from "../calls.js";
 
 const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
+
+const Confetti = ({ isFadingOut }) => {
+    const confettiPieces = useMemo(() => {
+        const colors = [
+            '#ff8e53', '#ffa733', '#ffcc00', '#ff6b6b', '#4ecdc4', '#45b7d1',
+            '#a29bfe', '#fd79a8', '#fdcb6e', '#00b894', '#e17055', '#74b9ff',
+            '#ff7675', '#fab1a0', '#55efc4', '#81ecec', '#ffeaa7', '#dfe6e9'
+        ];
+        const shapes = ['square', 'circle', 'triangle', 'rectangle'];
+
+        return Array.from({ length: 150 }, (_, i) => ({
+            id: i,
+            left: Math.random() * 100,
+            animationDelay: (Math.random() * 12).toFixed(2),
+            backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+            shape: shapes[Math.floor(Math.random() * shapes.length)]
+        }));
+    }, []);
+
+    return (
+        <div className={`confetti-container ${isFadingOut ? 'confetti-fade-out' : ''}`}>
+            {confettiPieces.map(piece => (
+                <div
+                    key={piece.id}
+                    className={`confetti-piece confetti-${piece.shape}`}
+                    style={{
+                        left: `${piece.left}%`,
+                        animationDelay: `${piece.animationDelay}s`,
+                        ...(piece.shape === 'triangle'
+                            ? { borderBottomColor: piece.backgroundColor }
+                            : { backgroundColor: piece.backgroundColor }
+                        )
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
 
 const MatchDetailPopup = ({ match, onClose, isOwner }) => {
     const [score1, setScore1] = useState(match.participants[0]?.resultText || "0");
@@ -338,6 +376,41 @@ const processMatches = (matches) => {
         }
     });
 
+    // Auto-assign winner for matches with WALK_OVER state
+    sortedMatches.forEach(match => {
+        if (match.state === 'WALK_OVER' && !match.participants.some(p => p.isWinner)) {
+            const validParticipants = match.participants.filter(p => p.id && p.name && p.name !== "TBD");
+            if (validParticipants.length === 1) {
+                const walkoverWinner = match.participants.find(p => p.id === validParticipants[0].id);
+                if (walkoverWinner) {
+                    walkoverWinner.isWinner = true;
+                }
+            }
+        }
+    });
+
+    // Third pass: Advance walkover winners to next round
+    sortedMatches.forEach(match => {
+        if (match.state === 'WALK_OVER') {
+            const winner = match.participants.find(p => p.isWinner);
+
+            if (winner && match.nextMatchId) {
+                const nextMatch = matchMap.get(match.nextMatchId);
+                if (nextMatch) {
+                    const alreadyIn = nextMatch.participants.some(p => p.id === winner.id);
+                    if (!alreadyIn) {
+                        const emptySlotIndex = nextMatch.participants.findIndex(p => !p.name || p.name === "TBD");
+                        if (emptySlotIndex !== -1) {
+                            nextMatch.participants[emptySlotIndex] = { ...winner, resultText: null, isWinner: false };
+                        } else if (nextMatch.participants.length < 2) {
+                            nextMatch.participants.push({ ...winner, resultText: null, isWinner: false });
+                        }
+                    }
+                }
+            }
+        }
+    });
+
     return Array.from(matchMap.values());
 };
 
@@ -384,8 +457,44 @@ const BracketView = ({ matches, onMatchClick }) => {
     );
 };
 
-export default function CustomBracket({ matches, bracketType, isOwner }) {
+export default function CustomBracket({ matches, bracketType, isOwner, currentUserId, tournamentInfo }) {
     const [selectedMatch, setSelectedMatch] = useState(null);
+    const [showConfetti, setShowConfetti] = useState(false);
+    const [isFadingOut, setIsFadingOut] = useState(false);
+
+    // Check if current user won the Grand Finals
+    useEffect(() => {
+        if (!matches || !currentUserId || !tournamentInfo) return;
+
+        const allMatches = bracketType === 'double'
+            ? [...(matches.upper || []), ...(matches.lower || [])]
+            : matches;
+
+        // Find the Grand Final match (nextMatchId === null)
+        const grandFinal = allMatches.find(match => match.nextMatchId === null);
+
+        if (grandFinal && grandFinal.participants) {
+            const winningParticipant = grandFinal.participants.find(p => p.isWinner);
+
+            if (winningParticipant && winningParticipant.id) {
+                // Find the winning team from tournament info
+                const winningTeam = tournamentInfo.teams?.find(team => team.id === winningParticipant.id);
+
+                if (winningTeam && winningTeam.players) {
+                    // Check if current user is in the winning team
+                    const isUserInWinningTeam = winningTeam.players.includes(currentUserId)
+
+                    if (isUserInWinningTeam) {
+                        setShowConfetti(true);
+                        setIsFadingOut(false);
+                        // Start fade-out after 13 seconds, then hide after fade completes
+                        setTimeout(() => setIsFadingOut(true), 13000);
+                        setTimeout(() => setShowConfetti(false), 15000);
+                    }
+                }
+            }
+        }
+    }, [matches, currentUserId, bracketType, tournamentInfo]);
 
     if (!matches) return null;
 
@@ -399,6 +508,8 @@ export default function CustomBracket({ matches, bracketType, isOwner }) {
 
     return (
         <>
+            {showConfetti && <Confetti isFadingOut={isFadingOut} />}
+
             {selectedMatch && (
                 <MatchDetailPopup
                     match={selectedMatch}
