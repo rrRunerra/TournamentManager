@@ -115,8 +115,6 @@ export default function TournamentDetailPage() {
   const bracketsType = info?.bracketType
 
   if (info.status === "ongoing") {
-    // current-match brackets  owner-controls
-    console.log(matches)
     return (
       <div>
 
