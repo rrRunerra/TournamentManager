@@ -80,7 +80,9 @@ export default function TournamentsPage() {
     <div class="background">
       <section class="tournaments-section">
         {tournaments.length === 0 ? (
-          <p>No tournaments available.</p>
+          <div className="section-header">
+            <h2 className="section-title">No tournaments available.</h2>
+          </div>
         ) : (
           tournaments.filter((t) => {
             return t.status == "ongoing" || t.status == "upcoming"
