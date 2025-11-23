@@ -6,7 +6,7 @@ import "../styles/tournamentDetail.css";
 import "../styles/tournamentDetail.css";
 import CustomBracket from "../bricks/CustomBracket.js";
 import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
-import OwnerControls from "../bricks/OwnerControls.js";
+import OwnerControls from "../bricks/ownerControls.js";
 
 
 
