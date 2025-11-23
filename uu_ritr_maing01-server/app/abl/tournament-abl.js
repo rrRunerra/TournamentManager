@@ -35,12 +35,15 @@ function generateDoubleBracket(teams) {
   const lowerBracket = [];
 
   // Generate first round of upper bracket
+  // Generate first round of upper bracket
   const firstRoundMatches = bracketSize / 2;
   const firstRoundUpper = [];
 
   for (let i = 0; i < firstRoundMatches; i++) {
-    const team1 = i * 2 < teams.length ? teams[i * 2] : null;
-    const team2 = i * 2 + 1 < teams.length ? teams[i * 2 + 1] : null;
+    // Improved pairing: Distribute teams to avoid empty matches
+    // Fill first slot of all matches first, then second slot
+    const team1 = i < teams.length ? teams[i] : null;
+    const team2 = (firstRoundMatches + i) < teams.length ? teams[firstRoundMatches + i] : null;
 
     const match = {
       id: generateMatchId(),
@@ -213,9 +216,24 @@ function generateDoubleBracket(teams) {
   // Rename the upper final to Grand Final since it will include the lower bracket winner
   upperFinal.name = "Grand Final";
 
+  // Filter out matches with no participants to avoid "ghost" matches
+  // This handles cases where Byes in upper bracket create empty matches in lower bracket
   return {
-    upper: upperBracket,
-    lower: lowerBracket
+    upper: upperBracket.filter(m => m.participants.length > 0 || m.state === "SCHEDULED"),
+    lower: lowerBracket.filter(m => {
+      // Keep if it has participants OR if it's waiting for input (SCHEDULED)
+      // But if it's SCHEDULED and has NO inputs pointing to it... that's hard to check here.
+      // For now, let's just filter out matches that are clearly empty/void.
+      // Actually, we should only filter matches that are "WALK_OVER" with 0 participants?
+      // Or just matches with 0 participants that are NOT waiting for anyone?
+      // The safest bet for the user's issue ("match with no participants in round 1") is to filter empty matches.
+      // But we must be careful not to filter future matches that are just waiting.
+
+      // Round 1 matches are fully populated. If they are empty, they are void.
+      if (m.tournamentRoundText === "1" && m.participants.length === 0) return false;
+
+      return true;
+    })
   };
 }
 
@@ -478,7 +496,7 @@ class TournamentAbl {
         //signle
         if (tournament.bracketType == 'single') {
           const a = await generateSingleBracket(t)
-          console.log(a)
+
           const matchdb = DaoFactory.getDao("match")
 
           for (const match of a) {
@@ -501,9 +519,6 @@ class TournamentAbl {
 
         if (tournament.bracketType == 'double') {
           const a = await generateDoubleBracket(t)
-
-          console.log("ddddddd")
-          console.log(a)
           const upper = a.upper
           const lower = a.lower
 

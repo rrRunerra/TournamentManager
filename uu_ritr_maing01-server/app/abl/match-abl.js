@@ -17,7 +17,6 @@ class MatchAbl {
   }
 
   async update(awid, dtoIn) {
-    console.log(dtoIn)
     //     {
     //   matchId: 246615,
     //   tournamentId: 'w8ndm3fulg7odhm6zd7fi',
@@ -28,7 +27,7 @@ class MatchAbl {
     // }
 
     const match = await this.dao.get(awid, dtoIn.matchId, dtoIn.tournamentId)
-    console.log(match)
+
     //     {
     //   awid: '22222222222222222222222222222222',
     //   matchId: 246615,
@@ -66,6 +65,78 @@ class MatchAbl {
 
     match.participants = dtoIn.participants
     await this.dao.update(match)
+
+    // Propagate winner and loser
+    const winner = dtoIn.participants.find(p => p.isWinner);
+    const loser = dtoIn.participants.find(p => !p.isWinner && p.id); // Ensure loser has an ID (not empty slot)
+
+    console.log("Propagating match result:");
+    console.log("Winner:", winner);
+    console.log("Loser:", loser);
+    console.log("Next Match ID:", match.nextMatchId);
+    console.log("Next Loser Match ID:", match.nextLooserMatchId);
+    console.log(match)
+
+    if (winner && match.nextMatchId) {
+      try {
+        const nextMatch = await this.dao.get(awid, match.nextMatchId, dtoIn.tournamentId);
+        console.log("Found next match:", nextMatch ? nextMatch.id : "null");
+        if (nextMatch) {
+          // Add winner to next match participants if not already there
+          const isAlreadyIn = nextMatch.participants.some(p => p.id === winner.id);
+          if (!isAlreadyIn) {
+            // Find first empty slot or push if less than 2
+            if (nextMatch.participants.length < 2) {
+              nextMatch.participants.push({
+                id: winner.id,
+                resultText: null,
+                isWinner: false,
+                status: null,
+                name: winner.name
+              });
+              console.log("Adding winner to next match");
+            } else {
+              console.log("Next match full, cannot add winner");
+            }
+            await this.dao.update(nextMatch);
+          } else {
+            console.log("Winner already in next match");
+          }
+        }
+      } catch (e) {
+        console.error("Error propagating winner:", e);
+      }
+    }
+
+    if (loser && match.nextLooserMatchId) {
+      try {
+        const nextLooserMatch = await this.dao.get(awid, match.nextLooserMatchId, dtoIn.tournamentId);
+        console.log(nextLooserMatch)
+        console.log("Found next loser match:", nextLooserMatch ? nextLooserMatch.id : "null");
+        if (nextLooserMatch) {
+          const isAlreadyIn = nextLooserMatch.participants.some(p => p.id === loser.id);
+          if (!isAlreadyIn) {
+            if (nextLooserMatch.participants.length < 2) {
+              nextLooserMatch.participants.push({
+                id: loser.id,
+                resultText: null,
+                isWinner: false,
+                status: null,
+                name: loser.name
+              });
+              console.log("Adding loser to next loser match");
+              await this.dao.update(nextLooserMatch);
+            } else {
+              console.log("Next loser match full, cannot add loser");
+            }
+          } else {
+            console.log("Loser already in next loser match");
+          }
+        }
+      } catch (e) {
+        console.error("Error propagating loser:", e);
+      }
+    }
 
   }
 
