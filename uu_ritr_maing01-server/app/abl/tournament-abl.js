@@ -385,6 +385,40 @@ class TournamentAbl {
       throw new Error("InvalidDtoIn");
     }
 
+    const tournament = await this.dao.get(awid, dtoIn.id);
+    if (!tournament) {
+      // If tournament doesn't exist, we can just return or throw. 
+      // Returning null or similar to indicate it's already gone or not found.
+      // But for now, let's proceed to try to remove it (maybe it was partially deleted?)
+      // Actually, if we want to delete teams, we need the tournament object.
+      // If it's not found, we can't delete teams, so we might as well just try to delete the tournament ID (idempotent)
+    }
+
+    if (tournament) {
+      if (tournament.teams) {
+        const teamdb = DaoFactory.getDao("team");
+        for (const teamId of tournament.teams) {
+          try {
+            await teamdb.remove({ awid, id: teamId });
+          } catch (e) {
+            console.error(`Failed to delete team ${teamId}`, e);
+          }
+        }
+      }
+
+      // Delete matches
+      const matchdb = DaoFactory.getDao("match");
+      try {
+        const matches = await matchdb.getAll(awid, dtoIn.id);
+        const matchList = matches.itemList || matches;
+        for (const match of matchList) {
+          await matchdb.remove({ awid, id: match.id });
+        }
+      } catch (e) {
+        console.error(`Failed to delete matches for tournament ${dtoIn.id}`, e);
+      }
+    }
+
     //dtoIn.id
     const out = await this.dao.remove({ awid, id: dtoIn.id });
     return out;
@@ -467,6 +501,8 @@ class TournamentAbl {
 
         if (tournament.bracketType == 'double') {
           const a = await generateDoubleBracket(t)
+
+          console.log("ddddddd")
           console.log(a)
           const upper = a.upper
           const lower = a.lower

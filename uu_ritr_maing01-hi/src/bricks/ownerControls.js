@@ -1,8 +1,8 @@
 import Calls from "../calls.js"
 import "../styles/ownerControls.css"
 
-export default function OwnerControls({ info, id, setInfo, setRoute }) {
-  return ( 
+export default function OwnerControls({ info, id, setInfo, setRoute, onTournamentStart }) {
+  return (
     <div className="owner-controls-panel">
       <h3 className="owner-controls-title">Tournament Controls</h3>
       <div className="owner-controls-actions">
@@ -14,6 +14,9 @@ export default function OwnerControls({ info, id, setInfo, setRoute }) {
                 try {
                   await Calls.updateTournament({ id, status: "ongoing" });
                   setInfo(await Calls.getTournament({ id }));
+                  if (onTournamentStart) {
+                    await onTournamentStart();
+                  }
                   alert("Tournament started!");
                 } catch (error) {
                   console.error("Error starting tournament:", error);

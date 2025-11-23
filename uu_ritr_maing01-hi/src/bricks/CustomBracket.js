@@ -42,7 +42,7 @@ const Confetti = ({ isFadingOut }) => {
     );
 };
 
-const MatchDetailPopup = ({ match, onClose, isOwner }) => {
+const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const [score1, setScore1] = useState(match.participants[0]?.resultText || "0");
     const [score2, setScore2] = useState(match.participants[1]?.resultText || "0");
     const [status1, setStatus1] = useState(match.participants[0]?.status || null);
@@ -123,16 +123,16 @@ const MatchDetailPopup = ({ match, onClose, isOwner }) => {
                     }
                 ]
             });
-            // Ideally, we should trigger a refresh of the matches here.
-            // For now, we'll just close the popup and let the user refresh or rely on live updates if implemented.
-            // A better approach would be to pass a refresh callback.
-            window.location.reload(); // Simple reload to fetch new data
+
+            if (onMatchUpdate) {
+                await onMatchUpdate();
+            }
+            onClose();
         } catch (error) {
             console.error("Failed to update score", error);
             alert("Failed to update score");
         } finally {
             setLoading(false);
-            onClose();
         }
     };
 
@@ -230,7 +230,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner }) => {
                             {loading ? "Saving..." : "Save Score"}
                         </button>
                     )}
-                    <button className="close-btn" onClick={onClose}>Close</button>
+                    <button className="cancel-btn" onClick={onClose} disabled={loading}>Cancel</button>
                 </div>
             </div>
         </div>
@@ -457,7 +457,7 @@ const BracketView = ({ matches, onMatchClick }) => {
     );
 };
 
-export default function CustomBracket({ matches, bracketType, isOwner, currentUserId, tournamentInfo }) {
+export default function CustomBracket({ matches, bracketType, isOwner, currentUserId, tournamentInfo, onMatchUpdate }) {
     const [selectedMatch, setSelectedMatch] = useState(null);
     const [showConfetti, setShowConfetti] = useState(false);
     const [isFadingOut, setIsFadingOut] = useState(false);
@@ -499,6 +499,7 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
     if (!matches) return null;
 
     const handleMatchClick = (match) => {
+        if (tournamentInfo?.status === "finished") return;
         setSelectedMatch(match);
     };
 
@@ -515,6 +516,7 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
                     match={selectedMatch}
                     onClose={handleClosePopup}
                     isOwner={isOwner}
+                    onMatchUpdate={onMatchUpdate}
                 />
             )}
 

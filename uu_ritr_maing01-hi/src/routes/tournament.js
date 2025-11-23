@@ -39,7 +39,9 @@ export default function TournamentsPage() {
   const fetchTournaments = async () => {
     try {
       const response = await Calls.listTournaments();
-      setTournaments(response.itemList);
+      setTournaments(response.itemList.filter((t) => {
+        return t.status == "ongoing" || t.status == "upcoming"
+      }));
     } catch (error) {
       console.error("Error fetching tournaments:", error);
     }
@@ -84,20 +86,28 @@ export default function TournamentsPage() {
             <h2 className="section-title">No tournaments available.</h2>
           </div>
         ) : (
-          tournaments.filter((t) => {
-            return t.status == "ongoing" || t.status == "upcoming"
-          }).map((tournament) => (
+          tournaments.map((tournament) => (
             <div class="tournament-card" onClick={() => {
               setRoute("tournamentDetail", { id: tournament.id })
             }}>
               <div class="tournament-icon">🏆</div>
               <h2 class="tournament-title">{tournament.name}</h2>
               <p class="tournament-details">
-                {/* finish date */}
                 📅 {new Date(tournament.startDate).getDay()}. - {new Date(tournament.endDate).getDay()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
                 👥 {tournament.teams.length} tímov v súťaži
               </p>
-              <div class="tournament-status">Prebieha prihlasovanie</div>
+              <div class="tournament-status">
+                {tournament.status === "ongoing" ? (
+                  <>
+                    <span className="status-dot"></span>
+                    Prebieha
+                  </>
+                ) : tournament.status === "finished" ? (
+                  "Ukončený"
+                ) : (
+                  "Prebieha prihlasovanie"
+                )}
+              </div>
             </div>
           ))
         )}

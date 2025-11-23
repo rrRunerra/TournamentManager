@@ -1,13 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import Calls from "../calls.js";
 import { Card, CardTitle, CardDescription, CardFooter } from "../bricks/cards.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournamentDetail.css";
 import "../styles/tournamentDetail.css";
 import CustomBracket from "../bricks/CustomBracket.js";
-import OwnerControls from "../bricks/ownerControls.js";
-import OngoingTournamentNav from "../bricks/OngoingTournamentNav.js";
-
+import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
+import OwnerControls from "../bricks/OwnerControls.js";
 
 
 
@@ -41,55 +40,51 @@ export default function TournamentDetailPage() {
 
   }, [id]);
 
-  useEffect(() => {
-    async function fetchMatches() {
-      try {
-        const response = await Calls.getMatches({ tournamentId: id });
+  const fetchMatches = useCallback(async () => {
+    try {
+      const response = await Calls.getMatches({ tournamentId: id });
 
+      setMatches(prev => {
+        // Check if this is a double bracket tournament
+        const hasBrackets = response.some(match => match.bracket);
 
-        setMatches(prev => {
-          // Check if this is a double bracket tournament
-          const hasBrackets = response.some(match => match.bracket);
+        let processedData;
 
-          let processedData;
+        if (hasBrackets) {
+          // Double bracket - group by bracket
+          processedData = response.reduce((acc, match) => {
+            if (match.bracket) {
+              const bracket = match.bracket;
+              const updatedMatch = {
+                ...match,
+                id: match.matchId
+              };
 
-          if (hasBrackets) {
-            // Double bracket - group by bracket
-            processedData = response.reduce((acc, match) => {
-              if (match.bracket) {
-                const bracket = match.bracket;
-                const updatedMatch = {
-                  ...match,
-                  id: match.matchId
-                };
-
-                if (!acc[bracket]) {
-                  acc[bracket] = [];
-                }
-                acc[bracket].push(updatedMatch);
+              if (!acc[bracket]) {
+                acc[bracket] = [];
               }
-              return acc;
-            }, { upper: [], lower: [] });
-          } else {
-            // Single bracket - just replace id with matchId
-            processedData = response.map(match => ({
-              ...match,
-              id: match.matchId
-            }));
-          }
+              acc[bracket].push(updatedMatch);
+            }
+            return acc;
+          }, { upper: [], lower: [] });
+        } else {
+          // Single bracket - just replace id with matchId
+          processedData = response.map(match => ({
+            ...match,
+            id: match.matchId
+          }));
+        }
 
-          return JSON.stringify(prev) === JSON.stringify(processedData) ? prev : processedData;
-        });
-      } catch (error) {
-        console.error("Error fetching matches:", error);
-      }
+        return JSON.stringify(prev) === JSON.stringify(processedData) ? prev : processedData;
+      });
+    } catch (error) {
+      console.error("Error fetching matches:", error);
     }
+  }, [id]);
 
+  useEffect(() => {
     fetchMatches();
-
-  }, [info, setInfo]);
-
-
+  }, [fetchMatches]);
 
   async function joinTeam(tournamentId, teamId, userId) {
     if (!userId || info.status !== "upcoming") return;
@@ -101,7 +96,7 @@ export default function TournamentDetailPage() {
       setInfo(updatedTournament);
     } catch (error) {
       console.error("Error joining team:", error);
-      alert("Failed to join the team.");
+      alert("Failed to join team. Please try again.");
     } finally {
       setJoiningTeam(null);
     }
@@ -109,12 +104,12 @@ export default function TournamentDetailPage() {
 
 
   // Renamed class "loading" to "tournament-detail-loading"
-  if (!info || !user) return <p className="tournament-detail-loading">Loading...</p>;
+  if (!info) return <div className="loading-spinner">Loading...</div>;
 
-  const isOwner = info?.owner === user?.id;
+  const isOwner = user?.uuIdentity === info.ownerId;
   const bracketsType = info?.bracketType
 
-  if (info.status === "ongoing") {
+  if (info.status === "ongoing" || info.status === "finished") {
     return (
       <div>
 
@@ -124,7 +119,14 @@ export default function TournamentDetailPage() {
           isOwner={isOwner}
           currentUserId={user?.id}
           tournamentInfo={info}
+          onMatchUpdate={fetchMatches}
         />
+
+        {isOwner && info.status === "ongoing" && (
+          <div style={{ marginTop: "2rem" }}>
+            <OngoingOwnerControls info={info} id={id} setInfo={setInfo} setRoute={setRoute} />
+          </div>
+        )}
 
 
       </div>
@@ -171,7 +173,14 @@ export default function TournamentDetailPage() {
       </div>
 
       {isOwner && (
-        <OwnerControls id={id} info={info} setInfo={setInfo} setRoute={setRoute} key={"owner-controls"} />
+        <OwnerControls
+          id={id}
+          info={info}
+          setInfo={setInfo}
+          setRoute={setRoute}
+          onTournamentStart={fetchMatches}
+          key={"owner-controls"}
+        />
       )}
 
       <button
