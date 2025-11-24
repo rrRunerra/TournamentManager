@@ -122,9 +122,15 @@ const CtaSection = () => {
       <p className="cta-text">
         Sme tu pre vás. Ozvite sa nám a radi vám pomôžeme.
       </p>
-      <button className="cta-button">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform?usp=dialog"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cta-button"
+        style={{ textDecoration: 'none', display: 'inline-block' }}
+      >
         Kontaktuj nás
-      </button>
+      </a>
     </div>
   );
 };
