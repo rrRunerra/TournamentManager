@@ -117,10 +117,10 @@ const CtaSection = () => {
   return (
     <div className="cta-section">
       <h2 className="cta-title">
-        Chceš sa zapojiť?
+        Máte otázku?
       </h2>
       <p className="cta-text">
-        Máš nápady alebo chceš pomôcť? Nechaj nám správu a staneš sa súčasťou našej komunity!
+        Sme tu pre vás. Ozvite sa nám a radi vám pomôžeme.
       </p>
       <button className="cta-button">
         Kontaktuj nás
