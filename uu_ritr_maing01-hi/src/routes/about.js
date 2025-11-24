@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/about.css"; // Import your new CSS file
+import FlappyBird from "../bricks/flappy-bird";
 
 const AboutPage = () => {
+  const [showGame, setShowGame] = useState(false);
   const team = [
     {
       initials: "SS",
@@ -46,7 +48,11 @@ const AboutPage = () => {
 
         <div className="team-grid">
           {team.map((member, index) => (
-            <TeamCard key={index} member={member} />
+            <TeamCard
+              key={index}
+              member={member}
+              onClick={member.name === "Branislav Bobrik" ? () => setShowGame(true) : undefined}
+            />
           ))}
         </div>
 
@@ -69,6 +75,8 @@ const AboutPage = () => {
         {/* --- CTA SECTION --- */}
         <CtaSection />
 
+        {showGame && <FlappyBird onClose={() => setShowGame(false)} />}
+
       </div>
     </div>
   );
@@ -76,9 +84,9 @@ const AboutPage = () => {
 
 // --- COMPONENTS ---
 
-const TeamCard = ({ member }) => {
+const TeamCard = ({ member, onClick }) => {
   return (
-    <div className="team-card">
+    <div className="team-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       <div className="card-top-line" />
       <div className="team-avatar">
         {member.initials}
@@ -109,10 +117,10 @@ const CtaSection = () => {
   return (
     <div className="cta-section">
       <h2 className="cta-title">
-        Chceš sa zapojiť?
+        Máte otázku?
       </h2>
       <p className="cta-text">
-        Máš nápady alebo chceš pomôcť? Nechaj nám správu a staneš sa súčasťou našej komunity!
+        Sme tu pre vás. Ozvite sa nám a radi vám pomôžeme.
       </p>
       <button className="cta-button">
         Kontaktuj nás
