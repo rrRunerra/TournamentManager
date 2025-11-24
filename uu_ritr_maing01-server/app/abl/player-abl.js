@@ -5,6 +5,7 @@ const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/player-error.js");
 const { Edupage } = require("edupage-api")
+import edu from "../edu.js"
 
 const WARNINGS = {
 
@@ -46,7 +47,7 @@ class PlayerAbl {
       throw new Error(Errors.Create.PasswordMissing);
     }
 
-    
+
     // if (dtoIn.name.toLowerCase() == "mariaortutayova") {
     //   return {
     //     id: "123456789",
@@ -54,15 +55,18 @@ class PlayerAbl {
     //     role: "teacher"
     //   }
     // }
-    const edupage = new Edupage()
-    try {
-      await edupage.login(dtoIn.name, dtoIn.password)
+    const edu = new Edu(dtoIn.name, dtoIn.password)
+    // const edupage = new Edupage()
+    // try {
+    //   await edupage.login(dtoIn.name, dtoIn.password)
 
-    } catch (e) {
-      if (e.name == "LoginError") {
-        throw new Error(Errors.Create.InvalidCredentials);
-      }
-    }
+    // } catch (e) {
+    //   if (e.name == "LoginError") {
+    //     throw new Error(Errors.Create.InvalidCredentials);
+    //   }
+    // }
+
+    edu.login()
 
     if (!edupage.user) {
       throw new Error(Errors.Create.UserNotFound);
