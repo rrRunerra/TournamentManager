@@ -12,11 +12,25 @@ const FlappyBird = ({ onClose }) => {
     const [birdVelocity, setBirdVelocity] = useState(0);
     const [pipes, setPipes] = useState([]);
     const [score, setScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
 
     const gameLoopRef = useRef();
-    const pipeGeneratorRef = useRef();
+
+    useEffect(() => {
+        const savedHighScore = localStorage.getItem('flappyHighScore');
+        if (savedHighScore) {
+            setHighScore(parseInt(savedHighScore, 10));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (score > highScore) {
+            setHighScore(score);
+            localStorage.setItem('flappyHighScore', score);
+        }
+    }, [score, highScore]);
 
     const jump = () => {
         if (!gameStarted) {
@@ -48,37 +62,15 @@ const FlappyBird = ({ onClose }) => {
                 });
 
                 // Collision detection
-                // Bird dimensions: 30x30, Pipe width: 50
-                // Ground at 580 (container height 600 - ground 20)
                 if (birdPos >= 570 || birdPos < 0) {
                     setGameOver(true);
                 }
-
-                // Pipe collision
-                // Bird x is fixed at roughly center or left side? Let's say bird is at 50px from left.
-                // Actually in CSS I didn't set left for bird, let's assume it's centered or we set it.
-                // Let's set bird left to 50px in inline style for simplicity or check CSS.
-                // CSS says position absolute but no left/top. I will add left: 50px to bird style.
-
-                // Check pipes
-                // Pipe x is the left edge. Pipe width is 50.
-                // Bird x is 50. Bird width is 30.
-                // Collision X: pipe.x < 50 + 30 && pipe.x + 50 > 50
-
-                // Collision Y:
-                // Top pipe: height is pipe.topHeight. Collision if birdPos < pipe.topHeight
-                // Bottom pipe: starts at pipe.topHeight + GAP_SIZE. Collision if birdPos + 30 > pipe.topHeight + GAP_SIZE
-
             };
 
             gameLoopRef.current = requestAnimationFrame(loop);
             return () => cancelAnimationFrame(gameLoopRef.current);
         }
     }, [gameStarted, gameOver, birdVelocity, birdPos]);
-
-    // Separate effect for collision to access latest state without resetting loop? 
-    // Actually putting logic in the loop above is tricky with state updates.
-    // Better to use a single game loop interval or requestAnimationFrame that updates everything.
 
     useEffect(() => {
         let timeId;
@@ -134,10 +126,7 @@ const FlappyBird = ({ onClose }) => {
             // Score
             if (pipeRight < birdLeft && !pipe.passed) {
                 setScore((s) => s + 1);
-                pipe.passed = true; // Mutating state object directly here is bad practice but in this loop we need to mark it. 
-                // Better to do it in the pipe update loop.
-                // Let's fix score in the pipe update loop or use a separate effect carefully.
-                // For simplicity, I'll update the pipe state to mark passed.
+                pipe.passed = true;
                 setPipes(prev => prev.map(p => p === pipe ? { ...p, passed: true } : p));
             }
         });
@@ -150,7 +139,10 @@ const FlappyBird = ({ onClose }) => {
             <div className="flappy-bird-container" onClick={jump}>
                 <button className="close-btn" onClick={(e) => { e.stopPropagation(); onClose(); }}>X</button>
 
-                <div className="score-board">{score}</div>
+                <div className="score-board">
+                    <div>{score}</div>
+                    <div className="high-score">Best: {highScore}</div>
+                </div>
 
                 <div
                     className="bird"
@@ -187,6 +179,7 @@ const FlappyBird = ({ onClose }) => {
                     <div className="game-over">
                         <h2>Game Over</h2>
                         <p>Score: {score}</p>
+                        <p>Best: {highScore}</p>
                         <p>Click to Restart</p>
                     </div>
                 )}
@@ -194,6 +187,7 @@ const FlappyBird = ({ onClose }) => {
                 {!gameStarted && !gameOver && (
                     <div className="game-over">
                         <h2>Flappy Bird</h2>
+                        <p>Best: {highScore}</p>
                         <p>Click to Start</p>
                     </div>
                 )}
