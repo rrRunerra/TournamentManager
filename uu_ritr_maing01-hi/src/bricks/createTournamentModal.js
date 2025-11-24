@@ -74,7 +74,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         >
           <option value="single">Single Elimination</option>
-          <option value="double">Double Elimination</option>
         </select>
 
 

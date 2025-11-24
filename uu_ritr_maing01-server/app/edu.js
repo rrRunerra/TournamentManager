@@ -43,13 +43,13 @@ export class Edu {
             //console.log("Login Response:", JSON.stringify(json, null, 2));
 
 
-            // if (json.users && json.users.length > 0) {
-            //     console.log("Login Successful!");
-            //     console.log("User ID:", json.users[0].userid);
-            //     console.log("Session ID:", json.users[0].esid);
-            // } else {
-            //     console.log("Login Failed: Invalid credentials or other error.");
-            // }
+            if (json.users && json.users.length > 0) {
+                console.log("Login Successful!");
+                console.log("User ID:", json.users[0].userid);
+                console.log("Session ID:", json.users[0].esid);
+            } else {
+                console.log("Login Failed: Invalid credentials or other error.");
+            }
             return json;
 
         } catch (error) {
