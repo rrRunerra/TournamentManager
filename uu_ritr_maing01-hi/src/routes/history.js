@@ -26,14 +26,14 @@ export default function HistoryPage() {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
 
-  // ROUTER for opening tournament detail
+  const [showFilter, setShowFilter] = useState(false);
+
   const [, setRoute] = useRoute();
 
   function goToTournament(id) {
     setRoute("tournamentDetail", { id });
   }
 
-  // Fetch tournaments
   useEffect(() => {
     async function fetchHistory() {
       try {
@@ -54,10 +54,9 @@ export default function HistoryPage() {
     fetchHistory();
   }, []);
 
-  // Dynamické roky z turnajov
-  const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))].sort((a, b) => b - a);
+  const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
+    .sort((a, b) => b - a);
 
-  // Auto-filter when selection changes
   useEffect(() => {
     const filtered = tournaments.filter((t) => {
       const date = new Date(t.endDate);
@@ -73,7 +72,6 @@ export default function HistoryPage() {
     setFilteredTournaments(filtered);
   }, [selectedYear, selectedMonth, tournaments]);
 
-  // Reset filters
   function resetFilters() {
     setSelectedYear("");
     setSelectedMonth("");
@@ -82,100 +80,135 @@ export default function HistoryPage() {
   if (loading) return <div className="loading-spinner">Loading history...</div>;
 
   return (
-    <div className="background">
-      {/* FILTER SECTION - Auto-filter, only reset button */}
-      <div style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(8px)',
-        borderRadius: '8px',
-        padding: '12px 16px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)',
-        border: '1px solid rgba(0, 0, 0, 0.08)',
-        marginBottom: '24px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        width: 'fit-content'
-      }}>
-        <h3 style={{
-          margin: '0',
-          fontSize: '0.95rem',
-          fontWeight: '600',
-          color: '#333',
-          whiteSpace: 'nowrap'
-        }}>
-          🔍 Filter:
-        </h3>
+    <div className="background" style={{ position: "relative" }}>
 
-        <select
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
+      {/* 🔍 ALWAYS VISIBLE LUPA BUTTON - fixovaná pozícia */}
+      <button
+        onClick={() => setShowFilter(!showFilter)}
+        style={{
+          position: "fixed",
+          top: "125px", // Fixované pod navigačnou lištou
+          left: "16px",
+          background: "#2a2a2a",
+          border: "none",
+          borderRadius: "50%",
+          width: "42px",
+          height: "42px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "20px",
+          cursor: "pointer",
+          zIndex: 30,
+          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+        }}
+      >
+        🔍
+      </button>
+
+      {/* Filter panel - fixovaná pozícia */}
+      <div
+        style={{
+          position: "fixed",
+          top: "121px", // Fixované pod navigačnou lištou
+          left: "70px",
+          transition: "transform 0.3s ease, opacity 0.3s ease",
+          transform: showFilter ? "translateX(0)" : "translateX(-120%)",
+          opacity: showFilter ? 1 : 0,
+          zIndex: 25,
+        }}
+      >
+        <div
           style={{
-            padding: '6px 8px',
-            borderRadius: '4px',
-            border: '1px solid #ddd',
-            backgroundColor: 'white',
-            fontSize: '0.85rem',
-            fontWeight: '500',
-            color: '#333',
-            outline: 'none',
-            minWidth: '70px'
+            backgroundColor: "rgb(42,42,42)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "8px",
+            padding: "12px 16px",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
+            border: "1px solid rgba(0, 0, 0, 0.08)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            width: "fit-content",
           }}
         >
-          <option value="">Rok</option>
-          {availableYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+          <h3
+            style={{
+              margin: "0",
+              fontSize: "0.95rem",
+              fontWeight: "600",
+              color: "#ffffff",
+              whiteSpace: "nowrap",
+            }}
+          >
+            🔍 Filter:
+          </h3>
 
-        <select
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
-          style={{
-            padding: '6px 8px',
-            borderRadius: '4px',
-            border: '1px solid #ddd',
-            backgroundColor: 'white',
-            fontSize: '0.85rem',
-            fontWeight: '500',
-            color: '#333',
-            outline: 'none',
-            minWidth: '90px'
-          }}
-        >
-          <option value="">Mesiac</option>
-          {Object.entries(months).map(([num, label]) => (
-            <option key={num} value={num}>
-              {label}
-            </option>
-          ))}
-        </select>
+          <select
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            style={{
+              padding: "6px 8px",
+              borderRadius: "4px",
+              border: "1px solid #ddd",
+              backgroundColor: "white",
+              fontSize: "0.85rem",
+              color: "#333",
+              outline: "none",
+              minWidth: "70px",
+            }}
+          >
+            <option value="">Rok</option>
+            {availableYears.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
 
-        <button
-          onClick={resetFilters}
-          style={{
-            padding: '6px 12px',
-            borderRadius: '4px',
-            backgroundColor: '#6c757d',
-            color: 'white',
-            border: 'none',
-            fontSize: '0.85rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-            transition: 'background-color 0.2s ease'
-          }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = '#5a6268'}
-          onMouseLeave={(e) => e.target.style.backgroundColor = '#6c757d'}
-        >
-          Reset
-        </button>
+          <select
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            style={{
+              padding: "6px 8px",
+              borderRadius: "4px",
+              border: "1px solid #ddd",
+              backgroundColor: "white",
+              fontSize: "0.85rem",
+              color: "#333",
+              outline: "none",
+              minWidth: "90px",
+            }}
+          >
+            <option value="">Mesiac</option>
+            {Object.entries(months).map(([num, label]) => (
+              <option key={num} value={num}>
+                {label}
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={resetFilters}
+            style={{
+              padding: "6px 12px",
+              borderRadius: "4px",
+              backgroundColor: "#ff8e53",
+              color: "white",
+              border: "none",
+              fontSize: "0.85rem",
+              fontWeight: "600",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </div>
 
-      {/* TOURNAMENT LIST */}
-      <section className="tournaments-section">
+      {/* TOURNAMENT LIST - začína nižšie, aby nezakrýval filter */}
+      <section className="tournaments-section" style={{ marginTop: "120px" }}>
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
             <h2 className="section-title">Žiadne turnaje pre daný filter.</h2>
@@ -192,7 +225,7 @@ export default function HistoryPage() {
 
               <p className="tournament-details">
                 📅 {new Date(tournament.startDate).getDate()}. –
-                {new Date(tournament.endDate).getDate()}.{" "}
+                {new Date(tournament.endDate).getDate()}{" "}
                 {months[new Date(tournament.endDate).getMonth() + 1]}{" "}
                 {new Date(tournament.endDate).getFullYear()}
                 <br />
