@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/createTournamentModal.css";
-import Calls from "../calls";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");

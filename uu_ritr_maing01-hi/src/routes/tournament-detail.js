@@ -1,12 +1,11 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
-import Calls from "../calls.js";
-import { Card, CardTitle, CardDescription, CardFooter } from "../bricks/cards.js";
+import { useCallback, useEffect, useState } from "react";
 import { useRoute } from "uu5g05";
-import "../styles/tournamentDetail.css";
-import "../styles/tournamentDetail.css";
+import { Card, CardDescription, CardFooter, CardTitle } from "../bricks/cards.js";
 import CustomBracket from "../bricks/CustomBracket.js";
 import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
 import OwnerControls from "../bricks/ownerControls.js";
+import Calls from "../calls.js";
+import "../styles/tournamentDetail.css";
 
 
 
@@ -52,6 +51,8 @@ export default function TournamentDetailPage() {
 
         if (hasBrackets) {
           // Double bracket - group by bracket
+
+          // USELESS
           processedData = response.reduce((acc, match) => {
             if (match.bracket) {
               const bracket = match.bracket;

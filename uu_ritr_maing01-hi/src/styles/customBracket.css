@@ -456,3 +456,43 @@
         opacity: 0;
     }
 }
+
+/* Tree Layout Styles */
+.bracket-scroll-container {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    background-color: #0d0d0d;
+    padding: 20px;
+    min-height: 500px;
+}
+
+.bracket-canvas {
+    position: relative;
+    margin: 0 auto;
+    /* Center if smaller than container */
+}
+
+.bracket-round-header {
+    position: absolute;
+    top: -40px;
+    text-align: center;
+    color: #d0d0d0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    height: 30px;
+}
+
+.bracket-svg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bracket-connector-path {
+    fill: none;
+    stroke: #ff8e53;
+    stroke-width: 2px;
+}

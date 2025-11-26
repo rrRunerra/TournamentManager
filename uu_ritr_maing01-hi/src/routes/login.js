@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Calls from "../calls.js";
-import { withRoute } from "uu_plus4u5g02-app";
+import { useEffect, useState } from "react";
 import { useRoute } from "uu5g05";
 import DarkVeil from "../bricks/DarkVeil.js";
+import Calls from "../calls.js";
 import "../styles/login.css";
 
 
@@ -72,7 +71,7 @@ export default function LoginPage() {
       localStorage.setItem("player", JSON.stringify(res));
       setRoute("tournaments");
     } catch (e) {
-      console.log(e);
+      console.error(e);
       setError(e.message);
     }
 

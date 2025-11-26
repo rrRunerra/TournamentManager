@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Calls from "../calls.js";
-import Plus4U5App from "uu_plus4u5g02-app";
+import { useEffect, useState } from "react";
 import { useRoute } from "uu5g05";
-import DarkVeil from "../bricks/DarkVeil.js";
-import { Card, CardDescription, CardTitle, CardFooter } from "../bricks/cards.js";
-import "../styles/tournament.css";
 import CreateModal from "../bricks/createTournamentModal.js";
+import Calls from "../calls.js";
+import "../styles/tournament.css";
 
 const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
-  console.log("Creating tournament with data:", { name, description, startDate, endDate, teamSize, owner, bracketType });
   const status = "upcoming";
 
   return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner, bracketType });
@@ -87,7 +83,7 @@ export default function TournamentsPage() {
           </div>
         ) : (
           tournaments.map((tournament) => (
-            <div className="tournament-card" onClick={() => {
+            <div className="tournament-card" key={tournament.id} onClick={() => {
               setRoute("tournamentDetail", { id: tournament.id })
             }}>
               <div className="tournament-icon">🏆</div>
