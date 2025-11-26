@@ -412,16 +412,10 @@ LOWER BRACKET:           │     └─────┘
 
 1. **Power of 2:** 2, 4, 8, 16, 32 teams
 2. **Non-power of 2:** 3, 5, 6, 7, 10 teams
-3. **Edge cases:** 2 teams (minimum), 64 teams (large)
+3. **Edge cases:** 3 teams (minimum), 64 teams (large)
 4. **Walkover scenarios:** Odd teams, team withdrawals
 5. **Double elimination:** All of above for both brackets
 
 ## Future Enhancements
 
-1. **Seeding:** Allow tournament organizers to seed teams
-2. **Swiss System:** Alternative to elimination
-3. **Group Stage:** Preliminary rounds before elimination
-4. **Consolation Bracket:** 3rd place playoff
-5. **Optimized Bye Distribution:** Better balance for irregular team counts
-6. **Dynamic Bracket:** Add/remove teams after creation
-7. **Bracket Reset:** Grand final bracket reset option
+1. NONE FOR NOW

@@ -4,7 +4,11 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 class TeamMongo extends UuObjectDao {
 
   async createSchema() {
-    await super.createIndex({ awid: 1 }, { unique: true });
+    // Primary lookup index
+    await super.createIndex({ awid: 1, id: 1 }, { unique: true });
+
+    // Query by tournament
+    await super.createIndex({ awid: 1, tournamentId: 1 });
   }
 
   async create(uuObject) {
@@ -28,8 +32,8 @@ class TeamMongo extends UuObjectDao {
 
 
   async update(filter, updateObject) {
-  return await super.findOneAndUpdate(filter, updateObject, "NONE");
-}
+    return await super.findOneAndUpdate(filter, updateObject, "NONE");
+  }
 
 
   async remove(uuObject) {

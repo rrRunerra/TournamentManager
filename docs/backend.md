@@ -587,13 +587,4 @@ Each entity has a DAO with standard methods:
 
 ## Future Improvements
 
-1. Add transaction support for atomic operations
-2. Implement caching layer
-3. Add WebSocket support for real-time updates
-4. Improve error messages
-5. Add request rate limiting
-6. Implement soft deletes
-7. Add audit logging
-8. Optimize bracket generation for large tournaments
-9. Add database indexes
-10. Implement connection pooling
+1. NONE FOR NOW

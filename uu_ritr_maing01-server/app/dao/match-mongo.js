@@ -4,7 +4,14 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 class MatchMongo extends UuObjectDao {
 
   async createSchema() {
-    await super.createIndex({ awid: 1 }, { unique: true });
+    // Primary lookup index
+    await super.createIndex({ awid: 1, id: 1 }, { unique: true });
+
+    // Query by tournament (most common query - getAll)
+    await super.createIndex({ awid: 1, tournamentId: 1 });
+
+    // Query by matchId and tournamentId (get specific match)
+    await super.createIndex({ awid: 1, matchId: 1, tournamentId: 1 });
   }
 
   async create(uuObject) {

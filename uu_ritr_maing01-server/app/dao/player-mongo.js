@@ -4,7 +4,14 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 class PlayerMongo extends UuObjectDao {
 
   async createSchema() {
-    await super.createIndex({ awid: 1 }, { unique: true });
+    // Primary lookup index
+    await super.createIndex({ awid: 1, id: 1 }, { unique: true });
+
+    // Query by name (for login/authentication)
+    await super.createIndex({ awid: 1, name: 1 });
+
+    // Query by uuIdentity
+    await super.createIndex({ awid: 1, uuIdentity: 1 });
   }
 
   async create(uuObject) {

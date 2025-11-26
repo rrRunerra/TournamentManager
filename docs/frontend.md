@@ -409,11 +409,4 @@ calculateLayout(rounds) {
 
 ## Future Improvements
 
-1. Replace `alert()` with toast notifications
-2. Add loading skeletons
-3. Implement error boundaries
-4. Add unit tests
-5. Optimize bundle size
-6. Add progressive web app features
-7. Improve mobile responsiveness
-8. Add real-time updates (WebSockets)
+1. NONE FOR NOW
