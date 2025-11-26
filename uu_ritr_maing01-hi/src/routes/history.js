@@ -25,6 +25,7 @@ export default function HistoryPage() {
 
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [showFilter, setShowFilter] = useState(false);
 
@@ -57,6 +58,7 @@ export default function HistoryPage() {
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
     .sort((a, b) => b - a);
 
+  // 🔍 APPLY ALL FILTERS (YEAR + MONTH + NAME SEARCH)
   useEffect(() => {
     const filtered = tournaments.filter((t) => {
       const date = new Date(t.endDate);
@@ -66,28 +68,32 @@ export default function HistoryPage() {
       if (selectedYear && year !== Number(selectedYear)) return false;
       if (selectedMonth && month !== Number(selectedMonth)) return false;
 
+      if (searchQuery && !t.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        return false;
+
       return true;
     });
 
     setFilteredTournaments(filtered);
-  }, [selectedYear, selectedMonth, tournaments]);
+  }, [selectedYear, selectedMonth, searchQuery, tournaments]);
 
   function resetFilters() {
     setSelectedYear("");
     setSelectedMonth("");
+    setSearchQuery("");
   }
 
-  if (loading) return <div className="loading-spinner">Načítavam históriu...</div>;
+  if (loading) return <div className="loading-spinner">Loading history...</div>;
 
   return (
     <div className="background" style={{ position: "relative" }}>
 
-      {/* 🔍 ALWAYS VISIBLE LUPA BUTTON - fixovaná pozícia */}
+      {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
       <button
         onClick={() => setShowFilter(!showFilter)}
         style={{
           position: "fixed",
-          top: "125px", // Fixované pod navigačnou lištou
+          top: "125px",
           left: "16px",
           background: "#2a2a2a",
           border: "none",
@@ -106,11 +112,11 @@ export default function HistoryPage() {
         🔍
       </button>
 
-      {/* Filter panel - fixovaná pozícia */}
+      {/* FILTER PANEL */}
       <div
         style={{
           position: "fixed",
-          top: "121px", // Fixované pod navigačnou lištou
+          top: "121px",
           left: "70px",
           transition: "transform 0.3s ease, opacity 0.3s ease",
           transform: showFilter ? "translateX(0)" : "translateX(-120%)",
@@ -144,6 +150,7 @@ export default function HistoryPage() {
             🔍 Filter:
           </h3>
 
+          {/* YEAR SELECT */}
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
@@ -153,7 +160,7 @@ export default function HistoryPage() {
               border: "1px solid #ddd",
               backgroundColor: "white",
               fontSize: "0.85rem",
-              color: "#333",
+              color: "#2a2a2a",
               outline: "none",
               minWidth: "70px",
             }}
@@ -166,6 +173,7 @@ export default function HistoryPage() {
             ))}
           </select>
 
+          {/* MONTH SELECT */}
           <select
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
@@ -175,7 +183,7 @@ export default function HistoryPage() {
               border: "1px solid #ddd",
               backgroundColor: "white",
               fontSize: "0.85rem",
-              color: "#333",
+              color: "#2a2a2a",
               outline: "none",
               minWidth: "90px",
             }}
@@ -188,6 +196,25 @@ export default function HistoryPage() {
             ))}
           </select>
 
+          {/* 🔍 SEARCH BY NAME */}
+          <input
+            type="text"
+            placeholder="Hľadať názov..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              padding: "6px 8px",
+              borderRadius: "4px",
+              border: "1px solid #ddd",
+              backgroundColor: "white",
+              fontSize: "0.85rem",
+              color: "#2a2a2a",
+              outline: "none",
+              minWidth: "120px",
+            }}
+          />
+
+          {/* RESET BUTTON */}
           <button
             onClick={resetFilters}
             style={{
@@ -202,12 +229,12 @@ export default function HistoryPage() {
               whiteSpace: "nowrap",
             }}
           >
-            Resetovať
+            Reset
           </button>
         </div>
       </div>
 
-      {/* TOURNAMENT LIST - začína nižšie, aby nezakrýval filter */}
+      {/* TOURNAMENT LIST */}
       <section className="tournaments-section" style={{ marginTop: "120px" }}>
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
