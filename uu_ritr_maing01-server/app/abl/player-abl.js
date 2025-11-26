@@ -23,6 +23,9 @@ class PlayerAbl {
     if (!validationResult.isValid()) {
       throw new Error("InvalidDtoIn");
     }
+
+    const out = await this.dao.get(awid, dtoIn.id);
+    return out;
   }
 
   async update(awid, dtoIn) {

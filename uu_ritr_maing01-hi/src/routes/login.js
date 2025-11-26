@@ -5,9 +5,7 @@ import { useRoute } from "uu5g05";
 import DarkVeil from "../bricks/DarkVeil.js";
 import "../styles/login.css";
 
-// ======================
-// 🧩 CUSTOM KOMPONENTY
-// ======================
+
 const LoginLogo = () => (
   <div>
     <img src="../assets/MatchUPlogo.png" alt="MatchUP Logo" className="login-logo" />
@@ -44,14 +42,12 @@ const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, err
     <LoginInput placeholder="Username" value={username} onChange={setUsername} />
     <LoginInput type="password" placeholder="Password" value={password} onChange={setPassword} />
     <LoginError message={error} />
-    
+
     <LoginButton text="Login" loading={loading} />
   </form>
 );
 
-// ======================
-// 🚀 HLAVNÝ KOMPONENT
-// ======================
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -59,12 +55,12 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useRoute();
 
-  // useEffect(() => {
-  //   const player = localStorage.getItem("player");
-  //   if (player) {
-  //     setRoute("tournaments");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const player = localStorage.getItem("player");
+    if (player) {
+      setRoute("tournaments");
+    }
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -84,36 +80,36 @@ export default function LoginPage() {
   }
 
   return (
-  <div className="login-container">
-    {/* Background */}
-    <div className="login-background">
-      <DarkVeil
-        speed={1.5}
-        hueShift={213}
-        noiseIntensity={0}
-        scanlineFrequency={0.5}
-        scanlineIntensity={0}
-        warpAmount={0}
-      />
-    </div>
-
-    {/* Foreground */}
-    <div className="login-page">
-      <div className="login-card">
-        <LoginLogo />
-        <LoginForm
-          onSubmit={handleSubmit}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-          error={error}
-          loading={loading}
+    <div className="login-container">
+      {/* Background */}
+      <div className="login-background">
+        <DarkVeil
+          speed={1.5}
+          hueShift={213}
+          noiseIntensity={0}
+          scanlineFrequency={0.5}
+          scanlineIntensity={0}
+          warpAmount={0}
         />
       </div>
+
+      {/* Foreground */}
+      <div className="login-page">
+        <div className="login-card">
+          <LoginLogo />
+          <LoginForm
+            onSubmit={handleSubmit}
+            username={username}
+            setUsername={setUsername}
+            password={password}
+            setPassword={setPassword}
+            error={error}
+            loading={loading}
+          />
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
 
 }
 

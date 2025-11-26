@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/createTournamentModal.css";
+import Calls from "../calls";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -23,6 +24,22 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const removeTeam = (index) => {
     setTeams(teams.filter((_, i) => i !== index));
   };
+
+
+  // localstorage bypass check
+  // const user = JSON.parse(localStorage.getItem("player"));
+  // new Promise((resolve, reject) => {
+  //   const pDb = Calls.getPlayer({ id: user.id });
+  //   resolve(pDb)
+  // }).then((pDb) => {
+  //   if (pDb.role.toLowerCase() !== "teacher") {
+  //     alert("You are not authorized to create a tournament");
+  //     onClose();
+  //   }
+  // })
+
+
+
 
   return (
     <div

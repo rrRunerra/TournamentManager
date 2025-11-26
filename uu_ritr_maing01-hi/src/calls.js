@@ -96,6 +96,11 @@ const Calls = {
   updateMatchScore(dtoIn) {
     const commandUri = Calls.getCommandUri("match/update");
     return Calls.call("post", commandUri, dtoIn);
+  },
+
+  getPlayer(dtoIn) {
+    const commandUri = Calls.getCommandUri("player/get");
+    return Calls.call("get", commandUri, dtoIn);
   }
 
 
