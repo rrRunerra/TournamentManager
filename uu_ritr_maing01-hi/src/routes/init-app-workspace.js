@@ -41,7 +41,7 @@ async function save(values) {
     redirectPath = Environment.appBaseUri;
   }
   window.location.replace(redirectPath);
-  return new Promise(() => {}); // don't resolve - we'll keep form disabled until reload happens
+  return new Promise(() => { }); // don't resolve - we'll keep form disabled until reload happens
 }
 //@@viewOff:helpers
 
@@ -74,7 +74,7 @@ let InitAppWorkspace = createVisualComponent({
     if (state === "error" || state === "errorNoData") {
       child = (
         <Plus4U5App.Error error={errorData?.error}>
-          <Lsi import={importLsi} path={["InitAppWorkspace", "notAuthorized"]} />
+          Nemáte oprávnenie na túto akciu.
         </Plus4U5App.Error>
       );
     } else if (state === "pending" || state === "pendingNoData") {
@@ -87,27 +87,27 @@ let InitAppWorkspace = createVisualComponent({
             <Uu5Elements.Block
               header={
                 <Uu5Elements.Text category="story" segment="heading" type="h2">
-                  <Lsi import={importLsi} path={["InitAppWorkspace", "formHeader"]} />
+                  Inicializácia aplikácie
                 </Uu5Elements.Text>
               }
-              info={<Lsi import={importLsi} path={["InitAppWorkspace", "formHeaderInfo"]} />}
+              info="Vyplňte prosím nasledujúce údaje."
               collapsible={false}
             >
               <Uu5Forms.Form onSubmit={async (e) => save(e.data.value)}>
                 <Uu5Forms.FormText
                   required
                   name="uuBtLocationUri"
-                  label={<Lsi import={importLsi} path={["InitAppWorkspace", "uuBtLocationUriLabel"]} />}
-                  info={<Lsi import={importLsi} path={["InitAppWorkspace", "uuBtLocationUriInfo"]} />}
+                  label="Umiestnenie uuBusinessTerritory"
+                  info="URI umiestnenia uuBusinessTerritory"
                 />
                 <Uu5Forms.FormText
                   name="name"
-                  label={<Lsi import={importLsi} path={["InitAppWorkspace", "nameLabel"]} />}
+                  label="Názov"
                 />
 
                 <div className={Css.formControls()}>
                   <Uu5Forms.SubmitButton colorScheme="primary">
-                    <Lsi import={importLsi} path={["InitAppWorkspace", "initialize"]} />
+                    Inicializovať
                   </Uu5Forms.SubmitButton>
                 </div>
               </Uu5Forms.Form>
@@ -117,7 +117,7 @@ let InitAppWorkspace = createVisualComponent({
       } else {
         child = (
           <Plus4U5App.Error>
-            <Lsi import={importLsi} path={["InitAppWorkspace", "notAuthorizedForInit"]} />
+            Nemáte oprávnenie na inicializáciu.
           </Plus4U5App.Error>
         );
       }

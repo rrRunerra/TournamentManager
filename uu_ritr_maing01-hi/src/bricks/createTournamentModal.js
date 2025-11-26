@@ -40,7 +40,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
 
 
-
   return (
     <div
       className="modal-overlay"
@@ -48,9 +47,9 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
       <div
         className="modal-content"
       >
-        <h3 className="modal-header">Create Tournament</h3>
+        <h3 className="modal-header">Vytvoriť turnaj</h3>
 
-        <label>Name</label>
+        <label>Názov</label>
         <input
           type="text"
           value={name}
@@ -59,7 +58,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Description</label>
+        <label>Popis</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -67,7 +66,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Start Date</label>
+        <label>Dátum začiatku</label>
         <input
           type="datetime-local"
           value={startDate}
@@ -75,7 +74,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         />
 
-        <label>End Date</label>
+        <label>Dátum konca</label>
         <input
           type="datetime-local"
           value={endDate}
@@ -83,18 +82,18 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         />
 
-        <label >Bracket Type</label>
+        <label >Typ pavúka</label>
         <select
           id="bracketType"
           value={bracketType}
           onChange={(e) => setBracketType(e.target.value)}
           className="form-control"
         >
-          <option value="single">Single Elimination</option>
+          <option value="single">Jednoduchá eliminácia</option>
         </select>
 
 
-        <label>Team Size</label>
+        <label>Veľkosť tímu</label>
         <input
           type="number"
           value={teamSize}
@@ -104,16 +103,16 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Teams</label>
+        <label>Tímy</label>
         <div className="team-input-container">
           <input
             type="text"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            placeholder="Enter team name"
+            placeholder="Zadajte názov tímu"
             className="team-input"
           />
-          <button className="btn" onClick={addTeam}>Add</button>
+          <button className="btn" onClick={addTeam}>Pridať</button>
         </div>
 
         <ul className="teams-list">
@@ -128,7 +127,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         </ul>
 
         <div className="modal-actions">
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={onClose}>Zrušiť</button>
           <button
             onClick={() => {
               const newErrors = {};
@@ -147,13 +146,13 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 setErrors(newErrors);
                 const errorMessages = [];
 
-                if (newErrors.name) errorMessages.push("Name is required.");
-                if (newErrors.description) errorMessages.push("Description is required.");
-                if (newErrors.startDate) errorMessages.push("Start Date is required.");
-                if (newErrors.endDate) errorMessages.push("End Date is required.");
-                if (newErrors.teamSize) errorMessages.push("Team Size is required.");
-                if (newErrors.teams) errorMessages.push("At least 3 teams are required.");
-                if (newErrors.invalidDate) errorMessages.push("Start date cannot be sooner than end date")
+                if (newErrors.name) errorMessages.push("Názov je povinný.");
+                if (newErrors.description) errorMessages.push("Popis je povinný.");
+                if (newErrors.startDate) errorMessages.push("Dátum začiatku je povinný.");
+                if (newErrors.endDate) errorMessages.push("Dátum konca je povinný.");
+                if (newErrors.teamSize) errorMessages.push("Veľkosť tímu je povinná.");
+                if (newErrors.teams) errorMessages.push("Sú vyžadované aspoň 3 tímy.");
+                if (newErrors.invalidDate) errorMessages.push("Dátum začiatku nemôže byť neskôr ako dátum konca")
 
                 alert(errorMessages.join("\n"));
                 return;
@@ -172,7 +171,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               setBracketType("single")
             }}
           >
-            Save
+            Uložiť
           </button>
         </div>
       </div>

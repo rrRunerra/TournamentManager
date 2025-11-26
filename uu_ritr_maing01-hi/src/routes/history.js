@@ -77,7 +77,7 @@ export default function HistoryPage() {
     setSelectedMonth("");
   }
 
-  if (loading) return <div className="loading-spinner">Loading history...</div>;
+  if (loading) return <div className="loading-spinner">Načítavam históriu...</div>;
 
   return (
     <div className="background" style={{ position: "relative" }}>
@@ -202,7 +202,7 @@ export default function HistoryPage() {
               whiteSpace: "nowrap",
             }}
           >
-            Reset
+            Resetovať
           </button>
         </div>
       </div>

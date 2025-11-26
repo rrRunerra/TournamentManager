@@ -4,74 +4,74 @@ import "../styles/ownerControls.css"
 export default function OwnerControls({ info, id, setInfo, setRoute, onTournamentStart }) {
   return (
     <div className="owner-controls-panel">
-      <h3 className="owner-controls-title">Tournament Controls</h3>
+      <h3 className="owner-controls-title">Ovládanie turnaja</h3>
       <div className="owner-controls-actions">
         {info.status === "upcoming" && (
           <button
             className="owner-controls-btn owner-controls-btn--primary"
             onClick={async () => {
-              if (window.confirm("Start this tournament? Teams will be locked.")) {
+              if (window.confirm("Spustiť tento turnaj? Tímy budú uzamknuté.")) {
                 try {
                   await Calls.updateTournament({ id, status: "ongoing" });
                   setInfo(await Calls.getTournament({ id }));
                   if (onTournamentStart) {
                     await onTournamentStart();
                   }
-                  alert("Tournament started!");
+                  alert("Turnaj spustený!");
                 } catch (error) {
                   console.error("Error starting tournament:", error);
-                  alert("Failed to start tournament.");
+                  alert("Nepodarilo sa spustiť turnaj.");
                 }
               }
             }}
           >
-            Start Tournament
+            Spustiť turnaj
           </button>
         )}
         <button
           className="owner-controls-btn owner-controls-btn--danger"
           onClick={async () => {
-            if (window.confirm("Delete this tournament? This cannot be undone.")) {
+            if (window.confirm("Vymazať tento turnaj? Táto akcia je nevratná.")) {
               try {
                 await Calls.deleteTournament({ id });
-                alert("Tournament deleted!");
+                alert("Turnaj vymazaný!");
                 setRoute("tournaments");
               } catch (error) {
                 console.error("Error deleting tournament:", error);
-                alert("Failed to delete tournament.");
+                alert("Nepodarilo sa vymazať turnaj.");
               }
             }
           }}
         >
-          Delete Tournament
+          Vymazať turnaj
         </button>
       </div>
 
       <div className="owner-controls-team-management">
-        <h4>Manage Teams</h4>
+        <h4>Spravovať tímy</h4>
         {info.teams.map(team => (
           <div key={team.id} className="owner-controls-team-management-item">
             <div className="owner-controls-team-info">
               <strong>{team.name}</strong>
               <span className="owner-controls-player-count">
-                ({team.players?.length || 0}/{info.teamSize} players)
+                ({team.players?.length || 0}/{info.teamSize} hráčov)
               </span>
             </div>
             <button
               className="owner-controls-btn owner-controls-btn--outline"
               onClick={async () => {
-                if (window.confirm(`Remove team "${team.name}"?`)) {
+                if (window.confirm(`Odstrániť tím "${team.name}"?`)) {
                   try {
                     await Calls.removeTeam({ tournamentId: id, teamId: team.id });
                     setInfo(await Calls.getTournament({ id }));
                   } catch (error) {
                     console.error("Error removing team:", error);
-                    alert("Failed to remove team.");
+                    alert("Nepodarilo sa odstrániť tím.");
                   }
                 }
               }}
             >
-              Remove
+              Odstrániť
             </button>
           </div>
         ))}

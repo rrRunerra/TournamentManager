@@ -15,16 +15,16 @@ const createTournament = ({ name, description, startDate, endDate, teamSize, tea
 };
 
 const months = {
-  1: "January",
-  2: "February",
-  3: "March",
-  4: "April",
-  5: "May",
-  6: "June",
-  7: "July",
+  1: "Január",
+  2: "Február",
+  3: "Marec",
+  4: "Apríl",
+  5: "Máj",
+  6: "Jún",
+  7: "Júl",
   8: "August",
   9: "September",
-  10: "October",
+  10: "Október",
   11: "November",
   12: "December"
 }
@@ -70,7 +70,7 @@ export default function TournamentsPage() {
       !Array.isArray(data.teams) ||
       data.teams.length < 2
     ) {
-      alert("All fields are required and at least 2 teams must be added.");
+      alert("Všetky polia sú povinné a musia byť pridané aspoň 2 tímy.");
       return;
     }
 
@@ -83,7 +83,7 @@ export default function TournamentsPage() {
       <section className="tournaments-section">
         {tournaments.length === 0 ? (
           <div className="section-header">
-            <h2 className="section-title">No tournaments available.</h2>
+            <h2 className="section-title">Žiadne turnaje nie sú k dispozícii.</h2>
           </div>
         ) : (
           tournaments.map((tournament) => (
@@ -93,7 +93,7 @@ export default function TournamentsPage() {
               <div className="tournament-icon">🏆</div>
               <h2 className="tournament-title">{tournament.name}</h2>
               <p className="tournament-details">
-                📅 {new Date(tournament.startDate).getDay()}. - {new Date(tournament.endDate).getDay()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
+                📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
                 👥 {tournament.teams.length} tímov v súťaži
               </p>
               <div className="tournament-status">

@@ -177,18 +177,18 @@ const FlappyBird = ({ onClose }) => {
 
                 {gameOver && (
                     <div className="game-over">
-                        <h2>Game Over</h2>
-                        <p>Score: {score}</p>
-                        <p>Best: {highScore}</p>
-                        <p>Click to Restart</p>
+                        <h2>Koniec hry</h2>
+                        <p>Skóre: {score}</p>
+                        <p>Najlepšie: {highScore}</p>
+                        <p>Kliknite pre reštart</p>
                     </div>
                 )}
 
                 {!gameStarted && !gameOver && (
                     <div className="game-over">
                         <h2>Flappy Bird</h2>
-                        <p>Best: {highScore}</p>
-                        <p>Click to Start</p>
+                        <p>Najlepšie: {highScore}</p>
+                        <p>Kliknite pre štart</p>
                     </div>
                 )}
             </div>

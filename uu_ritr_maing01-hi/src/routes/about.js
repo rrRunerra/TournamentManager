@@ -8,19 +8,19 @@ const AboutPage = () => {
     {
       initials: "SS",
       name: "Sebastián Savary",
-      role: "Backend Developer",
+      role: "Backend vývojár",
       bio: "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu."
     },
     {
       initials: "BB",
       name: "Branislav Bobrik",
-      role: "Frontend Developer",
+      role: "Frontend vývojár",
       bio: "Zodpovedný za vývoj používateľského rozhrania a interaktívnych komponentov."
     },
     {
       initials: "LS",
       name: "Lukáš Salaj",
-      role: "UI/UX Designer",
+      role: "UI/UX dizajnér",
       bio: "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
     },
   ];

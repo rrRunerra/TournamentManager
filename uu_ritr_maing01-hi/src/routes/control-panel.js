@@ -46,7 +46,7 @@ let ControlPanel = createVisualComponent({
     if (state === "error" || state === "errorNoData") {
       child = (
         <Plus4U5App.Error error={errorData?.error}>
-          <Lsi import={importLsi} path={["ControlPanel", "rightsError"]} />
+          Nemáte dostatočné práva na zobrazenie tohto komponentu.
         </Plus4U5App.Error>
       );
     } else if (state === "pending" || state === "pendingNoData") {
@@ -70,7 +70,7 @@ let ControlPanel = createVisualComponent({
     } else {
       child = (
         <Uu5Elements.HighlightedBox icon="mdi-alert-circle" colorScheme="negative">
-          <Lsi import={importLsi} path={["ControlPanel", "btNotConnected"]} />
+          Aplikácia nie je pripojená k Business Territory.
         </Uu5Elements.HighlightedBox>
       );
     }

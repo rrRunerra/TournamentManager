@@ -30,7 +30,7 @@ const LoginButton = ({ text, onClick, loading }) => {
       className="login-button"
       disabled={loading}
     >
-      {loading ? "Loading..." : text}
+      {loading ? "Načítavam..." : text}
     </button>
   );
 };
@@ -39,11 +39,11 @@ const LoginError = ({ message }) => (message ? <div className="login-error">{mes
 
 const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading }) => (
   <form onSubmit={onSubmit}>
-    <LoginInput placeholder="Username" value={username} onChange={setUsername} />
-    <LoginInput type="password" placeholder="Password" value={password} onChange={setPassword} />
+    <LoginInput placeholder="Používateľské meno" value={username} onChange={setUsername} />
+    <LoginInput type="password" placeholder="Heslo" value={password} onChange={setPassword} />
     <LoginError message={error} />
 
-    <LoginButton text="Login" loading={loading} />
+    <LoginButton text="Prihlásiť sa" loading={loading} />
   </form>
 );
 

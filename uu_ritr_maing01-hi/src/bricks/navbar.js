@@ -92,7 +92,7 @@ export default function Navbar() {
             onClick={() => handleCardClick('history')}
           >
             <span className="card-icon">📜</span>
-            <h2>Historia</h2>
+            <h2>História</h2>
           </div>
 
           <div

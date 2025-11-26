@@ -96,7 +96,7 @@ export default function TournamentDetailPage() {
       setInfo(updatedTournament);
     } catch (error) {
       console.error("Error joining team:", error);
-      alert("Failed to join team. Please try again.");
+      alert("Nepodarilo sa pripojiť k tímu. Skúste to prosím znova.");
     } finally {
       setJoiningTeam(null);
     }
@@ -104,7 +104,7 @@ export default function TournamentDetailPage() {
 
 
   // Renamed class "loading" to "tournament-detail-loading"
-  if (!info) return <div className="loading-spinner">Loading...</div>;
+  if (!info) return <div className="loading-spinner">Načítavam...</div>;
 
   const isOwner = user?.uuIdentity === info.ownerId;
   const bracketsType = info?.bracketType
@@ -142,10 +142,10 @@ export default function TournamentDetailPage() {
       <h2 className="tournament-detail-title">{info.name}</h2>
       {/* Renamed class "tournament-description" to "tournament-detail-description" */}
       <p className="tournament-detail-description">{info.description}</p>
-      <p><strong>Start Date:</strong> {new Date(info.startDate).toLocaleString()}</p>
-      <p><strong>End Date:</strong> {new Date(info.endDate).toLocaleString()}</p>
-      <p><strong>Status:</strong> {info.status}</p>
-      <p><strong>Team Size:</strong> {info.teamSize}</p>
+      <p><strong>Dátum začiatku:</strong> {new Date(info.startDate).toLocaleString()}</p>
+      <p><strong>Dátum konca:</strong> {new Date(info.endDate).toLocaleString()}</p>
+      <p><strong>Stav:</strong> {info.status}</p>
+      <p><strong>Veľkosť tímu:</strong> {info.teamSize}</p>
 
       {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
       <div className="tournament-detail-team-grid">
@@ -161,11 +161,11 @@ export default function TournamentDetailPage() {
             >
               <CardTitle>{team.name}</CardTitle>
               <CardDescription>
-                Players: {team.players?.length || 0} / {info.teamSize}
+                Hráči: {team.players?.length || 0} / {info.teamSize}
               </CardDescription>
               {/* Note: CardFooter content doesn't have a direct class change,
                   but its container selector was updated in the CSS. */}
-              <CardFooter>{joiningTeam === team.id ? "Joining..." : ""}</CardFooter>
+              <CardFooter>{joiningTeam === team.id ? "Pripájam sa..." : ""}</CardFooter>
             </Card>
           )
 
@@ -201,7 +201,7 @@ export default function TournamentDetailPage() {
           boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
           zIndex: 1000
         }}
-        aria-label="Go back to tournaments"
+        aria-label="Späť na turnaje"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5" />

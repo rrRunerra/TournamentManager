@@ -89,15 +89,15 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
         if (winnerId) {
             const s1 = parseInt(score1) || 0;
             const s2 = parseInt(score2) || 0;
-            const p1Name = match.participants[0]?.name || "Participant 1";
-            const p2Name = match.participants[1]?.name || "Participant 2";
+            const p1Name = match.participants[0]?.name || "Účastník 1";
+            const p2Name = match.participants[1]?.name || "Účastník 2";
 
             if (winnerId === match.participants[0]?.id && s1 < s2) {
-                if (!window.confirm(`${p1Name} is marked as winner but has a lower score (${s1} vs ${s2}). Are you sure you want to save?`)) {
+                if (!window.confirm(`${p1Name} je označený ako víťaz, ale má nižšie skóre (${s1} vs ${s2}). Ste si istí, že chcete uložiť?`)) {
                     return;
                 }
             } else if (winnerId === match.participants[1]?.id && s2 < s1) {
-                if (!window.confirm(`${p2Name} is marked as winner but has a lower score (${s2} vs ${s1}). Are you sure you want to save?`)) {
+                if (!window.confirm(`${p2Name} je označený ako víťaz, ale má nižšie skóre (${s2} vs ${s1}). Ste si istí, že chcete uložiť?`)) {
                     return;
                 }
             }
@@ -130,7 +130,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
             onClose();
         } catch (error) {
             console.error("Failed to update score", error);
-            alert("Failed to update score");
+            alert("Nepodarilo sa aktualizovať skóre");
         } finally {
             setLoading(false);
         }
@@ -139,8 +139,8 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     return (
         <div className="match-popup-overlay" onClick={onClose}>
             <div className="match-popup-content" onClick={e => e.stopPropagation()}>
-                <h3>{match.name || `Match #${match.id}`}</h3>
-                {!isMatchReady && <div className="match-not-ready-warning">Waiting for opponent</div>}
+                <h3>{match.name || `Zápas #${match.id}`}</h3>
+                {!isMatchReady && <div className="match-not-ready-warning">Čakanie na súpera</div>}
                 <div className="match-popup-teams">
                     <div className="match-popup-team">
                         <span className="team-name">{match.participants[0]?.name || "TBD"}</span>
@@ -159,7 +159,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                             onChange={() => handleWinnerChange(match.participants[0]?.id)}
                                             disabled={!isMatchReady}
                                         />
-                                        Winner
+                                        Víťaz
                                     </label>
                                 </div>
                                 <select
@@ -168,7 +168,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                     onChange={(e) => setStatus1(e.target.value || null)}
                                     disabled={!isMatchReady}
                                 >
-                                    <option value="">Status: None</option>
+                                    <option value="">Stav: Žiadny</option>
                                     {STATUS_OPTIONS.filter(s => s).map(status => (
                                         <option key={status} value={status}>{status}</option>
                                     ))}
@@ -178,7 +178,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                             <>
                                 <span className="score-display">{score1}</span>
                                 {status1 && <span className="status-display">{status1}</span>}
-                                {match.participants[0]?.isWinner && <span className="winner-badge">WINNER</span>}
+                                {match.participants[0]?.isWinner && <span className="winner-badge">VÍŤAZ</span>}
                             </>
                         )}
                     </div>
@@ -200,7 +200,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                             onChange={() => handleWinnerChange(match.participants[1]?.id)}
                                             disabled={!isMatchReady}
                                         />
-                                        Winner
+                                        Víťaz
                                     </label>
                                 </div>
                                 <select
@@ -209,7 +209,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                     onChange={(e) => setStatus2(e.target.value || null)}
                                     disabled={!isMatchReady}
                                 >
-                                    <option value="">Status: None</option>
+                                    <option value="">Stav: Žiadny</option>
                                     {STATUS_OPTIONS.filter(s => s).map(status => (
                                         <option key={status} value={status}>{status}</option>
                                     ))}
@@ -219,7 +219,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                             <>
                                 <span className="score-display">{score2}</span>
                                 {status2 && <span className="status-display">{status2}</span>}
-                                {match.participants[1]?.isWinner && <span className="winner-badge">WINNER</span>}
+                                {match.participants[1]?.isWinner && <span className="winner-badge">VÍŤAZ</span>}
                             </>
                         )}
                     </div>
@@ -227,10 +227,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                 <div className="match-popup-actions">
                     {isOwner && (
                         <button className="save-btn" onClick={handleSave} disabled={loading || !isMatchReady}>
-                            {loading ? "Saving..." : "Save Score"}
+                            {loading ? "Ukladám..." : "Uložiť skóre"}
                         </button>
                     )}
-                    <button className="cancel-btn" onClick={onClose} disabled={loading}>Cancel</button>
+                    <button className="cancel-btn" onClick={onClose} disabled={loading}>Zrušiť</button>
                 </div>
             </div>
         </div>
@@ -248,7 +248,7 @@ const MatchCard = ({ match, onClick }) => {
     return (
         <div className="match-card" onClick={() => onClick(match)}>
             <div className="match-header">
-                <span>Match #{id}</span>
+                <span>Zápas #{id}</span>
                 <span>{startTime ? new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD'}</span>
             </div>
 
@@ -340,11 +340,11 @@ const getRoundName = (roundKey, totalRounds, index) => {
     const roundNum = parseInt(roundKey);
     if (isNaN(roundNum)) return roundKey;
 
-    if (index === totalRounds - 1) return "Grand Final";
-    if (index === totalRounds - 2) return "Semifinals";
-    if (index === totalRounds - 3) return "Quarterfinals";
+    if (index === totalRounds - 1) return "Veľké finále";
+    if (index === totalRounds - 2) return "Semifinále";
+    if (index === totalRounds - 3) return "Štvrťfinále";
 
-    return `Round ${roundKey}`;
+    return `Kolo ${roundKey}`;
 };
 
 const processMatches = (matches) => {
