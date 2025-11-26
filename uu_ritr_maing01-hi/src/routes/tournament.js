@@ -79,24 +79,24 @@ export default function TournamentsPage() {
   };
 
   return (
-    <div class="background">
-      <section class="tournaments-section">
+    <div className="background">
+      <section className="tournaments-section">
         {tournaments.length === 0 ? (
           <div className="section-header">
             <h2 className="section-title">No tournaments available.</h2>
           </div>
         ) : (
           tournaments.map((tournament) => (
-            <div class="tournament-card" onClick={() => {
+            <div className="tournament-card" onClick={() => {
               setRoute("tournamentDetail", { id: tournament.id })
             }}>
-              <div class="tournament-icon">🏆</div>
-              <h2 class="tournament-title">{tournament.name}</h2>
-              <p class="tournament-details">
+              <div className="tournament-icon">🏆</div>
+              <h2 className="tournament-title">{tournament.name}</h2>
+              <p className="tournament-details">
                 📅 {new Date(tournament.startDate).getDay()}. - {new Date(tournament.endDate).getDay()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
                 👥 {tournament.teams.length} tímov v súťaži
               </p>
-              <div class="tournament-status">
+              <div className="tournament-status">
                 {tournament.status === "ongoing" ? (
                   <>
                     <span className="status-dot"></span>

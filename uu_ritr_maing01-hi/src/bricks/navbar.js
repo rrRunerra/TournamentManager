@@ -49,8 +49,8 @@ export default function Navbar() {
         <div className="nav-logo-mobile">
           <img src="../assets/MatchUPlogo.png" alt="MatchUP" />
         </div>
-        <button 
-          className="hamburger-btn" 
+        <button
+          className="hamburger-btn"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -64,7 +64,7 @@ export default function Navbar() {
 
       {/* Cards Section */}
       <section className={`cards-section ${isOpen ? 'mobile-open' : ''}`}>
-        
+
         <div className="nav-logo-wrapper desktop-only">
           <img src="../assets/MatchUPlogo.png" />
         </div>
@@ -72,10 +72,18 @@ export default function Navbar() {
         <div className="cards-container">
 
           <div
+            className={`card ${activeLink === 'home' ? 'active' : ''}`}
+            onClick={() => handleCardClick('home')}
+          >
+            <span className="card-icon">🏠</span>
+            <h2>Domov</h2>
+          </div>
+
+          <div
             className={`card ${activeLink === 'tournaments' ? 'active' : ''}`}
             onClick={() => handleCardClick('tournaments')}
           >
-            <span className="card-icon">🚀</span>
+            <span className="card-icon">🏆</span>
             <h2>Turnaje</h2>
           </div>
 
@@ -83,7 +91,7 @@ export default function Navbar() {
             className={`card ${activeLink === 'history' ? 'active' : ''}`}
             onClick={() => handleCardClick('history')}
           >
-            <span className="card-icon">📱</span>
+            <span className="card-icon">📜</span>
             <h2>Historia</h2>
           </div>
 
