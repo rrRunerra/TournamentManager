@@ -1,0 +1,90 @@
+/* History Page Styles */
+
+.history-background {
+    position: relative;
+}
+
+/* Filter Button */
+.filter-toggle-btn {
+    position: fixed;
+    top: 125px;
+    left: 16px;
+    background: #2a2a2a;
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 30;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.filter-toggle-btn:hover {
+    background: #3a3a3a;
+}
+
+/* Filter Panel Container */
+.filter-panel-container {
+    position: fixed;
+    top: 121px;
+    left: 70px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 25;
+}
+
+.filter-panel-container.hidden {
+    transform: translateX(-120%);
+    opacity: 0;
+}
+
+.filter-panel-container.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Filter Panel */
+.filter-panel {
+    background-color: rgb(42, 42, 42);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+}
+
+/* Filter Inputs */
+.filter-select,
+.filter-input {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 0.85rem;
+    color: #2a2a2a;
+    outline: none;
+}
+
+.filter-select {
+    min-width: 70px;
+}
+
+.filter-select.month-select {
+    min-width: 90px;
+}
+
+.filter-input {
+    min-width: 120px;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    border-color: #ff6b35;
+}

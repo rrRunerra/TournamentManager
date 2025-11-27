@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Calls from "../calls.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournament.css";
+import "../styles/history.css";
 
 const months = {
   1: "Január",
@@ -86,74 +87,26 @@ export default function HistoryPage() {
   if (loading) return <div className="loading-spinner">Loading history...</div>;
 
   return (
-    <div className="background" style={{ position: "relative" }}>
+    <div className="background history-background">
 
       {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
       <button
+        className="filter-toggle-btn"
         onClick={() => setShowFilter(!showFilter)}
-        style={{
-          position: "fixed",
-          top: "125px",
-          left: "16px",
-          background: "#2a2a2a",
-          border: "none",
-          borderRadius: "50%",
-          width: "42px",
-          height: "42px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "20px",
-          cursor: "pointer",
-          zIndex: 30,
-          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-        }}
       >
         🔍
       </button>
 
       {/* FILTER PANEL */}
-      <div
-        style={{
-          position: "fixed",
-          top: "121px",
-          left: "70px",
-          transition: "transform 0.3s ease, opacity 0.3s ease",
-          transform: showFilter ? "translateX(0)" : "translateX(-120%)",
-          opacity: showFilter ? 1 : 0,
-          zIndex: 25,
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "rgb(42,42,42)",
-            backdropFilter: "blur(8px)",
-            borderRadius: "8px",
-            padding: "12px 16px",
-            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.12)",
-            border: "1px solid rgba(0, 0, 0, 0.08)",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            width: "fit-content",
-          }}
-        >
+      <div className={`filter-panel-container ${showFilter ? 'visible' : 'hidden'}`}>
+        <div className="filter-panel">
 
 
           {/* YEAR SELECT */}
           <select
+            className="filter-select"
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
-            style={{
-              padding: "6px 8px",
-              borderRadius: "4px",
-              border: "1px solid #ddd",
-              backgroundColor: "white",
-              fontSize: "0.85rem",
-              color: "#2a2a2a",
-              outline: "none",
-              minWidth: "70px",
-            }}
           >
             <option value="">Rok</option>
             {availableYears.map((year) => (
@@ -165,18 +118,9 @@ export default function HistoryPage() {
 
           {/* MONTH SELECT */}
           <select
+            className="filter-select month-select"
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
-            style={{
-              padding: "6px 8px",
-              borderRadius: "4px",
-              border: "1px solid #ddd",
-              backgroundColor: "white",
-              fontSize: "0.85rem",
-              color: "#2a2a2a",
-              outline: "none",
-              minWidth: "90px",
-            }}
           >
             <option value="">Mesiac</option>
             {Object.entries(months).map(([num, label]) => (
@@ -188,20 +132,11 @@ export default function HistoryPage() {
 
           {/* 🔍 SEARCH BY NAME */}
           <input
+            className="filter-input"
             type="text"
             placeholder="Hľadať názov..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: "6px 8px",
-              borderRadius: "4px",
-              border: "1px solid #ddd",
-              backgroundColor: "white",
-              fontSize: "0.85rem",
-              color: "#2a2a2a",
-              outline: "none",
-              minWidth: "120px",
-            }}
           />
 
 
@@ -209,7 +144,7 @@ export default function HistoryPage() {
       </div>
 
       {/* TOURNAMENT LIST */}
-      <section className="tournaments-section" style={{ marginTop: "120px" }}>
+      <section className="tournaments-section">
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
             <h2 className="section-title">Žiadne turnaje pre daný filter.</h2>
