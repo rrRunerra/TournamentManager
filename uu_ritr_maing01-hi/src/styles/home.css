@@ -19,14 +19,23 @@
     position: relative;
 }
 
+/* Animated GIF Background */
 .home-hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: url('../assets/gif.gif');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    filter: grayscale(100%) brightness(0.5);
     pointer-events: none;
+    z-index: 0;
 }
 
 .hero-content {
@@ -80,23 +89,36 @@
     display: inline-block;
 }
 
-.brand-highlight::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b35, #ffd166);
-    border-radius: 2px;
-}
+
 
 .hero-subtitle {
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     line-height: 1.6;
     color: #b0b0b0;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-weight: 400;
+}
+
+/* Hero GIF */
+.hero-gif {
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-gif-image {
+    max-width: 100%;
+    width: auto;
+    max-height: 300px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-gif-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 48px rgba(255, 107, 53, 0.4);
 }
 
 .hero-buttons {

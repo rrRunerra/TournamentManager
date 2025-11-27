@@ -18,6 +18,10 @@ export default function Home() {
             Všetko čo potrebujete na jednom mieste.
           </p>
 
+          <div className="hero-gif">
+            <img src="../assets/gif.gif" alt="MatchUP Animation" className="hero-gif-image" />
+          </div>
+
           <div className="hero-buttons">
             <button
               className="hero-btn primary"
