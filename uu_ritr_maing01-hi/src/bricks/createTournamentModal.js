@@ -90,6 +90,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         >
           <option value="single">Jednoduchá eliminácia</option>
           <option value="double">Dvojitá eliminácia</option>
+          <option value="robin">Každý s každým</option>
         </select>
 
 
@@ -142,6 +143,8 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               if (!teamSize) newErrors.teamSize = true;
               if (teams.length < 3) newErrors.teams = true;
 
+              if (bracketType == "robin" && (teams.length % 2 == 1)) newErrors.robin = true
+
               if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors);
                 const errorMessages = [];
@@ -153,6 +156,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 if (newErrors.teamSize) errorMessages.push("Veľkosť tímu je povinná.");
                 if (newErrors.teams) errorMessages.push("Sú vyžadované aspoň 3 tímy.");
                 if (newErrors.invalidDate) errorMessages.push("Dátum začiatku nemôže byť neskôr ako dátum konca")
+                if (newErrors.robin) errorMessages.push("Každý s každým vyžaduje súčet tímov, ktorý je súčinom dvojice čísel")
 
                 alert(errorMessages.join("\n"));
                 return;

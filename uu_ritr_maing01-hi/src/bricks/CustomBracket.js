@@ -714,36 +714,78 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
         setSelectedMatch(null);
     };
 
+    if (bracketType === 'robin') {
+        // Group matches by round
+        const rounds = {};
+        matches.forEach(match => {
+            const roundName = match.tournamentRoundText;
+            if (!rounds[roundName]) {
+                rounds[roundName] = [];
+            }
+            rounds[roundName].push(match);
+        });
+
+        return (
+            <div className="bracket-container" style={{ flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+                {showConfetti && <Confetti isFadingOut={isFadingOut} />}
+                {selectedMatch && (
+                    <MatchDetailPopup
+                        match={selectedMatch}
+                        onClose={() => setSelectedMatch(null)}
+                        onUpdateMatch={onMatchUpdate}
+                        canEdit={isOwner}
+                        tournamentId={tournamentInfo?.id}
+                    />
+                )}
+
+                {Object.entries(rounds).map(([roundName, roundMatches]) => (
+                    <div key={roundName} style={{ width: '100%', maxWidth: '800px' }}>
+                        <h3 style={{ color: '#ff8e53', marginBottom: '1rem', textAlign: 'center' }}>{roundName}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                            {roundMatches.map(match => (
+                                <div key={match.id} onClick={() => handleMatchClick(match)} style={{ cursor: 'pointer' }}>
+                                    <MatchCard match={match} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
     return (
         <>
             {showConfetti && <Confetti isFadingOut={isFadingOut} />}
-
             {selectedMatch && (
                 <MatchDetailPopup
                     match={selectedMatch}
-                    onClose={handleClosePopup}
-                    isOwner={isOwner}
-                    onMatchUpdate={onMatchUpdate}
+                    onClose={() => setSelectedMatch(null)}
+                    onUpdateMatch={onMatchUpdate}
+                    canEdit={isOwner}
+                    tournamentId={tournamentInfo?.id}
                 />
             )}
-
             {bracketType === 'double' ? (
-                <div className="custom-bracket-container">
+                <div className="double-bracket-container">
                     <div className="bracket-section">
-                        <h3 className="bracket-title">Upper Bracket</h3>
-                        <div className="bracket-rounds">
+                        <h2 className="bracket-section-title">Upper Bracket</h2>
+                        <div className="bracket-scroll-container">
                             <BracketInner matches={matches.upper || []} onMatchClick={handleMatchClick} />
                         </div>
                     </div>
-                    <div className="bracket-section">
-                        <h3 className="bracket-title">Lower Bracket</h3>
-                        <div className="bracket-rounds">
+
+                    <div className="bracket-section lower-bracket">
+                        <h2 className="bracket-section-title">Lower Bracket</h2>
+                        <div className="bracket-scroll-container">
                             <BracketInner matches={matches.lower || []} onMatchClick={handleMatchClick} />
                         </div>
                     </div>
                 </div>
             ) : (
-                <TreeBracketView matches={matches} onMatchClick={handleMatchClick} />
+                <div className="bracket-scroll-container">
+                    <TreeBracketView matches={matches} onMatchClick={handleMatchClick} />
+                </div>
             )}
         </>
     );

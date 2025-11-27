@@ -6,6 +6,7 @@ const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/tournament-error.js");
 const generateSingleBracket = require("./brackets/generate-single-bracket.js");
 const generateDoubleBracket = require("./brackets/generate-double-bracket.js");
+const generateRoundRobin = require("./brackets/generate-round-robin.js");
 
 const WARNINGS = {};
 
@@ -174,6 +175,26 @@ class TournamentAbl {
               participants: match.participants,
               tournamentId: tournament.id,
               bracket: "lower",
+            })
+          }
+        }
+
+        if (tournament.bracketType == "robin") {
+          const a = await generateRoundRobin(t)
+          const matchdb = DaoFactory.getDao("match")
+
+          for (const match of a) {
+            await matchdb.create({
+              awid,
+              matchId: match.id, // Use MongoDB's _id field
+              name: match.name,
+              nextMatchId: match.nextMatchId,
+              nextLooserMatchId: match.nextLooserMatchId,
+              tournamentRoundText: match.tournamentRoundText,
+              startTime: match.startTime,
+              state: match.state,
+              participants: match.participants,
+              tournamentId: tournament.id,
             })
           }
         }
