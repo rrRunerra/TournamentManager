@@ -20,20 +20,18 @@
 }
 
 /* Animated GIF Background */
-.home-hero::before {
-    content: '';
+.hero-background-gif {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    transform: none;
+    width: 50%;
     height: 80%;
-    background-image: url('../assets/gif.gif');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.25;
-    filter: grayscale(100%) brightness(0.5);
+    object-fit: contain;
+    object-position: right center;
+    opacity: 0.15;
     pointer-events: none;
     z-index: 0;
 }

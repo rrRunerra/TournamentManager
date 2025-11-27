@@ -670,29 +670,36 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
             ? [...(matches.upper || []), ...(matches.lower || [])]
             : matches;
 
-        // Find the Grand Final match (nextMatchId === null)
-        const grandFinal = allMatches.find(match => match.nextMatchId === null);
+        // Find all Final matches (nextMatchId === null)
+        const finalMatches = allMatches.filter(match => match.nextMatchId === null);
 
-        if (grandFinal && grandFinal.participants) {
-            const winningParticipant = grandFinal.participants.find(p => p.isWinner);
+        let shouldShowConfetti = false;
 
-            if (winningParticipant && winningParticipant.id) {
-                // Find the winning team from tournament info
-                const winningTeam = tournamentInfo.teams?.find(team => team.id === winningParticipant.id);
+        for (const finalMatch of finalMatches) {
+            if (finalMatch && finalMatch.participants) {
+                const winningParticipant = finalMatch.participants.find(p => p.isWinner);
 
-                if (winningTeam && winningTeam.players) {
-                    // Check if current user is in the winning team
-                    const isUserInWinningTeam = winningTeam.players.includes(currentUserId)
+                if (winningParticipant && winningParticipant.id) {
+                    // Find the winning team from tournament info
+                    const winningTeam = tournamentInfo.teams?.find(team => team.id === winningParticipant.id);
 
-                    if (isUserInWinningTeam) {
-                        setShowConfetti(true);
-                        setIsFadingOut(false);
-                        // Start fade-out after 13 seconds, then hide after fade completes
-                        setTimeout(() => setIsFadingOut(true), 13000);
-                        setTimeout(() => setShowConfetti(false), 15000);
+                    if (winningTeam && winningTeam.players) {
+                        // Check if current user is in the winning team
+                        if (winningTeam.players.includes(currentUserId)) {
+                            shouldShowConfetti = true;
+                            break; // Found a win, no need to check other matches
+                        }
                     }
                 }
             }
+        }
+
+        if (shouldShowConfetti) {
+            setShowConfetti(true);
+            setIsFadingOut(false);
+            // Start fade-out after 13 seconds, then hide after fade completes
+            setTimeout(() => setIsFadingOut(true), 13000);
+            setTimeout(() => setShowConfetti(false), 15000);
         }
     }, [matches, currentUserId, bracketType, tournamentInfo]);
 

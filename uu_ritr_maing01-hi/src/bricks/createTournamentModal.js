@@ -89,6 +89,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         >
           <option value="single">Jednoduchá eliminácia</option>
+          <option value="double">Dvojitá eliminácia</option>
         </select>
 
 

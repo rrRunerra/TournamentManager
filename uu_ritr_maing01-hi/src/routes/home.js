@@ -1,6 +1,7 @@
 import React from "react";
 import { useRoute } from "uu5g05";
 import "../styles/home.css";
+import heroGif from "../assets/gif.gif";
 
 export default function Home() {
   const [, setRoute] = useRoute();
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className="home-hero">
+        <img src={heroGif} alt="" className="hero-background-gif" />
         <div className="hero-content">
           <h1 className="hero-title">
             Vitajte v <span className="brand-highlight">MatchUP</span>
@@ -18,9 +20,6 @@ export default function Home() {
             Všetko čo potrebujete na jednom mieste.
           </p>
 
-          <div className="hero-gif">
-            <img src="../assets/gif.gif" alt="MatchUP Animation" className="hero-gif-image" />
-          </div>
 
           <div className="hero-buttons">
             <button

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRoute } from "uu5g05";
 
 export default function Navbar() {
-  const [activeLink, setActiveLink] = useState("tournaments");
+  const [activeLink, setActiveLink] = useState("home");
   const [route, setRoute] = useRoute();
   const [user, setUser] = useState(); // Initialize user from mock state
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +85,7 @@ export default function Navbar() {
           </div>
 
           <div
-            className={`card ${activeLink === 'tournaments' ? 'active' : ''}`}
+            className={`card ${(activeLink === 'tournaments' || activeLink === 'tournamentDetail') ? 'active' : ''}`}
             onClick={() => handleCardClick('tournaments')}
           >
             <span className="card-icon">🏆</span>
