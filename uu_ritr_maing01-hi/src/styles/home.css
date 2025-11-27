@@ -46,6 +46,7 @@
     margin-bottom: 1.5rem;
     background: linear-gradient(45deg, #fff, #ccc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -99,6 +100,30 @@
     transform: translateY(-2px);
 }
 
+.sponsor-container {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    z-index: 10;
+}
+
+.sponsor-logo {
+    height: 4rem;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.sponsor-logo:hover {
+    transform: scale(1.05);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -127,5 +152,14 @@
 
     .home-button {
         width: 100%;
+    }
+
+    .sponsor-container {
+        bottom: 1rem;
+        gap: 1.5rem;
+    }
+
+    .sponsor-logo {
+        height: 3rem;
     }
 }

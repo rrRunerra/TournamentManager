@@ -138,17 +138,7 @@ export default function HistoryPage() {
             width: "fit-content",
           }}
         >
-          <h3
-            style={{
-              margin: "0",
-              fontSize: "0.95rem",
-              fontWeight: "600",
-              color: "#ffffff",
-              whiteSpace: "nowrap",
-            }}
-          >
-            🔍 Filter:
-          </h3>
+
 
           {/* YEAR SELECT */}
           <select
@@ -214,23 +204,7 @@ export default function HistoryPage() {
             }}
           />
 
-          {/* RESET BUTTON */}
-          <button
-            onClick={resetFilters}
-            style={{
-              padding: "6px 12px",
-              borderRadius: "4px",
-              backgroundColor: "#ff8e53",
-              color: "white",
-              border: "none",
-              fontSize: "0.85rem",
-              fontWeight: "600",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Reset
-          </button>
+
         </div>
       </div>
 
