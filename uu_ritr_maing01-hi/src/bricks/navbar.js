@@ -12,6 +12,7 @@ export default function Navbar() {
   const handleCardClick = (newRoute) => {
     setActiveLink(newRoute)
     setRoute(newRoute);
+    setIsOpen(false); // Close mobile menu when a card is clicked
   };
 
   const handleLogout = () => {
@@ -28,11 +29,15 @@ export default function Navbar() {
       return;
     }
 
+
+  }, []);
+
+  useEffect(() => {
     // Sync activeLink with the current route
-    if (route && route.uu5Route) {
+    if (route.uu5Route) {
       setActiveLink(route.uu5Route);
     }
-  }, []);
+  }, [route]);
 
 
   if (route.uu5Route === "login") {
@@ -46,7 +51,7 @@ export default function Navbar() {
 
       {/* Mobile Header */}
       <div className="mobile-navbar">
-        <div className="nav-logo-mobile">
+        <div className="nav-logo-mobile" onClick={() => handleCardClick('home')}>
           <img src="../assets/MatchUPlogo.png" alt="MatchUP" />
         </div>
         <button
@@ -65,7 +70,7 @@ export default function Navbar() {
       {/* Cards Section */}
       <section className={`cards-section ${isOpen ? 'mobile-open' : ''}`}>
 
-        <div className="nav-logo-wrapper desktop-only">
+        <div className="nav-logo-wrapper desktop-only" onClick={() => handleCardClick('home')}>
           <img src="../assets/MatchUPlogo.png" />
         </div>
 
