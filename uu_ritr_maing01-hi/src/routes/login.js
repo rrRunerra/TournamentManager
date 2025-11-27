@@ -57,7 +57,7 @@ export default function LoginPage() {
   useEffect(() => {
     const player = localStorage.getItem("player");
     if (player) {
-      setRoute("tournaments");
+      setRoute("home");
     }
   }, []);
 
@@ -69,7 +69,7 @@ export default function LoginPage() {
     try {
       const res = await Calls.PlayerCreate({ name: username, password: password });
       localStorage.setItem("player", JSON.stringify(res));
-      setRoute("tournaments");
+      setRoute("home");
     } catch (e) {
       console.error(e);
       setError(e.message);
