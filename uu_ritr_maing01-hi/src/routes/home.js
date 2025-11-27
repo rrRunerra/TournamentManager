@@ -42,7 +42,7 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="features-section">
-        <h2 className="section-title">Prečo MatchUP?</h2>
+        <h2 className="section-home-title">Prečo MatchUP?</h2>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon">⚡</div>

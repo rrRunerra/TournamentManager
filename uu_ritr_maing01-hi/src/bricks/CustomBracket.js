@@ -757,35 +757,33 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
     return (
         <>
             {showConfetti && <Confetti isFadingOut={isFadingOut} />}
+
             {selectedMatch && (
                 <MatchDetailPopup
                     match={selectedMatch}
-                    onClose={() => setSelectedMatch(null)}
-                    onUpdateMatch={onMatchUpdate}
-                    canEdit={isOwner}
-                    tournamentId={tournamentInfo?.id}
+                    onClose={handleClosePopup}
+                    isOwner={isOwner}
+                    onMatchUpdate={onMatchUpdate}
                 />
             )}
+
             {bracketType === 'double' ? (
-                <div className="double-bracket-container">
+                <div className="custom-bracket-container">
                     <div className="bracket-section">
-                        <h2 className="bracket-section-title">Upper Bracket</h2>
-                        <div className="bracket-scroll-container">
+                        <h3 className="bracket-title">Upper Bracket</h3>
+                        <div className="bracket-rounds">
                             <BracketInner matches={matches.upper || []} onMatchClick={handleMatchClick} />
                         </div>
                     </div>
-
-                    <div className="bracket-section lower-bracket">
-                        <h2 className="bracket-section-title">Lower Bracket</h2>
-                        <div className="bracket-scroll-container">
+                    <div className="bracket-section">
+                        <h3 className="bracket-title">Lower Bracket</h3>
+                        <div className="bracket-rounds">
                             <BracketInner matches={matches.lower || []} onMatchClick={handleMatchClick} />
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="bracket-scroll-container">
-                    <TreeBracketView matches={matches} onMatchClick={handleMatchClick} />
-                </div>
+                <TreeBracketView matches={matches} onMatchClick={handleMatchClick} />
             )}
         </>
     );

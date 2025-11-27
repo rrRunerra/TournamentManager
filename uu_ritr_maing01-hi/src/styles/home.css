@@ -193,12 +193,12 @@
     border-top: 1px solid #1a1a1a;
 }
 
-.section-title {
+.section-home-title {
     text-align: center;
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, #fff, #b0b0b0);
+    background: linear-gradient(90deg, #ff8e53, #ffd166);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
