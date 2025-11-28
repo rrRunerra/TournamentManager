@@ -62,8 +62,36 @@ class TournamentAbl {
     return out;
   }
 
-  async list(awid) {
-    return this.dao.list(awid);
+  async list(awid, dtoIn = {}) {
+    const limit = parseInt(dtoIn.limit) || 1000;
+    const skip = parseInt(dtoIn.skip) || 0;
+
+    console.log(dtoIn)
+
+    let allTournaments = await this.dao.list(awid);
+    let itemList = allTournaments.itemList || allTournaments;
+
+    // Sort by startDate to ensure stable pagination (newest first)
+    itemList.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+    // Filter by status if provided
+    if (dtoIn.status) {
+      const statuses = Array.isArray(dtoIn.status) ? dtoIn.status : [dtoIn.status];
+      itemList = itemList.filter(t => statuses.includes(t.status));
+    }
+
+    // Apply pagination
+    const paginatedItems = itemList.slice(skip, skip + limit);
+    const hasMore = skip + limit < itemList.length;
+
+    console.log(paginatedItems.length)
+    console.log(hasMore)
+
+    return {
+      itemList: paginatedItems,
+      total: itemList.length,
+      hasMore
+    };
   }
 
   async get(awid, dtoIn) {
@@ -273,3 +301,9 @@ class TournamentAbl {
 }
 
 module.exports = new TournamentAbl();
+
+// UNCOMMENT THE LINES BELOW TO GENERATE 27 TEST TOURNAMENTS (RUN ONCE THEN COMMENT OUT AGAIN)
+
+// const { generateTestTournaments } = require("./generate-test-tournaments.js");
+// const awid = "22222222222222222222222222222222";
+// generateTestTournaments(module.exports, awid).catch(console.error);

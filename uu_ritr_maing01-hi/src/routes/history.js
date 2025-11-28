@@ -23,12 +23,15 @@ export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
   const [filteredTournaments, setFilteredTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   const [showFilter, setShowFilter] = useState(false);
+  const [displayedCount, setDisplayedCount] = useState(30);
 
   const [, setRoute] = useRoute();
 
@@ -39,13 +42,18 @@ export default function HistoryPage() {
   useEffect(() => {
     async function fetchHistory() {
       try {
-        const response = await Calls.listTournaments();
-        const finished = response.itemList
-          .filter((t) => t.status === "finished")
-          .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+        const response = await Calls.listTournaments({
+          limit: 30,
+          skip: 0,
+          status: "finished"
+        });
 
-        setTournaments(finished);
-        setFilteredTournaments(finished);
+        // Sort by end date (descending)
+        const sorted = response.itemList.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+        setTournaments(sorted);
+        setFilteredTournaments(sorted);
+        setHasMore(response.hasMore);
       } catch (err) {
         console.error("Error fetching history:", err);
       } finally {
@@ -55,6 +63,43 @@ export default function HistoryPage() {
 
     fetchHistory();
   }, []);
+
+  // Fetch more history (server-side pagination)
+  const fetchMoreHistory = async () => {
+    if (loadingMore || !hasMore) return;
+
+    setLoadingMore(true);
+    try {
+      // Note: If filters are active, we can't easily use server pagination unless backend supports all filters.
+      // For now, we only paginate the main list. If filters are active, we might need to fetch all or handle differently.
+      // Assuming infinite scroll is primarily for the main list.
+      if (selectedYear || selectedMonth || searchQuery) {
+        // If filters are active, we don't fetch more from server in this simple implementation
+        // Ideally, backend should support these filters.
+        setLoadingMore(false);
+        return;
+      }
+
+      const response = await Calls.listTournaments({
+        limit: 10,
+        skip: tournaments.length,
+        status: "finished"
+      });
+
+      const sorted = response.itemList.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+      setTournaments(prev => {
+        const updated = [...prev, ...sorted];
+        setFilteredTournaments(updated); // Update filtered list too if no filters active
+        return updated;
+      });
+      setHasMore(response.hasMore);
+    } catch (err) {
+      console.error("Error fetching more history:", err);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
     .sort((a, b) => b - a);
@@ -76,7 +121,25 @@ export default function HistoryPage() {
     });
 
     setFilteredTournaments(filtered);
+    setDisplayedCount(30); // Reset displayed count when filters change
   }, [selectedYear, selectedMonth, searchQuery, tournaments]);
+
+  // Infinite scroll handler
+  useEffect(() => {
+    const handleScroll = () => {
+      if (loadingMore || !hasMore) return;
+
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition >= documentHeight - 300) {
+        fetchMoreHistory();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loadingMore, hasMore, tournaments.length, selectedYear, selectedMonth, searchQuery]);
 
   function resetFilters() {
     setSelectedYear("");
@@ -171,6 +234,11 @@ export default function HistoryPage() {
               <div className="tournament-status">Ukončený</div>
             </div>
           ))
+        )}
+        {loadingMore && (
+          <div style={{ textAlign: 'center', padding: '2rem', color: '#888' }}>
+            Načítavam...
+          </div>
         )}
       </section>
     </div>

@@ -30,16 +30,48 @@ export default function TournamentsPage() {
   const [route, setRoute] = useRoute();
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  // fetch tournaments
+  // fetch initial tournaments
   const fetchTournaments = async () => {
     try {
-      const response = await Calls.listTournaments();
-      setTournaments(response.itemList.filter((t) => {
-        return t.status == "ongoing" || t.status == "upcoming"
-      }));
+      const response = await Calls.listTournaments({
+        limit: 30,
+        skip: 0,
+        status: ["ongoing", "upcoming"]
+      });
+      setTournaments(response.itemList);
+      setHasMore(response.hasMore);
     } catch (error) {
       console.error("Error fetching tournaments:", error);
+    }
+  };
+
+  // fetch more tournaments
+  const fetchMoreTournaments = async () => {
+    if (loadingMore || !hasMore) return;
+
+
+    setLoadingMore(true);
+    try {
+      const response = await Calls.listTournaments({
+        limit: 10,
+        skip: tournaments.length,
+        status: ["ongoing", "upcoming"]
+      });
+      setTournaments(prev => {
+        // Filter out duplicates
+        const newItems = response.itemList.filter(newItem =>
+          !prev.some(existingItem => existingItem.id === newItem.id)
+        );
+        return [...prev, ...newItems];
+      });
+      setHasMore(response.hasMore);
+    } catch (error) {
+      console.error("Error fetching more tournaments:", error);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -52,6 +84,23 @@ export default function TournamentsPage() {
     setUser(user);
     fetchTournaments();
   }, []);
+
+  // Infinite scroll handler
+  useEffect(() => {
+    const handleScroll = () => {
+      if (loadingMore || !hasMore) return;
+
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition >= documentHeight - 300) {
+        fetchMoreTournaments();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loadingMore, hasMore, tournaments.length]);
 
   if (!user) return null;
   const isTeacher = user?.role.toLowerCase() === "teacher";
@@ -73,6 +122,8 @@ export default function TournamentsPage() {
     await createTournament(data);
     await fetchTournaments();
   };
+
+
 
   return (
     <div className="background">
@@ -106,6 +157,11 @@ export default function TournamentsPage() {
               </div>
             </div>
           ))
+        )}
+        {loadingMore && (
+          <div style={{ textAlign: 'center', padding: '2rem', color: '#888' }}>
+            Načítavam...
+          </div>
         )}
       </section>
 
