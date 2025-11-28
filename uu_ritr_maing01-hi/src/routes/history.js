@@ -82,7 +82,7 @@ export default function HistoryPage() {
 
       const response = await Calls.listTournaments({
         limit: 10,
-        skip: tournaments.length,
+        skip: tournaments.length ?? 0,
         status: "finished"
       });
 

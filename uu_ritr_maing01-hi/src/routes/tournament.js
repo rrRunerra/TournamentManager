@@ -57,7 +57,7 @@ export default function TournamentsPage() {
     try {
       const response = await Calls.listTournaments({
         limit: 10,
-        skip: tournaments.length,
+        skip: tournaments.length ?? 0,
         status: ["ongoing", "upcoming"]
       });
       setTournaments(prev => {
