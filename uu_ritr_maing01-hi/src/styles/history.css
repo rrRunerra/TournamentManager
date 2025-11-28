@@ -7,10 +7,12 @@
     min-height: 100vh;
 }
 
+
 .history-background .pagination {
     margin-top: auto;
     padding-bottom: 2rem;
 }
+
 
 /* Filter Button */
 .filter-toggle-btn {
