@@ -53,7 +53,13 @@ export default function TournamentsPage() {
     fetchTournaments();
   }, []);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div>
+        <p>No</p>
+      </div>
+    )
+  }
   const isTeacher = user?.role.toLowerCase() === "teacher";
 
   const handleCreateTournament = async (data) => {
