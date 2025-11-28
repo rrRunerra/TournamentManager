@@ -128,7 +128,14 @@ const SocialIcons = ({ socials }) => {
     <ul className="social-icons">
       {socials.map((social, index) => (
         <li key={index} className="icon-content">
-          <a href={social.url} aria-label={social.name} data-social={social.icon} target="_blank" rel="noopener noreferrer">
+          <a
+            href={social.url}
+            aria-label={social.name}
+            data-social={social.icon}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="filled" />
             {social.icon === 'discord' && (
               <svg viewBox="0 0 16 16" className="bi bi-discord" fill="currentColor" height={16} width={16} xmlns="http://www.w3.org/2000/svg">
