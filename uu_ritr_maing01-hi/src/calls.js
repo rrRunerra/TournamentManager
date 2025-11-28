@@ -54,9 +54,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  listTournaments() {
+  listTournaments(dtoIn) {
     const commandUri = Calls.getCommandUri("tournament/list");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   getTournament(dtoIn) {
