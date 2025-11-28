@@ -82,7 +82,7 @@ class TournamentAbl {
 
     // Apply pagination
     const paginatedItems = itemList.slice(skip, skip + limit);
-    const hasMore = skip + limit < itemList.length;
+    const hasMore = skip + limit < itemList?.length;
 
     console.log(paginatedItems.length)
     console.log(hasMore)

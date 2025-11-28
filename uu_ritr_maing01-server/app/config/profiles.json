@@ -200,14 +200,6 @@
         "profileList": [
           "Public"
         ]
-      },
-      "tournament/generateTestTournaments": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
       }
     }
   }
