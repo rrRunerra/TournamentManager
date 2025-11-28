@@ -4,9 +4,9 @@ import Plus4U5 from "uu_plus4u5g02";
 // NOTE During frontend development it's possible to redirect uuApp command calls elsewhere, e.g. to production/staging
 // backend, by configuring it in *-hi/env/development.json:
 //   "uu5Environment": {
-//     "callsBaseUri": "https://uuapp-dev.plus4u.net/vnd-app/awid"
+//     c
 //   }
-Environment.appBaseUri = "http://localhost:8080/uu-ritr-maing01/22222222222222222222222222222222";
+//Environment.appBaseUri = "http://localhost:8080/uu-ritr-maing01/22222222222222222222222222222222";
 
 const Calls = {
   async call(method, url, dtoIn, clientOptions) {
