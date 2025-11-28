@@ -261,3 +261,105 @@
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
 }
+
+/* --- Social Icons --- */
+.social-icons {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.5rem;
+  padding: 0;
+}
+
+.social-icons .icon-content {
+  margin: 0;
+  position: relative;
+}
+
+.social-icons .icon-content .tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.social-icons .icon-content:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -45px;
+}
+
+.social-icons .icon-content a {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #4d4d4d;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.social-icons .icon-content a:hover {
+  box-shadow: 0 4px 15px rgba(255, 138, 83, 0.3);
+  border-color: #ff8e53;
+}
+
+.social-icons .icon-content a svg {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+}
+
+.social-icons .icon-content a:hover {
+  color: white;
+}
+
+.social-icons .icon-content a .filled {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+}
+
+.social-icons .icon-content a:hover .filled {
+  height: 100%;
+}
+
+/* Social Icon Colors - Using Project Orange Gradient */
+.social-icons .icon-content a[data-social="discord"] .filled,
+.social-icons .icon-content a[data-social="discord"]~.tooltip {
+  background: linear-gradient(135deg, #ff8e53, #ff6b35);
+}
+
+.social-icons .icon-content a[data-social="steam"] .filled,
+.social-icons .icon-content a[data-social="steam"]~.tooltip {
+  background: linear-gradient(135deg, #ffd166, #ff8e53);
+}
+
+.social-icons .icon-content a[data-social="instagram"] .filled,
+.social-icons .icon-content a[data-social="instagram"]~.tooltip {
+  background: linear-gradient(135deg, #ff6b35, #ffd166);
+}
