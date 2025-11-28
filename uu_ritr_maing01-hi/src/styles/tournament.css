@@ -85,6 +85,9 @@
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 0.5px;
     flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tournament-details {
