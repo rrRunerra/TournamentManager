@@ -115,6 +115,7 @@ export default function TournamentDetailPage() {
     return (
       <div>
 
+        <h2 className="tournament-detail-title" style={{ textAlign: "center", marginBottom: "2rem", marginTop: "2rem" }}>{info.name}</h2>
         <CustomBracket
           matches={matches}
           bracketType={bracketsType}
