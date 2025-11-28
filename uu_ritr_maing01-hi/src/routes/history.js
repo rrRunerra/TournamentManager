@@ -173,7 +173,7 @@ export default function HistoryPage() {
               onClick={() => goToTournament(tournament.id)}
             >
               <div className="tournament-icon">🏆</div>
-              <h2 className="tournament-title">{tournament.name}</h2>
+              <h2 className="tournament-title" title={tournament.name}>{tournament.name}</h2>
 
               <p className="tournament-details">
                 📅 {new Date(tournament.startDate).getDate()}. –
