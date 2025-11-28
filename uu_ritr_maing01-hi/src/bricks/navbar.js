@@ -1,10 +1,19 @@
 import "../styles/navbar.css";
 import { useEffect, useState } from "react";
-import { useRoute, Utils, Environment, useLanguage } from "uu5g05";
+import { useRoute, Utils, Environment, useLanguage, Lsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
 const LANGUAGES = [
-  { code: "cs", label: "CS", icon: "🇨🇿" },
-  { code: "en", label: "EN", icon: "🇬🇧" }
+  { code: "en", label: "EN", icon: "🇬🇧" },
+  { code: "cz", label: "CZ", icon: "🇨🇿" },
+  { code: "sk", label: "SK", icon: "🇸🇰" },
+  { code: "uk", label: "UK", icon: "🇺🇦" },
+  { code: "de", label: "DE", icon: "🇩🇪" },
+  { code: "pl", label: "PL", icon: "🇵🇱" },
+  { code: "hu", label: "HU", icon: "🇭🇺" },
+  { code: "ru", label: "RU", icon: "🇷🇺" },
+  { code: "ja", label: "JA", icon: "🇯🇵" },
+  { code: "zh", label: "ZH", icon: "🇨🇳" }
 ];
 
 export default function Navbar() {
@@ -24,7 +33,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("player");
-    setRoute("login");
+    setRoute("home");
   }
 
   useEffect(() => {
@@ -36,27 +45,25 @@ export default function Navbar() {
     //   return;
     // }
 
-    // Load language from localStorage
-    const savedLang = localStorage.getItem("language");
-    if (savedLang) {
-      setLang(savedLang);
+    // Load language from localStorage (only on mount)
+    if (!route.uu5Route) {
+      const savedLang = localStorage.getItem("language");
+      if (savedLang) {
+        setLang(savedLang);
+      }
     }
-  }, []);
+
+    // Sync activeLink with the current route
+    if (route.uu5Route) {
+      setActiveLink(route.uu5Route);
+    }
+  }, [route]);
 
   const handleLanguageChange = (lang) => {
     setLang(lang);
     localStorage.setItem("language", lang);
     setIsLangOpen(false);
   };
-
-  console.log(lang)
-
-  useEffect(() => {
-    // Sync activeLink with the current route
-    if (route.uu5Route) {
-      setActiveLink(route.uu5Route);
-    }
-  }, [route]);
 
 
   if (route.uu5Route === "login") {
@@ -127,7 +134,7 @@ export default function Navbar() {
             onClick={() => handleCardClick('home')}
           >
             <span className="card-icon">🏠</span>
-            <h2>Domov</h2>
+            <h2><Lsi import={importLsi} path={["Navbar", "home"]} /></h2>
           </div>
 
           <div
@@ -135,7 +142,7 @@ export default function Navbar() {
             onClick={() => handleCardClick('tournaments')}
           >
             <span className="card-icon">🏆</span>
-            <h2>Turnaje</h2>
+            <h2><Lsi import={importLsi} path={["Navbar", "tournaments"]} /></h2>
           </div>
 
           <div
@@ -143,7 +150,7 @@ export default function Navbar() {
             onClick={() => handleCardClick('history')}
           >
             <span className="card-icon">📜</span>
-            <h2>História</h2>
+            <h2><Lsi import={importLsi} path={["Navbar", "history"]} /></h2>
           </div>
 
           <div
@@ -151,12 +158,15 @@ export default function Navbar() {
             onClick={() => handleCardClick('about')}
           >
             <span className="card-icon">👥</span>
-            <h2>O nás</h2>
+            <h2><Lsi import={importLsi} path={["Navbar", "about"]} /></h2>
           </div>
 
-          <div className="card card-logout" onClick={handleLogout}>
-            <span className="card-icon">🚪</span>
-            <h2>Odhlásiť sa</h2>
+          <div
+            className={`card ${user ? 'card-logout' : ''} ${activeLink === 'login' ? 'active' : ''}`}
+            onClick={user ? handleLogout : () => setRoute("login")}
+          >
+            <span className="card-icon">{user ? "🚪" : "🔑"}</span>
+            <h2><Lsi import={importLsi} path={user ? ["Navbar", "logout"] : ["Login", "login"]} /></h2>
           </div>
 
         </div>

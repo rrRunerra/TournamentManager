@@ -1,7 +1,10 @@
 import React from "react";
 import "../styles/pagination.css"
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
+    const lsi = useLsi(importLsi, ["Pagination"]);
     const getPageNumbers = () => {
         const pages = [];
         const maxVisiblePages = 5;
@@ -33,7 +36,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                     >
-                        Previous
+                        {lsi.previous}
                     </button>
                 </li>
 
@@ -58,7 +61,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                     >
-                        Next
+                        {lsi.next}
                     </button>
                 </li>
             </ul>

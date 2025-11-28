@@ -1,11 +1,31 @@
 import { Utils } from "uu5g05";
 import lsiEn from "./en.json";
+import lsiCz from "./cz.json";
+import lsiSk from "./sk.json";
+import lsiJa from "./ja.json";
+import lsiZh from "./zh.json";
+import lsiRu from "./ru.json";
+import lsiDe from "./de.json";
+import lsiPl from "./pl.json";
+import lsiHu from "./hu.json";
+import lsiUk from "./uk.json";
 
-const libraryCode = process.env.NAME;
+const libraryCode = "uu_ritr_maing01-hi";
 
 const importLsi = (lang) => import(`./${lang}.json`);
 importLsi.libraryCode = libraryCode;
 
-Utils.Lsi.setDefaultLsi(libraryCode, { en: lsiEn });
+Utils.Lsi.setDefaultLsi(libraryCode, {
+    en: lsiEn,
+    cz: lsiCz,
+    sk: lsiSk,
+    ja: lsiJa,
+    zh: lsiZh,
+    ru: lsiRu,
+    de: lsiDe,
+    pl: lsiPl,
+    hu: lsiHu,
+    uk: lsiUk
+});
 
 export default importLsi;

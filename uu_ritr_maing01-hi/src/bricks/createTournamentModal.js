@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../styles/createTournamentModal.css";
 import { useNotification } from "./NotificationProvider.js";
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -13,6 +15,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [errors, setErrors] = useState({});
   const [bracketType, setBracketType] = useState("single")
   const { showError } = useNotification();
+  const lsi = useLsi(importLsi, ["CreateTournament"]);
 
   if (!isOpen) return null;
 
@@ -48,9 +51,9 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
       <div
         className="modal-content"
       >
-        <h3 className="modal-header">Vytvoriť turnaj</h3>
+        <h3 className="modal-header">{lsi.header}</h3>
 
-        <label>Názov</label>
+        <label>{lsi.name}</label>
         <input
           type="text"
           value={name}
@@ -59,7 +62,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Popis</label>
+        <label>{lsi.description}</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -67,7 +70,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Dátum začiatku</label>
+        <label>{lsi.startDate}</label>
         <input
           type="datetime-local"
           value={startDate}
@@ -75,7 +78,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         />
 
-        <label>Dátum konca</label>
+        <label>{lsi.endDate}</label>
         <input
           type="datetime-local"
           value={endDate}
@@ -83,20 +86,20 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         />
 
-        <label >Typ pavúka</label>
+        <label >{lsi.bracketType}</label>
         <select
           id="bracketType"
           value={bracketType}
           onChange={(e) => setBracketType(e.target.value)}
           className="form-control"
         >
-          <option value="single">Jednoduchá eliminácia</option>
-          <option value="double">Dvojitá eliminácia</option>
-          <option value="robin">Každý s každým</option>
+          <option value="single">{lsi.singleElimination}</option>
+          <option value="double">{lsi.doubleElimination}</option>
+          <option value="robin">{lsi.roundRobin}</option>
         </select>
 
 
-        <label>Veľkosť tímu</label>
+        <label>{lsi.teamSize}</label>
         <input
           type="number"
           value={teamSize}
@@ -106,16 +109,16 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           required
         />
 
-        <label>Tímy</label>
+        <label>{lsi.teams}</label>
         <div className="team-input-container">
           <input
             type="text"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            placeholder="Zadajte názov tímu"
+            placeholder={lsi.teamPlaceholder}
             className="team-input"
           />
-          <button className="btn" onClick={addTeam}>Pridať</button>
+          <button className="btn" onClick={addTeam}>{lsi.add}</button>
         </div>
 
         <ul className="teams-list">
@@ -130,7 +133,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         </ul>
 
         <div className="modal-actions">
-          <button onClick={onClose}>Zrušiť</button>
+          <button onClick={onClose}>{lsi.cancel}</button>
           <button
             onClick={() => {
               const newErrors = {};
@@ -151,14 +154,14 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 setErrors(newErrors);
 
                 // Show each error in a separate notification
-                if (newErrors.name) showError("Chyba", "Názov je povinný.");
-                if (newErrors.description) showError("Chyba", "Popis je povinný.");
-                if (newErrors.startDate) showError("Chyba", "Dátum začiatku je povinný.");
-                if (newErrors.endDate) showError("Chyba", "Dátum konca je povinný.");
-                if (newErrors.teamSize) showError("Chyba", "Veľkosť tímu je povinná.");
-                if (newErrors.teams) showError("Chyba", "Sú vyžadované aspoň 3 tímy.");
-                if (newErrors.invalidDate) showError("Chyba", "Dátum začiatku nemôže byť neskôr ako dátum konca.");
-                if (newErrors.robin) showError("Chyba", "Každý s každým vyžaduje súčet tímov, ktorý je súčinom dvojice čísel.");
+                if (newErrors.name) showError(lsi.errorTitle, lsi.errorName);
+                if (newErrors.description) showError(lsi.errorTitle, lsi.errorDescription);
+                if (newErrors.startDate) showError(lsi.errorTitle, lsi.errorStartDate);
+                if (newErrors.endDate) showError(lsi.errorTitle, lsi.errorEndDate);
+                if (newErrors.teamSize) showError(lsi.errorTitle, lsi.errorTeamSize);
+                if (newErrors.teams) showError(lsi.errorTitle, lsi.errorTeams);
+                if (newErrors.invalidDate) showError(lsi.errorTitle, lsi.errorInvalidDate);
+                if (newErrors.robin) showError(lsi.errorTitle, lsi.errorRobin);
 
                 return;
               }
@@ -176,7 +179,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               setBracketType("single")
             }}
           >
-            Uložiť
+            {lsi.save}
           </button>
         </div>
       </div>

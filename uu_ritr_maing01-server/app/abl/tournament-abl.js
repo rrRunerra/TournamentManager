@@ -66,7 +66,6 @@ class TournamentAbl {
     const limit = parseInt(dtoIn.limit) || 1000;
     const skip = parseInt(dtoIn.skip) || 0;
 
-    console.log(dtoIn)
 
     let allTournaments = await this.dao.list(awid);
     let itemList = allTournaments.itemList || allTournaments;
@@ -83,9 +82,6 @@ class TournamentAbl {
     // Apply pagination
     const paginatedItems = itemList.slice(skip, skip + limit);
     const hasMore = skip + limit < itemList?.length;
-
-    console.log(paginatedItems.length)
-    console.log(hasMore)
 
     return {
       itemList: paginatedItems,

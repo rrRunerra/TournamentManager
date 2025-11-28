@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { useRoute } from "uu5g05";
+import { useRoute, useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 import { Card, CardDescription, CardFooter, CardTitle } from "../bricks/cards.js";
 import CustomBracket from "../bricks/CustomBracket.js";
 import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
@@ -20,6 +21,7 @@ export default function TournamentDetailPage() {
   const [, setRoute] = useRoute();
   const [activeTab, setActiveTab] = useState('current-match');
   const { showError } = useNotification();
+  const lsi = useLsi(importLsi, ["TournamentDetail"]);
 
 
   useEffect(() => {
@@ -97,7 +99,7 @@ export default function TournamentDetailPage() {
       setInfo(updatedTournament);
     } catch (error) {
       console.error("Error joining team:", error);
-      showError("Nepodarilo sa pripojiť k tímu.", "Skúste to prosím znova.");
+      showError(lsi.joinError, lsi.tryAgain);
     } finally {
       setJoiningTeam(null);
     }
@@ -105,7 +107,7 @@ export default function TournamentDetailPage() {
 
 
   // Renamed class "loading" to "tournament-detail-loading"
-  if (!info) return <div className="loading-spinner">Načítavam...</div>;
+  if (!info) return <div className="loading-spinner">{lsi.loading}</div>;
 
   const isOwner = user?.id == info.owner;
 
@@ -145,10 +147,10 @@ export default function TournamentDetailPage() {
       <h2 className="tournament-detail-title">{info.name}</h2>
       {/* Renamed class "tournament-description" to "tournament-detail-description" */}
       <p className="tournament-detail-description">{info.description}</p>
-      <p><strong>Dátum začiatku:</strong> {new Date(info.startDate).toLocaleString()}</p>
-      <p><strong>Dátum konca:</strong> {new Date(info.endDate).toLocaleString()}</p>
-      <p><strong>Stav:</strong> {info.status}</p>
-      <p><strong>Veľkosť tímu:</strong> {info.teamSize}</p>
+      <p><strong>{lsi.startDate}</strong> {new Date(info.startDate).toLocaleString()}</p>
+      <p><strong>{lsi.endDate}</strong> {new Date(info.endDate).toLocaleString()}</p>
+      <p><strong>{lsi.status}</strong> {info.status}</p>
+      <p><strong>{lsi.teamSize}</strong> {info.teamSize}</p>
 
       {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
       <div className="tournament-detail-team-grid">
@@ -164,11 +166,11 @@ export default function TournamentDetailPage() {
             >
               <CardTitle>{team.name}</CardTitle>
               <CardDescription>
-                Hráči: {team.players?.length || 0} / {info.teamSize}
+                {lsi.players} {team.players?.length || 0} / {info.teamSize}
               </CardDescription>
               {/* Note: CardFooter content doesn't have a direct class change,
                   but its container selector was updated in the CSS. */}
-              <CardFooter>{joiningTeam === team.id ? "Pripájam sa..." : ""}</CardFooter>
+              <CardFooter>{joiningTeam === team.id ? lsi.joining : ""}</CardFooter>
             </Card>
           )
 

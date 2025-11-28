@@ -14,8 +14,6 @@ import "../styles/spa.css"
 
 //@@viewOn:constants
 const About = Utils.Component.lazy(() => import("../routes/about.js"));
-const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
-const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 const Login = Utils.Component.lazy(() => import("../routes/login.js"));
 const Tournaments = Utils.Component.lazy(() => import("../routes/tournament.js"));
 const Tournament = Utils.Component.lazy(() => import("../routes/tournament-detail.js"));
@@ -29,7 +27,6 @@ const ROUTE_MAP = {
   tournaments: (props) => <Tournaments {...props} />,
   tournamentDetail: (props) => <Tournament {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
-  controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (
     <Uu5Elements.Text category="story" segment="heading" type="h1">
       Not Found
@@ -46,7 +43,7 @@ const Spa = createVisualComponent({
     return (
       <NotificationProvider>
         <ConfirmProvider>
-          <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+          <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "ko", "zh", "ru", "de", "es", "pl", "no", "fi", "hu", "it", "ro", "th", "vi"]}>
             <Uu5Elements.ModalBus>
               {/* Obal pre flex layout */}
               <div className="spa-layout">

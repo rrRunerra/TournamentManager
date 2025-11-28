@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import ConfirmDialog from './ConfirmDialog';
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
 const ConfirmContext = createContext();
 
@@ -12,14 +14,15 @@ export const useConfirm = () => {
 };
 
 export const ConfirmProvider = ({ children }) => {
+    const lsi = useLsi(importLsi, ["Confirm"]);
     const [confirmState, setConfirmState] = useState({
         isOpen: false,
         title: '',
         message: '',
         onConfirm: () => { },
         onCancel: () => { },
-        confirmText: 'Potvrdiť',
-        cancelText: 'Zrušiť',
+        confirmText: lsi.confirmDefault || 'Potvrdiť',
+        cancelText: lsi.cancelDefault || 'Zrušiť',
         danger: false
     });
 
@@ -27,10 +30,10 @@ export const ConfirmProvider = ({ children }) => {
         return new Promise((resolve) => {
             setConfirmState({
                 isOpen: true,
-                title: options.title || 'Potvrdenie',
-                message: options.message || 'Ste si istí?',
-                confirmText: options.confirmText || 'Potvrdiť',
-                cancelText: options.cancelText || 'Zrušiť',
+                title: options.title || lsi.titleDefault || 'Potvrdenie',
+                message: options.message || lsi.messageDefault || 'Ste si istí?',
+                confirmText: options.confirmText || lsi.confirmDefault || 'Potvrdiť',
+                cancelText: options.cancelText || lsi.cancelDefault || 'Zrušiť',
                 danger: options.danger || false,
                 onConfirm: () => {
                     setConfirmState(prev => ({ ...prev, isOpen: false }));

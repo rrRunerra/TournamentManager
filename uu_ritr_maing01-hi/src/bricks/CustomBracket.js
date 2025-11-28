@@ -3,6 +3,8 @@ import Calls from "../calls.js";
 import "../styles/customBracket.css";
 import { useNotification } from "./NotificationProvider.js";
 import { useConfirm } from "./ConfirmProvider.js";
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
 const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
 
@@ -51,6 +53,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const [status2, setStatus2] = useState(match.participants[1]?.status || null);
     const { showError } = useNotification();
     const { confirm } = useConfirm();
+    const lsi = useLsi(importLsi, ["CustomBracket"]);
 
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
@@ -93,15 +96,16 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
         if (winnerId) {
             const s1 = parseInt(score1) || 0;
             const s2 = parseInt(score2) || 0;
-            const p1Name = match.participants[0]?.name || "Účastník 1";
-            const p2Name = match.participants[1]?.name || "Účastník 2";
+
+            const p1Name = match.participants[0]?.name || lsi.participant1 || "Účastník 1";
+            const p2Name = match.participants[1]?.name || lsi.participant2 || "Účastník 2";
 
             if (winnerId === match.participants[0]?.id && s1 < s2) {
                 const confirmed = await confirm({
-                    title: "Neštandardné skóre",
-                    message: `${p1Name} je označený ako víťaz, ale má nižšie skóre (${s1} vs ${s2}). Ste si istí, že chcete uložiť?`,
-                    confirmText: "Áno, uložiť",
-                    cancelText: "Zrušiť",
+                    title: lsi.scoreWarningTitle,
+                    message: `${p1Name} ${lsi.scoreWarningMessage} (${s1} vs ${s2}). ${lsi.scoreWarningConfirm}`,
+                    confirmText: lsi.yesSave,
+                    cancelText: lsi.cancel,
                     danger: false
                 });
                 if (!confirmed) {
@@ -109,10 +113,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                 }
             } else if (winnerId === match.participants[1]?.id && s2 < s1) {
                 const confirmed = await confirm({
-                    title: "Neštandardné skóre",
-                    message: `${p2Name} je označený ako víťaz, ale má nižšie skóre (${s2} vs ${s1}). Ste si istí, že chcete uložiť?`,
-                    confirmText: "Áno, uložiť",
-                    cancelText: "Zrušiť",
+                    title: lsi.scoreWarningTitle,
+                    message: `${p2Name} ${lsi.scoreWarningMessage} (${s2} vs ${s1}). ${lsi.scoreWarningConfirm}`,
+                    confirmText: lsi.yesSave,
+                    cancelText: lsi.cancel,
                     danger: false
                 });
                 if (!confirmed) {
@@ -148,7 +152,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
             onClose();
         } catch (error) {
             console.error("Failed to update score", error);
-            showError("Nepodarilo sa aktualizovať skóre", "Skúste to prosím znova.");
+            showError(lsi.updateErrorTitle, lsi.updateErrorMessage);
         } finally {
             setLoading(false);
         }
@@ -157,11 +161,11 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     return (
         <div className="match-popup-overlay" onClick={onClose}>
             <div className="match-popup-content" onClick={e => e.stopPropagation()}>
-                <h3>{match.name || `Zápas #${match.id}`}</h3>
-                {!isMatchReady && <div className="match-not-ready-warning">Čakanie na súpera</div>}
+                <h3>{match.name || `${lsi.matchPrefix}${match.id}`}</h3>
+                {!isMatchReady && <div className="match-not-ready-warning">{lsi.waitingForOpponent}</div>}
                 <div className="match-popup-teams">
                     <div className="match-popup-team">
-                        <span className="team-name">{match.participants[0]?.name || "TBD"}</span>
+                        <span className="team-name">{match.participants[0]?.name || lsi.tbd}</span>
                         {isOwner ? (
                             <>
                                 <div className="score-control">
@@ -177,7 +181,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                             onChange={() => handleWinnerChange(match.participants[0]?.id)}
                                             disabled={!isMatchReady}
                                         />
-                                        Víťaz
+                                        {lsi.winner}
                                     </label>
                                 </div>
                                 <select
@@ -186,7 +190,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                     onChange={(e) => setStatus1(e.target.value || null)}
                                     disabled={!isMatchReady}
                                 >
-                                    <option value="">Stav: Žiadny</option>
+                                    <option value="">{lsi.statusNone}</option>
                                     {STATUS_OPTIONS.filter(s => s).map(status => (
                                         <option key={status} value={status}>{status}</option>
                                     ))}
@@ -196,13 +200,13 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                             <>
                                 <span className="score-display">{score1}</span>
                                 {status1 && <span className="status-display">{status1}</span>}
-                                {match.participants[0]?.isWinner && <span className="winner-badge">VÍŤAZ</span>}
+                                {match.participants[0]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
                             </>
                         )}
                     </div>
-                    <div className="match-popup-vs">VS</div>
+                    <div className="match-popup-vs">{lsi.vs}</div>
                     <div className="match-popup-team">
-                        <span className="team-name">{match.participants[1]?.name || "TBD"}</span>
+                        <span className="team-name">{match.participants[1]?.name || lsi.tbd}</span>
                         {isOwner ? (
                             <>
                                 <div className="score-control">
@@ -218,7 +222,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                             onChange={() => handleWinnerChange(match.participants[1]?.id)}
                                             disabled={!isMatchReady}
                                         />
-                                        Víťaz
+                                        {lsi.winner}
                                     </label>
                                 </div>
                                 <select
@@ -227,7 +231,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                     onChange={(e) => setStatus2(e.target.value || null)}
                                     disabled={!isMatchReady}
                                 >
-                                    <option value="">Stav: Žiadny</option>
+                                    <option value="">{lsi.statusNone}</option>
                                     {STATUS_OPTIONS.filter(s => s).map(status => (
                                         <option key={status} value={status}>{status}</option>
                                     ))}
@@ -237,7 +241,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                             <>
                                 <span className="score-display">{score2}</span>
                                 {status2 && <span className="status-display">{status2}</span>}
-                                {match.participants[1]?.isWinner && <span className="winner-badge">VÍŤAZ</span>}
+                                {match.participants[1]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
                             </>
                         )}
                     </div>
@@ -245,10 +249,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                 <div className="match-popup-actions">
                     {isOwner && (
                         <button className="save-btn" onClick={handleSave} disabled={loading || !isMatchReady}>
-                            {loading ? "Ukladám..." : "Uložiť skóre"}
+                            {loading ? lsi.saving : lsi.saveScore}
                         </button>
                     )}
-                    <button className="cancel-btn" onClick={onClose} disabled={loading}>Zrušiť</button>
+                    <button className="cancel-btn" onClick={onClose} disabled={loading}>{lsi.cancel}</button>
                 </div>
             </div>
         </div>
@@ -262,36 +266,37 @@ const MatchCard = ({ match, onClick, style }) => {
 
     const isTopWinner = topParticipant.isWinner;
     const isBottomWinner = bottomParticipant.isWinner;
+    const lsi = useLsi(importLsi, ["CustomBracket"]);
 
     return (
         <div className="match-card" style={style} onClick={() => onClick(match)}>
             <div className="match-header">
-                <span>Zápas #{id}</span>
+                <span>{lsi.matchPrefix}{id}</span>
                 {/* <span>{startTime ? new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD'}</span> */}
             </div>
 
             <div className={`match-team ${isTopWinner ? "winner" : ""} ${!topParticipant.name ? "placeholder" : ""}`}>
-                <span>{topParticipant.name || "TBD"}</span>
+                <span>{topParticipant.name || lsi.tbd}</span>
                 {topParticipant.resultText && <span className="team-score-box">{topParticipant.resultText}</span>}
             </div>
 
             <div className={`match-team ${isBottomWinner ? "winner" : ""} ${!bottomParticipant.name ? "placeholder" : ""}`}>
-                <span>{bottomParticipant.name || "TBD"}</span>
+                <span>{bottomParticipant.name || lsi.tbd}</span>
                 {bottomParticipant.resultText && <span className="team-score-box">{bottomParticipant.resultText}</span>}
             </div>
         </div>
     );
 };
 
-const getRoundName = (roundKey, totalRounds, index) => {
+const getRoundName = (roundKey, totalRounds, index, lsi) => {
     const roundNum = parseInt(roundKey);
     if (isNaN(roundNum)) return roundKey;
 
-    if (index === totalRounds - 1) return "Veľké finále";
-    if (index === totalRounds - 2) return "Semifinále";
-    if (index === totalRounds - 3) return "Štvrťfinále";
+    if (index === totalRounds - 1) return lsi.grandFinal;
+    if (index === totalRounds - 2) return lsi.semifinal;
+    if (index === totalRounds - 3) return lsi.quarterfinal;
 
-    return `Kolo ${roundKey}`;
+    return `${lsi.roundPrefix} ${roundKey}`;
 };
 
 const processMatches = (matches) => {
@@ -363,6 +368,7 @@ const processMatches = (matches) => {
 
 const TreeBracketView = ({ matches, onMatchClick }) => {
     const processedMatches = useMemo(() => processMatches(matches), [matches]);
+    const lsi = useLsi(importLsi, ["CustomBracket"]);
 
     // Group by rounds
     const rounds = useMemo(() => {
@@ -382,10 +388,10 @@ const TreeBracketView = ({ matches, onMatchClick }) => {
 
         return sortedKeys.map((key, index) => ({
             id: key,
-            title: getRoundName(key, sortedKeys.length, index),
+            title: getRoundName(key, sortedKeys.length, index, lsi),
             matches: roundsMap[key].sort((a, b) => a.id - b.id)
         }));
-    }, [processedMatches]);
+    }, [processedMatches, lsi]);
 
     // Calculate layout
     const layout = useMemo(() => {
@@ -636,6 +642,7 @@ const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches
 
 const BracketInner = ({ matches, onMatchClick }) => {
     const processedMatches = useMemo(() => processMatches(matches), [matches]);
+    const lsi = useLsi(importLsi, ["CustomBracket"]);
 
     const rounds = useMemo(() => {
         const roundsMap = {};
@@ -653,10 +660,10 @@ const BracketInner = ({ matches, onMatchClick }) => {
         });
 
         return sortedKeys.map((key, index) => ({
-            title: getRoundName(key, sortedKeys.length, index),
+            title: getRoundName(key, sortedKeys.length, index, lsi),
             matches: roundsMap[key].sort((a, b) => a.id - b.id)
         }));
-    }, [processedMatches]);
+    }, [processedMatches, lsi]);
 
     return (
         <>
@@ -679,6 +686,7 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
     const [selectedMatch, setSelectedMatch] = useState(null);
     const [showConfetti, setShowConfetti] = useState(false);
     const [isFadingOut, setIsFadingOut] = useState(false);
+    const lsi = useLsi(importLsi, ["CustomBracket"]);
 
     // Check if current user won the Grand Finals
     useEffect(() => {
@@ -791,13 +799,13 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
             {bracketType === 'double' ? (
                 <div className="custom-bracket-container">
                     <div className="bracket-section">
-                        <h3 className="bracket-title">Upper Bracket</h3>
+                        <h3 className="bracket-title">{lsi.upperBracket}</h3>
                         <div className="bracket-rounds">
                             <BracketInner matches={matches.upper || []} onMatchClick={handleMatchClick} />
                         </div>
                     </div>
                     <div className="bracket-section">
-                        <h3 className="bracket-title">Lower Bracket</h3>
+                        <h3 className="bracket-title">{lsi.lowerBracket}</h3>
                         <div className="bracket-rounds">
                             <BracketInner matches={matches.lower || []} onMatchClick={handleMatchClick} />
                         </div>

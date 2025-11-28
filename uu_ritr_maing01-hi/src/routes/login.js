@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRoute } from "uu5g05";
+import { useRoute, useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 import DarkVeil from "../bricks/DarkVeil.js";
 import Calls from "../calls.js";
 import "../styles/login.css";
@@ -22,27 +23,27 @@ const LoginInput = ({ type = "text", placeholder, value, onChange }) => (
   />
 );
 
-const LoginButton = ({ text, onClick, loading }) => {
+const LoginButton = ({ text, onClick, loading, loadingText }) => {
   return (
     <button
       onClick={onClick}
       className="login-button"
       disabled={loading}
     >
-      {loading ? "Načítavam..." : text}
+      {loading ? loadingText : text}
     </button>
   );
 };
 
 const LoginError = ({ message }) => (message ? <div className="login-error">{message}</div> : null);
 
-const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading }) => (
+const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading, lsi }) => (
   <form onSubmit={onSubmit}>
-    <LoginInput placeholder="Používateľské meno" value={username} onChange={setUsername} />
-    <LoginInput type="password" placeholder="Heslo" value={password} onChange={setPassword} />
+    <LoginInput placeholder={lsi.username} value={username} onChange={setUsername} />
+    <LoginInput type="password" placeholder={lsi.password} value={password} onChange={setPassword} />
     <LoginError message={error} />
 
-    <LoginButton text="Prihlásiť sa" loading={loading} />
+    <LoginButton text={lsi.login} loading={loading} loadingText={lsi.loading} />
   </form>
 );
 
@@ -53,6 +54,7 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useRoute();
+  const lsi = useLsi(importLsi, ["Login"]);
 
   useEffect(() => {
     const player = localStorage.getItem("player");
@@ -104,6 +106,7 @@ export default function LoginPage() {
             setPassword={setPassword}
             error={error}
             loading={loading}
+            lsi={lsi}
           />
         </div>
       </div>

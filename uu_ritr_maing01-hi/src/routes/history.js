@@ -4,21 +4,11 @@ import { useRoute } from "uu5g05";
 import "../styles/tournament.css";
 import "../styles/history.css";
 import Pagination from "../bricks/pagination.js";
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 
-const months = {
-  1: "Január",
-  2: "Február",
-  3: "Marec",
-  4: "Apríl",
-  5: "Máj",
-  6: "Jún",
-  7: "Júl",
-  8: "August",
-  9: "September",
-  10: "Október",
-  11: "November",
-  12: "December",
-};
+
+
 
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -33,6 +23,7 @@ export default function HistoryPage() {
   const [showFilter, setShowFilter] = useState(false);
 
   const [, setRoute] = useRoute();
+  const lsi = useLsi(importLsi, ["History"]);
 
   function goToTournament(id) {
     setRoute("tournamentDetail", { id });
@@ -100,7 +91,7 @@ export default function HistoryPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (loading) return <div className="loading-spinner">Loading history...</div>;
+  if (loading) return <div className="loading-spinner">{lsi.loading}</div>;
 
   return (
     <div className="background history-background">
@@ -124,7 +115,7 @@ export default function HistoryPage() {
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
           >
-            <option value="">Rok</option>
+            <option value="">{lsi.year}</option>
             {availableYears.map((year) => (
               <option key={year} value={year}>
                 {year}
@@ -138,8 +129,8 @@ export default function HistoryPage() {
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
           >
-            <option value="">Mesiac</option>
-            {Object.entries(months).map(([num, label]) => (
+            <option value="">{lsi.month}</option>
+            {Object.entries(lsi.months).map(([num, label]) => (
               <option key={num} value={num}>
                 {label}
               </option>
@@ -150,7 +141,7 @@ export default function HistoryPage() {
           <input
             className="filter-input"
             type="text"
-            placeholder="Hľadať názov..."
+            placeholder={lsi.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -163,7 +154,7 @@ export default function HistoryPage() {
       <section className="tournaments-section">
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
-            <h2 className="section-title">Žiadne turnaje pre daný filter.</h2>
+            <h2 className="section-title">{lsi.noTournaments}</h2>
           </div>
         ) : (
           currentItems.map((tournament) => (
@@ -178,13 +169,13 @@ export default function HistoryPage() {
               <p className="tournament-details">
                 📅 {new Date(tournament.startDate).getDate()}. –
                 {new Date(tournament.endDate).getDate()}{" "}
-                {months[new Date(tournament.endDate).getMonth() + 1]}{" "}
+                {lsi.months[new Date(tournament.endDate).getMonth() + 1]}{" "}
                 {new Date(tournament.endDate).getFullYear()}
                 <br />
-                👥 {tournament.teams?.length || 0} tímov v súťaži
+                👥 {tournament.teams?.length || 0} {lsi.teamsCount}
               </p>
 
-              <div className="tournament-status">Ukončený</div>
+              <div className="tournament-status">{lsi.finished}</div>
             </div>
           ))
         )}

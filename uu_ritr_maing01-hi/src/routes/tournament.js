@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRoute } from "uu5g05";
+import { useRoute, useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Calls from "../calls.js";
 import "../styles/tournament.css";
@@ -11,20 +12,7 @@ const createTournament = ({ name, description, startDate, endDate, teamSize, tea
   return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner, bracketType });
 };
 
-const months = {
-  1: "Január",
-  2: "Február",
-  3: "Marec",
-  4: "Apríl",
-  5: "Máj",
-  6: "Jún",
-  7: "Júl",
-  8: "August",
-  9: "September",
-  10: "Október",
-  11: "November",
-  12: "December"
-}
+
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -32,6 +20,7 @@ export default function TournamentsPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
   const { showError, showSuccess } = useNotification();
+  const lsi = useLsi(importLsi, ["Tournaments"]);
 
   // fetch tournaments
   const fetchTournaments = async () => {
@@ -47,18 +36,25 @@ export default function TournamentsPage() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("player"));
-    if (!user) {
-      setRoute("login");
-      return;
-    }
+    // if (!user) {
+    //   setRoute("login");
+    //   return;
+    // }
     setUser(user);
     fetchTournaments();
   }, []);
 
   if (!user) {
     return (
-      <div>
-        <p>No</p>
+      <div className="background">
+        <div className="login-prompt">
+          <div className="login-prompt-icon">🔒</div>
+          <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
+          <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
+          <button className="login-prompt-button" onClick={() => setRoute("login")}>
+            {lsi.goToLogin || "Go to Login"}
+          </button>
+        </div>
       </div>
     )
   }
@@ -74,13 +70,13 @@ export default function TournamentsPage() {
       !Array.isArray(data.teams) ||
       data.teams.length < 2
     ) {
-      showError("Chyba", "Všetky polia sú povinné a musia byť pridané aspoň 2 tímy.");
+      showError(lsi.createErrorTitle, lsi.createErrorMessage);
       return;
     }
 
     await createTournament(data);
     await fetchTournaments();
-    showSuccess("Turnaj vytvorený!", `Turnaj "${data.name}" bol úspešne vytvorený.`);
+    showSuccess(lsi.createSuccessTitle, lsi.createSuccessMessage);
   };
 
   const ongoingTournaments = tournaments.filter(t => t.status === "ongoing");
@@ -98,19 +94,19 @@ export default function TournamentsPage() {
       <div className="tournament-icon">🏆</div>
       <h2 className="tournament-title" title={tournament.name}>{tournament.name}</h2>
       <p className="tournament-details">
-        📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
-        👥 {tournament.teams.length} tímov v súťaži
+        📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {lsi.months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
+        👥 {tournament.teams.length} {lsi.teamsCount}
       </p>
       <div className="tournament-status">
         {tournament.status === "ongoing" ? (
           <>
             <span className="status-dot"></span>
-            Prebieha
+            {lsi.ongoing}
           </>
         ) : tournament.status === "finished" ? (
-          "Ukončený"
+          lsi.finished
         ) : (
-          "Prebieha prihlasovanie"
+          lsi.upcoming
         )}
       </div>
     </div>
@@ -121,7 +117,7 @@ export default function TournamentsPage() {
       <section className="tournaments-section">
         {tournaments.length === 0 ? (
           <div className="section-header">
-            <h2 className="section-title">Žiadne turnaje nie sú k dispozícii.</h2>
+            <h2 className="section-title">{lsi.noTournaments}</h2>
           </div>
         ) : (
           <>
