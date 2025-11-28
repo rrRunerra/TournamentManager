@@ -3,6 +3,7 @@ import Calls from "../calls.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournament.css";
 import "../styles/history.css";
+import Pagination from "../bricks/pagination.js";
 
 const months = {
   1: "Január",
@@ -27,6 +28,7 @@ export default function HistoryPage() {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [showFilter, setShowFilter] = useState(false);
 
@@ -76,6 +78,7 @@ export default function HistoryPage() {
     });
 
     setFilteredTournaments(filtered);
+    setCurrentPage(1); // Reset to first page on filter change
   }, [selectedYear, selectedMonth, searchQuery, tournaments]);
 
   function resetFilters() {
@@ -83,6 +86,19 @@ export default function HistoryPage() {
     setSelectedMonth("");
     setSearchQuery("");
   }
+
+  // Pagination logic
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
+  const currentItems = filteredTournaments.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   if (loading) return <div className="loading-spinner">Loading history...</div>;
 
@@ -150,7 +166,7 @@ export default function HistoryPage() {
             <h2 className="section-title">Žiadne turnaje pre daný filter.</h2>
           </div>
         ) : (
-          filteredTournaments.map((tournament) => (
+          currentItems.map((tournament) => (
             <div
               key={tournament.id}
               className="tournament-card"
@@ -173,6 +189,14 @@ export default function HistoryPage() {
           ))
         )}
       </section>
+
+      {filteredTournaments.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

@@ -74,6 +74,34 @@ export default function TournamentsPage() {
     await fetchTournaments();
   };
 
+  const ongoingTournaments = tournaments.filter(t => t.status === "ongoing");
+  const upcomingTournaments = tournaments.filter(t => t.status === "upcoming");
+
+  const renderTournamentCard = (tournament) => (
+    <div className="tournament-card" key={tournament.id} onClick={() => {
+      setRoute("tournamentDetail", { id: tournament.id })
+    }}>
+      <div className="tournament-icon">🏆</div>
+      <h2 className="tournament-title">{tournament.name}</h2>
+      <p className="tournament-details">
+        📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
+        👥 {tournament.teams.length} tímov v súťaži
+      </p>
+      <div className="tournament-status">
+        {tournament.status === "ongoing" ? (
+          <>
+            <span className="status-dot"></span>
+            Prebieha
+          </>
+        ) : tournament.status === "finished" ? (
+          "Ukončený"
+        ) : (
+          "Prebieha prihlasovanie"
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div className="background">
       <section className="tournaments-section">
@@ -82,30 +110,13 @@ export default function TournamentsPage() {
             <h2 className="section-title">Žiadne turnaje nie sú k dispozícii.</h2>
           </div>
         ) : (
-          tournaments.map((tournament) => (
-            <div className="tournament-card" key={tournament.id} onClick={() => {
-              setRoute("tournamentDetail", { id: tournament.id })
-            }}>
-              <div className="tournament-icon">🏆</div>
-              <h2 className="tournament-title">{tournament.name}</h2>
-              <p className="tournament-details">
-                📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
-                👥 {tournament.teams.length} tímov v súťaži
-              </p>
-              <div className="tournament-status">
-                {tournament.status === "ongoing" ? (
-                  <>
-                    <span className="status-dot"></span>
-                    Prebieha
-                  </>
-                ) : tournament.status === "finished" ? (
-                  "Ukončený"
-                ) : (
-                  "Prebieha prihlasovanie"
-                )}
-              </div>
-            </div>
-          ))
+          <>
+            {ongoingTournaments.map(renderTournamentCard)}
+            {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && (
+              <hr className="tournament-separator" />
+            )}
+            {upcomingTournaments.map(renderTournamentCard)}
+          </>
         )}
       </section>
 
