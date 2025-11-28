@@ -8,9 +8,8 @@
     "uu_plus4u5g02_peopleBaseUri": null,
     "uu_plus4u5g02_organizationBaseUri": null,
     "uu5loaderg01_initUuAppDisabled": false,
-    "callsBaseUri": "http://localhost:8080/uu-ritr-maing01/22222222222222222222222222222222",
     "uu_plus4u5g02_uuApp": {
-      "name": "MatchUP"
+      "name": "uuRitr"
     }
   }
 }

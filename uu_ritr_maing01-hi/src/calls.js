@@ -6,7 +6,7 @@ import Plus4U5 from "uu_plus4u5g02";
 //   "uu5Environment": {
 //     "callsBaseUri": "https://uuapp-dev.plus4u.net/vnd-app/awid"
 //   }
-//Environment.appBaseUri = "http://localhost:8080/uu-ritr-maing01/22222222222222222222222222222222";
+Environment.appBaseUri = "http://localhost:8080/uu-ritr-maing01/22222222222222222222222222222222";
 
 const Calls = {
   async call(method, url, dtoIn, clientOptions) {
@@ -54,9 +54,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  listTournaments(dtoIn) {
+  listTournaments() {
     const commandUri = Calls.getCommandUri("tournament/list");
-    return Calls.call("get", commandUri, dtoIn);
+    return Calls.call("get", commandUri);
   },
 
   getTournament(dtoIn) {

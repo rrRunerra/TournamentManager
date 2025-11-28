@@ -107,8 +107,7 @@ export default function TournamentDetailPage() {
   // Renamed class "loading" to "tournament-detail-loading"
   if (!info) return <div className="loading-spinner">Načítavam...</div>;
 
-  const isOwner = user?.id == info.owner;
-
+  const isOwner = user?.uuIdentity === info.ownerId;
   const bracketsType = info?.bracketType
 
   if (info.status === "ongoing" || info.status === "finished") {

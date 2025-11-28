@@ -119,7 +119,6 @@
     gap: 8px;
     transition: all 0.2s ease;
     z-index: 1;
-    min-height: 120px;
 }
 
 .match-card:hover {

@@ -9,7 +9,7 @@ const TournamentCreateDtoInType = shape({
     teamSize: uu5String(255).isRequired(),
     teams: array(),
     owner: uu5String(255).isRequired()
-
+        
 
 })
 
@@ -35,16 +35,6 @@ const TournamentGetDtoInType = shape({
 const TournamentDeleteDtoInType = shape({
     id: uu5String(255).isRequired()
 })
-
-const TournamentListDtoInType = shape({
-    limit: integer(),
-    skip: integer(),
-    status: oneOf([
-        oneOf(["ongoing", "finished", "cancelled", "upcoming"]),
-        array(oneOf(["ongoing", "finished", "cancelled", "upcoming"]))
-    ])
-})
-
 
 
 

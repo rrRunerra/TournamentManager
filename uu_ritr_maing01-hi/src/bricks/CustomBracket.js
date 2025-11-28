@@ -249,7 +249,7 @@ const MatchCard = ({ match, onClick, style }) => {
         <div className="match-card" style={style} onClick={() => onClick(match)}>
             <div className="match-header">
                 <span>Zápas #{id}</span>
-                {/* <span>{startTime ? new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD'}</span> */}
+                <span>{startTime ? new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD'}</span>
             </div>
 
             <div className={`match-team ${isTopWinner ? "winner" : ""} ${!topParticipant.name ? "placeholder" : ""}`}>
@@ -732,27 +732,24 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
                     <MatchDetailPopup
                         match={selectedMatch}
                         onClose={() => setSelectedMatch(null)}
-                        onMatchUpdate={onMatchUpdate}
-                        isOwner={isOwner}
+                        onUpdateMatch={onMatchUpdate}
+                        canEdit={isOwner}
                         tournamentId={tournamentInfo?.id}
                     />
                 )}
 
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '2rem', width: '100%', marginTop: '2rem', padding: '0 2rem' }}>
-                    {Object.entries(rounds).map(([roundName, roundMatches]) => (
-                        <div key={roundName} style={{ minWidth: '250px', maxWidth: '250px', flex: '0 0 auto' }}>
-                            <h3 style={{ color: '#ff8e53', marginBottom: '1rem', textAlign: 'center' }}>{roundName}</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {roundMatches.map(match => (
-                                    <div key={match.id} onClick={() => handleMatchClick(match)} style={{ cursor: 'pointer' }}>
-                                        <MatchCard match={match} />
-                                    </div>
-                                ))}
-                            </div>
+                {Object.entries(rounds).map(([roundName, roundMatches]) => (
+                    <div key={roundName} style={{ width: '100%', maxWidth: '800px' }}>
+                        <h3 style={{ color: '#ff8e53', marginBottom: '1rem', textAlign: 'center' }}>{roundName}</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                            {roundMatches.map(match => (
+                                <div key={match.id} onClick={() => handleMatchClick(match)} style={{ cursor: 'pointer' }}>
+                                    <MatchCard match={match} />
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         );
     }
