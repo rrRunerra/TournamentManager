@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/createTournamentModal.css";
+import { useNotification } from "./NotificationProvider.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -11,6 +12,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [teamName, setTeamName] = useState("");
   const [errors, setErrors] = useState({});
   const [bracketType, setBracketType] = useState("single")
+  const { showError } = useNotification();
 
   if (!isOpen) return null;
 
@@ -147,18 +149,17 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
               if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors);
-                const errorMessages = [];
 
-                if (newErrors.name) errorMessages.push("Názov je povinný.");
-                if (newErrors.description) errorMessages.push("Popis je povinný.");
-                if (newErrors.startDate) errorMessages.push("Dátum začiatku je povinný.");
-                if (newErrors.endDate) errorMessages.push("Dátum konca je povinný.");
-                if (newErrors.teamSize) errorMessages.push("Veľkosť tímu je povinná.");
-                if (newErrors.teams) errorMessages.push("Sú vyžadované aspoň 3 tímy.");
-                if (newErrors.invalidDate) errorMessages.push("Dátum začiatku nemôže byť neskôr ako dátum konca")
-                if (newErrors.robin) errorMessages.push("Každý s každým vyžaduje súčet tímov, ktorý je súčinom dvojice čísel")
+                // Show each error in a separate notification
+                if (newErrors.name) showError("Chyba", "Názov je povinný.");
+                if (newErrors.description) showError("Chyba", "Popis je povinný.");
+                if (newErrors.startDate) showError("Chyba", "Dátum začiatku je povinný.");
+                if (newErrors.endDate) showError("Chyba", "Dátum konca je povinný.");
+                if (newErrors.teamSize) showError("Chyba", "Veľkosť tímu je povinná.");
+                if (newErrors.teams) showError("Chyba", "Sú vyžadované aspoň 3 tímy.");
+                if (newErrors.invalidDate) showError("Chyba", "Dátum začiatku nemôže byť neskôr ako dátum konca.");
+                if (newErrors.robin) showError("Chyba", "Každý s každým vyžaduje súčet tímov, ktorý je súčinom dvojice čísel.");
 
-                alert(errorMessages.join("\n"));
                 return;
               }
 

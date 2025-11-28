@@ -7,6 +7,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Navbar from "../bricks/navbar.js";
+import { NotificationProvider } from "../bricks/NotificationProvider.js";
 import "../styles/spa.css"
 //@@viewOff:imports
 
@@ -42,22 +43,24 @@ const Spa = createVisualComponent({
 
   render() {
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Uu5Elements.ModalBus>
-          {/* Obal pre flex layout */}
-          <div className="spa-layout">
-            <Navbar />
-            <main className="spa-content">
-              <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
-            </main>
-            <footer className="app-footer">
-              <p>© 2025 MatchUP. Všetky práva vyhradené.
-                <br/>
-                Študentský projekt v spolupráci s firmou Unicorn</p>
-            </footer>
-          </div>
-        </Uu5Elements.ModalBus>
-      </Plus4U5.SpaProvider>
+      <NotificationProvider>
+        <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+          <Uu5Elements.ModalBus>
+            {/* Obal pre flex layout */}
+            <div className="spa-layout">
+              <Navbar />
+              <main className="spa-content">
+                <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
+              </main>
+              <footer className="app-footer">
+                <p>© 2025 MatchUP. Všetky práva vyhradené.
+                  <br />
+                  Študentský projekt v spolupráci s firmou Unicorn</p>
+              </footer>
+            </div>
+          </Uu5Elements.ModalBus>
+        </Plus4U5.SpaProvider>
+      </NotificationProvider>
     );
   },
 });

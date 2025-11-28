@@ -6,8 +6,7 @@ import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
 import OwnerControls from "../bricks/ownerControls.js";
 import Calls from "../calls.js";
 import "../styles/tournamentDetail.css";
-
-
+import { useNotification } from "../bricks/NotificationProvider.js";
 
 
 
@@ -20,6 +19,7 @@ export default function TournamentDetailPage() {
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
   const [activeTab, setActiveTab] = useState('current-match');
+  const { showError } = useNotification();
 
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function TournamentDetailPage() {
       setInfo(updatedTournament);
     } catch (error) {
       console.error("Error joining team:", error);
-      alert("Nepodarilo sa pripojiť k tímu. Skúste to prosím znova.");
+      showError("Nepodarilo sa pripojiť k tímu.", "Skúste to prosím znova.");
     } finally {
       setJoiningTeam(null);
     }

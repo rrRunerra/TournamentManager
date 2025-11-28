@@ -1,7 +1,10 @@
 import Calls from "../calls.js"
 import "../styles/ownerControls.css"
+import { useNotification } from "./NotificationProvider.js"
 
 export default function OwnerControls({ info, id, setInfo, setRoute, onTournamentStart }) {
+  const { showSuccess, showError } = useNotification();
+
   return (
     <div className="owner-controls-panel">
       <h3 className="owner-controls-title">Ovládanie turnaja</h3>
@@ -17,10 +20,10 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
                   if (onTournamentStart) {
                     await onTournamentStart();
                   }
-                  alert("Turnaj spustený!");
+                  showSuccess("Turnaj spustený!", "Tímy boli uzamknuté a turnaj bol spustený.");
                 } catch (error) {
                   console.error("Error starting tournament:", error);
-                  alert("Nepodarilo sa spustiť turnaj.");
+                  showError("Nepodarilo sa spustiť turnaj.", "Skúste to prosím znova.");
                 }
               }
             }}
@@ -34,11 +37,11 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
             if (window.confirm("Vymazať tento turnaj? Táto akcia je nevratná.")) {
               try {
                 await Calls.deleteTournament({ id });
-                alert("Turnaj vymazaný!");
+                showSuccess("Turnaj vymazaný!", "Turnaj bol úspešne odstránený.");
                 setRoute("tournaments");
               } catch (error) {
                 console.error("Error deleting tournament:", error);
-                alert("Nepodarilo sa vymazať turnaj.");
+                showError("Nepodarilo sa vymazať turnaj.", "Skúste to prosím znova.");
               }
             }
           }}
@@ -66,7 +69,7 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
                     setInfo(await Calls.getTournament({ id }));
                   } catch (error) {
                     console.error("Error removing team:", error);
-                    alert("Nepodarilo sa odstrániť tím.");
+                    showError("Nepodarilo sa odstrániť tím.", "Skúste to prosím znova.");
                   }
                 }
               }}

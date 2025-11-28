@@ -1,7 +1,10 @@
 import Calls from "../calls.js";
 import "../styles/ownerControls.css"; // Reusing existing styles
+import { useNotification } from "./NotificationProvider.js";
 
 export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
+    const { showSuccess, showError } = useNotification();
+
     return (
         <div className="owner-controls-panel" style={{ maxWidth: "600px", margin: "0 auto" }}>
             <h3 className="owner-controls-title">Ovládanie turnaja</h3>
@@ -13,10 +16,10 @@ export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
                             try {
                                 await Calls.updateTournament({ id, status: "finished" });
                                 setInfo(await Calls.getTournament({ id }));
-                                alert("Turnaj ukončený!");
+                                showSuccess("Turnaj ukončený!", "Turnaj bol úspešne dokončený.");
                             } catch (error) {
                                 console.error("Error ending tournament:", error);
-                                alert("Nepodarilo sa ukončiť turnaj.");
+                                showError("Nepodarilo sa ukončiť turnaj.", "Skúste to prosím znova.");
                             }
                         }
                     }}
@@ -29,11 +32,11 @@ export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
                         if (window.confirm("Vymazať tento turnaj? Táto akcia je nevratná.")) {
                             try {
                                 await Calls.deleteTournament({ id });
-                                alert("Turnaj vymazaný!");
+                                showSuccess("Turnaj vymazaný!", "Turnaj bol úspešne odstránený.");
                                 setRoute("tournaments");
                             } catch (error) {
                                 console.error("Error deleting tournament:", error);
-                                alert("Nepodarilo sa vymazať turnaj.");
+                                showError("Nepodarilo sa vymazať turnaj.", "Skúste to prosím znova.");
                             }
                         }
                     }}

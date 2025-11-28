@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Calls from "../calls.js";
 import "../styles/customBracket.css";
+import { useNotification } from "./NotificationProvider.js";
 
 const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
 
@@ -47,6 +48,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const [score2, setScore2] = useState(match.participants[1]?.resultText || "0");
     const [status1, setStatus1] = useState(match.participants[0]?.status || null);
     const [status2, setStatus2] = useState(match.participants[1]?.status || null);
+    const { showError } = useNotification();
 
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
@@ -130,7 +132,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
             onClose();
         } catch (error) {
             console.error("Failed to update score", error);
-            alert("Nepodarilo sa aktualizovať skóre");
+            showError("Nepodarilo sa aktualizovať skóre", "Skúste to prosím znova.");
         } finally {
             setLoading(false);
         }

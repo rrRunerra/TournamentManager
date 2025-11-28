@@ -3,6 +3,7 @@ import { useRoute } from "uu5g05";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Calls from "../calls.js";
 import "../styles/tournament.css";
+import { useNotification } from "../bricks/NotificationProvider.js";
 
 const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
   const status = "upcoming";
@@ -30,6 +31,7 @@ export default function TournamentsPage() {
   const [route, setRoute] = useRoute();
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const { showError, showSuccess } = useNotification();
 
   // fetch tournaments
   const fetchTournaments = async () => {
@@ -72,12 +74,13 @@ export default function TournamentsPage() {
       !Array.isArray(data.teams) ||
       data.teams.length < 2
     ) {
-      alert("Všetky polia sú povinné a musia byť pridané aspoň 2 tímy.");
+      showError("Chyba", "Všetky polia sú povinné a musia byť pridané aspoň 2 tímy.");
       return;
     }
 
     await createTournament(data);
     await fetchTournaments();
+    showSuccess("Turnaj vytvorený!", `Turnaj "${data.name}" bol úspešne vytvorený.`);
   };
 
   const ongoingTournaments = tournaments.filter(t => t.status === "ongoing");
