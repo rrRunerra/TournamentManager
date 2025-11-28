@@ -1,9 +1,11 @@
 import Calls from "../calls.js";
 import "../styles/ownerControls.css"; // Reusing existing styles
 import { useNotification } from "./NotificationProvider.js";
+import { useConfirm } from "./ConfirmProvider.js";
 
 export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
     const { showSuccess, showError } = useNotification();
+    const { confirm } = useConfirm();
 
     return (
         <div className="owner-controls-panel" style={{ maxWidth: "600px", margin: "0 auto" }}>
@@ -12,7 +14,14 @@ export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
                 <button
                     className="owner-controls-btn owner-controls-btn--primary"
                     onClick={async () => {
-                        if (window.confirm("Ukončiť tento turnaj? Toto ho označí ako dokončený.")) {
+                        const confirmed = await confirm({
+                            title: "Ukončiť turnaj",
+                            message: "Ukončiť tento turnaj? Toto ho označí ako dokončený.",
+                            confirmText: "Ukončiť",
+                            cancelText: "Zrušiť"
+                        });
+
+                        if (confirmed) {
                             try {
                                 await Calls.updateTournament({ id, status: "finished" });
                                 setInfo(await Calls.getTournament({ id }));
@@ -29,7 +38,15 @@ export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
                 <button
                     className="owner-controls-btn owner-controls-btn--danger"
                     onClick={async () => {
-                        if (window.confirm("Vymazať tento turnaj? Táto akcia je nevratná.")) {
+                        const confirmed = await confirm({
+                            title: "Vymazať turnaj",
+                            message: "Vymazať tento turnaj? Táto akcia je nevratná.",
+                            confirmText: "Vymazať",
+                            cancelText: "Zrušiť",
+                            danger: true
+                        });
+
+                        if (confirmed) {
                             try {
                                 await Calls.deleteTournament({ id });
                                 showSuccess("Turnaj vymazaný!", "Turnaj bol úspešne odstránený.");

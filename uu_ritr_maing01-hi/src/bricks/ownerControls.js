@@ -1,9 +1,11 @@
 import Calls from "../calls.js"
 import "../styles/ownerControls.css"
 import { useNotification } from "./NotificationProvider.js"
+import { useConfirm } from "./ConfirmProvider.js"
 
 export default function OwnerControls({ info, id, setInfo, setRoute, onTournamentStart }) {
   const { showSuccess, showError } = useNotification();
+  const { confirm } = useConfirm();
 
   return (
     <div className="owner-controls-panel">
@@ -13,7 +15,14 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
           <button
             className="owner-controls-btn owner-controls-btn--primary"
             onClick={async () => {
-              if (window.confirm("Spustiť tento turnaj? Tímy budú uzamknuté.")) {
+              const confirmed = await confirm({
+                title: "Spustiť turnaj",
+                message: "Spustiť tento turnaj? Tímy budú uzamknuté.",
+                confirmText: "Spustiť",
+                cancelText: "Zrušiť"
+              });
+
+              if (confirmed) {
                 try {
                   await Calls.updateTournament({ id, status: "ongoing" });
                   setInfo(await Calls.getTournament({ id }));
@@ -34,7 +43,15 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
         <button
           className="owner-controls-btn owner-controls-btn--danger"
           onClick={async () => {
-            if (window.confirm("Vymazať tento turnaj? Táto akcia je nevratná.")) {
+            const confirmed = await confirm({
+              title: "Vymazať turnaj",
+              message: "Vymazať tento turnaj? Táto akcia je nevratná.",
+              confirmText: "Vymazať",
+              cancelText: "Zrušiť",
+              danger: true
+            });
+
+            if (confirmed) {
               try {
                 await Calls.deleteTournament({ id });
                 showSuccess("Turnaj vymazaný!", "Turnaj bol úspešne odstránený.");
@@ -63,7 +80,15 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
             <button
               className="owner-controls-btn owner-controls-btn--outline"
               onClick={async () => {
-                if (window.confirm(`Odstrániť tím "${team.name}"?`)) {
+                const confirmed = await confirm({
+                  title: "Odstrániť tím",
+                  message: `Odstrániť tím "${team.name}"?`,
+                  confirmText: "Odstrániť",
+                  cancelText: "Zrušiť",
+                  danger: true
+                });
+
+                if (confirmed) {
                   try {
                     await Calls.removeTeam({ tournamentId: id, teamId: team.id });
                     setInfo(await Calls.getTournament({ id }));

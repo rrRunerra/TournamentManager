@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Calls from "../calls.js";
 import "../styles/customBracket.css";
 import { useNotification } from "./NotificationProvider.js";
+import { useConfirm } from "./ConfirmProvider.js";
 
 const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
 
@@ -49,6 +50,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const [status1, setStatus1] = useState(match.participants[0]?.status || null);
     const [status2, setStatus2] = useState(match.participants[1]?.status || null);
     const { showError } = useNotification();
+    const { confirm } = useConfirm();
 
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
@@ -95,11 +97,25 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
             const p2Name = match.participants[1]?.name || "Účastník 2";
 
             if (winnerId === match.participants[0]?.id && s1 < s2) {
-                if (!window.confirm(`${p1Name} je označený ako víťaz, ale má nižšie skóre (${s1} vs ${s2}). Ste si istí, že chcete uložiť?`)) {
+                const confirmed = await confirm({
+                    title: "Neštandardné skóre",
+                    message: `${p1Name} je označený ako víťaz, ale má nižšie skóre (${s1} vs ${s2}). Ste si istí, že chcete uložiť?`,
+                    confirmText: "Áno, uložiť",
+                    cancelText: "Zrušiť",
+                    danger: false
+                });
+                if (!confirmed) {
                     return;
                 }
             } else if (winnerId === match.participants[1]?.id && s2 < s1) {
-                if (!window.confirm(`${p2Name} je označený ako víťaz, ale má nižšie skóre (${s2} vs ${s1}). Ste si istí, že chcete uložiť?`)) {
+                const confirmed = await confirm({
+                    title: "Neštandardné skóre",
+                    message: `${p2Name} je označený ako víťaz, ale má nižšie skóre (${s2} vs ${s1}). Ste si istí, že chcete uložiť?`,
+                    confirmText: "Áno, uložiť",
+                    cancelText: "Zrušiť",
+                    danger: false
+                });
+                if (!confirmed) {
                     return;
                 }
             }
