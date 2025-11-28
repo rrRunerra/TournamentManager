@@ -1,5 +1,6 @@
 import React from "react";
-import { useRoute } from "uu5g05";
+import { useRoute, Lsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi.js";
 import "../styles/home.css";
 import heroGif from "../assets/gif.gif";
 
@@ -12,12 +13,10 @@ export default function Home() {
         <img src={heroGif} alt="" className="hero-background-gif" />
         <div className="hero-content">
           <h1 className="hero-title">
-            Vitajte v <span className="brand-highlight">MatchUP</span>
+            <Lsi import={importLsi} path={["Home", "welcome"]} /> <span className="brand-highlight">MatchUP</span>
           </h1>
           <p className="hero-subtitle">
-            Organizujte svoje turnaje jednoducho a efektívne.
-            <br />
-            Všetko čo potrebujete na jednom mieste.
+            <Lsi import={importLsi} path={["Home", "subtitle"]} />
           </p>
 
 
@@ -27,14 +26,14 @@ export default function Home() {
               onClick={() => setRoute("tournaments")}
             >
               <span className="btn-icon">🏆</span>
-              Prehľad turnajov
+              <Lsi import={importLsi} path={["Home", "tournamentsBtn"]} />
             </button>
             <button
               className="hero-btn secondary"
               onClick={() => setRoute("about")}
             >
               <span className="btn-icon">👥</span>
-              O nás
+              <Lsi import={importLsi} path={["Home", "aboutBtn"]} />
             </button>
           </div>
         </div>
@@ -42,37 +41,37 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="features-section">
-        <h2 className="section-home-title">Prečo MatchUP?</h2>
+        <h2 className="section-home-title"><Lsi import={importLsi} path={["Home", "whyTitle"]} /></h2>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon">⚡</div>
-            <h3>Rýchle a jednoduché</h3>
-            <p>Vytvorte turnaj za pár kliknutí a začnite okamžite</p>
+            <h3><Lsi import={importLsi} path={["Home", "fastTitle"]} /></h3>
+            <p><Lsi import={importLsi} path={["Home", "fastDesc"]} /></p>
           </div>
 
           <div className="feature-card">
             <div className="feature-icon">📊</div>
-            <h3>Prehľadné výsledky</h3>
-            <p>Sledujte priebeh turnaja v reálnom čase</p>
+            <h3><Lsi import={importLsi} path={["Home", "resultsTitle"]} /></h3>
+            <p><Lsi import={importLsi} path={["Home", "resultsDesc"]} /></p>
           </div>
 
           <div className="feature-card">
             <div className="feature-icon">🎯</div>
-            <h3>Flexibilné formáty</h3>
-            <p>Single a double elimination turnaje</p>
+            <h3><Lsi import={importLsi} path={["Home", "flexibleTitle"]} /></h3>
+            <p><Lsi import={importLsi} path={["Home", "flexibleDesc"]} /></p>
           </div>
 
           <div className="feature-card">
             <div className="feature-icon">📜</div>
-            <h3>História turnajov</h3>
-            <p>Všetky vaše turnaje na jednom mieste</p>
+            <h3><Lsi import={importLsi} path={["Home", "historyTitle"]} /></h3>
+            <p><Lsi import={importLsi} path={["Home", "historyDesc"]} /></p>
           </div>
         </div>
       </section>
 
       {/* Sponsors Section */}
       <section className="sponsors-section">
-        <h3 className="sponsors-title">Partneri</h3>
+        <h3 className="sponsors-title"><Lsi import={importLsi} path={["Home", "partnersTitle"]} /></h3>
         <div className="sponsors-grid">
           <a
             href="https://sps-snina.edupage.org/"
