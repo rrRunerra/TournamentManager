@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/about.css"; // Import your new CSS file
 import FlappyBird from "../bricks/flappy-bird";
 import { useLsi } from "uu5g05";
@@ -43,16 +43,40 @@ const AboutPage = () => {
     },
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+        rootMargin: "0px 0px -50px 0px" // Offset slightly so it triggers before bottom
+      }
+    );
+
+    const hiddenElements = document.querySelectorAll(".animate-on-scroll");
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      hiddenElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div className="about-page">
       <div className="about-container">
 
         {/* --- HEADER SECTION --- */}
         <div className="about-header">
-          <h1 className="main-title">
+          <h1 className="main-title animate-on-scroll">
             {lsi.title} <span className="text-gradient">{lsi.team}</span>
           </h1>
-          <p className="subtitle">
+          <p className="subtitle animate-on-scroll delay-1">
             {lsi.subtitle}
             <br /><br />
             {lsi.subtitle2}
@@ -61,7 +85,7 @@ const AboutPage = () => {
 
         {/* --- TEAM SECTION --- */}
         <div className="section-header">
-          <h2 className="section-title">{lsi.ourTeam}</h2>
+          <h2 className="section-title animate-on-scroll">{lsi.ourTeam}</h2>
         </div>
 
         <div className="team-grid">
@@ -70,28 +94,31 @@ const AboutPage = () => {
               key={index}
               member={member}
               onClick={member.name === "Branislav Bobrik" ? () => setShowGame(true) : undefined}
+              className={`animate-on-scroll delay-${index + 1}`}
             />
           ))}
         </div>
 
         {/* --- MOTIVATION SECTION --- */}
         <div className="section-header">
-          <h2 className="section-title">{lsi.motivationTitle}</h2>
+          <h2 className="section-title animate-on-scroll">{lsi.motivationTitle}</h2>
         </div>
 
         <div className="motivation-grid">
           <MotivationCard
             title={lsi.collaborationTitle}
             text={lsi.collaborationText}
+            className="animate-on-scroll delay-1"
           />
           <MotivationCard
             title={lsi.innovationTitle}
             text={lsi.innovationText}
+            className="animate-on-scroll delay-2"
           />
         </div>
 
         {/* --- CTA SECTION --- */}
-        <CtaSection lsi={lsi} />
+        <CtaSection lsi={lsi} className="animate-on-scroll" />
 
         {showGame && <FlappyBird onClose={() => setShowGame(false)} />}
 
@@ -102,9 +129,9 @@ const AboutPage = () => {
 
 // --- COMPONENTS ---
 
-const TeamCard = ({ member, onClick }) => {
+const TeamCard = ({ member, onClick, className }) => {
   return (
-    <div className="team-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
+    <div className={`team-card ${className || ''}`} onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       <div className="card-top-line" />
       <div className="team-avatar">
         {member.initials}
@@ -161,18 +188,18 @@ const SocialIcons = ({ socials }) => {
   );
 };
 
-const MotivationCard = ({ title, text }) => {
+const MotivationCard = ({ title, text, className }) => {
   return (
-    <div className="motivation-card">
+    <div className={`motivation-card ${className || ''}`}>
       <h3 className="motivation-title">{title}</h3>
       <p className="motivation-text">{text}</p>
     </div>
   );
 };
 
-const CtaSection = ({ lsi }) => {
+const CtaSection = ({ lsi, className }) => {
   return (
-    <div className="cta-section">
+    <div className={`cta-section ${className || ''}`}>
       <h2 className="cta-title">
         {lsi.ctaTitle}
       </h2>

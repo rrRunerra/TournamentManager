@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRoute, Lsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/home.css";
@@ -7,20 +7,45 @@ import heroGif from "../assets/gif.gif";
 export default function Home() {
   const [, setRoute] = useRoute();
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+        rootMargin: "0px 0px -50px 0px" // Offset slightly so it triggers before bottom
+      }
+    );
+
+    const hiddenElements = document.querySelectorAll(".animate-on-scroll");
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      hiddenElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div className="home-container">
       <div className="home-hero">
         <img src={heroGif} alt="" className="hero-background-gif" />
         <div className="hero-content">
-          <h1 className="hero-title">
+          <h1 className="hero-title animate-on-scroll">
             <Lsi import={importLsi} path={["Home", "welcome"]} /> <span className="brand-highlight">MatchUP</span>
           </h1>
-          <p className="hero-subtitle">
+          <p className="hero-subtitle animate-on-scroll delay-1">
             <Lsi import={importLsi} path={["Home", "subtitle"]} />
           </p>
 
 
-          <div className="hero-buttons">
+
+          <div className="hero-buttons animate-on-scroll delay-2">
             <button
               className="hero-btn primary"
               onClick={() => setRoute("tournaments")}
@@ -41,27 +66,27 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="features-section">
-        <h2 className="section-home-title"><Lsi import={importLsi} path={["Home", "whyTitle"]} /></h2>
+        <h2 className="section-home-title animate-on-scroll"><Lsi import={importLsi} path={["Home", "whyTitle"]} /></h2>
         <div className="features-grid">
-          <div className="feature-card">
+          <div className="feature-card animate-on-scroll delay-1">
             <div className="feature-icon">⚡</div>
             <h3><Lsi import={importLsi} path={["Home", "fastTitle"]} /></h3>
             <p><Lsi import={importLsi} path={["Home", "fastDesc"]} /></p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card animate-on-scroll delay-2">
             <div className="feature-icon">📊</div>
             <h3><Lsi import={importLsi} path={["Home", "resultsTitle"]} /></h3>
             <p><Lsi import={importLsi} path={["Home", "resultsDesc"]} /></p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card animate-on-scroll delay-3">
             <div className="feature-icon">🎯</div>
             <h3><Lsi import={importLsi} path={["Home", "flexibleTitle"]} /></h3>
             <p><Lsi import={importLsi} path={["Home", "flexibleDesc"]} /></p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card animate-on-scroll delay-4">
             <div className="feature-icon">📜</div>
             <h3><Lsi import={importLsi} path={["Home", "historyTitle"]} /></h3>
             <p><Lsi import={importLsi} path={["Home", "historyDesc"]} /></p>
@@ -71,8 +96,8 @@ export default function Home() {
 
       {/* Sponsors Section */}
       <section className="sponsors-section">
-        <h3 className="sponsors-title"><Lsi import={importLsi} path={["Home", "partnersTitle"]} /></h3>
-        <div className="sponsors-grid">
+        <h3 className="sponsors-title animate-on-scroll"><Lsi import={importLsi} path={["Home", "partnersTitle"]} /></h3>
+        <div className="sponsors-grid animate-on-scroll delay-1">
           <a
             href="https://sps-snina.edupage.org/"
             target="_blank"
