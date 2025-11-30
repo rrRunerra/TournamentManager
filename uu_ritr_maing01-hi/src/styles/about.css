@@ -358,8 +358,8 @@
   background: linear-gradient(135deg, #ff8e53, #ff6b35);
 }
 
-.social-icons .icon-content a[data-social="steam"] .filled,
-.social-icons .icon-content a[data-social="steam"]~.tooltip {
+.social-icons .icon-content a[data-social="email"] .filled,
+.social-icons .icon-content a[data-social="email"]~.tooltip {
   background: linear-gradient(135deg, #ffd166, #ff8e53);
 }
 
