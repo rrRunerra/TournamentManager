@@ -3,9 +3,11 @@ import "../styles/about.css"; // Import your new CSS file
 import FlappyBird from "../bricks/flappy-bird";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
+import ContactModal from "../bricks/contactModal";
 
 const AboutPage = () => {
   const [showGame, setShowGame] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const lsi = useLsi(importLsi, ["AboutPage"]);
   const team = [
     {
@@ -118,9 +120,10 @@ const AboutPage = () => {
         </div>
 
         {/* --- CTA SECTION --- */}
-        <CtaSection lsi={lsi} className="animate-on-scroll" />
+        <CtaSection lsi={lsi} className="animate-on-scroll" onContactClick={() => setShowContactModal(true)} />
 
         {showGame && <FlappyBird onClose={() => setShowGame(false)} />}
+        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
 
       </div>
     </div>
@@ -196,7 +199,7 @@ const MotivationCard = ({ title, text, className }) => {
   );
 };
 
-const CtaSection = ({ lsi, className }) => {
+const CtaSection = ({ lsi, className, onContactClick }) => {
   return (
     <div className={`cta-section ${className || ''}`}>
       <h2 className="cta-title">
@@ -205,15 +208,12 @@ const CtaSection = ({ lsi, className }) => {
       <p className="cta-text">
         {lsi.ctaText}
       </p>
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform?usp=dialog"
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={onContactClick}
         className="cta-button"
-        style={{ textDecoration: 'none', display: 'inline-block' }}
       >
         {lsi.contactUs}
-      </a>
+      </button>
     </div>
   );
 };
