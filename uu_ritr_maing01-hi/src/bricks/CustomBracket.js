@@ -55,6 +55,8 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const { confirm } = useConfirm();
     const lsi = useLsi(importLsi, ["CustomBracket"]);
 
+    console.log(match)
+
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
     const [winnerId, setWinnerId] = useState(initialWinnerId);
@@ -301,6 +303,7 @@ const getRoundName = (roundKey, totalRounds, index, lsi) => {
 
 const processMatches = (matches) => {
     const matchMap = new Map(matches.map(m => [m.id, { ...m }]));
+    console.log("Processing matches")
 
     const sortedMatches = [...matchMap.values()].sort((a, b) => {
         const rA = parseInt(a.tournamentRoundText || a.round);
@@ -328,40 +331,68 @@ const processMatches = (matches) => {
         }
     });
 
-    // Auto-assign winner for matches with WALK_OVER state
-    sortedMatches.forEach(match => {
-        if (match.state === 'WALK_OVER') {
-            const validParticipants = match.participants.filter(p => p.id && p.name && p.name !== "TBD" && p.resultText !== "WALK_OVER");
-            if (validParticipants.length === 1) {
-                const walkoverWinner = match.participants.find(p => p.id === validParticipants[0].id);
-                if (walkoverWinner) {
-                    walkoverWinner.isWinner = true;
+    // Auto-assign winners and advance them through WALK_OVER chains
+    // Keep looping until no more changes occur
+    let changesOccurred = true;
+    let iterations = 0;
+    const maxIterations = 20; // Prevent infinite loops
+
+    while (changesOccurred && iterations < maxIterations) {
+        changesOccurred = false;
+        iterations++;
+
+        // Pass 1: Mark winners in WALK_OVER matches
+        sortedMatches.forEach(match => {
+            if (match.state == 'WALK_OVER') {
+                // Case 1: Match has only 1 participant total
+                if (match.participants.length === 1 && match.participants[0].id && !match.participants[0].isWinner) {
+                    console.log(`[Iteration ${iterations}] Setting single participant as winner:`, match.participants[0].name, "in match", match.id);
+                    match.participants[0].isWinner = true;
+                    changesOccurred = true;
                 }
-            }
-        }
-    });
-
-    // Third pass: Advance walkover winners to next round
-    sortedMatches.forEach(match => {
-        if (match.state === 'WALK_OVER') {
-            const winner = match.participants.find(p => p.isWinner && p.resultText !== "WALK_OVER");
-
-            if (winner && match.nextMatchId) {
-                const nextMatch = matchMap.get(match.nextMatchId);
-                if (nextMatch) {
-                    const alreadyIn = nextMatch.participants.some(p => p.id === winner.id);
-                    if (!alreadyIn) {
-                        const emptySlotIndex = nextMatch.participants.findIndex(p => !p.name || p.name === "TBD" || p.resultText === "WALK_OVER");
-                        if (emptySlotIndex !== -1) {
-                            nextMatch.participants[emptySlotIndex] = { ...winner, resultText: null, isWinner: false };
-                        } else if (nextMatch.participants.length < 2) {
-                            nextMatch.participants.push({ ...winner, resultText: null, isWinner: false });
+                // Case 2: Match has 2 slots but only 1 valid participant (other is TBD/WALK_OVER)
+                else {
+                    const validParticipants = match.participants.filter(p => p.id && p.name && p.name !== "TBD" && p.resultText !== "WALK_OVER");
+                    if (validParticipants.length === 1) {
+                        const walkoverWinner = match.participants.find(p => p.id === validParticipants[0].id);
+                        if (walkoverWinner && !walkoverWinner.isWinner) {
+                            console.log(`[Iteration ${iterations}] Setting valid participant as winner:`, walkoverWinner.name, "in match", match.id);
+                            walkoverWinner.isWinner = true;
+                            changesOccurred = true;
                         }
                     }
                 }
             }
-        }
-    });
+        });
+
+        // Pass 2: Advance walkover winners to next round
+        sortedMatches.forEach(match => {
+            if (match.state === 'WALK_OVER') {
+                const winner = match.participants.find(p => p.isWinner && p.resultText !== "WALK_OVER");
+
+                if (winner && match.nextMatchId) {
+                    const nextMatch = matchMap.get(match.nextMatchId);
+                    if (nextMatch) {
+                        const alreadyIn = nextMatch.participants.some(p => p.id === winner.id);
+                        if (!alreadyIn) {
+                            const emptySlotIndex = nextMatch.participants.findIndex(p => !p.name || p.name === "TBD" || p.resultText === "WALK_OVER");
+                            if (emptySlotIndex !== -1) {
+                                console.log(`[Iteration ${iterations}] Advancing ${winner.name} from match ${match.id} to match ${nextMatch.id}`);
+                                nextMatch.participants[emptySlotIndex] = { ...winner, resultText: null, isWinner: false };
+                                changesOccurred = true;
+                            } else if (nextMatch.participants.length < 2) {
+                                console.log(`[Iteration ${iterations}] Adding ${winner.name} to match ${nextMatch.id}`);
+                                nextMatch.participants.push({ ...winner, resultText: null, isWinner: false });
+                                changesOccurred = true;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    console.log(`WALK_OVER processing completed after ${iterations} iterations`);
 
     return Array.from(matchMap.values());
 };
@@ -560,125 +591,6 @@ const TreeBracketView = ({ matches, onMatchClick }) => {
                 ))}
             </div>
         </div>
-    );
-};
-
-// Keep RoundColumn and MatchPair for Double Bracket (Legacy support if needed)
-// Or we can try to use TreeBracketView for double bracket too?
-// Double bracket is essentially two trees + a final.
-// For now, let's keep the old components for double bracket to be safe, 
-// as the user specifically asked to "remake the single bracket".
-
-const MatchPair = ({ matches, isLastRound, onMatchClick }) => {
-    if (matches.length === 0) return <div className="match-pair"></div>;
-
-    return (
-        <div className="match-pair">
-            {matches.map(match => (
-                <MatchCard key={match.id} match={match} onClick={onMatchClick} />
-            ))}
-            {!isLastRound && matches.length > 1 && <div className="match-pair-connector"></div>}
-            {!isLastRound && matches.length === 1 && <div className="match-connector-straight"></div>}
-        </div>
-    );
-};
-
-const RoundColumn = ({ title, matches, roundIndex, totalRounds, nextRoundMatches, onMatchClick }) => {
-    const pairs = useMemo(() => {
-        if (roundIndex === totalRounds - 1) {
-            return matches.map(m => [m]);
-        }
-
-        const pairsMap = new Map();
-
-        matches.forEach(match => {
-            const nextId = match.nextMatchId;
-            if (!nextId) {
-                pairsMap.set(`standalone-${match.id}`, [match]);
-            } else {
-                if (!pairsMap.has(nextId)) {
-                    pairsMap.set(nextId, []);
-                }
-                pairsMap.get(nextId).push(match);
-            }
-        });
-
-        if (nextRoundMatches) {
-            const orderedPairs = [];
-            const remainingPairs = new Map(pairsMap);
-
-            nextRoundMatches.forEach(nextMatch => {
-                if (remainingPairs.has(nextMatch.id)) {
-                    orderedPairs.push(remainingPairs.get(nextMatch.id));
-                    remainingPairs.delete(nextMatch.id);
-                }
-            });
-
-            remainingPairs.forEach(pair => orderedPairs.push(pair));
-            return orderedPairs;
-        }
-
-        return Array.from(pairsMap.values());
-    }, [matches, roundIndex, totalRounds, nextRoundMatches]);
-
-    return (
-        <div className="round-column">
-            <div className="round-header">
-                <div className="round-title">{title}</div>
-            </div>
-            <div className="round-matches">
-                {pairs.map((pair, index) => (
-                    <MatchPair
-                        key={index}
-                        matches={pair}
-                        isLastRound={roundIndex === totalRounds - 1}
-                        onMatchClick={onMatchClick}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-};
-
-const BracketInner = ({ matches, onMatchClick }) => {
-    const processedMatches = useMemo(() => processMatches(matches), [matches]);
-    const lsi = useLsi(importLsi, ["CustomBracket"]);
-
-    const rounds = useMemo(() => {
-        const roundsMap = {};
-        processedMatches.forEach(match => {
-            const round = match.tournamentRoundText || `${match.round}`;
-            if (!roundsMap[round]) roundsMap[round] = [];
-            roundsMap[round].push(match);
-        });
-
-        const sortedKeys = Object.keys(roundsMap).sort((a, b) => {
-            const numA = parseInt(a);
-            const numB = parseInt(b);
-            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
-            return a.localeCompare(b);
-        });
-
-        return sortedKeys.map((key, index) => ({
-            title: getRoundName(key, sortedKeys.length, index, lsi),
-            matches: roundsMap[key].sort((a, b) => a.id - b.id)
-        }));
-    }, [processedMatches, lsi]);
-
-    return (
-        <>
-            {rounds.map((round, index) => (
-                <RoundColumn
-                    key={index}
-                    title={round.title}
-                    matches={round.matches}
-                    roundIndex={index}
-                    totalRounds={rounds.length}
-                    nextRoundMatches={rounds[index + 1]?.matches}
-                    onMatchClick={onMatchClick}
-                />
-            ))}
-        </>
     );
 };
 
