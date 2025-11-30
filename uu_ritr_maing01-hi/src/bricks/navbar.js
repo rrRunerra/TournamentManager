@@ -18,7 +18,7 @@ const LANGUAGES = [
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("home");
   const [route, setRoute] = useRoute();
-  const [user, setUser] = useState(); // Initialize user from mock state
+  const [user, setUser] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [lang, setLang] = useLanguage();
@@ -27,7 +27,7 @@ export default function Navbar() {
   const handleCardClick = (newRoute) => {
     setActiveLink(newRoute)
     setRoute(newRoute);
-    setIsOpen(false); // Close mobile menu when a card is clicked
+    setIsOpen(false);
   };
 
   const handleLogout = () => {
@@ -44,13 +44,12 @@ export default function Navbar() {
     //   return;
     // }
 
-    // Load language from localStorage (only on mount)
-    if (!route.uu5Route) {
-      const savedLang = localStorage.getItem("language");
-      if (savedLang) {
-        setLang(savedLang);
-      }
+    // Load language from localStorage
+    const savedLang = localStorage.getItem("language");
+    if (savedLang) {
+      setLang(savedLang);
     }
+
 
     // Sync activeLink with the current route
     if (route.uu5Route) {
