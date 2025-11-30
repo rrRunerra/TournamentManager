@@ -51,7 +51,11 @@
         "tournaments": "Turnieje",
         "history": "Historia",
         "about": "O nas",
-        "logout": "Wyloguj się"
+        "logout": "Wyloguj się",
+        "logoutConfirmTitle": "Potwierdź wylogowanie",
+        "logoutConfirmMessage": "Czy naprawdę chcesz się wylogować?",
+        "logoutConfirm": "Tak, wyloguj",
+        "logoutCancel": "Anuluj"
     },
     "Confirm": {
         "confirmDefault": "Potwierdź",

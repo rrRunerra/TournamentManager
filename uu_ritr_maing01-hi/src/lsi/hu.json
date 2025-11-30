@@ -51,7 +51,11 @@
         "tournaments": "Versenyek",
         "history": "Előzmények",
         "about": "Rólunk",
-        "logout": "Kijelentkezés"
+        "logout": "Kijelentk ezés",
+        "logoutConfirmTitle": "Kijelentkezés megerősítése",
+        "logoutConfirmMessage": "Biztos, hogy ki szeretne jelentkezni?",
+        "logoutConfirm": "Igen, kijelentkezés",
+        "logoutCancel": "Mégse"
     },
     "Confirm": {
         "confirmDefault": "Megerősítés",

@@ -51,7 +51,11 @@
         "tournaments": "Турниры",
         "history": "История",
         "about": "О нас",
-        "logout": "Выйти"
+        "logout": "Выйти",
+        "logoutConfirmTitle": "Подтвердить выход",
+        "logoutConfirmMessage": "Вы действительно хотите выйти?",
+        "logoutConfirm": "Да, выйти",
+        "logoutCancel": "Отмена"
     },
     "Confirm": {
         "confirmDefault": "Подтвердить",

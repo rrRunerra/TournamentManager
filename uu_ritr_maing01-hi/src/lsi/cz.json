@@ -51,7 +51,11 @@
     "tournaments": "Turnaje",
     "history": "Historie",
     "about": "O nás",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "logoutConfirmTitle": "Potvrdit odhlášení",
+    "logoutConfirmMessage": "Opravdu se chcete odhlásit?",
+    "logoutConfirm": "Ano, odhlásit",
+    "logoutCancel": "Zrušit"
   },
   "Confirm": {
     "confirmDefault": "Potvrdit",

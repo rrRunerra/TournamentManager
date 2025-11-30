@@ -51,7 +51,11 @@
     "tournaments": "Tournaments",
     "history": "History",
     "about": "About Us",
-    "logout": "Logout"
+    "logout": "Logout",
+    "logoutConfirmTitle": "Confirm Logout",
+    "logoutConfirmMessage": "Do you really want to log out?",
+    "logoutConfirm": "Yes, logout",
+    "logoutCancel": "Cancel"
   },
   "Confirm": {
     "confirmDefault": "Confirm",

@@ -51,7 +51,11 @@
         "tournaments": "Turniere",
         "history": "Verlauf",
         "about": "Über uns",
-        "logout": "Abmelden"
+        "logout": "Abmelden",
+        "logoutConfirmTitle": "Abmeldung bestätigen",
+        "logoutConfirmMessage": "Möchten Sie sich wirklich abmelden?",
+        "logoutConfirm": "Ja, abmelden",
+        "logoutCancel": "Abbrechen"
     },
     "Confirm": {
         "confirmDefault": "Bestätigen",

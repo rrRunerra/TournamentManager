@@ -1,7 +1,8 @@
 import "../styles/navbar.css";
 import { useEffect, useState } from "react";
-import { useRoute, Utils, Environment, useLanguage, Lsi } from "uu5g05";
+import { useRoute, Utils, Environment, useLanguage, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
+import { useConfirm } from "./ConfirmProvider.js";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -22,6 +23,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [lang, setLang] = useLanguage();
+  const { confirm } = useConfirm();
+  const lsi = useLsi(importLsi, ["Navbar"]);
 
   // Handler to update route
   const handleCardClick = (newRoute) => {
@@ -30,9 +33,19 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("player");
-    setRoute("home");
+  const handleLogout = async () => {
+    const confirmed = await confirm({
+      title: lsi.logoutConfirmTitle,
+      message: lsi.logoutConfirmMessage,
+      confirmText: lsi.logoutConfirm,
+      cancelText: lsi.logoutCancel,
+      danger: true
+    });
+
+    if (confirmed) {
+      localStorage.removeItem("player");
+      setRoute("home");
+    }
   }
 
   useEffect(() => {
