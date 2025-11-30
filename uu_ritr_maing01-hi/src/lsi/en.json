@@ -83,7 +83,8 @@
     "errorTeamSize": "Team size is required.",
     "errorTeams": "At least 3 teams are required.",
     "errorInvalidDate": "Start date cannot be later than end date.",
-    "errorRobin": "Round Robin requires an even number of teams."
+    "errorRobin": "Round Robin requires an even number of teams.",
+    "errorDouble": "Double elimination requires the number of teams to be divisible by 4."
   },
   "Pagination": {
     "previous": "Previous",

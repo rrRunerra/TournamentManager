@@ -83,7 +83,8 @@
         "errorTeamSize": "A csapatméret kötelező.",
         "errorTeams": "Legalább 3 csapat szükséges.",
         "errorInvalidDate": "A kezdés dátuma nem lehet később, mint a befejezés dátuma.",
-        "errorRobin": "A körmérkőzéshez páros számú csapat szükséges."
+        "errorRobin": "A körmérkőzéshez páros számú csapat szükséges.",
+        "errorDouble": "A dupla kieséses rendszerhez a csapatok számának oszthatónak kell lennie 4-gyel."
     },
     "Pagination": {
         "previous": "Előző",

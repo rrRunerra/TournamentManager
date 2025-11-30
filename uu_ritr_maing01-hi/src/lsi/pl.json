@@ -83,7 +83,8 @@
         "errorTeamSize": "Rozmiar drużyny jest wymagany.",
         "errorTeams": "Wymagane są co najmniej 3 drużyny.",
         "errorInvalidDate": "Data rozpoczęcia nie może być późniejsza niż data zakończenia.",
-        "errorRobin": "Każdy z każdym wymaga parzystej liczby drużyn."
+        "errorRobin": "Każdy z każdym wymaga parzystej liczby drużyn.",
+        "errorDouble": "Podwójna eliminacja wymaga, aby liczba drużyn była podzielna przez 4."
     },
     "Pagination": {
         "previous": "Poprzedni",

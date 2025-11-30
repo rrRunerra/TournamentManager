@@ -83,7 +83,8 @@
         "errorTeamSize": "Veľkosť tímu je povinná.",
         "errorTeams": "Sú vyžadované aspoň 3 tímy.",
         "errorInvalidDate": "Dátum začiatku nemôže byť neskôr ako dátum konca.",
-        "errorRobin": "Každý s každým vyžaduje párny počet tímov."
+        "errorRobin": "Každý s každým vyžaduje párny počet tímov.",
+        "errorDouble": "Dvojitá eliminácia vyžaduje, aby počet tímov bol deliteľný 4."
     },
     "Pagination": {
         "previous": "Predchádzajúci",

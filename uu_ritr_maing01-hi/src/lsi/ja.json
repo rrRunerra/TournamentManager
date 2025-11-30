@@ -83,7 +83,8 @@
         "errorTeamSize": "チームサイズは必須です。",
         "errorTeams": "少なくとも3つのチームが必要です。",
         "errorInvalidDate": "開始日は終了日より後にはできません。",
-        "errorRobin": "ラウンドロビンには偶数のチームが必要です。"
+        "errorRobin": "ラウンドロビンには偶数のチームが必要です。",
+        "errorDouble": "ダブルエリミネーションには、チーム数が4で割り切れる必要があります。"
     },
     "Pagination": {
         "previous": "前へ",

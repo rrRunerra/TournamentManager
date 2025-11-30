@@ -149,7 +149,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               if (teams.length < 3) newErrors.teams = true;
 
               if (bracketType == "robin" && (teams.length % 2 == 1)) newErrors.robin = true
-              if (bracketType == "double" && (teams.length % 4 != 0)) newErrors.dobule = true
+              if (bracketType == "double" && (teams.length % 4 != 0)) newErrors.double = true
 
               console.log(bracketType)
               console.log(teams.length % 4)
@@ -166,7 +166,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
                 if (newErrors.teams) showError(lsi.errorTitle, lsi.errorTeams);
                 if (newErrors.invalidDate) showError(lsi.errorTitle, lsi.errorInvalidDate);
                 if (newErrors.robin) showError(lsi.errorTitle, lsi.errorRobin);
-                if (newErrors.dobule) showError(lsi.errorTitle, "Number of teams must be a multiple of 4 for double elimination bracket");
+                if (newErrors.double) showError(lsi.errorTitle, lsi.errorDouble);
 
                 return;
               }

@@ -83,7 +83,8 @@
     "errorTeamSize": "Velikost týmu je povinná.",
     "errorTeams": "Jsou vyžadovány alespoň 3 týmy.",
     "errorInvalidDate": "Datum začátku nemůže být později než datum konce.",
-    "errorRobin": "Každý s každým vyžaduje sudý počet týmů."
+    "errorRobin": "Každý s každým vyžaduje sudý počet týmů.",
+    "errorDouble": "Dvojitá eliminace vyžaduje, aby počet týmů byl dělitelný 4."
   },
   "Pagination": {
     "previous": "Předchozí",

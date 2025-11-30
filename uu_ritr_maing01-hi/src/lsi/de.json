@@ -83,7 +83,8 @@
         "errorTeamSize": "Teamgröße ist erforderlich.",
         "errorTeams": "Mindestens 3 Teams sind erforderlich.",
         "errorInvalidDate": "Startdatum darf nicht nach dem Enddatum liegen.",
-        "errorRobin": "Jeder gegen Jeden erfordert eine gerade Anzahl von Teams."
+        "errorRobin": "Jeder gegen Jeden erfordert eine gerade Anzahl von Teams.",
+        "errorDouble": "Doppel-Eliminierung erfordert, dass die Anzahl der Teams durch 4 teilbar ist."
     },
     "Pagination": {
         "previous": "Zurück",
