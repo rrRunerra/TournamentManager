@@ -51,7 +51,11 @@
         "tournaments": "锦标赛",
         "history": "历史",
         "about": "关于我们",
-        "logout": "注销"
+        "logout": "注销",
+        "logoutConfirmTitle": "确认注销",
+        "logoutConfirmMessage": "您真的要注销吗？",
+        "logoutConfirm": "是的，注销",
+        "logoutCancel": "取消"
     },
     "Confirm": {
         "confirmDefault": "确认",

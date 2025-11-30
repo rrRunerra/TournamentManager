@@ -51,7 +51,11 @@
         "tournaments": "トーナメント",
         "history": "履歴",
         "about": "私たちについて",
-        "logout": "ログアウト"
+        "logout": "ログアウト",
+        "logoutConfirmTitle": "ログアウトの確認",
+        "logoutConfirmMessage": "本当にログアウトしますか？",
+        "logoutConfirm": "はい、ログアウト",
+        "logoutCancel": "キャンセル"
     },
     "Confirm": {
         "confirmDefault": "確認",
