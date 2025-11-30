@@ -800,15 +800,11 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
                 <div className="custom-bracket-container">
                     <div className="bracket-section">
                         <h3 className="bracket-title">{lsi.upperBracket}</h3>
-                        <div className="bracket-rounds">
-                            <BracketInner matches={matches.upper || []} onMatchClick={handleMatchClick} />
-                        </div>
+                        <TreeBracketView matches={matches.upper || []} onMatchClick={handleMatchClick} />
                     </div>
                     <div className="bracket-section">
                         <h3 className="bracket-title">{lsi.lowerBracket}</h3>
-                        <div className="bracket-rounds">
-                            <BracketInner matches={matches.lower || []} onMatchClick={handleMatchClick} />
-                        </div>
+                        <TreeBracketView matches={matches.lower || []} onMatchClick={handleMatchClick} />
                     </div>
                 </div>
             ) : (
