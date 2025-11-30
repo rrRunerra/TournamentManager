@@ -6,7 +6,7 @@ import { Lsi } from "uu5g05";
 const GRAVITY = 0.08;
 const JUMP_STRENGTH = -3;
 const PIPE_SPEED = 2;
-const PIPE_SPAWN_RATE = 2000; // ms
+const PIPE_SPAWN_RATE = 1300; // ms - reduced for closer obstacles
 const GAP_SIZE = 200;
 
 const FlappyBird = ({ onClose }) => {
