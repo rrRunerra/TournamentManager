@@ -247,5 +247,16 @@
             "11": "Listopad",
             "12": "Grudzień"
         }
+    },
+    "FlappyBird": {
+        "best": "Najlepszy",
+        "score": "Wynik",
+        "clickToStart": "Kliknij, aby rozpocząć",
+        "clickToRestart": "Kliknij, aby zrestartować",
+        "gameOver": "Koniec gry"
+    },
+    "Footer": {
+        "copyright": "© 2025 MatchUP. Wszelkie prawa zastrzeżone.",
+        "collaboration": "Projekt studencki we współpracy z Unicorn"
     }
 }

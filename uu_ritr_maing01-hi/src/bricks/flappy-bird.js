@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/flappy-bird.css';
+import importLsi from "../lsi/import-lsi.js";
+import { Lsi } from "uu5g05";
 
 const GRAVITY = 0.08;
 const JUMP_STRENGTH = -3;
@@ -141,7 +143,7 @@ const FlappyBird = ({ onClose }) => {
 
                 <div className="score-board">
                     <div>{score}</div>
-                    <div className="high-score">Best: {highScore}</div>
+                    <div className="high-score"><Lsi import={importLsi} path={["FlappyBird", "best"]} />: {highScore}</div>
                 </div>
 
                 <div
@@ -177,18 +179,18 @@ const FlappyBird = ({ onClose }) => {
 
                 {gameOver && (
                     <div className="game-over">
-                        <h2>Koniec hry</h2>
-                        <p>Skóre: {score}</p>
-                        <p>Najlepšie: {highScore}</p>
-                        <p>Kliknite pre reštart</p>
+                        <h2><Lsi import={importLsi} path={["FlappyBird", "gameOver"]} /></h2>
+                        <p><Lsi import={importLsi} path={["FlappyBird", "score"]} />: {score}</p>
+                        <p><Lsi import={importLsi} path={["FlappyBird", "best"]} />: {highScore}</p>
+                        <p><Lsi import={importLsi} path={["FlappyBird", "clickToRestart"]} /></p>
                     </div>
                 )}
 
                 {!gameStarted && !gameOver && (
                     <div className="game-over">
                         <h2>Flappy Bird</h2>
-                        <p>Najlepšie: {highScore}</p>
-                        <p>Kliknite pre štart</p>
+                        <p><Lsi import={importLsi} path={["FlappyBird", "best"]} />: {highScore}</p>
+                        <p><Lsi import={importLsi} path={["FlappyBird", "clickToStart"]} /></p>
                     </div>
                 )}
             </div>
@@ -197,3 +199,4 @@ const FlappyBird = ({ onClose }) => {
 };
 
 export default FlappyBird;
+

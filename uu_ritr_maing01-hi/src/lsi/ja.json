@@ -247,5 +247,16 @@
             "11": "11月",
             "12": "12月"
         }
+    },
+    "FlappyBird": {
+        "best": "ベスト",
+        "score": "スコア",
+        "clickToStart": "クリックしてスタート",
+        "clickToRestart": "クリックして再スタート",
+        "gameOver": "ゲームオーバー"
+    },
+    "Footer": {
+        "copyright": "© 2025 MatchUP. 無断転載を禁じます。",
+        "collaboration": "Unicornとの共同学生プロジェクト"
     }
 }

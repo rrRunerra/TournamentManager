@@ -7,7 +7,6 @@ const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
   { code: "cz", label: "CZ", icon: "🇨🇿" },
   { code: "sk", label: "SK", icon: "🇸🇰" },
-  { code: "uk", label: "UK", icon: "🇺🇦" },
   { code: "de", label: "DE", icon: "🇩🇪" },
   { code: "pl", label: "PL", icon: "🇵🇱" },
   { code: "hu", label: "HU", icon: "🇭🇺" },

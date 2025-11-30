@@ -247,5 +247,16 @@
             "11": "十一月",
             "12": "十二月"
         }
+    },
+    "FlappyBird": {
+        "best": "最佳",
+        "score": "分数",
+        "clickToStart": "点击开始",
+        "clickToRestart": "点击重新开始",
+        "gameOver": "游戏结束"
+    },
+    "Footer": {
+        "copyright": "© 2025 MatchUP. 保留所有权利。",
+        "collaboration": "与Unicorn合作的学生项目"
     }
 }

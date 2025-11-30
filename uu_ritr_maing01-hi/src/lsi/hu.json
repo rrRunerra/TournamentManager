@@ -247,5 +247,16 @@
             "11": "November",
             "12": "December"
         }
+    },
+    "FlappyBird": {
+        "best": "Legjobb",
+        "score": "Pontszám",
+        "clickToStart": "Kattints a kezdéshez",
+        "clickToRestart": "Kattints az újraindításhoz",
+        "gameOver": "Játék vége"
+    },
+    "Footer": {
+        "copyright": "© 2025 MatchUP. Minden jog fenntartva.",
+        "collaboration": "Diákprojekt az Unicornnal együttműködve"
     }
 }

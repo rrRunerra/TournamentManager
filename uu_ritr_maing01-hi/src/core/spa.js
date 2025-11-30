@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
@@ -9,6 +9,7 @@ import Home from "../routes/home.js";
 import Navbar from "../bricks/navbar.js";
 import { NotificationProvider } from "../bricks/NotificationProvider.js";
 import { ConfirmProvider } from "../bricks/ConfirmProvider.js";
+import importLsi from "../lsi/import-lsi.js";
 import "../styles/spa.css"
 //@@viewOff:imports
 
@@ -43,7 +44,7 @@ const Spa = createVisualComponent({
     return (
       <NotificationProvider>
         <ConfirmProvider>
-          <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "ko", "zh", "ru", "de", "es", "pl", "no", "fi", "hu", "it", "ro", "th", "vi"]}>
+          <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "zh", "ru", "de", "pl", "hu"]}>
             <Uu5Elements.ModalBus>
               {/* Obal pre flex layout */}
               <div className="spa-layout">
@@ -52,9 +53,9 @@ const Spa = createVisualComponent({
                   <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
                 </main>
                 <footer className="app-footer">
-                  <p>© 2025 MatchUP. Všetky práva vyhradené.
+                  <p><Lsi import={importLsi} path={["Footer", "copyright"]} />
                     <br />
-                    Študentský projekt v spolupráci s firmou Unicorn</p>
+                    <Lsi import={importLsi} path={["Footer", "collaboration"]} /></p>
                 </footer>
               </div>
             </Uu5Elements.ModalBus>

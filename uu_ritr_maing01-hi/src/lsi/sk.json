@@ -247,5 +247,16 @@
             "11": "November",
             "12": "December"
         }
+    },
+    "FlappyBird": {
+        "best": "Najlepšie",
+        "score": "Skóre",
+        "clickToStart": "Kliknite pre štart",
+        "clickToRestart": "Kliknite pre reštart",
+        "gameOver": "Koniec hry"
+    },
+    "Footer": {
+        "copyright": "© 2025 MatchUP. Všetky práva vyhradené.",
+        "collaboration": "Študentský projekt v spolupráci s firmou Unicorn"
     }
 }

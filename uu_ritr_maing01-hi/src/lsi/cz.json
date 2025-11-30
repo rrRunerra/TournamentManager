@@ -247,5 +247,16 @@
       "11": "Listopad",
       "12": "Prosinec"
     }
+  },
+  "FlappyBird": {
+    "best": "Nejlepší",
+    "score": "Skóre",
+    "clickToStart": "Klikněte pro start",
+    "clickToRestart": "Klikněte pro restart",
+    "gameOver": "Konec hry"
+  },
+  "Footer": {
+    "copyright": "© 2025 MatchUP. Všechna práva vyhrazena.",
+    "collaboration": "Studentský projekt ve spolupráci s firmou Unicorn"
   }
 }

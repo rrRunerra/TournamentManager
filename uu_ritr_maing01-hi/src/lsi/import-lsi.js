@@ -8,7 +8,7 @@ import lsiRu from "./ru.json";
 import lsiDe from "./de.json";
 import lsiPl from "./pl.json";
 import lsiHu from "./hu.json";
-import lsiUk from "./uk.json";
+
 
 const libraryCode = "uu_ritr_maing01-hi";
 
@@ -25,7 +25,6 @@ Utils.Lsi.setDefaultLsi(libraryCode, {
     de: lsiDe,
     pl: lsiPl,
     hu: lsiHu,
-    uk: lsiUk
 });
 
 export default importLsi;
