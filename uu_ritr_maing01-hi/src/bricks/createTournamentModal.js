@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/createTournamentModal.css";
 import { useNotification } from "./NotificationProvider.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
+import Calls from "../calls.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -17,6 +18,31 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const { showError } = useNotification();
   const lsi = useLsi(importLsi, ["CreateTournament"]);
 
+  // Authorization check using localStorage
+  // useEffect(() => {
+  //   if (!isOpen) return;
+
+  //   const user = localStorage.getItem("player");
+  //   if (user) {
+  //     try {
+  //       const parsedUser = JSON.parse(user);
+  //       Calls.getPlayer({ id: parsedUser.id }).then((pDb) => {
+  //         if (pDb.role.toLowerCase() !== "teacher") {
+  //           showError(lsi.errorTitle, lsi.errorUnauthorized);
+  //           onClose();
+  //         }
+  //       }).catch((error) => {
+  //         console.error("Failed to verify user role:", error);
+  //       });
+  //     } catch (error) {
+  //       console.error("Failed to parse user from localStorage:", error);
+  //     }
+  //   }
+  // }, [isOpen, lsi, showError, onClose]);
+
+
+
+
   if (!isOpen) return null;
 
   const addTeam = () => {
@@ -28,19 +54,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const removeTeam = (index) => {
     setTeams(teams.filter((_, i) => i !== index));
   };
-
-
-  // localstorage bypass check
-  // const user = JSON.parse(localStorage.getItem("player"));
-  // new Promise((resolve, reject) => {
-  //   const pDb = Calls.getPlayer({ id: user.id });
-  //   resolve(pDb)
-  // }).then((pDb) => {
-  //   if (pDb.role.toLowerCase() !== "teacher") {
-  //     alert("You are not authorized to create a tournament");
-  //     onClose();
-  //   }
-  // })
 
 
 

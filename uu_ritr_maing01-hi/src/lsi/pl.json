@@ -88,7 +88,8 @@
         "errorTeams": "Wymagane są co najmniej 3 drużyny.",
         "errorInvalidDate": "Data rozpoczęcia nie może być późniejsza niż data zakończenia.",
         "errorRobin": "Każdy z każdym wymaga parzystej liczby drużyn.",
-        "errorDouble": "Podwójna eliminacja wymaga, aby liczba drużyn była podzielna przez 4."
+        "errorDouble": "Podwójna eliminacja wymaga, aby liczba drużyn była podzielna przez 4.",
+        "errorUnauthorized": "Nie masz uprawnień do tworzenia turnieju. Tylko nauczyciele mogą tworzyć turnieje."
     },
     "Pagination": {
         "previous": "Poprzedni",

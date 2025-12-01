@@ -88,7 +88,8 @@
     "errorTeams": "Jsou vyžadovány alespoň 3 týmy.",
     "errorInvalidDate": "Datum začátku nemůže být později než datum konce.",
     "errorRobin": "Každý s každým vyžaduje sudý počet týmů.",
-    "errorDouble": "Dvojitá eliminace vyžaduje, aby počet týmů byl dělitelný 4."
+    "errorDouble": "Dvojitá eliminace vyžaduje, aby počet týmů byl dělitelný 4.",
+    "errorUnauthorized": "Nemáte oprávnění k vytvoření turnaje. Pouze učitelé mohou vytvářet turnaje."
   },
   "Pagination": {
     "previous": "Předchozí",

@@ -88,7 +88,8 @@
         "errorTeams": "至少需要 3 个团队。",
         "errorInvalidDate": "开始日期不能晚于结束日期。",
         "errorRobin": "循环赛需要偶数个团队。",
-        "errorDouble": "双淘汰赛要求团队数量必须是4的倍数。"
+        "errorDouble": "双淘汰赛要求团队数量必须是4的倍数。",
+        "errorUnauthorized": "您无权创建锦标赛。只有教师才能创建锦标赛。"
     },
     "Pagination": {
         "previous": "上一页",
