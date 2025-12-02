@@ -50,14 +50,12 @@ export default function Home() {
               className="hero-btn primary"
               onClick={() => setRoute("tournaments")}
             >
-              <span className="btn-icon">🏆</span>
               <Lsi import={importLsi} path={["Home", "tournamentsBtn"]} />
             </button>
             <button
               className="hero-btn secondary"
               onClick={() => setRoute("about")}
             >
-              <span className="btn-icon">👥</span>
               <Lsi import={importLsi} path={["Home", "aboutBtn"]} />
             </button>
           </div>
