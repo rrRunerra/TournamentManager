@@ -15,6 +15,10 @@ class PlayerController {
     return PlayerAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
+  updatePlayerStats(ucEnv) {
+    return PlayerAbl.updatePlayerStats(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
 }
 
 module.exports = new PlayerController();

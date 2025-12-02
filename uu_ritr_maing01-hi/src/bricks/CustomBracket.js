@@ -55,7 +55,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
     const { confirm } = useConfirm();
     const lsi = useLsi(importLsi, ["CustomBracket"]);
 
-    console.log(match)
+    const isFinal = match.name.toLowerCase().includes("final")
 
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
@@ -151,6 +151,48 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
             if (onMatchUpdate) {
                 await onMatchUpdate();
             }
+
+            // Check if this is a final match and update player stats
+            if (isFinal && winnerId) {
+                console.log(match)
+                if (match.name.toLowerCase().includes("upper")) {
+                    const winner = match.participants.find(p => p.id === winnerId);
+                    const loser = match.participants.find(p => p.id !== winnerId);
+                    await Calls.updatePlayerStats({
+                        tournamentId: match.tournamentId,
+                        firstPlaceParticipantId: winner.id,
+                        secondPlaceParticipantId: loser.id,
+                        thirdPlaceParticipantId: null,
+                        fourthPlaceParticipantId: null
+                    })
+                }
+                if (match.name.toLowerCase().includes("lower")) {
+                    const winner = match.participants.find(p => p.id === winnerId);
+                    const loser = match.participants.find(p => p.id !== winnerId);
+                    await Calls.updatePlayerStats({
+                        tournamentId: match.tournamentId,
+                        firstPlaceParticipantId: null,
+                        secondPlaceParticipantId: null,
+                        thirdPlaceParticipantId: winner.id,
+                        fourthPlaceParticipantId: loser.id
+                    })
+                }
+
+                // Signle elim. bracket
+                if (match.name.toLowerCase().includes("final") && !match.name.toLowerCase().includes("lower") && !match.name.toLowerCase().includes("upper")) {
+                    const winner = match.participants.find(p => p.id === winnerId);
+                    const loser = match.participants.find(p => p.id !== winnerId);
+                    await Calls.updatePlayerStats({
+                        tournamentId: match.tournamentId,
+                        firstPlaceParticipantId: winner.id,
+                        secondPlaceParticipantId: loser.id,
+                        thirdPlaceParticipantId: null,
+                        fourthPlaceParticipantId: null
+                    })
+                }
+
+            }
+
             onClose();
         } catch (error) {
             console.error("Failed to update score", error);

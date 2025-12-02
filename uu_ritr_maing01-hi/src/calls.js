@@ -101,8 +101,12 @@ const Calls = {
   getPlayer(dtoIn) {
     const commandUri = Calls.getCommandUri("player/get");
     return Calls.call("get", commandUri, dtoIn);
-  }
+  },
 
+  updatePlayerStats(dtoIn) {
+    const commandUri = Calls.getCommandUri("player/updateStats");
+    return Calls.call("post", commandUri, dtoIn);
+  }
 
 
 

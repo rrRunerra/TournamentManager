@@ -19,6 +19,7 @@ const Login = Utils.Component.lazy(() => import("../routes/login.js"));
 const Tournaments = Utils.Component.lazy(() => import("../routes/tournament.js"));
 const Tournament = Utils.Component.lazy(() => import("../routes/tournament-detail.js"));
 const History = Utils.Component.lazy(() => import("../routes/history.js"));
+const Profile = Utils.Component.lazy(() => import("../routes/profile.js"))
 
 const ROUTE_MAP = {
   "": { redirect: "login" },
@@ -34,6 +35,7 @@ const ROUTE_MAP = {
     </Uu5Elements.Text>
   ),
   history: (props) => <History {...props} />,
+  profile: (props) => <Profile {...props} />,
 };
 //@@viewOff:constants
 

@@ -287,7 +287,6 @@ class TournamentAbl {
     dtoIn.id = tId;
 
 
-    console.log("Creating tournament with data:", dtoIn);
     const out = await this.dao.create({
       awid,
       ...dtoIn,

@@ -105,6 +105,11 @@
         "realization": "api/controllers/MatchController.update",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "player/updateStats": {
+        "realization": "api/controllers/PlayerController.updatePlayerStats",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

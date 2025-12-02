@@ -70,17 +70,17 @@ class MatchAbl {
     const winner = dtoIn.participants.find(p => p.isWinner);
     const loser = dtoIn.participants.find(p => !p.isWinner && p.id); // Ensure loser has an ID (not empty slot)
 
-    console.log("Propagating match result:");
-    console.log("Winner:", winner);
-    console.log("Loser:", loser);
-    console.log("Next Match ID:", match.nextMatchId);
-    console.log("Next Loser Match ID:", match.nextLooserMatchId);
-    console.log(match)
+    // console.log("Propagating match result:");
+    // console.log("Winner:", winner);
+    // console.log("Loser:", loser);
+    // console.log("Next Match ID:", match.nextMatchId);
+    // console.log("Next Loser Match ID:", match.nextLooserMatchId);
+    // console.log(match)
 
     if (winner && match.nextMatchId) {
       try {
         const nextMatch = await this.dao.get(awid, match.nextMatchId, dtoIn.tournamentId);
-        console.log("Found next match:", nextMatch ? nextMatch.id : "null");
+        // console.log("Found next match:", nextMatch ? nextMatch.id : "null");
         if (nextMatch) {
           // Add winner to next match participants if not already there
           const isAlreadyIn = nextMatch.participants.some(p => p.id === winner.id);

@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "Spielerstatistiken",
+        "firstPlace": "1. Platz",
+        "secondPlace": "2. Platz",
+        "thirdPlace": "3. Platz",
+        "fourthPlace": "4. Platz",
+        "totalTournaments": "Insgesamt gespielte Turniere"
+    },
     "appName": "Anwendung uuRitr",
     "About": {
         "header": "Über die Anwendung uuRitr",

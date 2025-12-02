@@ -160,7 +160,11 @@ export default function Navbar() {
                 {user.name || user.username || "User"}
               </div>
               <div className="account-popup-divider"></div>
-              <div className="account-popup-item" onClick={() => handleCardClick('profile')}>
+              <div className="account-popup-item" onClick={() => {
+                setActiveLink("home")
+                setIsAccountOpen(false)
+                setRoute("profile", { id: user.id })
+              }}>
                 <span className="account-popup-icon">👤</span>
                 <Lsi import={importLsi} path={["Navbar", "profile"]} />
               </div>

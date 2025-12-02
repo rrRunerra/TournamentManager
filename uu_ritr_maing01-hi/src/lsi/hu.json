@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "Játékos statisztikák",
+        "firstPlace": "1. hely",
+        "secondPlace": "2. hely",
+        "thirdPlace": "3. hely",
+        "fourthPlace": "4. hely",
+        "totalTournaments": "Összes lejátszott verseny"
+    },
     "appName": "uuRitr alkalmazás",
     "About": {
         "header": "A uuRitr alkalmazásról",

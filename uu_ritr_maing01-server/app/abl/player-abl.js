@@ -34,6 +34,8 @@ class PlayerAbl {
     if (!validationResult.isValid()) {
       throw new Error("InvalidDtoIn");
     }
+
+
   }
 
   async create(awid, dtoIn) {
@@ -162,12 +164,82 @@ class PlayerAbl {
         id: user.id,
         name: user.name,
         school: user.school,
-        role: user.role
+        role: user.role,
+        stats: {
+          firstPlace: 0,
+          secondPlace: 0,
+          thirdPlace: 0,
+          fourthPlace: 0
+        }
       })
     }
 
     return user
 
+  }
+
+  async updatePlayerStats(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerUpdateStatsDtoInType", dtoIn);
+    console.log("UPDAING USER")
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    console.log(dtoIn)
+    //     {
+    //   tournamentId: 'rsmqy3e1e0h246boknzjky',
+    //   firstPlaceParticipantId: '8ijppe8mlynf5io5xuqbv',
+    //   secondPlaceParticipantId: 'o835td8d8vim1yggoivvf',
+    //   thirdPlaceParticipantId: null,
+    //   fourthPlaceParticipantId: null
+    // }
+    // Get team DAO
+    const teamDao = DaoFactory.getDao("team");
+
+    // Helper function to update stats for a team's players
+    const updateTeamPlayerStats = async (participantId, statField) => {
+      if (!participantId) return;
+
+      const team = await teamDao.get(awid, participantId);
+      if (!team || !team.players) return;
+
+      for (const playerId of team.players) {
+        // Fetch the full player object
+        const playerObj = await this.dao.get(awid, playerId);
+        if (!playerObj) continue;
+
+        // Initialize stats if they don't exist
+        const currentStats = playerObj.stats || {
+          firstPlace: 0,
+          secondPlace: 0,
+          thirdPlace: 0,
+          fourthPlace: 0
+        };
+
+        // Update with incremented stat
+        await this.dao.update({
+          awid,
+          id: playerId,
+          ...playerObj,
+          stats: {
+            ...currentStats,
+            [statField]: currentStats[statField] + 1
+          }
+        });
+        console.log(`Updated ${statField} for player ${playerId}`);
+      }
+
+
+    };
+
+    // Update stats for each placement
+    await updateTeamPlayerStats(dtoIn.firstPlaceParticipantId, 'firstPlace');
+    await updateTeamPlayerStats(dtoIn.secondPlaceParticipantId, 'secondPlace');
+    await updateTeamPlayerStats(dtoIn.thirdPlaceParticipantId, 'thirdPlace');
+    await updateTeamPlayerStats(dtoIn.fourthPlaceParticipantId, 'fourthPlace');
+
+    return { success: true, message: "Player stats updated successfully" };
   }
 
 }

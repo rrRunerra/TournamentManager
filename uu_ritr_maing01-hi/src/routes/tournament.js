@@ -95,7 +95,7 @@ export default function TournamentsPage() {
       <h2 className="tournament-title" title={tournament.name}>{tournament.name}</h2>
       <p className="tournament-details">
         📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {lsi.months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
-        👥 {tournament.teams.length} {lsi.teamsCount}
+        👥 {tournament.teams?.length} {lsi.teamsCount}
       </p>
       <div className="tournament-status">
         {tournament.status === "ongoing" ? (

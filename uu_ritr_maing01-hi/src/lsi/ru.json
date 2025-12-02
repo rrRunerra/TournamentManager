@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "Статистика игрока",
+        "firstPlace": "1-е место",
+        "secondPlace": "2-е место",
+        "thirdPlace": "3-е место",
+        "fourthPlace": "4-е место",
+        "totalTournaments": "Всего сыграно турниров"
+    },
     "appName": "Приложение uuRitr",
     "About": {
         "header": "О приложении uuRitr",

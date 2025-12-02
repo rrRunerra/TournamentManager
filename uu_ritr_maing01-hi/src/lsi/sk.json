@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "Štatistiky hráča",
+        "firstPlace": "1. miesto",
+        "secondPlace": "2. miesto",
+        "thirdPlace": "3. miesto",
+        "fourthPlace": "4. miesto",
+        "totalTournaments": "Celkom odohraných turnajov"
+    },
     "appName": "Aplikácia uuRitr",
     "About": {
         "header": "O aplikácii uuRitr",

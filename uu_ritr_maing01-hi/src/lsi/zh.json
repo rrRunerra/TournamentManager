@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "玩家统计",
+        "firstPlace": "第一名",
+        "secondPlace": "第二名",
+        "thirdPlace": "第三名",
+        "fourthPlace": "第四名",
+        "totalTournaments": "参加锦标赛总数"
+    },
     "appName": "uuRitr 应用程序",
     "About": {
         "header": "关于 uuRitr 应用程序",

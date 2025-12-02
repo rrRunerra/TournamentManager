@@ -1,4 +1,12 @@
 {
+    "Profile": {
+        "statsTitle": "プレイヤー統計",
+        "firstPlace": "1位",
+        "secondPlace": "2位",
+        "thirdPlace": "3位",
+        "fourthPlace": "4位",
+        "totalTournaments": "総トーナメント数"
+    },
     "appName": "uuRitr アプリケーション",
     "About": {
         "header": "uuRitr アプリケーションについて",

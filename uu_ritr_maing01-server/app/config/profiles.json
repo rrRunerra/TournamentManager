@@ -200,6 +200,14 @@
         "profileList": [
           "Public"
         ]
+      },
+      "player/updateStats": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       }
     }
   }

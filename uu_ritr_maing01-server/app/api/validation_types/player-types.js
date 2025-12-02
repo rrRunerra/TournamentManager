@@ -15,6 +15,14 @@ const PlayerGetDtoInType = shape({
     id: uu5String(255).isRequired()
 })
 
+const PlayerUpdateStatsDtoInType = shape({
+    firstPlaceParticipantId: uu5String(255),
+    secondPlaceParticipantId: uu5String(255),
+    thirdPlaceParticipantId: uu5String(255),
+    fourthPlaceParticipantId: uu5String(255),
+    tournamentId: uu5String(255).isRequired()
+})
+
 // const playerSchema = {
 //   id: String,                      
 //   name: String,
