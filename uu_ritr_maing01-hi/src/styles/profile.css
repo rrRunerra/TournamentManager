@@ -1,0 +1,99 @@
+.profile-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.profile-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+}
+
+.profile-name {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #fff, #a5a5a5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.profile-details {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stats-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #ff8e53;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease;
+    min-width: 140px;
+    flex: 1;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.total-stats-card {
+    background: linear-gradient(45deg, rgba(255, 142, 83, 0.1), rgba(255, 142, 83, 0.05));
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 142, 83, 0.2);
+}
+
+.total-stats-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.total-stats-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff8e53;
+}
