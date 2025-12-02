@@ -52,6 +52,8 @@
     "history": "Historie",
     "about": "O nás",
     "logout": "Odhlásit se",
+    "loggedInAs": "Přihlášen jako",
+    "profile": "Můj profil",
     "logoutConfirmTitle": "Potvrdit odhlášení",
     "logoutConfirmMessage": "Opravdu se chcete odhlásit?",
     "logoutConfirm": "Ano, odhlásit",

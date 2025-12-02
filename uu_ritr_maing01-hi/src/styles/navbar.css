@@ -278,7 +278,7 @@
 /* Language Switcher Styles */
 .language-selector-wrapper {
   position: absolute;
-  right: 25px;
+  right: 85px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
@@ -360,4 +360,91 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Account Icon Styles */
+.account-icon-wrapper {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-icon {
+  width: 40px;
+  height: 40px;
+  color: #ff8e53;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 4px rgba(255, 142, 83, 0.2));
+}
+
+.account-icon:hover {
+  color: #ffd166;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.4));
+}
+
+/* Account Popup Styles */
+.account-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 12px;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease;
+}
+
+.account-popup-header {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  font-family: 'Space Mono', monospace;
+}
+
+.account-popup-name {
+  font-size: 1rem;
+  color: #ff8e53;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.account-popup-divider {
+  height: 1px;
+  background-color: #2a2a2a;
+  margin: 8px 0;
+}
+
+.account-popup-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #e0e0e0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.account-popup-item:hover {
+  background-color: #242424;
+  color: #ff6b35;
+}
+
+.account-popup-icon {
+  font-size: 1.1rem;
 }

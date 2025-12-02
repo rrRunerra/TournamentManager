@@ -52,6 +52,8 @@
         "history": "Historia",
         "about": "O nas",
         "logout": "Wyloguj się",
+        "loggedInAs": "Zalogowany jako",
+        "profile": "Mój profil",
         "logoutConfirmTitle": "Potwierdź wylogowanie",
         "logoutConfirmMessage": "Czy naprawdę chcesz się wylogować?",
         "logoutConfirm": "Tak, wyloguj",

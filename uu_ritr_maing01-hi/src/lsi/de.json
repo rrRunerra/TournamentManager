@@ -52,6 +52,8 @@
         "history": "Verlauf",
         "about": "Über uns",
         "logout": "Abmelden",
+        "loggedInAs": "Angemeldet als",
+        "profile": "Mein Profil",
         "logoutConfirmTitle": "Abmeldung bestätigen",
         "logoutConfirmMessage": "Möchten Sie sich wirklich abmelden?",
         "logoutConfirm": "Ja, abmelden",

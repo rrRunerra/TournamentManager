@@ -52,6 +52,8 @@
         "history": "Előzmények",
         "about": "Rólunk",
         "logout": "Kijelentk ezés",
+        "loggedInAs": "Bejelentkezve mint",
+        "profile": "Saját profil",
         "logoutConfirmTitle": "Kijelentkezés megerősítése",
         "logoutConfirmMessage": "Biztos, hogy ki szeretne jelentkezni?",
         "logoutConfirm": "Igen, kijelentkezés",

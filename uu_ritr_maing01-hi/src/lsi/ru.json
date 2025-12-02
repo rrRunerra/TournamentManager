@@ -52,6 +52,8 @@
         "history": "История",
         "about": "О нас",
         "logout": "Выйти",
+        "loggedInAs": "Вы вошли как",
+        "profile": "Мой профиль",
         "logoutConfirmTitle": "Подтвердить выход",
         "logoutConfirmMessage": "Вы действительно хотите выйти?",
         "logoutConfirm": "Да, выйти",

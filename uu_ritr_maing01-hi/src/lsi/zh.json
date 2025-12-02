@@ -52,6 +52,8 @@
         "history": "历史",
         "about": "关于我们",
         "logout": "注销",
+        "loggedInAs": "登录身份:",
+        "profile": "我的个人资料",
         "logoutConfirmTitle": "确认注销",
         "logoutConfirmMessage": "您真的要注销吗？",
         "logoutConfirm": "是的，注销",

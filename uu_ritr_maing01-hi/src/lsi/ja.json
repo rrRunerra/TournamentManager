@@ -52,6 +52,8 @@
         "history": "履歴",
         "about": "私たちについて",
         "logout": "ログアウト",
+        "loggedInAs": "ログイン中:",
+        "profile": "マイプロフィール",
         "logoutConfirmTitle": "ログアウトの確認",
         "logoutConfirmMessage": "本当にログアウトしますか？",
         "logoutConfirm": "はい、ログアウト",

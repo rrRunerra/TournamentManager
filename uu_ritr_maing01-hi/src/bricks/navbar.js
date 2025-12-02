@@ -22,6 +22,7 @@ export default function Navbar() {
   const [user, setUser] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [lang, setLang] = useLanguage();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["Navbar"]);
@@ -115,7 +116,7 @@ export default function Navbar() {
         <div className="language-selector-wrapper desktop-only">
           <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
             <span className="lang-icon">
-              {LANGUAGES.find(l => l.code === lang)?.icon || "�"}
+              {LANGUAGES.find(l => l.code === lang)?.icon || "🌐"}
             </span>
             <span className="lang-text">
               {LANGUAGES.find(l => l.code === lang)?.label || lang.toUpperCase()}
@@ -134,6 +135,35 @@ export default function Navbar() {
                   <span className="lang-icon">{l.icon}</span> {l.label}
                 </div>
               ))}
+            </div>
+          )}
+        </div>
+
+        {/* Account Icon (Desktop) */}
+        <div className="account-icon-wrapper desktop-only">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="account-icon"
+            onClick={() => setIsAccountOpen(!isAccountOpen)}
+          >
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+          </svg>
+
+          {isAccountOpen && user && (
+            <div className="account-popup">
+              <div className="account-popup-header">
+                <Lsi import={importLsi} path={["Navbar", "loggedInAs"]} />
+              </div>
+              <div className="account-popup-name">
+                {user.name || user.username || "User"}
+              </div>
+              <div className="account-popup-divider"></div>
+              <div className="account-popup-item" onClick={() => handleCardClick('profile')}>
+                <span className="account-popup-icon">👤</span>
+                <Lsi import={importLsi} path={["Navbar", "profile"]} />
+              </div>
             </div>
           )}
         </div>
