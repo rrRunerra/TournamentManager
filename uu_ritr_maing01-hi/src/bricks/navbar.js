@@ -1,5 +1,5 @@
 import "../styles/navbar.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRoute, Utils, Environment, useLanguage, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { useConfirm } from "./ConfirmProvider.js";
@@ -26,6 +26,8 @@ export default function Navbar() {
   const [lang, setLang] = useLanguage();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["Navbar"]);
+  const accountPopupRef = useRef(null);
+  const langPopupRef = useRef(null);
 
   // Handler to update route
   const handleCardClick = (newRoute) => {
@@ -71,6 +73,40 @@ export default function Navbar() {
     }
   }, [route]);
 
+  // Close account popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (accountPopupRef.current && !accountPopupRef.current.contains(event.target)) {
+        setIsAccountOpen(false);
+      }
+    };
+
+    if (isAccountOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isAccountOpen]);
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langPopupRef.current && !langPopupRef.current.contains(event.target)) {
+        setIsLangOpen(false);
+      }
+    };
+
+    if (isLangOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLangOpen]);
+
   const handleLanguageChange = (lang) => {
     setLang(lang);
     localStorage.setItem("language", lang);
@@ -113,7 +149,7 @@ export default function Navbar() {
         </div>
 
         {/* Language Switcher (Desktop) */}
-        <div className="language-selector-wrapper desktop-only">
+        <div className="language-selector-wrapper desktop-only" ref={langPopupRef}>
           <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
             <span className="lang-icon">
               {LANGUAGES.find(l => l.code === lang)?.icon || "🌐"}
@@ -140,7 +176,7 @@ export default function Navbar() {
         </div>
 
         {/* Account Icon (Desktop) */}
-        <div className="account-icon-wrapper desktop-only">
+        <div className="account-icon-wrapper desktop-only" ref={accountPopupRef}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
