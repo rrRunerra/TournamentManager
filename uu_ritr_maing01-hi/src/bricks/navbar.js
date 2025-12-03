@@ -204,6 +204,14 @@ export default function Navbar() {
                 <span className="account-popup-icon">👤</span>
                 <Lsi import={importLsi} path={["Navbar", "profile"]} />
               </div>
+              <div className="account-popup-item" onClick={() => {
+                setActiveLink("home")
+                setIsAccountOpen(false)
+                setRoute("settings")
+              }}>
+                <span className="account-popup-icon">⚙️</span>
+                <Lsi import={importLsi} path={["Navbar", "settings"]} />
+              </div>
             </div>
           )}
         </div>

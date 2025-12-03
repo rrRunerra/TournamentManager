@@ -67,6 +67,7 @@
     "logout": "Logout",
     "loggedInAs": "Logged in as",
     "profile": "My Profile",
+    "settings": "Settings",
     "logoutConfirmTitle": "Confirm Logout",
     "logoutConfirmMessage": "Do you really want to log out?",
     "logoutConfirm": "Yes, logout",

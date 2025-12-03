@@ -119,9 +119,6 @@ const AboutPage = () => {
           />
         </div>
 
-        {/* --- CTA SECTION --- */}
-        <CtaSection lsi={lsi} className="animate-on-scroll" />
-
         {/* --- THANKS SECTION --- */}
         <ThanksSection lsi={lsi} className="animate-on-scroll" />
 
@@ -199,27 +196,6 @@ const MotivationCard = ({ title, text, className }) => {
     <div className={`motivation-card ${className || ''}`}>
       <h3 className="motivation-title">{title}</h3>
       <p className="motivation-text">{text}</p>
-    </div>
-  );
-};
-
-const CtaSection = ({ lsi, className }) => {
-  return (
-    <div className={`cta-section ${className || ''}`}>
-      <h2 className="cta-title">
-        {lsi.ctaTitle}
-      </h2>
-      <p className="cta-text">
-        {lsi.ctaText}
-      </p>
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="cta-button"
-      >
-        {lsi.contactUs}
-      </a>
     </div>
   );
 };
