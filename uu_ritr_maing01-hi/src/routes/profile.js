@@ -30,12 +30,40 @@ const StatCard = ({ label, value, color }) => (
 export default function ProfilePage() {
     const id = new URLSearchParams(window.location.search).get("id");
     const [stats, setStats] = useState(null);
+    const [lastTournaments, setLastTournaments] = useState([]);
     const lsi = useLsi(importLsi, ["Profile"]);
 
     useEffect(() => {
         async function fetchData() {
             const s = await Calls.getPlayer({ id });
-            setStats(s)
+            setStats(s);
+
+            const playerId = id || s.id;
+            console.log("Fetching tournaments for player:", playerId);
+
+            try {
+                // Fetch more tournaments to ensure we find the user's history
+                const tournamentsResponse = await Calls.listTournaments({
+                    status: "finished",
+                    limit: 100
+                });
+                const allTournaments = tournamentsResponse.itemList || [];
+                console.log("All finished tournaments:", allTournaments.length);
+
+                // Filter tournaments where the user played
+                const userTournaments = allTournaments.filter(t =>
+                    t.teams && t.teams.some(team => team.players && team.players.includes(playerId))
+                );
+                console.log("User tournaments found:", userTournaments);
+
+                // Sort by end date descending
+                userTournaments.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+                // Take top 3
+                setLastTournaments(userTournaments.slice(0, 3));
+            } catch (e) {
+                console.error("Error fetching tournaments for profile", e);
+            }
         }
         fetchData()
     }, [id])
@@ -53,11 +81,7 @@ export default function ProfilePage() {
         flappyBirdHighScore: 0
     };
 
-    const totalTournaments =
-        (playerStats.finals_firstPlace || 0) +
-        (playerStats.finals_secondPlace || 0) +
-        (playerStats.finals_thirdPlace || 0) +
-        (playerStats.finals_fourthPlace || 0);
+
 
     return (
         <div className="profile-container">
@@ -120,22 +144,54 @@ export default function ProfilePage() {
                         value={playerStats.tournamentsPlayed || 0}
                         color="#a29bfe" // Purple
                     />
-                    <StatCard
-                        label={lsi.flappyBirdHighScore}
-                        value={playerStats.flappyBirdHighScore || 0}
-                        color="#fdcb6e" // Yellow
-                    />
+
                 </div>
 
-                <div className="total-stats-card">
-                    <div className="total-stats-label">
-                        {lsi.totalTournaments}
-                    </div>
-                    <div className="total-stats-value">
-                        {totalTournaments}
+
+            </div>
+
+            {/* Last Played Tournaments Section */}
+            {lastTournaments.length > 0 && (
+                <div style={{ marginTop: '2rem' }}>
+                    <h2 className="stats-title">
+                        {lsi.lastTournaments}
+                    </h2>
+                    <div className="stats-grid" style={{ gridTemplateColumns: '1fr' }}>
+                        {lastTournaments.map(t => {
+                            const playerId = id || stats.id;
+                            const userTeam = t.teams.find(team => team.players && team.players.includes(playerId));
+                            return (
+                                <div key={t.id} className="stat-card" style={{
+                                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    padding: '1rem 2rem'
+                                }}>
+                                    <div style={{ textAlign: 'left' }}>
+                                        <div className="stat-card-value" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+                                            {t.name}
+                                        </div>
+                                        <div className="stat-card-label">
+                                            {new Date(t.endDate).toLocaleDateString()}
+                                        </div>
+                                    </div>
+                                    <div style={{ textAlign: 'right' }}>
+                                        <div className="stat-card-label" style={{ marginBottom: '0.2rem' }}>
+                                            Tím
+                                        </div>
+                                        <div style={{ color: '#fff', fontWeight: 'bold' }}>
+                                            {userTeam ? userTeam.name : '-'}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
-            </div>
+            )}
+
         </div>
+
     )
 }

@@ -9,7 +9,8 @@
     "matchesLost": "Matches Lost",
     "tournamentsPlayed": "Tournaments Played",
     "flappyBirdHighScore": "Flappy Bird Score",
-    "totalTournaments": "Total Tournaments Played"
+    "totalTournaments": "Total Tournaments Played",
+    "lastTournaments": "Last Played Tournaments"
   },
   "appName": "Application uuRitr",
   "About": {
