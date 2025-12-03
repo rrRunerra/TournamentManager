@@ -18,6 +18,7 @@ export default function HistoryPage() {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [showFilter, setShowFilter] = useState(false);
@@ -29,48 +30,44 @@ export default function HistoryPage() {
     setRoute("tournamentDetail", { id });
   }
 
-  useEffect(() => {
-    async function fetchHistory() {
-      try {
-        const response = await Calls.listTournaments();
-        const finished = response.itemList
-          .filter((t) => t.status === "finished")
-          .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+  async function fetchHistory(page = 1, year = "", month = "", search = "") {
+    setLoading(true);
+    try {
+      const dtoIn = {
+        limit: 15,
+        skip: (page - 1) * 15,
+        status: "finished",
+        year,
+        month,
+        search
+      };
+      const response = await Calls.listTournaments(dtoIn);
 
-        setTournaments(finished);
-        setFilteredTournaments(finished);
-      } catch (err) {
-        console.error("Error fetching history:", err);
-      } finally {
-        setLoading(false);
-      }
+      setTournaments(response.itemList);
+      setFilteredTournaments(response.itemList);
+      setTotalPages(Math.ceil(response.total / 15));
+    } catch (err) {
+      console.error("Error fetching history:", err);
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchHistory();
-  }, []);
+  useEffect(() => {
+    fetchHistory(currentPage, selectedYear, selectedMonth, searchQuery);
+  }, [currentPage, selectedYear, selectedMonth, searchQuery]);
 
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
     .sort((a, b) => b - a);
 
   // 🔍 APPLY ALL FILTERS (YEAR + MONTH + NAME SEARCH)
-  useEffect(() => {
-    const filtered = tournaments.filter((t) => {
-      const date = new Date(t.endDate);
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-
-      if (selectedYear && year !== Number(selectedYear)) return false;
-      if (selectedMonth && month !== Number(selectedMonth)) return false;
-
-      if (searchQuery && !t.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        return false;
-
-      return true;
-    });
-
-    setFilteredTournaments(filtered);
+  // 🔍 FILTERS ARE NOW HANDLED ON SERVER
+  function handleFilterChange(key, value) {
+    if (key === "year") setSelectedYear(value);
+    if (key === "month") setSelectedMonth(value);
+    if (key === "search") setSearchQuery(value);
     setCurrentPage(1); // Reset to first page on filter change
-  }, [selectedYear, selectedMonth, searchQuery, tournaments]);
+  }
 
   function resetFilters() {
     setSelectedYear("");
@@ -79,12 +76,9 @@ export default function HistoryPage() {
   }
 
   // Pagination logic
-  const itemsPerPage = 12;
-  const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
-  const currentItems = filteredTournaments.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // const itemsPerPage = 12; // Handled on server
+  // const totalPages = Math.ceil(filteredTournaments.length / itemsPerPage);
+  const currentItems = filteredTournaments; // Already paginated from server
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -113,7 +107,7 @@ export default function HistoryPage() {
           <select
             className="filter-select"
             value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
+            onChange={(e) => handleFilterChange("year", e.target.value)}
           >
             <option value="">{lsi.year}</option>
             {availableYears.map((year) => (
@@ -127,7 +121,7 @@ export default function HistoryPage() {
           <select
             className="filter-select month-select"
             value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
+            onChange={(e) => handleFilterChange("month", e.target.value)}
           >
             <option value="">{lsi.month}</option>
             {Object.entries(lsi.months).map(([num, label]) => (
@@ -143,7 +137,7 @@ export default function HistoryPage() {
             type="text"
             placeholder={lsi.searchPlaceholder}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleFilterChange("search", e.target.value)}
           />
 
 

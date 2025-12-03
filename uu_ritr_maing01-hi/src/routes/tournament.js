@@ -16,6 +16,9 @@ const createTournament = ({ name, description, startDate, endDate, teamSize, tea
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [route, setRoute] = useRoute();
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -23,16 +26,46 @@ export default function TournamentsPage() {
   const lsi = useLsi(importLsi, ["Tournaments"]);
 
   // fetch tournaments
-  const fetchTournaments = async () => {
+  // fetch tournaments
+  const fetchTournaments = async (pageNum) => {
+    if (loading) return;
+    setLoading(true);
     try {
-      const response = await Calls.listTournaments();
-      setTournaments(response.itemList.filter((t) => {
-        return t.status == "ongoing" || t.status == "upcoming"
-      }));
+      const dtoIn = {
+        limit: 10,
+        skip: (pageNum - 1) * 10,
+        status: ["ongoing", "upcoming"]
+      };
+      const response = await Calls.listTournaments(dtoIn);
+
+      setTournaments(prev => pageNum === 1 ? response.itemList : [...prev, ...response.itemList]);
+      setHasMore(response.hasMore);
     } catch (error) {
       console.error("Error fetching tournaments:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 100 &&
+        hasMore &&
+        !loading
+      ) {
+        setPage(prev => prev + 1);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasMore, loading]);
+
+  useEffect(() => {
+    fetchTournaments(page);
+  }, [page]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("player"));
@@ -41,7 +74,7 @@ export default function TournamentsPage() {
     //   return;
     // }
     setUser(user);
-    fetchTournaments();
+    // fetchTournaments(1); // Triggered by page dependency
   }, []);
 
   if (!user) {
@@ -75,7 +108,9 @@ export default function TournamentsPage() {
     }
 
     await createTournament(data);
-    await fetchTournaments();
+    await createTournament(data);
+    setPage(1); // Reset to first page to reload
+    fetchTournaments(1);
     showSuccess(lsi.createSuccessTitle, lsi.createSuccessMessage);
   };
 

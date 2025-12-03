@@ -79,6 +79,20 @@ class TournamentAbl {
       itemList = itemList.filter(t => statuses.includes(t.status));
     }
 
+    // Filter by Year and Month (based on endDate as per frontend logic)
+    if (dtoIn.year) {
+      itemList = itemList.filter(t => new Date(t.endDate).getFullYear() === parseInt(dtoIn.year));
+    }
+    if (dtoIn.month) {
+      itemList = itemList.filter(t => new Date(t.endDate).getMonth() + 1 === parseInt(dtoIn.month));
+    }
+
+    // Filter by Name (Search)
+    if (dtoIn.search) {
+      const query = dtoIn.search.toLowerCase();
+      itemList = itemList.filter(t => t.name.toLowerCase().includes(query));
+    }
+
     // Apply pagination
     const paginatedItems = itemList.slice(skip, skip + limit);
     const hasMore = skip + limit < itemList?.length;
