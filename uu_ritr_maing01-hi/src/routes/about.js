@@ -233,9 +233,31 @@ const ThanksSection = ({ lsi, className }) => {
       <p className="thanks-text">
         {lsi.thanksText}
       </p>
-      <p className="thanks-secondary">
-        {lsi.thanksUnicorn}
-      </p>
+      <div className="special-thanks">
+        <p className="thanks-people">
+          {lsi.specialThanks || "Špeciálne poďakovanie patri:"}{" "}
+          <a
+            href="https://www.linkedin.com/in/ali-al-alawin/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="thanks-link"
+          >
+            Ali Al Alawin
+          </a>
+          {" a "}
+          <a
+            href="https://www.linkedin.com/in/vanesa-smo%C4%BEakov%C3%A1-962abb39b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="thanks-link"
+          >
+            Vanesa Smoľaková
+          </a>
+        </p>
+        <p className="thanks-appreciation">
+          {lsi.thanksAppreciation || "Bez nich by nič z toho nebolo možné. 💛"}
+        </p>
+      </div>
     </div>
   );
 };

@@ -451,3 +451,60 @@
   border-color: #ff6b35;
   box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
 }
+
+/* --- Special Thanks with Links --- */
+.special-thanks {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+.thanks-people {
+  color: #d1d5db;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.thanks-link {
+  color: #ff8e53;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.thanks-link:hover {
+  background: linear-gradient(90deg, #ffd166, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.4);
+}
+
+.thanks-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd166, #ff6b35);
+  transition: width 0.3s ease;
+}
+
+.thanks-link:hover::after {
+  width: 100%;
+}
+
+.thanks-appreciation {
+  color: #9ca3af;
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-style: italic;
+  line-height: 1.6;
+}
