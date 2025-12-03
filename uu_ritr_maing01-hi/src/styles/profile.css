@@ -110,7 +110,57 @@
 }
 
 .total-stats-value {
-    font-size: 2.5rem;
     font-weight: bold;
     color: #ff8e53;
+}
+
+.profile-tournament-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.profile-tournament-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff8e53;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.profile-tournament-card-name {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.profile-tournament-card-date {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.profile-tournament-card-team-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
+}
+
+.profile-tournament-card-team-name {
+    color: #ff8e53;
+    font-weight: bold;
+    font-size: 1.2rem;
 }

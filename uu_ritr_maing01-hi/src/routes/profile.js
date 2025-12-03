@@ -145,33 +145,25 @@ export default function ProfilePage() {
                     <h2 className="stats-title">
                         {lsi.lastTournaments}
                     </h2>
-                    <div className="stats-grid" style={{ gridTemplateColumns: '1fr' }}>
+                    <div className="stats-grid">
                         {lastTournaments.map(t => {
                             const playerId = id || stats.id;
 
                             return (
-                                <div key={t.id} className="stat-card" style={{
-                                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: '1rem 2rem'
-                                }} onClick={() => {
+                                <div key={t.id} className="profile-tournament-card" onClick={() => {
                                     setRoute("tournamentDetail", { id: t.id })
                                 }}>
-                                    <div style={{ textAlign: 'left' }}>
-                                        <div className="stat-card-value" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                                            {t.name}
-                                        </div>
-                                        <div className="stat-card-label">
-                                            {new Date(t.endDate).toLocaleDateString()}
-                                        </div>
+                                    <div className="profile-tournament-card-name">
+                                        {t.name}
                                     </div>
-                                    <div style={{ textAlign: 'right' }}>
-                                        <div className="stat-card-label" style={{ marginBottom: '0.2rem' }}>
+                                    <div className="profile-tournament-card-date">
+                                        {new Date(t.endDate).toLocaleDateString()}
+                                    </div>
+                                    <div style={{ marginTop: '1rem' }}>
+                                        <div className="profile-tournament-card-team-label">
                                             Tím
                                         </div>
-                                        <div style={{ color: '#fff', fontWeight: 'bold' }}>
+                                        <div className="profile-tournament-card-team-name">
                                             {t.teamName}
                                         </div>
                                     </div>
