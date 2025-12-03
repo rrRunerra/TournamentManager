@@ -23,6 +23,10 @@ class TournamentController {
     return TournamentAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
+  listByUser(ucEnv) {
+    return TournamentAbl.listByUser(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
 }
 
 module.exports = new TournamentController();

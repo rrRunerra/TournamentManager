@@ -121,6 +121,14 @@
           "Public"
         ]
       },
+      "tournament/listByUser": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
       "player/get": {
         "sysStateList": [
           "active"

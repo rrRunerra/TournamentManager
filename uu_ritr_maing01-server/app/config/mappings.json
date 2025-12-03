@@ -56,6 +56,11 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
+      "tournament/listByUser": {
+        "realization": "api/controllers/TournamentController.listByUser",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
       "player/get": {
         "realization": "api/controllers/PlayerController.get",
         "httpMethod": "GET",

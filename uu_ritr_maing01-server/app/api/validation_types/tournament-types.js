@@ -45,6 +45,11 @@ const TournamentListDtoInType = shape({
     ])
 })
 
+const TournamentListByUserDtoInType = shape({
+    userId: uu5String(255).isRequired(),
+    limit: uu5String(255)
+})
+
 
 
 

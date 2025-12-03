@@ -42,25 +42,14 @@ export default function ProfilePage() {
             console.log("Fetching tournaments for player:", playerId);
 
             try {
-                // Fetch more tournaments to ensure we find the user's history
-                const tournamentsResponse = await Calls.listTournaments({
-                    status: "finished",
-                    limit: 100
+                const tournamentsResponse = await Calls.listTournamentsByUser({
+                    userId: playerId,
+                    limit: 3
                 });
-                const allTournaments = tournamentsResponse.itemList || [];
-                console.log("All finished tournaments:", allTournaments.length);
-
-                // Filter tournaments where the user played
-                const userTournaments = allTournaments.filter(t =>
-                    t.teams && t.teams.some(team => team.players && team.players.includes(playerId))
-                );
+                const userTournaments = tournamentsResponse.itemList || [];
                 console.log("User tournaments found:", userTournaments);
 
-                // Sort by end date descending
-                userTournaments.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
-
-                // Take top 3
-                setLastTournaments(userTournaments.slice(0, 3));
+                setLastTournaments(userTournaments);
             } catch (e) {
                 console.error("Error fetching tournaments for profile", e);
             }

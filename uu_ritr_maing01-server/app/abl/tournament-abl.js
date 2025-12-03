@@ -104,6 +104,72 @@ class TournamentAbl {
     };
   }
 
+  async listByUser(awid, dtoIn) {
+    const validationResult = this.validator.validate("TournamentListByUserDtoInType", dtoIn);
+    console.log(dtoIn)
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    const limit = dtoIn.limit || 3;
+    const userId = dtoIn.userId;
+
+    // 1. Fetch finished tournaments
+    // Ideally we would filter by status "finished" in the DB query
+    // But since we need to filter by team players which is inside an array of IDs, 
+    // and we need to resolve teams to check players... this is heavy.
+    // However, the user request snippet showed fetching "finished" tournaments.
+    // Let's optimize by fetching only finished tournaments first.
+
+    // NOTE: In a real large-scale app, we should have a reverse index or a "userTournaments" collection.
+    // For now, we follow the logic: fetch finished -> resolve teams -> filter by user.
+
+    let allTournaments = await this.dao.list(awid); // This fetches all. We should probably filter by status if DAO supports it, but DAO list usually just returns all or paginated.
+    // The existing list method does in-memory filtering. Let's do the same but try to be efficient.
+
+    let itemList = allTournaments.itemList || allTournaments;
+
+    // Filter for finished only
+    itemList = itemList.filter(t => t.status === "finished");
+
+    // Sort by endDate descending (newest first)
+    itemList.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+    const userTournaments = [];
+    const teamdb = DaoFactory.getDao("team");
+
+    // We iterate and resolve teams until we find enough tournaments or run out.
+    // This is better than resolving ALL tournaments' teams.
+
+    for (const tournament of itemList) {
+      if (userTournaments.length >= limit) break;
+
+      if (tournament.teams) {
+        // We need to check if ANY of the teams contains the user.
+        // We can resolve teams one by one or all at once for this tournament.
+        // Let's resolve all for this tournament to check.
+        const teams = await Promise.all(
+          tournament.teams.map(teamId => teamdb.get(awid, teamId))
+        );
+
+        const isUserInTournament = teams.some(team => team && team.players && team.players.includes(userId));
+
+        if (isUserInTournament) {
+          // We don't need to return full team details for this list, usually just the tournament info is enough.
+          // But if the frontend expects the same structure as `get` or `list`, we might want to keep it simple.
+          // The snippet just used `userTournaments` to `setLastTournaments`.
+          // Let's return the tournament object.
+          userTournaments.push(tournament);
+        }
+      }
+    }
+
+    return {
+      itemList: userTournaments,
+      total: userTournaments.length
+    };
+  }
+
   async get(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentGetDtoInType", dtoIn);
 
