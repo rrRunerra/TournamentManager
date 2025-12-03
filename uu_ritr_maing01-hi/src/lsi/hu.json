@@ -5,6 +5,10 @@
         "secondPlace": "2. hely",
         "thirdPlace": "3. hely",
         "fourthPlace": "4. hely",
+        "matchesWon": "Győzelmek",
+        "matchesLost": "Vereségek",
+        "tournamentsPlayed": "Lejátszott versenyek",
+        "flappyBirdHighScore": "Flappy Bird pontszám",
         "totalTournaments": "Összes lejátszott verseny"
     },
     "appName": "uuRitr alkalmazás",

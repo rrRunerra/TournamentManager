@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/flappy-bird.css';
 import importLsi from "../lsi/import-lsi.js";
 import { Lsi } from "uu5g05";
+import Calls from "../calls.js";
 
 const GRAVITY = 0.08;
 const JUMP_STRENGTH = -3;
@@ -28,11 +29,27 @@ const FlappyBird = ({ onClose }) => {
     }, []);
 
     useEffect(() => {
-        if (score > highScore) {
+
+
+        if (score > highScore || gameOver) {
             setHighScore(score);
             localStorage.setItem('flappyHighScore', score);
+            const currentUser = JSON.parse(localStorage.getItem('player') || '{}');
+
+            if (gameOver) {
+                console.log("updating flappybird score")
+
+                Calls.updateFlappyBirdScore({
+                    playerId: currentUser.id,
+                    score: score
+                }).catch(err => {
+                    console.error('Failed to update Flappy Bird score:', err);
+                });
+
+            }
+
         }
-    }, [score, highScore]);
+    }, [score, highScore, gameOver]);
 
     const jump = () => {
         if (!gameStarted) {

@@ -5,6 +5,10 @@
         "secondPlace": "第二名",
         "thirdPlace": "第三名",
         "fourthPlace": "第四名",
+        "matchesWon": "赢得的比赛",
+        "matchesLost": "输掉的比赛",
+        "tournamentsPlayed": "参加的锦标赛",
+        "flappyBirdHighScore": "Flappy Bird 分数",
         "totalTournaments": "参加锦标赛总数"
     },
     "appName": "uuRitr 应用程序",

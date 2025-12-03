@@ -3,7 +3,7 @@ import Calls from "../calls.js";
 import "../styles/customBracket.css";
 import { useNotification } from "./NotificationProvider.js";
 import { useConfirm } from "./ConfirmProvider.js";
-import { useLsi } from "uu5g05";
+import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 
 const STATUS_OPTIONS = ['PLAYED', 'NO_SHOW', 'WALK_OVER', 'NO_PARTY', null];
@@ -46,16 +46,20 @@ const Confetti = ({ isFadingOut }) => {
     );
 };
 
-const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
+const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentInfo }) => {
     const [score1, setScore1] = useState(match.participants[0]?.resultText || "0");
     const [score2, setScore2] = useState(match.participants[1]?.resultText || "0");
     const [status1, setStatus1] = useState(match.participants[0]?.status || null);
     const [status2, setStatus2] = useState(match.participants[1]?.status || null);
+    const [team1Players, setTeam1Players] = useState([]);
+    const [team2Players, setTeam2Players] = useState([]);
     const { showError } = useNotification();
     const { confirm } = useConfirm();
     const lsi = useLsi(importLsi, ["CustomBracket"]);
+    const [, setRoute] = useRoute();
 
     const isFinal = match.name.toLowerCase().includes("final")
+    const isFinishedTournament = tournamentInfo?.status === "finished";
 
     // Determine initial winner
     const initialWinnerId = match.participants.find(p => p.isWinner)?.id || null;
@@ -65,6 +69,34 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
 
     // Check if both participants are present
     const isMatchReady = match.participants && match.participants[0]?.id && match.participants[1]?.id;
+
+    // Fetch team players when tournament is finished
+    useEffect(() => {
+        if (isFinishedTournament && tournamentInfo?.teams && match.participants) {
+            // Get players for team 1
+            const team1 = tournamentInfo.teams.find(t => t.id === match.participants[0]?.id);
+            if (team1?.players) {
+                // Fetch player details
+                Promise.all(team1.players.map(playerId =>
+                    Calls.getPlayer({ id: playerId }).catch(() => null)
+                )).then(players => setTeam1Players(players.filter(p => p)));
+            }
+
+            // Get players for team 2
+            const team2 = tournamentInfo.teams.find(t => t.id === match.participants[1]?.id);
+            if (team2?.players) {
+                Promise.all(team2.players.map(playerId =>
+                    Calls.getPlayer({ id: playerId }).catch(() => null)
+                )).then(players => setTeam2Players(players.filter(p => p)));
+            }
+        }
+    }, [isFinishedTournament, tournamentInfo, match.participants]);
+
+    const handlePlayerClick = (playerId) => {
+        if (playerId) {
+            setRoute("profile", { id: playerId });
+        }
+    };
 
     const handleScoreChange = (participantIndex, increment) => {
         if (!isMatchReady) return;
@@ -152,6 +184,27 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                 await onMatchUpdate();
             }
 
+            // Update match stats for both participants
+            if (winnerId && match.participants[0]?.id && match.participants[1]?.id) {
+                // Update winner stats
+                const winnerParticipant = match.participants.find(p => p.id === winnerId);
+                if (winnerParticipant) {
+                    await Calls.updateMatchStats({
+                        participantId: winnerParticipant.id,
+                        won: true
+                    });
+                }
+
+                // Update loser stats
+                const loserParticipant = match.participants.find(p => p.id !== winnerId);
+                if (loserParticipant) {
+                    await Calls.updateMatchStats({
+                        participantId: loserParticipant.id,
+                        won: false
+                    });
+                }
+            }
+
             // Check if this is a final match and update player stats
             if (isFinal && winnerId) {
                 console.log(match)
@@ -160,10 +213,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                     const loser = match.participants.find(p => p.id !== winnerId);
                     await Calls.updatePlayerStats({
                         tournamentId: match.tournamentId,
-                        firstPlaceParticipantId: winner.id,
-                        secondPlaceParticipantId: loser.id,
-                        thirdPlaceParticipantId: null,
-                        fourthPlaceParticipantId: null
+                        finalsFirstPlaceParticipantId: winner.id,
+                        finalsSecondPlaceParticipantId: loser.id,
+                        finalsThirdPlaceParticipantId: null,
+                        finalsFourthPlaceParticipantId: null
                     })
                 }
                 if (match.name.toLowerCase().includes("lower")) {
@@ -171,10 +224,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                     const loser = match.participants.find(p => p.id !== winnerId);
                     await Calls.updatePlayerStats({
                         tournamentId: match.tournamentId,
-                        firstPlaceParticipantId: null,
-                        secondPlaceParticipantId: null,
-                        thirdPlaceParticipantId: winner.id,
-                        fourthPlaceParticipantId: loser.id
+                        finalsFirstPlaceParticipantId: null,
+                        finalsSecondPlaceParticipantId: null,
+                        finalsThirdPlaceParticipantId: winner.id,
+                        finalsFourthPlaceParticipantId: loser.id
                     })
                 }
 
@@ -184,10 +237,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                     const loser = match.participants.find(p => p.id !== winnerId);
                     await Calls.updatePlayerStats({
                         tournamentId: match.tournamentId,
-                        firstPlaceParticipantId: winner.id,
-                        secondPlaceParticipantId: loser.id,
-                        thirdPlaceParticipantId: null,
-                        fourthPlaceParticipantId: null
+                        finalsFirstPlaceParticipantId: winner.id,
+                        finalsSecondPlaceParticipantId: loser.id,
+                        finalsThirdPlaceParticipantId: null,
+                        finalsFourthPlaceParticipantId: null
                     })
                 }
 
@@ -206,11 +259,11 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
         <div className="match-popup-overlay" onClick={onClose}>
             <div className="match-popup-content" onClick={e => e.stopPropagation()}>
                 <h3>{match.name || `${lsi.matchPrefix}${match.id}`}</h3>
-                {!isMatchReady && <div className="match-not-ready-warning">{lsi.waitingForOpponent}</div>}
+                {!isMatchReady && !isFinishedTournament && <div className="match-not-ready-warning">{lsi.waitingForOpponent}</div>}
                 <div className="match-popup-teams">
                     <div className="match-popup-team">
                         <span className="team-name">{match.participants[0]?.name || lsi.tbd}</span>
-                        {isOwner ? (
+                        {isOwner && !isFinishedTournament ? (
                             <>
                                 <div className="score-control">
                                     <button onClick={() => handleScoreChange(0, false)} disabled={!isMatchReady}>-</button>
@@ -241,17 +294,33 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                 </select>
                             </>
                         ) : (
-                            <>
+                            <div className="score-display-container">
                                 <span className="score-display">{score1}</span>
                                 {status1 && <span className="status-display">{status1}</span>}
                                 {match.participants[0]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
-                            </>
+                            </div>
+                        )}
+                        {isFinishedTournament && (
+                            <div className="team-players-list">
+                                {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
+                                    const player = team1Players[index];
+                                    return (
+                                        <div
+                                            key={index}
+                                            className={`player-item ${!player ? 'empty' : 'clickable'}`}
+                                            onClick={() => player && handlePlayerClick(player.id)}
+                                        >
+                                            👤 {player?.name || '---'}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         )}
                     </div>
                     <div className="match-popup-vs">{lsi.vs}</div>
                     <div className="match-popup-team">
                         <span className="team-name">{match.participants[1]?.name || lsi.tbd}</span>
-                        {isOwner ? (
+                        {isOwner && !isFinishedTournament ? (
                             <>
                                 <div className="score-control">
                                     <button onClick={() => handleScoreChange(1, false)} disabled={!isMatchReady}>-</button>
@@ -282,21 +351,37 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate }) => {
                                 </select>
                             </>
                         ) : (
-                            <>
+                            <div className="score-display-container">
                                 <span className="score-display">{score2}</span>
                                 {status2 && <span className="status-display">{status2}</span>}
                                 {match.participants[1]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
-                            </>
+                            </div>
+                        )}
+                        {isFinishedTournament && (
+                            <div className="team-players-list">
+                                {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
+                                    const player = team2Players[index];
+                                    return (
+                                        <div
+                                            key={index}
+                                            className={`player-item ${!player ? 'empty' : 'clickable'}`}
+                                            onClick={() => player && handlePlayerClick(player.id)}
+                                        >
+                                            👤 {player?.name || '---'}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         )}
                     </div>
                 </div>
                 <div className="match-popup-actions">
-                    {isOwner && (
+                    {isOwner && !isFinishedTournament && (
                         <button className="save-btn" onClick={handleSave} disabled={loading || !isMatchReady}>
                             {loading ? lsi.saving : lsi.saveScore}
                         </button>
                     )}
-                    <button className="cancel-btn" onClick={onClose} disabled={loading}>{lsi.cancel}</button>
+                    <button className="save-btn" onClick={onClose} disabled={loading}>Close</button>
                 </div>
             </div>
         </div>
@@ -686,7 +771,6 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
     if (!matches) return null;
 
     const handleMatchClick = (match) => {
-        if (tournamentInfo?.status === "finished") return;
         setSelectedMatch(match);
     };
 
@@ -714,7 +798,7 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
                         onClose={() => setSelectedMatch(null)}
                         onMatchUpdate={onMatchUpdate}
                         isOwner={isOwner}
-                        tournamentId={tournamentInfo?.id}
+                        tournamentInfo={tournamentInfo}
                     />
                 )}
 
@@ -747,6 +831,7 @@ export default function CustomBracket({ matches, bracketType, isOwner, currentUs
                     onClose={handleClosePopup}
                     isOwner={isOwner}
                     onMatchUpdate={onMatchUpdate}
+                    tournamentInfo={tournamentInfo}
                 />
             )}
 

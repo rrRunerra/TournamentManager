@@ -208,6 +208,30 @@
         "profileList": [
           "Public"
         ]
+      },
+      "player/updateMatchStats": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
+      "player/updateFlappyBirdScore": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
+      "player/incrementTournamentsPlayed": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       }
     }
   }

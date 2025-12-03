@@ -164,8 +164,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               if (bracketType == "robin" && (teams.length % 2 == 1)) newErrors.robin = true
               if (bracketType == "double" && (teams.length % 4 != 0)) newErrors.double = true
 
-              console.log(bracketType)
-              console.log(teams.length % 4)
 
               if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors);

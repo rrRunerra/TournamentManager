@@ -110,6 +110,21 @@
         "realization": "api/controllers/PlayerController.updatePlayerStats",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "player/updateMatchStats": {
+        "realization": "api/controllers/PlayerController.updateMatchStats",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "player/updateFlappyBirdScore": {
+        "realization": "api/controllers/PlayerController.updateFlappyBirdScore",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "player/incrementTournamentsPlayed": {
+        "realization": "api/controllers/PlayerController.incrementTournamentsPlayed",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

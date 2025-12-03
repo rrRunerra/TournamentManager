@@ -43,17 +43,21 @@ export default function ProfilePage() {
     if (!stats) return <div style={{ padding: '2rem', color: '#fff' }}>Loading...</div>;
 
     const playerStats = stats.stats || {
-        firstPlace: 0,
-        secondPlace: 0,
-        thirdPlace: 0,
-        fourthPlace: 0
+        finals_firstPlace: 0,
+        finals_secondPlace: 0,
+        finals_thirdPlace: 0,
+        finals_fourthPlace: 0,
+        matchesWon: 0,
+        matchesLost: 0,
+        tournamentsPlayed: 0,
+        flappyBirdHighScore: 0
     };
 
     const totalTournaments =
-        (playerStats.firstPlace || 0) +
-        (playerStats.secondPlace || 0) +
-        (playerStats.thirdPlace || 0) +
-        (playerStats.fourthPlace || 0);
+        (playerStats.finals_firstPlace || 0) +
+        (playerStats.finals_secondPlace || 0) +
+        (playerStats.finals_thirdPlace || 0) +
+        (playerStats.finals_fourthPlace || 0);
 
     return (
         <div className="profile-container">
@@ -83,23 +87,43 @@ export default function ProfilePage() {
                 <div className="stats-grid">
                     <StatCard
                         label={lsi.firstPlace}
-                        value={playerStats.firstPlace || 0}
+                        value={playerStats.finals_firstPlace || 0}
                         color="#FFD700" // Gold
                     />
                     <StatCard
                         label={lsi.secondPlace}
-                        value={playerStats.secondPlace || 0}
+                        value={playerStats.finals_secondPlace || 0}
                         color="#C0C0C0" // Silver
                     />
                     <StatCard
                         label={lsi.thirdPlace}
-                        value={playerStats.thirdPlace || 0}
+                        value={playerStats.finals_thirdPlace || 0}
                         color="#CD7F32" // Bronze
                     />
                     <StatCard
                         label={lsi.fourthPlace}
-                        value={playerStats.fourthPlace || 0}
+                        value={playerStats.finals_fourthPlace || 0}
                         color="#4ecdc4" // Teal
+                    />
+                    <StatCard
+                        label={lsi.matchesWon}
+                        value={playerStats.matchesWon || 0}
+                        color="#00b894" // Green
+                    />
+                    <StatCard
+                        label={lsi.matchesLost}
+                        value={playerStats.matchesLost || 0}
+                        color="#e17055" // Red
+                    />
+                    <StatCard
+                        label={lsi.tournamentsPlayed}
+                        value={playerStats.tournamentsPlayed || 0}
+                        color="#a29bfe" // Purple
+                    />
+                    <StatCard
+                        label={lsi.flappyBirdHighScore}
+                        value={playerStats.flappyBirdHighScore || 0}
+                        color="#fdcb6e" // Yellow
                     />
                 </div>
 

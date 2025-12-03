@@ -106,6 +106,21 @@ const Calls = {
   updatePlayerStats(dtoIn) {
     const commandUri = Calls.getCommandUri("player/updateStats");
     return Calls.call("post", commandUri, dtoIn);
+  },
+
+  updateMatchStats(dtoIn) {
+    const commandUri = Calls.getCommandUri("player/updateMatchStats");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  updateFlappyBirdScore(dtoIn) {
+    const commandUri = Calls.getCommandUri("player/updateFlappyBirdScore");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  incrementTournamentsPlayed(dtoIn) {
+    const commandUri = Calls.getCommandUri("player/incrementTournamentsPlayed");
+    return Calls.call("post", commandUri, dtoIn);
   }
 
 

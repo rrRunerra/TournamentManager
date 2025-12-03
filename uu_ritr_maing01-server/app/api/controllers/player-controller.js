@@ -19,6 +19,18 @@ class PlayerController {
     return PlayerAbl.updatePlayerStats(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
+  updateMatchStats(ucEnv) {
+    return PlayerAbl.updateMatchStats(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  updateFlappyBirdScore(ucEnv) {
+    return PlayerAbl.updateFlappyBirdScore(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  incrementTournamentsPlayed(ucEnv) {
+    return PlayerAbl.incrementTournamentsPlayed(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
 }
 
 module.exports = new PlayerController();

@@ -5,6 +5,10 @@
         "secondPlace": "2-е место",
         "thirdPlace": "3-е место",
         "fourthPlace": "4-е место",
+        "matchesWon": "Выигранные матчи",
+        "matchesLost": "Проигранные матчи",
+        "tournamentsPlayed": "Сыгранные турниры",
+        "flappyBirdHighScore": "Flappy Bird счёт",
         "totalTournaments": "Всего сыграно турниров"
     },
     "appName": "Приложение uuRitr",

@@ -16,10 +16,24 @@ const PlayerGetDtoInType = shape({
 })
 
 const PlayerUpdateStatsDtoInType = shape({
-    firstPlaceParticipantId: uu5String(255),
-    secondPlaceParticipantId: uu5String(255),
-    thirdPlaceParticipantId: uu5String(255),
-    fourthPlaceParticipantId: uu5String(255),
+    finalsFirstPlaceParticipantId: uu5String(255),
+    finalsSecondPlaceParticipantId: uu5String(255),
+    finalsThirdPlaceParticipantId: uu5String(255),
+    finalsFourthPlaceParticipantId: uu5String(255),
+    tournamentId: uu5String(255).isRequired()
+})
+
+const PlayerUpdateMatchStatsDtoInType = shape({
+    participantId: uu5String(255).isRequired(),
+    won: boolean().isRequired()
+})
+
+const PlayerUpdateFlappyBirdScoreDtoInType = shape({
+    playerId: uu5String(255).isRequired(),
+    score: number().isRequired()
+})
+
+const PlayerIncrementTournamentsPlayedDtoInType = shape({
     tournamentId: uu5String(255).isRequired()
 })
 

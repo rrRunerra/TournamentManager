@@ -166,10 +166,14 @@ class PlayerAbl {
         school: user.school,
         role: user.role,
         stats: {
-          firstPlace: 0,
-          secondPlace: 0,
-          thirdPlace: 0,
-          fourthPlace: 0
+          finals_firstPlace: 0,
+          finals_secondPlace: 0,
+          finals_thirdPlace: 0,
+          finals_fourthPlace: 0,
+          matchesWon: 0,
+          matchesLost: 0,
+          tournamentsPlayed: 0,
+          flappyBirdHighScore: 0
         }
       })
     }
@@ -189,10 +193,10 @@ class PlayerAbl {
     console.log(dtoIn)
     //     {
     //   tournamentId: 'rsmqy3e1e0h246boknzjky',
-    //   firstPlaceParticipantId: '8ijppe8mlynf5io5xuqbv',
-    //   secondPlaceParticipantId: 'o835td8d8vim1yggoivvf',
-    //   thirdPlaceParticipantId: null,
-    //   fourthPlaceParticipantId: null
+    //   finalsFirstPlaceParticipantId: '8ijppe8mlynf5io5xuqbv',
+    //   finalsSecondPlaceParticipantId: 'o835td8d8vim1yggoivvf',
+    //   finalsThirdPlaceParticipantId: null,
+    //   finalsFourthPlaceParticipantId: null
     // }
     // Get team DAO
     const teamDao = DaoFactory.getDao("team");
@@ -211,10 +215,14 @@ class PlayerAbl {
 
         // Initialize stats if they don't exist
         const currentStats = playerObj.stats || {
-          firstPlace: 0,
-          secondPlace: 0,
-          thirdPlace: 0,
-          fourthPlace: 0
+          finals_firstPlace: 0,
+          finals_secondPlace: 0,
+          finals_thirdPlace: 0,
+          finals_fourthPlace: 0,
+          matchesWon: 0,
+          matchesLost: 0,
+          tournamentsPlayed: 0,
+          flappyBirdHighScore: 0
         };
 
         // Update with incremented stat
@@ -234,12 +242,145 @@ class PlayerAbl {
     };
 
     // Update stats for each placement
-    await updateTeamPlayerStats(dtoIn.firstPlaceParticipantId, 'firstPlace');
-    await updateTeamPlayerStats(dtoIn.secondPlaceParticipantId, 'secondPlace');
-    await updateTeamPlayerStats(dtoIn.thirdPlaceParticipantId, 'thirdPlace');
-    await updateTeamPlayerStats(dtoIn.fourthPlaceParticipantId, 'fourthPlace');
+    await updateTeamPlayerStats(dtoIn.finalsFirstPlaceParticipantId, 'finals_firstPlace');
+    await updateTeamPlayerStats(dtoIn.finalsSecondPlaceParticipantId, 'finals_secondPlace');
+    await updateTeamPlayerStats(dtoIn.finalsThirdPlaceParticipantId, 'finals_thirdPlace');
+    await updateTeamPlayerStats(dtoIn.finalsFourthPlaceParticipantId, 'finals_fourthPlace');
 
     return { success: true, message: "Player stats updated successfully" };
+  }
+
+  async updateMatchStats(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerUpdateMatchStatsDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    // Get team DAO to find all players in the team
+    const teamDao = DaoFactory.getDao("team");
+    const team = await teamDao.get(awid, dtoIn.participantId);
+
+    if (!team || !team.players) return { success: true, message: "No players found" };
+
+    const statField = dtoIn.won ? 'matchesWon' : 'matchesLost';
+
+    for (const playerId of team.players) {
+      const playerObj = await this.dao.get(awid, playerId);
+      if (!playerObj) continue;
+
+      const currentStats = playerObj.stats || {
+        finals_firstPlace: 0,
+        finals_secondPlace: 0,
+        finals_thirdPlace: 0,
+        finals_fourthPlace: 0,
+        matchesWon: 0,
+        matchesLost: 0,
+        tournamentsPlayed: 0,
+        flappyBirdHighScore: 0
+      };
+
+      await this.dao.update({
+        awid,
+        id: playerId,
+        ...playerObj,
+        stats: {
+          ...currentStats,
+          [statField]: currentStats[statField] + 1
+        }
+      });
+    }
+
+    return { success: true, message: "Match stats updated successfully" };
+  }
+
+  async updateFlappyBirdScore(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerUpdateFlappyBirdScoreDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    const playerObj = await this.dao.get(awid, dtoIn.playerId);
+    if (!playerObj) {
+      throw new Error("Player not found");
+    }
+
+    const currentStats = playerObj.stats || {
+      finals_firstPlace: 0,
+      finals_secondPlace: 0,
+      finals_thirdPlace: 0,
+      finals_fourthPlace: 0,
+      matchesWon: 0,
+      matchesLost: 0,
+      tournamentsPlayed: 0,
+      flappyBirdHighScore: 0
+    };
+
+    // Only update if new score is higher
+    if (dtoIn.score > currentStats.flappyBirdHighScore) {
+      await this.dao.update({
+        awid,
+        id: dtoIn.playerId,
+        ...playerObj,
+        stats: {
+          ...currentStats,
+          flappyBirdHighScore: dtoIn.score
+        }
+      });
+    }
+
+    return { success: true, message: "Flappy Bird score updated successfully" };
+  }
+
+  async incrementTournamentsPlayed(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerIncrementTournamentsPlayedDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Error("InvalidDtoIn");
+    }
+
+    // Get team DAO to iterate through all teams in tournament
+    const teamDao = DaoFactory.getDao("team");
+    const tournamentDao = DaoFactory.getDao("tournament");
+
+    const tournament = await tournamentDao.get(awid, dtoIn.tournamentId);
+    if (!tournament || !tournament.teams) return { success: true, message: "No teams found" };
+
+    // Increment tournamentsPlayed for all players in all teams
+    console.log("Incrementing tournamentsPlayed for all players in all teams")
+    for (const teamId of tournament.teams) {
+      const team = await teamDao.get(awid, teamId);
+      if (!team || !team.players) continue;
+
+      for (const playerId of team.players) {
+        const playerObj = await this.dao.get(awid, playerId);
+        if (!playerObj) continue;
+        console.log("Incrementing tournamentsPlayed for player " + playerId);
+        const currentStats = playerObj.stats || {
+          finals_firstPlace: 0,
+          finals_secondPlace: 0,
+          finals_thirdPlace: 0,
+          finals_fourthPlace: 0,
+          matchesWon: 0,
+          matchesLost: 0,
+          tournamentsPlayed: 0,
+          flappyBirdHighScore: 0
+        };
+
+        await this.dao.update({
+          awid,
+          id: playerId,
+          ...playerObj,
+          stats: {
+            ...currentStats,
+            tournamentsPlayed: currentStats.tournamentsPlayed + 1
+          }
+        });
+      }
+    }
+
+    return { success: true, message: "Tournaments played updated successfully" };
   }
 
 }

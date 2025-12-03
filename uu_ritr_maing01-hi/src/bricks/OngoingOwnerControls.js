@@ -27,6 +27,7 @@ export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
                         if (confirmed) {
                             try {
                                 await Calls.updateTournament({ id, status: "finished" });
+                                await Calls.incrementTournamentsPlayed({ tournamentId: id });
                                 setInfo(await Calls.getTournament({ id }));
                                 showSuccess(lsi.tournamentEnded, lsi.tournamentEndedMessage);
                             } catch (error) {

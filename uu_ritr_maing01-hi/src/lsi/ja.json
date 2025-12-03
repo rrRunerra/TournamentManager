@@ -5,6 +5,10 @@
         "secondPlace": "2位",
         "thirdPlace": "3位",
         "fourthPlace": "4位",
+        "matchesWon": "勝利数",
+        "matchesLost": "敗北数",
+        "tournamentsPlayed": "参加トーナメント数",
+        "flappyBirdHighScore": "Flappy Bird スコア",
         "totalTournaments": "総トーナメント数"
     },
     "appName": "uuRitr アプリケーション",

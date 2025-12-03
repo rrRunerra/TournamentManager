@@ -108,7 +108,6 @@ export default function TournamentsPage() {
     }
 
     await createTournament(data);
-    await createTournament(data);
     setPage(1); // Reset to first page to reload
     fetchTournaments(1);
     showSuccess(lsi.createSuccessTitle, lsi.createSuccessMessage);

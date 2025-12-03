@@ -5,6 +5,10 @@
     "secondPlace": "2nd Place",
     "thirdPlace": "3rd Place",
     "fourthPlace": "4th Place",
+    "matchesWon": "Matches Won",
+    "matchesLost": "Matches Lost",
+    "tournamentsPlayed": "Tournaments Played",
+    "flappyBirdHighScore": "Flappy Bird Score",
     "totalTournaments": "Total Tournaments Played"
   },
   "appName": "Application uuRitr",

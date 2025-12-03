@@ -5,6 +5,10 @@
     "secondPlace": "2. místo",
     "thirdPlace": "3. místo",
     "fourthPlace": "4. místo",
+    "matchesWon": "Výhry",
+    "matchesLost": "Prohry",
+    "tournamentsPlayed": "Odehrané turnaje",
+    "flappyBirdHighScore": "Flappy Bird skóre",
     "totalTournaments": "Celkem odehraných turnajů"
   },
   "appName": "Aplikace uuRitr",
