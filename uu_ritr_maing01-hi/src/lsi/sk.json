@@ -199,7 +199,10 @@
             "backend": "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu.",
             "frontend": "Zodpovedný za vývoj používateľského rozhrania a interaktívnych komponentov.",
             "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
-        }
+        },
+        "thanksTitle": "Špeciálne poďakovanie",
+        "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemua by tento projekt nebol možný.",
+        "thanksUnicorn": "Ďakujeme tiež všetkým, ktorí nás podporovali a motivovali na tejto ceste."
     },
     "Login": {
         "username": "Používateľské meno",

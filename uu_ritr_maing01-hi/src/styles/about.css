@@ -396,3 +396,58 @@
 .delay-3 {
   transition-delay: 0.3s;
 }
+
+/* --- Thanks Section --- */
+.thanks-section {
+  max-width: 800px;
+  margin: 4rem auto 0;
+  text-align: center;
+  padding: 3rem;
+  border-radius: 16px;
+  background-color: #121212;
+  border: 1px solid #2a2a2a;
+  position: relative;
+  overflow: hidden;
+}
+
+.thanks-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b35, #ffd166, #ff8e53);
+  border-radius: 16px 16px 0 0;
+}
+
+.thanks-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.thanks-text {
+  color: #d1d5db;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.thanks-secondary {
+  color: #9ca3af;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.thanks-section:hover {
+  background-color: #161616;
+  border-color: #ff6b35;
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+}

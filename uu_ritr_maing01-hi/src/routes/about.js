@@ -122,7 +122,11 @@ const AboutPage = () => {
         {/* --- CTA SECTION --- */}
         <CtaSection lsi={lsi} className="animate-on-scroll" />
 
+        {/* --- THANKS SECTION --- */}
+        <ThanksSection lsi={lsi} className="animate-on-scroll" />
+
         {showGame && <FlappyBird onClose={() => setShowGame(false)} />}
+
 
 
       </div>
@@ -216,6 +220,22 @@ const CtaSection = ({ lsi, className }) => {
       >
         {lsi.contactUs}
       </a>
+    </div>
+  );
+};
+
+const ThanksSection = ({ lsi, className }) => {
+  return (
+    <div className={`thanks-section ${className || ''}`}>
+      <h2 className="thanks-title">
+        {lsi.thanksTitle}
+      </h2>
+      <p className="thanks-text">
+        {lsi.thanksText}
+      </p>
+      <p className="thanks-secondary">
+        {lsi.thanksUnicorn}
+      </p>
     </div>
   );
 };
