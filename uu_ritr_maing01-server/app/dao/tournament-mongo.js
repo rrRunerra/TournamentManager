@@ -26,10 +26,13 @@ class TournamentMongo extends UuObjectDao {
     return await super.findOne(filter);
   }
 
-  async list(awid) {
+  async list(awid, status) {
     let filter = {
       awid: awid,
     };
+    if (status) {
+      filter.status = status;
+    }
     return await super.find(filter)
   }
 
