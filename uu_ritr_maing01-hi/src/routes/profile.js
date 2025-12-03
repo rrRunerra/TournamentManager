@@ -32,6 +32,7 @@ export default function ProfilePage() {
     const [stats, setStats] = useState(null);
     const [lastTournaments, setLastTournaments] = useState([]);
     const lsi = useLsi(importLsi, ["Profile"]);
+    const [route, setRoute] = useRoute()
 
     useEffect(() => {
         async function fetchData() {
@@ -39,7 +40,6 @@ export default function ProfilePage() {
             setStats(s);
 
             const playerId = id || s.id;
-            console.log("Fetching tournaments for player:", playerId);
 
             try {
                 const tournamentsResponse = await Calls.listTournamentsByUser({
@@ -47,7 +47,7 @@ export default function ProfilePage() {
                     limit: 3
                 });
                 const userTournaments = tournamentsResponse.itemList || [];
-                console.log("User tournaments found:", userTournaments);
+
 
                 setLastTournaments(userTournaments);
             } catch (e) {
@@ -148,7 +148,7 @@ export default function ProfilePage() {
                     <div className="stats-grid" style={{ gridTemplateColumns: '1fr' }}>
                         {lastTournaments.map(t => {
                             const playerId = id || stats.id;
-                            const userTeam = t.teams.find(team => team.players && team.players.includes(playerId));
+
                             return (
                                 <div key={t.id} className="stat-card" style={{
                                     borderColor: 'rgba(255, 255, 255, 0.1)',
@@ -156,6 +156,8 @@ export default function ProfilePage() {
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
                                     padding: '1rem 2rem'
+                                }} onClick={() => {
+                                    setRoute("tournamentDetail", { id: t.id })
                                 }}>
                                     <div style={{ textAlign: 'left' }}>
                                         <div className="stat-card-value" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
@@ -170,7 +172,7 @@ export default function ProfilePage() {
                                             Tím
                                         </div>
                                         <div style={{ color: '#fff', fontWeight: 'bold' }}>
-                                            {userTeam ? userTeam.name : '-'}
+                                            {t.teamName}
                                         </div>
                                     </div>
                                 </div>
