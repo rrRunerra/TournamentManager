@@ -29,25 +29,20 @@ const FlappyBird = ({ onClose }) => {
     }, []);
 
     useEffect(() => {
-
-
-        if (score > highScore || gameOver) {
+        if (gameOver && score > highScore) {
+            // Only update when we have a new high score
             setHighScore(score);
             localStorage.setItem('flappyHighScore', score);
             const currentUser = JSON.parse(localStorage.getItem('player') || '{}');
 
-            if (gameOver) {
-                console.log("updating flappybird score")
+            console.log("updating flappybird score with new high score:", score);
 
-                Calls.updateFlappyBirdScore({
-                    playerId: currentUser.id,
-                    score: score
-                }).catch(err => {
-                    console.error('Failed to update Flappy Bird score:', err);
-                });
-
-            }
-
+            Calls.updateFlappyBirdScore({
+                playerId: currentUser.id,
+                score: score
+            }).catch(err => {
+                console.error('Failed to update Flappy Bird score:', err);
+            });
         }
     }, [score, highScore, gameOver]);
 
