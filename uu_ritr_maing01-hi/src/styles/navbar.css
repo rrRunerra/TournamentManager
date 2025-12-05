@@ -281,7 +281,7 @@
   right: 85px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
+  z-index: 2;
 }
 
 .lang-btn {
@@ -368,7 +368,7 @@
   right: 25px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;

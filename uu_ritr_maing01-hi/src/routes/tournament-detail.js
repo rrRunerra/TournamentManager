@@ -8,6 +8,7 @@ import OwnerControls from "../bricks/ownerControls.js";
 import Calls from "../calls.js";
 import "../styles/tournamentDetail.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
+import ImgEditor from "../bricks/image-editor.js";
 
 
 
@@ -17,6 +18,7 @@ export default function TournamentDetailPage() {
   const [user, setUser] = useState(null);
   const [joiningTeam, setJoiningTeam] = useState(null);
   const [matches, setMatches] = useState([]);
+  const [isImgEditorShown, setIsImgEditorShown] = useState(false);
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
   const [activeTab, setActiveTab] = useState('current-match');
@@ -133,6 +135,41 @@ export default function TournamentDetailPage() {
           </div>
         )}
 
+        {/* Diploma Editor Button - only for finished tournaments and owner */}
+        {isOwner && info.status === "finished" && (
+          <button
+            onClick={() => setIsImgEditorShown(true)}
+            style={{
+              position: 'fixed',
+              bottom: '20px',
+              right: '80px',
+              width: '50px',
+              height: '50px',
+              borderRadius: '50%',
+              backgroundColor: '#ff8e53',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+              zIndex: 1000
+            }}
+            aria-label="Create Diploma"
+            title="Create Diploma"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+          </button>
+        )}
+
+        {/* Image Editor Modal */}
+        <ImgEditor
+          isImgEditorShown={isImgEditorShown}
+          closeImgEditor={() => setIsImgEditorShown(false)}
+        />
 
       </div>
     )

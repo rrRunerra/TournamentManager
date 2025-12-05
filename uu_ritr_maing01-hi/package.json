@@ -7,8 +7,10 @@
   "namespace": "UuRitr",
   "spec": "uu5-app; uu_appg01_devkit@5.22.1",
   "dependencies": {
-    "@g-loot/react-tournament-brackets": "^1.0.31-rc",
+    "filerobot-image-editor": "^4.8.1",
     "ogl": "^1.0.11",
+    "react-konva": "^18.2.14",
+    "styled-components": "^6.1.19",
     "uu_plus4u5g02": "^1.22.2",
     "uu_plus4u5g02-app": "^1.22.2",
     "uu_plus4u5g02-elements": "^1.22.2",
