@@ -286,5 +286,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. 保留所有权利。",
         "collaboration": "与Unicorn合作的学生项目"
+    },
+    "ImageEditor": {
+        "selectTemplate": "选择证书模板",
+        "uploadYourOwn": "上传您自己的图片",
+        "diploma1": "MatchUP 证书 1",
+        "diploma2": "MatchUP 证书 2",
+        "diploma3": "MatchUP 证书 3"
     }
 }

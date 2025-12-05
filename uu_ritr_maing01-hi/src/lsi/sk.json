@@ -287,5 +287,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. Všetky práva vyhradené.",
         "collaboration": "Študentský projekt v spolupráci s firmou Unicorn"
+    },
+    "ImageEditor": {
+        "selectTemplate": "Vyberte šablónu diplomu",
+        "uploadYourOwn": "Nahrať vlastný obrázok",
+        "diploma1": "MatchUP Diplom 1",
+        "diploma2": "MatchUP Diplom 2",
+        "diploma3": "MatchUP Diplom 3"
     }
 }

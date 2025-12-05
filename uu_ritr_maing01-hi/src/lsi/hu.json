@@ -286,5 +286,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. Minden jog fenntartva.",
         "collaboration": "Diákprojekt az Unicornnal együttműködve"
+    },
+    "ImageEditor": {
+        "selectTemplate": "Válasszon oklevélsablont",
+        "uploadYourOwn": "Saját kép feltöltése",
+        "diploma1": "MatchUP Oklevél 1",
+        "diploma2": "MatchUP Oklevél 2",
+        "diploma3": "MatchUP Oklevél 3"
     }
 }

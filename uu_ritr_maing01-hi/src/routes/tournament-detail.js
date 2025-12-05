@@ -153,7 +153,7 @@ export default function TournamentDetailPage() {
               justifyContent: 'center',
               cursor: 'pointer',
               boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              zIndex: 1000
+              zIndex: 1
             }}
             aria-label="Create Diploma"
             title="Create Diploma"

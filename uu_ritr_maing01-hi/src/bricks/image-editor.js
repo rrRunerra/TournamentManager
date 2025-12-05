@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { useLsi } from "uu5g05";
 import FilerobotImageEditor, {
     TABS,
     TOOLS,
@@ -12,25 +13,7 @@ import diploma3 from '../assets/matchup_diploma_3.jpg';
 
 // Import styles
 import '../styles/image-editor.css';
-
-// Predefined diploma templates
-const DIPLOMA_TEMPLATES = [
-    {
-        id: 1,
-        name: 'MatchUP Diploma 1',
-        url: diploma1,
-    },
-    {
-        id: 2,
-        name: 'MatchUP Diploma 2',
-        url: diploma2,
-    },
-    {
-        id: 3,
-        name: 'MatchUP Diploma 3',
-        url: diploma3,
-    },
-];
+import importLsi from "../lsi/import-lsi.js";
 
 // Theme configuration matching app colors with good text visibility
 const EDITOR_THEME = {
@@ -62,6 +45,26 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isEditorOpen, setIsEditorOpen] = useState(false);
     const fileInputRef = useRef(null);
+    const lsi = useLsi(importLsi, ["ImageEditor"]);
+
+    // Predefined diploma templates with LSI
+    const DIPLOMA_TEMPLATES = [
+        {
+            id: 1,
+            name: lsi.diploma1 || 'MatchUP Diploma 1',
+            url: diploma1,
+        },
+        {
+            id: 2,
+            name: lsi.diploma2 || 'MatchUP Diploma 2',
+            url: diploma2,
+        },
+        {
+            id: 3,
+            name: lsi.diploma3 || 'MatchUP Diploma 3',
+            url: diploma3,
+        },
+    ];
 
     const handleTemplateSelect = (templateUrl) => {
         setSelectedImage(templateUrl);
@@ -114,7 +117,7 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
                 <div className="image-editor-modal">
                     <div className="image-editor-header">
                         <h2 className="image-editor-title">
-                            Select Diploma Template
+                            {lsi.selectTemplate || 'Select Diploma Template'}
                         </h2>
                         <button
                             onClick={handleClose}
@@ -156,7 +159,7 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
                             onClick={() => fileInputRef.current?.click()}
                             className="image-editor-upload-btn"
                         >
-                            📁 Upload Your Own Image
+                            📁 {lsi.uploadYourOwn || 'Upload Your Own Image'}
                         </button>
                     </div>
                 </div>
@@ -249,6 +252,7 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
                 previewPixelRatio={2}
             />
         </div>,
+        // ts must be here
         document.body
     );
 }

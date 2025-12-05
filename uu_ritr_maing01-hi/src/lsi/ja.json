@@ -286,5 +286,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. 無断転載を禁じます。",
         "collaboration": "Unicornとの共同学生プロジェクト"
+    },
+    "ImageEditor": {
+        "selectTemplate": "ディプロマテンプレートを選択",
+        "uploadYourOwn": "自分の画像をアップロード",
+        "diploma1": "MatchUP ディプロマ 1",
+        "diploma2": "MatchUP ディプロマ 2",
+        "diploma3": "MatchUP ディプロマ 3"
     }
 }

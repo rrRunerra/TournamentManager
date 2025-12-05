@@ -286,5 +286,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. Wszelkie prawa zastrzeżone.",
         "collaboration": "Projekt studencki we współpracy z Unicorn"
+    },
+    "ImageEditor": {
+        "selectTemplate": "Wybierz szablon dyplomu",
+        "uploadYourOwn": "Prześlij własny obraz",
+        "diploma1": "MatchUP Dyplom 1",
+        "diploma2": "MatchUP Dyplom 2",
+        "diploma3": "MatchUP Dyplom 3"
     }
 }

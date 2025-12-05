@@ -286,5 +286,12 @@
     "Footer": {
         "copyright": "© 2025 MatchUP. Все права защищены.",
         "collaboration": "Студенческий проект в сотрудничестве с Unicorn"
+    },
+    "ImageEditor": {
+        "selectTemplate": "Выберите шаблон диплома",
+        "uploadYourOwn": "Загрузить своё изображение",
+        "diploma1": "MatchUP Диплом 1",
+        "diploma2": "MatchUP Диплом 2",
+        "diploma3": "MatchUP Диплом 3"
     }
 }
