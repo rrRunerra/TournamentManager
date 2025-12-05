@@ -213,9 +213,8 @@ export default function Navbar() {
                 <Lsi import={importLsi} path={["Navbar", "settings"]} />
               </div>
               <div className="account-popup-item" onClick={() => {
-                setActiveLink("about")
                 setIsAccountOpen(false)
-                setRoute("about")
+                window.open("https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform?usp=sharing&ouid=101372114214195565381", "_blank")
               }}>
                 <span className="account-popup-icon">❓</span>
                 <Lsi import={importLsi} path={["Navbar", "contactUs"]} />
