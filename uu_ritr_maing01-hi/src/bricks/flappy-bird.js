@@ -149,7 +149,7 @@ const FlappyBird = ({ onClose }) => {
 
 
     return (
-        <div className="flappy-bird-overlay">
+        <div className="flappy-bird-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
             <div className="flappy-bird-container" onClick={jump}>
                 <button className="close-btn" onClick={(e) => { e.stopPropagation(); onClose(); }}>X</button>
 
