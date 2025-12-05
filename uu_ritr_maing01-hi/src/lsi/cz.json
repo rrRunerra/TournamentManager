@@ -199,7 +199,12 @@
       "backend": "Spravuje serverovou logiku, databáze a API integrace pro naši aplikaci.",
       "frontend": "Zodpovědný za vývoj uživatelského rozhraní a interaktivních komponent.",
       "uiux": "Navrhuje uživatelská rozhraní a zajišťuje optimální uživatelskou zkušenost."
-    }
+    },
+    "thanksTitle": "Speciální poděkování",
+    "thanksText": "Chtěli bychom vyjádřit velké poděkování firmě Unicorn a Střední průmyslové škole v Snině za jejich podporu a mentorství během vývoje tohoto projektu. Bez jejich odborných rad a technologického zázemí by tento projekt nebyl možný.",
+    "thanksUnicorn": "Děkujeme také všem, kteří nás podporovali a motivovali na této cestě.",
+    "specialThanks": "Speciální poděkování patří:",
+    "thanksAppreciation": "Bez nich by nic z toho nebylo možné. 💛"
   },
   "Login": {
     "username": "Uživatelské jméno",

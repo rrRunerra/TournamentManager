@@ -66,6 +66,7 @@
         "logout": "Abmelden",
         "loggedInAs": "Angemeldet als",
         "profile": "Mein Profil",
+        "settings": "Einstellungen",
         "logoutConfirmTitle": "Abmeldung bestätigen",
         "logoutConfirmMessage": "Möchten Sie sich wirklich abmelden?",
         "logoutConfirm": "Ja, abmelden",
@@ -198,7 +199,12 @@
             "backend": "Verwaltet Serverlogik, Datenbanken und API-Integrationen für unsere Anwendung.",
             "frontend": "Verantwortlich für die Entwicklung der Benutzeroberfläche und interaktiver Komponenten.",
             "uiux": "Entwirft Benutzeroberflächen und sorgt für eine optimale Benutzererfahrung."
-        }
+        },
+        "thanksTitle": "Besonderer Dank",
+        "thanksText": "Wir möchten uns herzlich bei Unicorn und der Sekundarschule für Industrie in Snina für ihre Unterstützung und Mentorschaft während der Entwicklung dieses Projekts bedanken. Ohne ihre fachkundige Beratung und technologische Unterstützung wäre dieses Projekt nicht möglich gewesen.",
+        "thanksUnicorn": "Wir danken auch allen, die uns auf diesem Weg unterstützt und motiviert haben.",
+        "specialThanks": "Besonderer Dank gilt:",
+        "thanksAppreciation": "Ohne sie wäre nichts davon möglich gewesen. 💛"
     },
     "Login": {
         "username": "Benutzername",

@@ -66,6 +66,7 @@
         "logout": "Wyloguj się",
         "loggedInAs": "Zalogowany jako",
         "profile": "Mój profil",
+        "settings": "Ustawienia",
         "logoutConfirmTitle": "Potwierdź wylogowanie",
         "logoutConfirmMessage": "Czy naprawdę chcesz się wylogować?",
         "logoutConfirm": "Tak, wyloguj",
@@ -198,7 +199,12 @@
             "backend": "Zarządza logiką serwera, bazami danych i integracjami API dla naszej aplikacji.",
             "frontend": "Odpowiedzialny za tworzenie interfejsu użytkownika i interaktywnych komponentów.",
             "uiux": "Projektuje interfejsy użytkownika i zapewnia optymalne wrażenia użytkownika."
-        }
+        },
+        "thanksTitle": "Specjalne podziękowania",
+        "thanksText": "Chcielibyśmy wyrazić wielkie podziękowania firmie Unicorn i Średniej Szkole Przemysłowej w Sninie za wsparcie i mentoring podczas rozwoju tego projektu. Bez ich fachowych porad i wsparcia technologicznego ten projekt nie byłby możliwy.",
+        "thanksUnicorn": "Dziękujemy również wszystkim, którzy nas wspierali i motywowali na tej drodze.",
+        "specialThanks": "Specjalne podziękowania dla:",
+        "thanksAppreciation": "Bez nich nic z tego nie byłoby możliwe. 💛"
     },
     "Login": {
         "username": "Nazwa użytkownika",

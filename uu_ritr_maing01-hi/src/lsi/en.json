@@ -200,7 +200,12 @@
       "backend": "Manages server logic, databases, and API integrations for our application.",
       "frontend": "Responsible for developing the user interface and interactive components.",
       "uiux": "Designs user interfaces and ensures optimal user experience."
-    }
+    },
+    "thanksTitle": "Special Thanks",
+    "thanksText": "We would like to express our great gratitude to Unicorn and the Secondary Industrial School in Snina for their support and mentorship during the development of this project. Without their expert advice and technological background, this project would not have been possible.",
+    "thanksUnicorn": "We also thank everyone who supported and motivated us on this journey.",
+    "specialThanks": "Special thanks goes to:",
+    "thanksAppreciation": "Without them, none of this would be possible. 💛"
   },
   "Login": {
     "username": "Username",

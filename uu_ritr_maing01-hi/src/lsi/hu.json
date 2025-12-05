@@ -66,6 +66,7 @@
         "logout": "Kijelentk ezés",
         "loggedInAs": "Bejelentkezve mint",
         "profile": "Saját profil",
+        "settings": "Beállítások",
         "logoutConfirmTitle": "Kijelentkezés megerősítése",
         "logoutConfirmMessage": "Biztos, hogy ki szeretne jelentkezni?",
         "logoutConfirm": "Igen, kijelentkezés",
@@ -198,7 +199,12 @@
             "backend": "Kezeli a szerver logikát, az adatbázisokat és az API integrációkat alkalmazásunkhoz.",
             "frontend": "Felelős a felhasználói felület és az interaktív komponensek fejlesztéséért.",
             "uiux": "Tervezi a felhasználói felületeket és biztosítja az optimális felhasználói élményt."
-        }
+        },
+        "thanksTitle": "Különleges köszönet",
+        "thanksText": "Nagy köszönettel tartozunk a Unicornnak és a Sninai Ipari Szakközépiskolának a projekt fejlesztése során nyújtott támogatásukért és mentorálásukért. Az ő szakértői tanácsaik és technológiai háttér nélkül ez a projekt nem lett volna lehetséges.",
+        "thanksUnicorn": "Köszönünk mindenkinek, aki támogatott és motivált minket ezen az úton.",
+        "specialThanks": "Különleges köszönet illeti:",
+        "thanksAppreciation": "Nélkülük semmi sem lett volna lehetséges. 💛"
     },
     "Login": {
         "username": "Felhasználónév",

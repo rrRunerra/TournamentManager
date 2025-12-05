@@ -66,6 +66,7 @@
         "logout": "注销",
         "loggedInAs": "登录身份:",
         "profile": "我的个人资料",
+        "settings": "设置",
         "logoutConfirmTitle": "确认注销",
         "logoutConfirmMessage": "您真的要注销吗？",
         "logoutConfirm": "是的，注销",
@@ -198,7 +199,12 @@
             "backend": "管理应用程序的服务器逻辑、数据库和 API 集成。",
             "frontend": "负责开发用户界面和交互组件。",
             "uiux": "设计用户界面并确保最佳用户体验。"
-        }
+        },
+        "thanksTitle": "特别感谢",
+        "thanksText": "我们要向 Unicorn 和斯尼纳工业中学表示最诚挚的感谢，感谢他们在此项目开发过程中的支持和指导。没有他们的专业建议和技术支持，这个项目将不可能实现.",
+        "thanksUnicorn": "我们也感谢在这一路上支持和激励我们的每一个人。",
+        "specialThanks": "特别感谢:",
+        "thanksAppreciation": "没有他们，这一切都不可能实现。💛"
     },
     "Login": {
         "username": "用户名",

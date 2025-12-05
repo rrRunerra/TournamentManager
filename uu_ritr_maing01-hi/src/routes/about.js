@@ -220,14 +220,24 @@ const ThanksSection = ({ lsi, className }) => {
           >
             Ali Al Alawin
           </a>
-          {" a "}
+          {", "}
           <a
-            href="https://www.linkedin.com/in/vanesa-smo%C4%BEakov%C3%A1-962abb39b/"
+            href="https://www.linkedin.com/in/vanesa-smoľakov%C3%A1-962abb39b/"
             target="_blank"
             rel="noopener noreferrer"
             className="thanks-link"
           >
             Vanesa Smoľaková
+          </a>
+          {" a "}
+          <br />
+          <a
+            href="https://www.linkedin.com/in/mária-ortutayová-466229ba/?originalSubdomain=sk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="thanks-link"
+          >
+            Ing. Mária Ortutayová
           </a>
         </p>
         <p className="thanks-appreciation">

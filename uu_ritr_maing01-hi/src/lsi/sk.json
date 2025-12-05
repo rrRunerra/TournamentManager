@@ -202,8 +202,10 @@
             "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
         },
         "thanksTitle": "Špeciálne poďakovanie",
-        "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemua by tento projekt nebol možný.",
-        "thanksUnicorn": "Ďakujeme tiež všetkým, ktorí nás podporovali a motivovali na tejto ceste."
+        "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn a Strednej Priemyslenej škole v Snine za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemia by tento projekt nebol možný.",
+        "thanksUnicorn": "Ďakujeme tiež všetkým, ktorí nás podporovali a motivovali na tejto ceste.",
+        "specialThanks": "Špeciálne poďakovanie patrí:",
+        "thanksAppreciation": "Bez nich by nič z toho nebolo možné. 💛"
     },
     "Login": {
         "username": "Používateľské meno",
