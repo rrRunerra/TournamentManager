@@ -60,6 +60,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   return (
     <div
       className="modal-overlay"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
         className="modal-content"

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Calls from "../calls.js";
 import { useRoute } from "uu5g05";
 import "../styles/tournament.css";
@@ -22,6 +22,8 @@ export default function HistoryPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [showFilter, setShowFilter] = useState(false);
+  const filterRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const [, setRoute] = useRoute();
   const lsi = useLsi(importLsi, ["History"]);
@@ -56,6 +58,26 @@ export default function HistoryPage() {
   useEffect(() => {
     fetchHistory(currentPage, selectedYear, selectedMonth, searchQuery);
   }, [currentPage, selectedYear, selectedMonth, searchQuery]);
+
+  // Close filter when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        showFilter &&
+        filterRef.current &&
+        !filterRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setShowFilter(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showFilter]);
 
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
     .sort((a, b) => b - a);
@@ -92,6 +114,7 @@ export default function HistoryPage() {
 
       {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
       <button
+        ref={buttonRef}
         className="filter-toggle-btn"
         onClick={() => setShowFilter(!showFilter)}
       >
@@ -99,7 +122,10 @@ export default function HistoryPage() {
       </button>
 
       {/* FILTER PANEL */}
-      <div className={`filter-panel-container ${showFilter ? 'visible' : 'hidden'}`}>
+      <div
+        ref={filterRef}
+        className={`filter-panel-container ${showFilter ? 'visible' : 'hidden'}`}
+      >
         <div className="filter-panel">
 
 
