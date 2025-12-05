@@ -258,6 +258,7 @@
         "month": "Miesiąc",
         "searchPlaceholder": "Szukaj nazwy...",
         "noTournaments": "Nie znaleziono turniejów dla tego filtra.",
+        "noHistory": "Brak turniejów w historii",
         "teamsCount": "drużyn w konkursie",
         "finished": "Zakończony",
         "months": {

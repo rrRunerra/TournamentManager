@@ -258,6 +258,7 @@
         "month": "月",
         "searchPlaceholder": "搜索名称...",
         "noTournaments": "未找到此过滤器的锦标赛。",
+        "noHistory": "历史记录中没有锦标赛",
         "teamsCount": "参赛团队",
         "finished": "已完成",
         "months": {

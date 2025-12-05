@@ -259,6 +259,7 @@
     "month": "Month",
     "searchPlaceholder": "Search name...",
     "noTournaments": "No tournaments found for this filter.",
+    "noHistory": "No tournaments in history.",
     "teamsCount": "teams in competition",
     "finished": "Finished",
     "months": {
