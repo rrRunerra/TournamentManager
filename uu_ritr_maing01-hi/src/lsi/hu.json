@@ -258,6 +258,7 @@
         "month": "Hónap",
         "searchPlaceholder": "Keresés név szerint...",
         "noTournaments": "Nem található verseny ehhez a szűrőhöz.",
+        "noHistory": "Nincsenek versenyek az előzményekben",
         "teamsCount": "csapat a versenyben",
         "finished": "Befejezve",
         "months": {

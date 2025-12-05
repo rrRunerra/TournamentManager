@@ -148,8 +148,13 @@ export default function HistoryPage() {
       <section className="tournaments-section">
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
-            <h2 className="section-title">{lsi.noTournaments}</h2>
+            <h2 className="section-title">
+              {(selectedYear || selectedMonth || searchQuery)
+                ? lsi.noTournaments
+                : lsi.noHistory}
+            </h2>
           </div>
+
         ) : (
           currentItems.map((tournament) => (
             <div

@@ -258,6 +258,7 @@
     "month": "Měsíc",
     "searchPlaceholder": "Hledat název...",
     "noTournaments": "Žádné turnaje pro daný filtr.",
+    "noHistory": "Žádné turnaje v historii",
     "teamsCount": "týmů v soutěži",
     "finished": "Ukončený",
     "months": {

@@ -258,6 +258,7 @@
         "month": "Месяц",
         "searchPlaceholder": "Поиск по имени...",
         "noTournaments": "Турниры по этому фильтру не найдены.",
+        "noHistory": "Нет турниров в истории",
         "teamsCount": "команд в соревновании",
         "finished": "Завершен",
         "months": {

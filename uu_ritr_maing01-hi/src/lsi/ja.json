@@ -258,6 +258,7 @@
         "month": "月",
         "searchPlaceholder": "名前で検索...",
         "noTournaments": "このフィルターに一致するトーナメントはありません。",
+        "noHistory": "履歴に大会はありません",
         "teamsCount": "チーム参加中",
         "finished": "終了",
         "months": {
