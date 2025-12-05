@@ -10,6 +10,9 @@ import diploma1 from '../assets/matchup_diploma_1.jpg';
 import diploma2 from '../assets/matchup_diploma_2.jpg';
 import diploma3 from '../assets/matchup_diploma_3.jpg';
 
+// Import styles
+import '../styles/image-editor.css';
+
 // Predefined diploma templates
 const DIPLOMA_TEMPLATES = [
     {
@@ -28,6 +31,32 @@ const DIPLOMA_TEMPLATES = [
         url: diploma3,
     },
 ];
+
+// Theme configuration matching app colors with good text visibility
+const EDITOR_THEME = {
+    palette: {
+        'bg-secondary': '#1a1a1a',
+        'bg-primary': '#0f0f0f',
+        'bg-primary-active': '#2a2a2a',
+        'accent-primary': '#ff8e53',
+        'accent-primary-active': '#ffd166',
+        'icons-primary': '#ff8e53',
+        'icons-secondary': '#ff8e53',
+        'borders-secondary': '#444444',
+        'borders-primary': '#555555',
+        'borders-strong': '#ff8e53',
+        'light-shadow': 'rgba(255, 142, 83, 0.3)',
+        'warning': '#ff4d4d',
+        'txt-primary': '#ff8e53',
+        'txt-secondary': '#ffffff',
+        'txt-secondary-invert': '#ffffff',
+        'txt-placeholder': '#888888',
+        'btn-primary-text': '#000000',
+    },
+    typography: {
+        fontFamily: 'Space Grotesk, Arial, sans-serif',
+    },
+};
 
 export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -81,87 +110,33 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
     // Template selection modal
     if (!isEditorOpen) {
         return ReactDOM.createPortal(
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 99999,
-                background: 'rgba(0, 0, 0, 0.8)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <div style={{
-                    background: '#0f0f0f',
-                    borderRadius: '16px',
-                    padding: '32px',
-                    maxWidth: '800px',
-                    width: '90%',
-                    border: '1px solid #333',
-                    boxShadow: '0 0 20px rgba(255, 140, 0, 0.25)',
-                }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                        <h2 style={{ color: '#ffd166', margin: 0, fontFamily: 'Space Grotesk' }}>
+            <div className="image-editor-overlay">
+                <div className="image-editor-modal">
+                    <div className="image-editor-header">
+                        <h2 className="image-editor-title">
                             Select Diploma Template
                         </h2>
                         <button
                             onClick={handleClose}
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                color: '#ff4d4d',
-                                fontSize: '24px',
-                                cursor: 'pointer',
-                            }}
+                            className="image-editor-close-btn"
                         >
                             ✕
                         </button>
                     </div>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '16px',
-                        marginBottom: '24px',
-                    }}>
+                    <div className="image-editor-templates">
                         {DIPLOMA_TEMPLATES.map((template) => (
                             <div
                                 key={template.id}
                                 onClick={() => handleTemplateSelect(template.url)}
-                                style={{
-                                    cursor: 'pointer',
-                                    borderRadius: '12px',
-                                    overflow: 'hidden',
-                                    border: '2px solid #333',
-                                    transition: 'all 0.3s ease',
-                                }}
-                                onMouseOver={(e) => {
-                                    e.currentTarget.style.border = '2px solid #ff8e53';
-                                    e.currentTarget.style.transform = 'scale(1.02)';
-                                }}
-                                onMouseOut={(e) => {
-                                    e.currentTarget.style.border = '2px solid #333';
-                                    e.currentTarget.style.transform = 'scale(1)';
-                                }}
+                                className="image-editor-template-card"
                             >
                                 <img
                                     src={template.url}
                                     alt={template.name}
-                                    style={{
-                                        width: '100%',
-                                        height: '140px',
-                                        objectFit: 'cover',
-                                    }}
+                                    className="image-editor-template-img"
                                 />
-                                <div style={{
-                                    padding: '12px',
-                                    background: '#1a1a1a',
-                                    color: '#fff',
-                                    textAlign: 'center',
-                                    fontFamily: 'Space Grotesk',
-                                }}>
+                                <div className="image-editor-template-name">
                                     {template.name}
                                 </div>
                             </div>
@@ -169,34 +144,17 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
                     </div>
 
                     {/* Upload Custom Image */}
-                    <div style={{ textAlign: 'center' }}>
+                    <div className="image-editor-upload-section">
                         <input
                             type="file"
                             ref={fileInputRef}
                             onChange={handleFileUpload}
                             accept="image/*"
-                            style={{ display: 'none' }}
+                            className="image-editor-file-input"
                         />
                         <button
                             onClick={() => fileInputRef.current?.click()}
-                            style={{
-                                padding: '14px 28px',
-                                background: 'transparent',
-                                border: '2px dashed #ff8e53',
-                                borderRadius: '12px',
-                                color: '#ff8e53',
-                                cursor: 'pointer',
-                                fontWeight: 'bold',
-                                fontSize: '16px',
-                                transition: 'all 0.3s ease',
-                                fontFamily: 'Space Grotesk',
-                            }}
-                            onMouseOver={(e) => {
-                                e.currentTarget.style.background = 'rgba(255, 142, 83, 0.1)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.currentTarget.style.background = 'transparent';
-                            }}
+                            className="image-editor-upload-btn"
                         >
                             📁 Upload Your Own Image
                         </button>
@@ -209,18 +167,14 @@ export default function ImgEditor({ isImgEditorShown, closeImgEditor }) {
 
     // Image Editor - use portal to render at body level
     return ReactDOM.createPortal(
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            zIndex: 2,
-        }}>
+        <div className="image-editor-container">
             <FilerobotImageEditor
                 source={selectedImage}
                 onSave={handleSave}
                 onClose={handleEditorClose}
+
+                // Apply custom theme
+                theme={EDITOR_THEME}
 
                 // Text tool configuration
                 Text={{

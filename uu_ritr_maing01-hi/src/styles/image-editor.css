@@ -1,0 +1,238 @@
+/* Image Editor Styles */
+
+/* Template Selection Modal Overlay */
+.image-editor-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+/* Template Selection Modal Content */
+.image-editor-modal {
+    background: #0f0f0f;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 800px;
+    width: 90%;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.25);
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Modal Header */
+.image-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.image-editor-title {
+    color: #ffd166;
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+}
+
+.image-editor-close-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.image-editor-close-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Template Grid */
+.image-editor-templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Template Card */
+.image-editor-template-card {
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #333;
+    transition: all 0.3s ease;
+}
+
+.image-editor-template-card:hover {
+    border-color: #ff8e53;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(255, 142, 83, 0.3);
+}
+
+/* Template Image */
+.image-editor-template-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Template Name */
+.image-editor-template-name {
+    padding: 12px;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Upload Section */
+.image-editor-upload-section {
+    text-align: center;
+}
+
+.image-editor-file-input {
+    display: none;
+}
+
+.image-editor-upload-btn {
+    padding: 14px 28px;
+    background: transparent;
+    border: 2px dashed #ff8e53;
+    border-radius: 12px;
+    color: #ff8e53;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.image-editor-upload-btn:hover {
+    background: rgba(255, 142, 83, 0.1);
+    border-color: #ffd166;
+    color: #ffd166;
+}
+
+/* Editor Container */
+.image-editor-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+
+/* ===== Filerobot Editor Overrides ===== */
+
+/* Tab icons in left sidebar - make them orange */
+.FIE_tabs-bar svg,
+.FIE_tabs-bar path,
+.FIE_tab svg,
+.FIE_tab path {
+    fill: #ff8e53 !important;
+    stroke: #ff8e53 !important;
+}
+
+/* Tab labels */
+.FIE_tab-label,
+.FIE_tabs-bar span {
+    color: #ff8e53 !important;
+}
+
+/* Active tab highlight */
+.FIE_tab--active,
+.FIE_tab--active svg,
+.FIE_tab--active path {
+    fill: #ffd166 !important;
+    stroke: #ffd166 !important;
+    color: #ffd166 !important;
+}
+
+
+/* Override any white backgrounds */
+.FIE_root [style*="background: rgb(255, 255, 255)"],
+.FIE_root [style*="background-color: rgb(255, 255, 255)"],
+.FIE_root [style*="background: white"],
+.FIE_root [style*="background-color: white"] {
+    background-color: #1a1a1a !important;
+    background: #1a1a1a !important;
+}
+
+/* Dropdown/select arrows */
+.FIE_root select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ff8e53' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 8px center !important;
+}
+
+/* Toolbar icons */
+.FIE_topbar svg,
+.FIE_topbar path,
+.FIE_tools-bar svg,
+.FIE_tools-bar path {
+    fill: #ff8e53 !important;
+}
+
+/* Tool buttons text */
+.FIE_tool-button-label {
+    color: #ff8e53 !important;
+}
+
+/* Color picker trigger */
+.FIE_color-picker-triggerer {
+    border-color: #ff8e53 !important;
+}
+
+/* Slider track */
+.FIE_slider-track {
+    background-color: #ff8e53 !important;
+}
+
+/* Save button */
+.FIE_topbar-save-button {
+    background-color: #ff8e53 !important;
+    color: #000000 !important;
+}
+
+/* Close/back button */
+.FIE_topbar-close-button svg,
+.FIE_topbar-back-button svg {
+    fill: #ff8e53 !important;
+}
+
+/* Toolbar icon background */
+.kaWmp {
+    background-color: #1a1a1a !important;
+}
+
+.gHyNwu {
+    background-color: #1a1a1a !important;
+}
+
+/* font and size box bg color */
+.fYpOim {
+    background-color: #1a1a1a !important;
+    border: 1px solid #ff8e53 !important;
+}
+
+/* font picker bg */
+.btmhVz {
+    background-color: #1a1a1a !important;
+}
+
+/* canvas background */
+.bqPKLM {
+    background-color: #1a1a1a !important;
+}
