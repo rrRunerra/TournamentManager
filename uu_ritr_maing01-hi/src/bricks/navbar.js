@@ -241,8 +241,8 @@ export default function Navbar() {
                 setIsAccountOpen(false)
                 setIsSettingsOpen(true)
               }}>
-                <span className="account-popup-icon">⚙️</span>
-                <Lsi import={importLsi} path={["Navbar", "settings"]} />
+                <span className="account-popup-icon">🔤</span>
+                <Lsi import={importLsi} path={["Navbar", "fontSize"]} />
               </div>
               <div className="account-popup-item" onClick={() => {
                 setIsAccountOpen(false)

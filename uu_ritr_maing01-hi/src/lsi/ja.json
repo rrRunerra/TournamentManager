@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "ログアウトの確認",
         "logoutConfirmMessage": "本当にログアウトしますか？",
         "logoutConfirm": "はい、ログアウト",
-        "logoutCancel": "キャンセル"
+        "logoutCancel": "キャンセル",
+        "fontSize": "フォントサイズ",
+        "fontSmall": "小",
+        "fontNormal": "標準",
+        "fontLarge": "大",
+        "resetDefault": "デフォルトに戻す"
     },
     "Confirm": {
         "confirmDefault": "確認",

@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "确认注销",
         "logoutConfirmMessage": "您真的要注销吗？",
         "logoutConfirm": "是的，注销",
-        "logoutCancel": "取消"
+        "logoutCancel": "取消",
+        "fontSize": "字体大小",
+        "fontSmall": "小",
+        "fontNormal": "正常",
+        "fontLarge": "大",
+        "resetDefault": "恢复默认"
     },
     "Confirm": {
         "confirmDefault": "确认",

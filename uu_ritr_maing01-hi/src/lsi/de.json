@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "Abmeldung bestätigen",
         "logoutConfirmMessage": "Möchten Sie sich wirklich abmelden?",
         "logoutConfirm": "Ja, abmelden",
-        "logoutCancel": "Abbrechen"
+        "logoutCancel": "Abbrechen",
+        "fontSize": "Schriftgröße",
+        "fontSmall": "Klein",
+        "fontNormal": "Normal",
+        "fontLarge": "Groß",
+        "resetDefault": "Standard wiederherstellen"
     },
     "Confirm": {
         "confirmDefault": "Bestätigen",

@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "Potwierdź wylogowanie",
         "logoutConfirmMessage": "Czy naprawdę chcesz się wylogować?",
         "logoutConfirm": "Tak, wyloguj",
-        "logoutCancel": "Anuluj"
+        "logoutCancel": "Anuluj",
+        "fontSize": "Rozmiar czcionki",
+        "fontSmall": "Mały",
+        "fontNormal": "Normalny",
+        "fontLarge": "Duży",
+        "resetDefault": "Przywróć domyślne"
     },
     "Confirm": {
         "confirmDefault": "Potwierdź",

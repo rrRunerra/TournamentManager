@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "Kijelentkezés megerősítése",
         "logoutConfirmMessage": "Biztos, hogy ki szeretne jelentkezni?",
         "logoutConfirm": "Igen, kijelentkezés",
-        "logoutCancel": "Mégse"
+        "logoutCancel": "Mégse",
+        "fontSize": "Betűméret",
+        "fontSmall": "Kicsi",
+        "fontNormal": "Normál",
+        "fontLarge": "Nagy",
+        "resetDefault": "Alapértelmezett visszaállítása"
     },
     "Confirm": {
         "confirmDefault": "Megerősítés",

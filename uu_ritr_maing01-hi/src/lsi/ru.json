@@ -71,7 +71,12 @@
         "logoutConfirmTitle": "Подтвердить выход",
         "logoutConfirmMessage": "Вы действительно хотите выйти?",
         "logoutConfirm": "Да, выйти",
-        "logoutCancel": "Отмена"
+        "logoutCancel": "Отмена",
+        "fontSize": "Размер шрифта",
+        "fontSmall": "Маленький",
+        "fontNormal": "Нормальный",
+        "fontLarge": "Большой",
+        "resetDefault": "Сбросить по умолчанию"
     },
     "Confirm": {
         "confirmDefault": "Подтвердить",
