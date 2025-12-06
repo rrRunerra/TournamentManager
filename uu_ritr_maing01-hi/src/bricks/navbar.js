@@ -23,11 +23,17 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [fontSize, setFontSize] = useState(() => {
+    const saved = localStorage.getItem("fontSize");
+    return saved ? parseInt(saved, 10) : 100;
+  });
   const [lang, setLang] = useLanguage();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["Navbar"]);
   const accountPopupRef = useRef(null);
   const langPopupRef = useRef(null);
+  const settingsPopupRef = useRef(null);
 
   // Handler to update route
   const handleCardClick = (newRoute) => {
@@ -106,6 +112,33 @@ export default function Navbar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isLangOpen]);
+
+  // Close settings popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (settingsPopupRef.current && !settingsPopupRef.current.contains(event.target)) {
+        setIsSettingsOpen(false);
+      }
+    };
+
+    if (isSettingsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSettingsOpen]);
+
+  // Apply font size to document
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${fontSize}%`;
+    localStorage.setItem("fontSize", fontSize.toString());
+  }, [fontSize]);
+
+  const handleFontSizeChange = (newSize) => {
+    setFontSize(newSize);
+  };
 
   const handleLanguageChange = (lang) => {
     setLang(lang);
@@ -205,9 +238,8 @@ export default function Navbar() {
                 <Lsi import={importLsi} path={["Navbar", "profile"]} />
               </div>
               <div className="account-popup-item" onClick={() => {
-                setActiveLink("home")
                 setIsAccountOpen(false)
-                setRoute("settings")
+                setIsSettingsOpen(true)
               }}>
                 <span className="account-popup-icon">⚙️</span>
                 <Lsi import={importLsi} path={["Navbar", "settings"]} />
@@ -222,6 +254,61 @@ export default function Navbar() {
             </div>
           )}
         </div>
+
+        {/* Settings Popup */}
+        {isSettingsOpen && (
+          <div className="settings-popup-overlay">
+            <div className="settings-popup" ref={settingsPopupRef}>
+              <div className="settings-popup-header">
+                <span className="settings-popup-title">
+                  <Lsi import={importLsi} path={["Navbar", "settings"]} />
+                </span>
+                <button className="settings-close-btn" onClick={() => setIsSettingsOpen(false)}>✕</button>
+              </div>
+              <div className="settings-popup-content">
+                <div className="settings-item">
+                  <label className="settings-label">
+                    <Lsi import={importLsi} path={["Navbar", "fontSize"]} />
+                  </label>
+                  <div className="font-size-control">
+                    <button
+                      className="font-size-btn"
+                      onClick={() => handleFontSizeChange(Math.max(70, fontSize - 10))}
+                      disabled={fontSize <= 70}
+                    >
+                      A-
+                    </button>
+                    <span className="font-size-value">{fontSize}%</span>
+                    <button
+                      className="font-size-btn"
+                      onClick={() => handleFontSizeChange(Math.min(150, fontSize + 10))}
+                      disabled={fontSize >= 150}
+                    >
+                      A+
+                    </button>
+                  </div>
+                  <input
+                    type="range"
+                    min="70"
+                    max="150"
+                    step="10"
+                    value={fontSize}
+                    onChange={(e) => handleFontSizeChange(parseInt(e.target.value, 10))}
+                    className="font-size-slider"
+                  />
+                  <div className="font-size-labels">
+                    <span><Lsi import={importLsi} path={["Navbar", "fontSmall"]} /></span>
+                    <span><Lsi import={importLsi} path={["Navbar", "fontNormal"]} /></span>
+                    <span><Lsi import={importLsi} path={["Navbar", "fontLarge"]} /></span>
+                  </div>
+                </div>
+                <button className="settings-reset-btn" onClick={() => handleFontSizeChange(100)}>
+                  <Lsi import={importLsi} path={["Navbar", "resetDefault"]} />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="cards-container">
 

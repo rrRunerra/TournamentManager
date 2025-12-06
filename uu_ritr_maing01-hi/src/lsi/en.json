@@ -72,7 +72,12 @@
     "logoutConfirmTitle": "Confirm Logout",
     "logoutConfirmMessage": "Do you really want to log out?",
     "logoutConfirm": "Yes, logout",
-    "logoutCancel": "Cancel"
+    "logoutCancel": "Cancel",
+    "fontSize": "Font Size",
+    "fontSmall": "Small",
+    "fontNormal": "Normal",
+    "fontLarge": "Large",
+    "resetDefault": "Reset to Default"
   },
   "Confirm": {
     "confirmDefault": "Confirm",

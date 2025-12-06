@@ -72,7 +72,12 @@
         "logoutConfirmTitle": "Potvrdiť odhlásenie",
         "logoutConfirmMessage": "Naozaj sa chcete odhlásiť?",
         "logoutConfirm": "Áno, odhlásiť",
-        "logoutCancel": "Zrušiť"
+        "logoutCancel": "Zrušiť",
+        "fontSize": "Veľkosť písma",
+        "fontSmall": "Malé",
+        "fontNormal": "Normálne",
+        "fontLarge": "Veľké",
+        "resetDefault": "Obnoviť predvolené"
     },
     "Confirm": {
         "confirmDefault": "Potvrdiť",
