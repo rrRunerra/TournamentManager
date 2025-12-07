@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import NotificationCard from './NotificationCard';
-import '../styles/notificationContainer.css';
+import '../styles/bricks/notificationContainer.css';
 
 const NotificationContext = createContext();
 

@@ -12,7 +12,7 @@ import diploma2 from '../assets/matchup_diploma_2.jpg';
 import diploma3 from '../assets/matchup_diploma_3.jpg';
 
 // Import styles
-import '../styles/image-editor.css';
+import '../styles/bricks/image-editor.css';
 import importLsi from "../lsi/import-lsi.js";
 
 // Theme configuration matching app colors with good text visibility

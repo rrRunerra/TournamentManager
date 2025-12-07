@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRoute, Lsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import "../styles/home.css";
+import "../styles/routes/home.css";
 import heroGif from "../assets/gif.gif";
 
 export default function Home() {

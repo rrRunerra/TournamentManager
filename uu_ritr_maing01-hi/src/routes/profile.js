@@ -2,7 +2,7 @@ import { useRoute, useLsi } from "uu5g05";
 import { useEffect, useState } from "react";
 import Calls from "../calls.js"
 import importLsi from "../lsi/import-lsi.js";
-import "../styles/profile.css";
+import "../styles/routes/profile.css";
 
 const StatCard = ({ label, value, color }) => (
     <div

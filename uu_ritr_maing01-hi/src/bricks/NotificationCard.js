@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/notificationCard.css';
+import '../styles/bricks/notificationCard.css';
 
 const NotificationCard = ({ type = 'success', message, subText, onClose, autoClose = true, duration = 5000 }) => {
     const [isVisible, setIsVisible] = useState(true);

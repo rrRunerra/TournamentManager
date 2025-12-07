@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/confirmDialog.css';
+import '../styles/bricks/confirmDialog.css';
 
 const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel, confirmText = "Potvrdiť", cancelText = "Zrušiť", danger = false }) => {
     if (!isOpen) return null;

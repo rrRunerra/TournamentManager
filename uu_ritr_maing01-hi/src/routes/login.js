@@ -3,8 +3,8 @@ import { useRoute, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import DarkVeil from "../bricks/DarkVeil.js";
 import Calls from "../calls.js";
-import "../styles/login.css";
-
+import "../styles/routes/login.css";
+import useUser from "../hooks/useUser.js";
 
 const LoginLogo = () => (
   <div>
@@ -55,10 +55,10 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useRoute();
   const lsi = useLsi(importLsi, ["Login"]);
+  const [user, setUser] = useUser();
 
   useEffect(() => {
-    const player = localStorage.getItem("player");
-    if (player) {
+    if (user) {
       setRoute("home");
     }
   }, []);
@@ -70,6 +70,7 @@ export default function LoginPage() {
 
     try {
       const res = await Calls.PlayerCreate({ name: username, password: password });
+      setUser(res);
       localStorage.setItem("player", JSON.stringify(res));
       setRoute("home");
     } catch (e) {

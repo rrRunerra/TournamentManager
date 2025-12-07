@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../styles/about.css"; // Import your new CSS file
+import "../styles/routes/about.css"; // Import your new CSS file
 import FlappyBird from "../bricks/flappy-bird";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";

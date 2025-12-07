@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/flappy-bird.css';
+import '../styles/bricks/flappy-bird.css';
 import importLsi from "../lsi/import-lsi.js";
 import { Lsi } from "uu5g05";
 import Calls from "../calls.js";
+import useUser from "../hooks/useUser.js";
 
 const GRAVITY = 0.08;
 const JUMP_STRENGTH = -3;
@@ -18,6 +19,7 @@ const FlappyBird = ({ onClose }) => {
     const [highScore, setHighScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
+    const [user, setUser] = useUser();
 
     const gameLoopRef = useRef();
 
@@ -33,12 +35,11 @@ const FlappyBird = ({ onClose }) => {
             // Only update when we have a new high score
             setHighScore(score);
             localStorage.setItem('flappyHighScore', score);
-            const currentUser = JSON.parse(localStorage.getItem('player') || '{}');
 
             console.log("updating flappybird score with new high score:", score);
 
             Calls.updateFlappyBirdScore({
-                playerId: currentUser.id,
+                playerId: user.id,
                 score: score
             }).catch(err => {
                 console.error('Failed to update Flappy Bird score:', err);

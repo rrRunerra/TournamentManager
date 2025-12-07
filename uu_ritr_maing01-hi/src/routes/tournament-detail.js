@@ -2,26 +2,26 @@ import { useCallback, useEffect, useState } from "react";
 import { useRoute, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { Card, CardDescription, CardFooter, CardTitle } from "../bricks/cards.js";
-import CustomBracket from "../bricks/CustomBracket.js";
+import CustomBracket from "../bricks/brackets/CustomBracket.js";
 import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
 import OwnerControls from "../bricks/ownerControls.js";
 import Calls from "../calls.js";
-import "../styles/tournamentDetail.css";
+import "../styles/routes/tournamentDetail.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import ImgEditor from "../bricks/image-editor.js";
+import useUser from "../hooks/useUser.js";
 
 
 
 
 export default function TournamentDetailPage() {
   const [info, setInfo] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useUser()
   const [joiningTeam, setJoiningTeam] = useState(null);
   const [matches, setMatches] = useState([]);
   const [isImgEditorShown, setIsImgEditorShown] = useState(false);
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
-  const [activeTab, setActiveTab] = useState('current-match');
   const { showError } = useNotification();
   const lsi = useLsi(importLsi, ["TournamentDetail"]);
 
@@ -36,10 +36,6 @@ export default function TournamentDetailPage() {
       }
     }
     fetchTournamentDetail();
-
-    const storedUser = localStorage.getItem("player");
-    if (storedUser) setUser(JSON.parse(storedUser));
-
 
   }, [id]);
 
@@ -119,7 +115,7 @@ export default function TournamentDetailPage() {
     return (
       <div>
 
-        <h2 className="tournament-detail-title" style={{ textAlign: "center", marginBottom: "2rem", marginTop: "2rem" }}>{info.name}</h2>
+        <h2 className="tournament-detail-title tournament-detail-title-centered">{info.name}</h2>
         <CustomBracket
           matches={matches}
           bracketType={bracketsType}
@@ -130,7 +126,7 @@ export default function TournamentDetailPage() {
         />
 
         {isOwner && info.status === "ongoing" && (
-          <div style={{ marginTop: "2rem" }}>
+          <div className="tournament-detail-ongoing-controls">
             <OngoingOwnerControls info={info} id={id} setInfo={setInfo} setRoute={setRoute} />
           </div>
         )}
@@ -139,22 +135,7 @@ export default function TournamentDetailPage() {
         {isOwner && info.status === "finished" && (
           <button
             onClick={() => setIsImgEditorShown(true)}
-            style={{
-              position: 'fixed',
-              bottom: '20px',
-              right: '80px',
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              backgroundColor: '#ff8e53',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              zIndex: 1
-            }}
+            className="tournament-detail-fab tournament-detail-fab-diploma"
             aria-label="Create Diploma"
             title="Create Diploma"
           >
@@ -227,22 +208,7 @@ export default function TournamentDetailPage() {
 
       <button
         onClick={() => setRoute("tournaments")}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          width: '50px',
-          height: '50px',
-          borderRadius: '50%',
-          backgroundColor: '#ff8e53',
-          border: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-          zIndex: 1000
-        }}
+        className="tournament-detail-fab tournament-detail-fab-back"
         aria-label="Späť na turnaje"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

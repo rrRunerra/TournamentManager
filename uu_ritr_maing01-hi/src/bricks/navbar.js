@@ -1,8 +1,9 @@
-import "../styles/navbar.css";
+import "../styles/bricks/navbar.css";
 import { useEffect, useState, useRef } from "react";
 import { useRoute, Utils, Environment, useLanguage, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { useConfirm } from "./ConfirmProvider.js";
+import useUser from "../hooks/useUser.js";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -19,7 +20,7 @@ const LANGUAGES = [
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("home");
   const [route, setRoute] = useRoute();
-  const [user, setUser] = useState();
+  const [user, setUser] = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -34,6 +35,7 @@ export default function Navbar() {
   const accountPopupRef = useRef(null);
   const langPopupRef = useRef(null);
   const settingsPopupRef = useRef(null);
+
 
   // Handler to update route
   const handleCardClick = (newRoute) => {
@@ -52,19 +54,13 @@ export default function Navbar() {
     });
 
     if (confirmed) {
+      setUser(null);
       localStorage.removeItem("player");
       setRoute("home");
     }
   }
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("player"));
-    setUser(user);
-
-    // if (!user) {
-    //   setRoute("login");
-    //   return;
-    // }
 
     // Load language from localStorage
     const savedLang = localStorage.getItem("language");

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import "../styles/createTournamentModal.css";
+import "../styles/bricks/createTournamentModal.css";
 import { useNotification } from "./NotificationProvider.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import Calls from "../calls.js";
+import useUser from "../hooks/useUser.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [name, setName] = useState("");
@@ -17,16 +18,15 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [bracketType, setBracketType] = useState("single")
   const { showError } = useNotification();
   const lsi = useLsi(importLsi, ["CreateTournament"]);
+  const [user, setUser] = useUser();
 
   // Authorization check using localStorage
   // useEffect(() => {
   //   if (!isOpen) return;
 
-  //   const user = localStorage.getItem("player");
   //   if (user) {
   //     try {
-  //       const parsedUser = JSON.parse(user);
-  //       Calls.getPlayer({ id: parsedUser.id }).then((pDb) => {
+  //       Calls.getPlayer({ id: user.id }).then((pDb) => {
   //         if (pDb.role.toLowerCase() !== "teacher") {
   //           showError(lsi.errorTitle, lsi.errorUnauthorized);
   //           onClose();
@@ -38,7 +38,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   //       console.error("Failed to parse user from localStorage:", error);
   //     }
   //   }
-  // }, [isOpen, lsi, showError, onClose]);
+  // }, [isOpen, lsi, showError, onClose, user]);
 
 
 

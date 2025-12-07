@@ -1,5 +1,5 @@
 import Calls from "../calls.js";
-import "../styles/ownerControls.css"; // Reusing existing styles
+import "../styles/bricks/ownerControls.css"; // Reusing existing styles
 import { useNotification } from "./NotificationProvider.js";
 import { useConfirm } from "./ConfirmProvider.js";
 import { useLsi } from "uu5g05";

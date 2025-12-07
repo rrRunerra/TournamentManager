@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Calls from "../calls.js";
 import { useRoute } from "uu5g05";
-import "../styles/tournament.css";
-import "../styles/history.css";
+import "../styles/routes/tournament.css";
+import "../styles/routes/history.css";
 import Pagination from "../bricks/pagination.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
@@ -89,12 +89,6 @@ export default function HistoryPage() {
     if (key === "month") setSelectedMonth(value);
     if (key === "search") setSearchQuery(value);
     setCurrentPage(1); // Reset to first page on filter change
-  }
-
-  function resetFilters() {
-    setSelectedYear("");
-    setSelectedMonth("");
-    setSearchQuery("");
   }
 
   // Pagination logic

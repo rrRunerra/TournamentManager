@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/pagination.css"
+import "../styles/bricks/pagination.css"
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 

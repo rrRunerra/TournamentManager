@@ -246,6 +246,51 @@
   font-size: 0.8rem;
 }
 
+/* Title centered with margin for ongoing/finished tournaments */
+.tournament-detail-title-centered {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+/* Owner controls wrapper for ongoing tournaments */
+.tournament-detail-ongoing-controls {
+  margin-top: 2rem;
+}
+
+/* Floating Action Button - Base */
+.tournament-detail-fab {
+  position: fixed;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff8e53;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tournament-detail-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Back button - positioned right */
+.tournament-detail-fab-back {
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Diploma button - positioned second from right */
+.tournament-detail-fab-diploma {
+  right: 80px;
+  z-index: 1;
+}
 
 #uuApp {
   background-color: #0d0d0d

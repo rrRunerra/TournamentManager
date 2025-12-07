@@ -3,8 +3,9 @@ import { useRoute, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Calls from "../calls.js";
-import "../styles/tournament.css";
+import "../styles/routes/tournament.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
+import useUser from "../hooks/useUser.js";
 
 const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
   const status = "upcoming";
@@ -21,12 +22,14 @@ export default function TournamentsPage() {
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useRoute();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useUser();
   const { showError, showSuccess } = useNotification();
   const lsi = useLsi(importLsi, ["Tournaments"]);
 
-  // fetch tournaments
-  // fetch tournaments
+  const isTeacher = user?.role.toLowerCase() === "teacher";
+
+
+
   const fetchTournaments = async (pageNum) => {
     if (loading) return;
     setLoading(true);
@@ -63,19 +66,11 @@ export default function TournamentsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasMore, loading]);
 
+
   useEffect(() => {
     fetchTournaments(page);
   }, [page]);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("player"));
-    // if (!user) {
-    //   setRoute("login");
-    //   return;
-    // }
-    setUser(user);
-    // fetchTournaments(1); // Triggered by page dependency
-  }, []);
 
   if (!user) {
     return (
@@ -91,7 +86,6 @@ export default function TournamentsPage() {
       </div>
     )
   }
-  const isTeacher = user?.role.toLowerCase() === "teacher";
 
   const handleCreateTournament = async (data) => {
     if (
@@ -117,10 +111,6 @@ export default function TournamentsPage() {
   const upcomingTournaments = tournaments.filter(t => t.status === "upcoming");
 
   const renderTournamentCard = (tournament) => (
-
-
-
-
 
     <div className="tournament-card" key={tournament.id} onClick={() => {
       setRoute("tournamentDetail", { id: tournament.id })
