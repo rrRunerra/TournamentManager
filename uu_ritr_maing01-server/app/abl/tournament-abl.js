@@ -10,22 +10,64 @@ const generateRoundRobin = require("./brackets/generate-round-robin.js");
 
 const WARNINGS = {};
 
+/**
+ * @typedef {"upcoming"|"ongoing"|"finished"} TournamentStatus
+ */
+
+/**
+ * @typedef {"single"|"double"|"robin"} BracketType
+ */
+
+/**
+ * @typedef {Object} Tournament
+ * @property {string} id - Tournament ID
+ * @property {string} awid - Application workspace ID
+ * @property {string} name - Tournament name
+ * @property {string} description - Tournament description
+ * @property {string} startDate - Start date (ISO string)
+ * @property {string} endDate - End date (ISO string)
+ * @property {string} teamSize - Number of players per team
+ * @property {TournamentStatus} status - Tournament status
+ * @property {string[]} teams - Array of team IDs
+ * @property {string} owner - Owner player ID
+ * @property {BracketType} bracketType - Type of bracket
+ * @property {{cts: string, mts: string, rev: number}} sys - System metadata
+ */
+
+/**
+ * @typedef {Object} TournamentListResponse
+ * @property {Tournament[]} itemList - Array of tournaments
+ * @property {number} total - Total count
+ * @property {boolean} hasMore - Whether more items exist
+ */
+
+/**
+ * Application Business Logic for Tournament operations.
+ * Handles tournament creation, listing, updates, and bracket generation.
+ */
 class TournamentAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("tournament");
   }
 
+  /**
+   * Deletes a tournament and all associated teams and matches.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string}} dtoIn - Tournament ID
+   * @returns {Promise<void>}
+   */
   async delete(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentDeleteDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Delete.InvalidDtoIn();
     }
 
-    const tournament = await this.dao.get(awid, dtoIn.id);
+    const tournament = await this.dao.get({ awid, id: dtoIn.id });
     if (!tournament) {
-      // If tournament doesn't exist, we can just return or throw. 
+      // If tournament doesn't exist, we can just return or throw.
       // Returning null or similar to indicate it's already gone or not found.
       // But for now, let's proceed to try to remove it (maybe it was partially deleted?)
       // Actually, if we want to delete teams, we need the tournament object.
@@ -47,7 +89,7 @@ class TournamentAbl {
       // Delete matches
       const matchdb = DaoFactory.getDao("match");
       try {
-        const matches = await matchdb.getAll(awid, dtoIn.id);
+        const matches = await matchdb.getAll({ awid, tournamentId: dtoIn.id });
         const matchList = matches.itemList || matches;
         for (const match of matchList) {
           await matchdb.remove({ awid, id: match.id });
@@ -62,12 +104,25 @@ class TournamentAbl {
     return out;
   }
 
+  /**
+   * Lists tournaments with optional filtering and pagination.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   limit?: number,
+   *   skip?: number,
+   *   status?: TournamentStatus|TournamentStatus[],
+   *   year?: number,
+   *   month?: number,
+   *   search?: string
+   * }} [dtoIn={}] - Filter options
+   * @returns {Promise<TournamentListResponse>}
+   */
   async list(awid, dtoIn = {}) {
     const limit = parseInt(dtoIn.limit) || 1000;
     const skip = parseInt(dtoIn.skip) || 0;
 
-
-    let allTournaments = await this.dao.list(awid);
+    let allTournaments = await this.dao.list({ awid });
     let itemList = allTournaments.itemList || allTournaments;
 
     // Sort by startDate to ensure stable pagination (newest first)
@@ -76,21 +131,21 @@ class TournamentAbl {
     // Filter by status if provided
     if (dtoIn.status) {
       const statuses = Array.isArray(dtoIn.status) ? dtoIn.status : [dtoIn.status];
-      itemList = itemList.filter(t => statuses.includes(t.status));
+      itemList = itemList.filter((t) => statuses.includes(t.status));
     }
 
     // Filter by Year and Month (based on endDate as per frontend logic)
     if (dtoIn.year) {
-      itemList = itemList.filter(t => new Date(t.endDate).getFullYear() === parseInt(dtoIn.year));
+      itemList = itemList.filter((t) => new Date(t.endDate).getFullYear() === parseInt(dtoIn.year));
     }
     if (dtoIn.month) {
-      itemList = itemList.filter(t => new Date(t.endDate).getMonth() + 1 === parseInt(dtoIn.month));
+      itemList = itemList.filter((t) => new Date(t.endDate).getMonth() + 1 === parseInt(dtoIn.month));
     }
 
     // Filter by Name (Search)
     if (dtoIn.search) {
       const query = dtoIn.search.toLowerCase();
-      itemList = itemList.filter(t => t.name.toLowerCase().includes(query));
+      itemList = itemList.filter((t) => t.name.toLowerCase().includes(query));
     }
 
     // Apply pagination
@@ -100,23 +155,31 @@ class TournamentAbl {
     return {
       itemList: paginatedItems,
       total: itemList.length,
-      hasMore
+      hasMore,
     };
   }
 
+  /**
+   * Lists finished tournaments that a user has participated in.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   userId: string,
+   *   limit?: number
+   * }} dtoIn - User filter
+   * @returns {Promise<{itemList: (Tournament & {teamName: string})[], total: number}>}
+   */
   async listByUser(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentListByUserDtoInType", dtoIn);
-    console.log(dtoIn)
+    console.log(dtoIn);
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.ListByUser.InvalidDtoIn();
     }
 
     const limit = dtoIn.limit || 3;
     const userId = dtoIn.userId;
 
-
-
-    let allTournaments = await this.dao.list(awid, "finished");
+    let allTournaments = await this.dao.list({ awid, status: "finished" });
 
     let itemList = allTournaments.itemList || allTournaments;
 
@@ -126,21 +189,19 @@ class TournamentAbl {
     const userTournaments = [];
     const teamdb = DaoFactory.getDao("team");
 
-    const teamNames = []
+    const teamNames = [];
 
     for (const tournament of itemList) {
       if (userTournaments.length >= limit) break;
 
       if (tournament.teams) {
         // We need to check if ANY of the teams contains the user.
-        const teams = await Promise.all(
-          tournament.teams.map(teamId => teamdb.get(awid, teamId))
-        );
+        const teams = await Promise.all(tournament.teams.map((teamId) => teamdb.get({ awid, id: teamId })));
 
-        const isUserInTournament = teams.some(team => team && team.players && team.players.includes(userId));
+        const isUserInTournament = teams.some((team) => team && team.players && team.players.includes(userId));
 
         if (isUserInTournament) {
-          tournament.teamName = teams.find(team => team && team.players && team.players.includes(userId))?.name
+          tournament.teamName = teams.find((team) => team && team.players && team.players.includes(userId))?.name;
           userTournaments.push(tournament);
         }
       }
@@ -148,28 +209,35 @@ class TournamentAbl {
 
     return {
       itemList: userTournaments,
-      total: userTournaments.length
+      total: userTournaments.length,
     };
   }
 
+  /**
+   * Gets a tournament by ID with resolved team details.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string}} dtoIn - Tournament ID
+   * @returns {Promise<Tournament & {teams: {id: string, name: string, players: string[]}[]}>}
+   */
   async get(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentGetDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Get.InvalidDtoIn();
     }
 
     const teamdb = DaoFactory.getDao("team");
-    const data = await this.dao.get(awid, dtoIn.id);
+    const data = await this.dao.get({ awid, id: dtoIn.id });
 
     // Resolve team details
     const teams = await Promise.all(
       data.teams.map(async (team) => {
-        const t = await teamdb.findOne({ awid, id: team });
+        const t = await teamdb.get({ awid, id: team });
         return {
           name: t?.name,
           id: t?.id,
-          players: t?.players
+          players: t?.players,
         };
       }),
     );
@@ -179,31 +247,37 @@ class TournamentAbl {
     return data;
   }
 
+  /**
+   * Updates a tournament status.
+   * When changing to "ongoing", generates brackets based on bracketType.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, status?: TournamentStatus}} dtoIn - Update data
+   * @returns {Promise<Tournament>} Updated tournament
+   * @throws {Error} If not enough teams or tournament not found
+   */
   async update(awid, dtoIn) {
-    const validationResult = this.validator.validate("TournamentUpdateDtoInType", dtoIn)
-    if (!validationResult.isValid()) throw new Error("InvalidDtoIn")
+    const validationResult = this.validator.validate("TournamentUpdateDtoInType", dtoIn);
+    if (!validationResult.isValid()) throw new Errors.Update.InvalidDtoIn();
 
-    const tournament = await this.dao.get(awid, dtoIn.id)
-    if (!tournament) throw new Error("TournamentNotFound")
-
+    const tournament = await this.dao.get({ awid, id: dtoIn.id });
+    if (!tournament) throw new Errors.Update.TournamentNotFound();
 
     if (dtoIn?.status) {
-      tournament.status = dtoIn.status
+      tournament.status = dtoIn.status;
 
       //  bracketType 'double' 'single'
       if (dtoIn.status === "ongoing") {
-        const teams = tournament.teams || []
-        if (teams.length < 2) throw new Error("NotEnoughTeams")
+        const teams = tournament.teams || [];
+        if (teams.length < 2) throw new Errors.Update.NotEnoughTeams();
 
         const teamdb = DaoFactory.getDao("team");
-        const t = await Promise.all(
-          teams.map(team => teamdb.get(awid, team))
-        )
+        const t = await Promise.all(teams.map((team) => teamdb.get({ awid, id: team })));
         //signle
-        if (tournament.bracketType == 'single') {
-          const a = await generateSingleBracket(t)
+        if (tournament.bracketType == "single") {
+          const a = await generateSingleBracket(t);
 
-          const matchdb = DaoFactory.getDao("match")
+          const matchdb = DaoFactory.getDao("match");
 
           for (const match of a) {
             await matchdb.create({
@@ -217,19 +291,16 @@ class TournamentAbl {
               state: match.state,
               participants: match.participants,
               tournamentId: tournament.id,
-            })
+            });
           }
-
         }
 
+        if (tournament.bracketType == "double") {
+          const a = await generateDoubleBracket(t);
+          const upper = a.upper;
+          const lower = a.lower;
 
-        if (tournament.bracketType == 'double') {
-          const a = await generateDoubleBracket(t)
-          const upper = a.upper
-          const lower = a.lower
-
-          const matchdb = DaoFactory.getDao("match")
-
+          const matchdb = DaoFactory.getDao("match");
 
           for (const match of upper) {
             await matchdb.create({
@@ -244,9 +315,8 @@ class TournamentAbl {
               participants: match.participants,
               tournamentId: tournament.id,
               bracket: "upper",
-            })
+            });
           }
-
 
           for (const match of lower) {
             await matchdb.create({
@@ -261,13 +331,13 @@ class TournamentAbl {
               participants: match.participants,
               tournamentId: tournament.id,
               bracket: "lower",
-            })
+            });
           }
         }
 
         if (tournament.bracketType == "robin") {
-          const a = await generateRoundRobin(t)
-          const matchdb = DaoFactory.getDao("match")
+          const a = await generateRoundRobin(t);
+          const matchdb = DaoFactory.getDao("match");
 
           for (const match of a) {
             await matchdb.create({
@@ -281,58 +351,71 @@ class TournamentAbl {
               state: match.state,
               participants: match.participants,
               tournamentId: tournament.id,
-            })
+            });
           }
         }
-
-
-
       }
     }
 
-    const out = await this.dao.update({ awid, tournament })
-    return out
+    const out = await this.dao.update({ awid, tournament });
+    return out;
   }
 
-
+  /**
+   * Creates a new tournament with teams.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   name: string,
+   *   description: string,
+   *   startDate: string,
+   *   endDate: string,
+   *   teamSize: string,
+   *   status: "upcoming",
+   *   teams: string[],
+   *   owner: string,
+   *   bracketType: BracketType
+   * }} dtoIn - Tournament creation data
+   * @returns {Promise<Tournament>} Created tournament
+   */
   async create(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentCreateDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error(Errors.Create.InvalidDtoIn);
+      throw new Errors.Create.InvalidDtoIn();
     }
     if (!dtoIn.name) {
-      throw new Error(Errors.Create.NameMissing);
+      throw new Errors.Create.NameMissing();
     }
     if (!dtoIn.description) {
-      throw new Error(Errors.Create.DescriptionMissing);
+      throw new Errors.Create.DescriptionMissing();
     }
     if (!dtoIn.startDate) {
-      throw new Error(Errors.Create.StartDateMissing);
+      throw new Errors.Create.StartDateMissing();
     }
     if (!dtoIn.endDate) {
-      throw new Error(Errors.Create.EndDateMissing);
+      throw new Errors.Create.EndDateMissing();
     }
     if (!dtoIn.status) {
-      throw new Error(Errors.Create.StatusMissing);
+      throw new Errors.Create.StatusMissing();
     }
     if (!dtoIn.teamSize) {
-      throw new Error(Errors.Create.TeamSizeMissing);
+      throw new Errors.Create.TeamSizeMissing();
     }
     if (!dtoIn.teams) {
-      throw new Error(Errors.Create.TeamsMissing);
+      throw new Errors.Create.TeamsMissing();
     }
     if (!dtoIn.bracketType) {
-      throw new Error(Errors.Create.BracketTypeMissing)
+      throw new Errors.Create.BracketTypeMissing();
     }
 
-    const tId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    const tId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     const teams = dtoIn.teams.map((team) => {
       return {
         id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
         name: team,
         players: [],
-        tournamentId: tId
+        tournamentId: tId,
       };
     });
 
@@ -347,7 +430,6 @@ class TournamentAbl {
 
     dtoIn.teams = teams.map((team) => team.id);
     dtoIn.id = tId;
-
 
     const out = await this.dao.create({
       awid,

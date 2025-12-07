@@ -4,56 +4,102 @@ const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/player-error.js");
-const { Edu } = require("../edu.js")
+const { Edu } = require("../edu.js");
 
-const WARNINGS = {
+const WARNINGS = {};
 
-};
+/**
+ * @typedef {Object} PlayerStats
+ * @property {number} finals_firstPlace - Number of first place finishes
+ * @property {number} finals_secondPlace - Number of second place finishes
+ * @property {number} finals_thirdPlace - Number of third place finishes
+ * @property {number} finals_fourthPlace - Number of fourth place finishes
+ * @property {number} matchesWon - Total matches won
+ * @property {number} matchesLost - Total matches lost
+ * @property {number} tournamentsPlayed - Total tournaments participated in
+ * @property {number} flappyBirdHighScore - Highest score in Flappy Bird minigame
+ */
 
+/**
+ * @typedef {Object} Player
+ * @property {string} id - Player ID (derived from Edupage user ID)
+ * @property {string} name - Player full name
+ * @property {string} school - School identifier (e.g., "sps-snina")
+ * @property {"student"|"teacher"} role - Player role
+ * @property {string} awid - Application workspace ID
+ * @property {PlayerStats} stats - Player statistics
+ * @property {{cts: string, mts: string, rev: number}} sys - System metadata
+ */
+
+/**
+ * Application Business Logic for Player operations.
+ * Handles player creation via Edupage authentication, stats management,
+ * and various game-related score updates.
+ */
 class PlayerAbl {
-
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("player");
   }
 
+  /**
+   * Retrieves a player by ID.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string}} dtoIn - Player ID
+   * @returns {Promise<Player>} Player data with stats
+   */
   async get(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerGetDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Get.InvalidDtoIn();
     }
 
-    const out = await this.dao.get(awid, dtoIn.id);
+    const out = await this.dao.get({ awid, id: dtoIn.id });
     return out;
   }
 
+  /**
+   * Updates player information.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, school?: string}} dtoIn - Update data
+   * @returns {Promise<Player>} Updated player
+   */
   async update(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerUpdateDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Update.InvalidDtoIn();
     }
-
-
   }
 
+  /**
+   * Creates a new player by authenticating with Edupage.
+   * If the player already exists, returns the existing player.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{name: string, password: string}} dtoIn - Edupage login credentials
+   * @returns {Promise<{id: string, name: string, school: string, role: string}>} Created/existing player
+   * @throws {Error} If credentials are invalid or user not found
+   */
   async create(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerCreateDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error(Errors.Create.InvalidDtoIn);
+      throw new Errors.Create.InvalidDtoIn();
     }
     if (!dtoIn.name) {
-      throw new Error(Errors.Create.NameMissing);
+      throw new Errors.Create.NameMissing();
     }
     if (!dtoIn.password) {
-      throw new Error(Errors.Create.PasswordMissing);
+      throw new Errors.Create.PasswordMissing();
     }
 
     const edu = new Edu(dtoIn.name, dtoIn.password);
     const loginResponse = await edu.login();
-    console.log(loginResponse.users[0])
+    console.log(loginResponse.users[0]);
     //     Login Response: {
     //   "users": [
     //     {
@@ -143,20 +189,18 @@ class PlayerAbl {
     //   "edid": "V5EDUaxfTUjtjLgaYn0jFt4rmijmD40x779af02514"
     // }
 
-
-
     if (!loginResponse.users || loginResponse.users.length == 0) {
-      throw new Error(Errors.Create.UserNotFound);
+      throw new Errors.Create.UserNotFound();
     }
 
     const user = {
       id: loginResponse.users[0].userid.replace(/\D+/g, ""),
       name: `${loginResponse.users[0].firstname} ${loginResponse.users[0].lastname}`,
       school: loginResponse.users[0].edupage.toLowerCase(),
-      role: loginResponse.users[0].userid?.replace(/\d+/g, "")?.trim()?.toLowerCase() ?? "a"
-    }
+      role: loginResponse.users[0].userid?.replace(/\d+/g, "")?.trim()?.toLowerCase() ?? "a",
+    };
 
-    const existing = await this.dao.get(awid, user.id)
+    const existing = await this.dao.get({ awid, id: user.id });
 
     if (!existing) {
       const out = await this.dao.create({
@@ -173,24 +217,36 @@ class PlayerAbl {
           matchesWon: 0,
           matchesLost: 0,
           tournamentsPlayed: 0,
-          flappyBirdHighScore: 0
-        }
-      })
+          flappyBirdHighScore: 0,
+        },
+      });
     }
 
-    return user
-
+    return user;
   }
 
+  /**
+   * Updates finals placement stats for players in the winning/losing teams.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   tournamentId: string,
+   *   finalsFirstPlaceParticipantId: string|null,
+   *   finalsSecondPlaceParticipantId: string|null,
+   *   finalsThirdPlaceParticipantId: string|null,
+   *   finalsFourthPlaceParticipantId: string|null
+   * }} dtoIn - Finals placement data
+   * @returns {Promise<{success: boolean, message: string}>}
+   */
   async updatePlayerStats(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerUpdateStatsDtoInType", dtoIn);
-    console.log("UPDAING USER")
+    console.log("UPDAING USER");
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.UpdateStats.InvalidDtoIn();
     }
 
-    console.log(dtoIn)
+    console.log(dtoIn);
     //     {
     //   tournamentId: 'rsmqy3e1e0h246boknzjky',
     //   finalsFirstPlaceParticipantId: '8ijppe8mlynf5io5xuqbv',
@@ -205,12 +261,12 @@ class PlayerAbl {
     const updateTeamPlayerStats = async (participantId, statField) => {
       if (!participantId) return;
 
-      const team = await teamDao.get(awid, participantId);
+      const team = await teamDao.get({ awid, id: participantId });
       if (!team || !team.players) return;
 
       for (const playerId of team.players) {
         // Fetch the full player object
-        const playerObj = await this.dao.get(awid, playerId);
+        const playerObj = await this.dao.get({ awid, id: playerId });
         if (!playerObj) continue;
 
         // Initialize stats if they don't exist
@@ -222,7 +278,7 @@ class PlayerAbl {
           matchesWon: 0,
           matchesLost: 0,
           tournamentsPlayed: 0,
-          flappyBirdHighScore: 0
+          flappyBirdHighScore: 0,
         };
 
         // Update with incremented stat
@@ -232,41 +288,49 @@ class PlayerAbl {
           ...playerObj,
           stats: {
             ...currentStats,
-            [statField]: currentStats[statField] + 1
-          }
+            [statField]: currentStats[statField] + 1,
+          },
         });
         console.log(`Updated ${statField} for player ${playerId}`);
       }
-
-
     };
 
     // Update stats for each placement
-    await updateTeamPlayerStats(dtoIn.finalsFirstPlaceParticipantId, 'finals_firstPlace');
-    await updateTeamPlayerStats(dtoIn.finalsSecondPlaceParticipantId, 'finals_secondPlace');
-    await updateTeamPlayerStats(dtoIn.finalsThirdPlaceParticipantId, 'finals_thirdPlace');
-    await updateTeamPlayerStats(dtoIn.finalsFourthPlaceParticipantId, 'finals_fourthPlace');
+    await updateTeamPlayerStats(dtoIn.finalsFirstPlaceParticipantId, "finals_firstPlace");
+    await updateTeamPlayerStats(dtoIn.finalsSecondPlaceParticipantId, "finals_secondPlace");
+    await updateTeamPlayerStats(dtoIn.finalsThirdPlaceParticipantId, "finals_thirdPlace");
+    await updateTeamPlayerStats(dtoIn.finalsFourthPlaceParticipantId, "finals_fourthPlace");
 
     return { success: true, message: "Player stats updated successfully" };
   }
 
+  /**
+   * Updates match win/loss stats for all players in a team.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   participantId: string,
+   *   won: boolean
+   * }} dtoIn - Match result data
+   * @returns {Promise<{success: boolean, message: string}>}
+   */
   async updateMatchStats(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerUpdateMatchStatsDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.UpdateMatchStats.InvalidDtoIn();
     }
 
     // Get team DAO to find all players in the team
     const teamDao = DaoFactory.getDao("team");
-    const team = await teamDao.get(awid, dtoIn.participantId);
+    const team = await teamDao.get({ awid, id: dtoIn.participantId });
 
     if (!team || !team.players) return { success: true, message: "No players found" };
 
-    const statField = dtoIn.won ? 'matchesWon' : 'matchesLost';
+    const statField = dtoIn.won ? "matchesWon" : "matchesLost";
 
     for (const playerId of team.players) {
-      const playerObj = await this.dao.get(awid, playerId);
+      const playerObj = await this.dao.get({ awid, id: playerId });
       if (!playerObj) continue;
 
       const currentStats = playerObj.stats || {
@@ -277,7 +341,7 @@ class PlayerAbl {
         matchesWon: 0,
         matchesLost: 0,
         tournamentsPlayed: 0,
-        flappyBirdHighScore: 0
+        flappyBirdHighScore: 0,
       };
 
       await this.dao.update({
@@ -286,24 +350,35 @@ class PlayerAbl {
         ...playerObj,
         stats: {
           ...currentStats,
-          [statField]: currentStats[statField] + 1
-        }
+          [statField]: currentStats[statField] + 1,
+        },
       });
     }
 
     return { success: true, message: "Match stats updated successfully" };
   }
 
+  /**
+   * Updates the Flappy Bird high score for a player.
+   * Only updates if the new score is higher than the current high score.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   playerId: string,
+   *   score: number
+   * }} dtoIn - Score data
+   * @returns {Promise<{success: boolean, message: string}>}
+   */
   async updateFlappyBirdScore(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerUpdateFlappyBirdScoreDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.UpdateFlappyBirdScore.InvalidDtoIn();
     }
 
-    const playerObj = await this.dao.get(awid, dtoIn.playerId);
+    const playerObj = await this.dao.get({ awid, id: dtoIn.playerId });
     if (!playerObj) {
-      throw new Error("Player not found");
+      throw new Errors.UpdateFlappyBirdScore.PlayerNotFound();
     }
 
     const currentStats = playerObj.stats || {
@@ -314,7 +389,7 @@ class PlayerAbl {
       matchesWon: 0,
       matchesLost: 0,
       tournamentsPlayed: 0,
-      flappyBirdHighScore: 0
+      flappyBirdHighScore: 0,
     };
 
     // Only update if new score is higher
@@ -325,36 +400,44 @@ class PlayerAbl {
         ...playerObj,
         stats: {
           ...currentStats,
-          flappyBirdHighScore: dtoIn.score
-        }
+          flappyBirdHighScore: dtoIn.score,
+        },
       });
     }
 
     return { success: true, message: "Flappy Bird score updated successfully" };
   }
 
+  /**
+   * Increments the tournamentsPlayed counter for all players in a tournament.
+   * Called when a tournament is finished.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{tournamentId: string}} dtoIn - Tournament ID
+   * @returns {Promise<{success: boolean, message: string}>}
+   */
   async incrementTournamentsPlayed(awid, dtoIn) {
     const validationResult = this.validator.validate("PlayerIncrementTournamentsPlayedDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.IncrementTournamentsPlayed.InvalidDtoIn();
     }
 
     // Get team DAO to iterate through all teams in tournament
     const teamDao = DaoFactory.getDao("team");
     const tournamentDao = DaoFactory.getDao("tournament");
 
-    const tournament = await tournamentDao.get(awid, dtoIn.tournamentId);
+    const tournament = await tournamentDao.get({ awid, id: dtoIn.tournamentId });
     if (!tournament || !tournament.teams) return { success: true, message: "No teams found" };
 
     // Increment tournamentsPlayed for all players in all teams
-    console.log("Incrementing tournamentsPlayed for all players in all teams")
+    console.log("Incrementing tournamentsPlayed for all players in all teams");
     for (const teamId of tournament.teams) {
-      const team = await teamDao.get(awid, teamId);
+      const team = await teamDao.get({ awid, id: teamId });
       if (!team || !team.players) continue;
 
       for (const playerId of team.players) {
-        const playerObj = await this.dao.get(awid, playerId);
+        const playerObj = await this.dao.get({ awid, id: playerId });
         if (!playerObj) continue;
         console.log("Incrementing tournamentsPlayed for player " + playerId);
         const currentStats = playerObj.stats || {
@@ -365,7 +448,7 @@ class PlayerAbl {
           matchesWon: 0,
           matchesLost: 0,
           tournamentsPlayed: 0,
-          flappyBirdHighScore: 0
+          flappyBirdHighScore: 0,
         };
 
         await this.dao.update({
@@ -374,15 +457,14 @@ class PlayerAbl {
           ...playerObj,
           stats: {
             ...currentStats,
-            tournamentsPlayed: currentStats.tournamentsPlayed + 1
-          }
+            tournamentsPlayed: currentStats.tournamentsPlayed + 1,
+          },
         });
       }
     }
 
     return { success: true, message: "Tournaments played updated successfully" };
   }
-
 }
 
 module.exports = new PlayerAbl();

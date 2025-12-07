@@ -5,102 +5,101 @@ const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/match-error.js");
 
-const WARNINGS = {
+const WARNINGS = {};
 
-};
+/**
+ * @typedef {Object} Participant
+ * @property {string} id - Team ID
+ * @property {string|null} resultText - Score text
+ * @property {boolean} isWinner - Whether this participant won
+ * @property {string|null} status - Match status (e.g., "PLAYED", "NO_SHOW")
+ * @property {string} name - Team name
+ */
 
+/**
+ * @typedef {Object} Match
+ * @property {string} awid - Application workspace ID
+ * @property {number} matchId - Match identifier
+ * @property {string} name - Match name (e.g., "Upper Round 1 - Match 3")
+ * @property {number|null} nextMatchId - ID of the next match for winner
+ * @property {number|null} nextLooserMatchId - ID of the next match for loser (double elimination)
+ * @property {string} tournamentRoundText - Round number as string
+ * @property {string|null} startTime - Match start time
+ * @property {string} state - Match state (e.g., "SCHEDULED")
+ * @property {Participant[]} participants - Array of match participants
+ * @property {string} tournamentId - Tournament ID
+ * @property {string} [bracket] - Bracket type ("upper" or "lower") for double elimination
+ * @property {{cts: string, mts: string, rev: number}} sys - System metadata
+ * @property {string} id - MongoDB document ID
+ */
+
+/**
+ * Application Business Logic for Match operations.
+ * Handles match updates, score tracking, and bracket progression.
+ */
 class MatchAbl {
-
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("match");
   }
 
+  /**
+   * Updates a match score and propagates winner/loser to next matches.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   matchId: number,
+   *   tournamentId: string,
+   *   participants: {
+   *     id: string,
+   *     resultText: string,
+   *     status: string|null,
+   *     isWinner: boolean,
+   *     name: string
+   *   }[]
+   * }} dtoIn - Match update data
+   * @returns {Promise<void>}
+   * @throws {Errors.Update.InvalidDtoIn} If dtoIn is invalid
+   * @throws {Errors.Update.MatchNotFound} If match not found
+   */
   async update(awid, dtoIn) {
-    //     {
-    //   matchId: 246615,
-    //   tournamentId: 'w8ndm3fulg7odhm6zd7fi',
-    //   participants: [
-    //     { id: '1nfmv5ijednr1agyj26r2l', resultText: '5', status: 'PLAYED' },
-    //     { id: 'u52cw6x9axznqlntikhl', resultText: '6', status: 'NO_SHOW' }
-    //   ]
-    // }
+    const validationResult = this.validator.validate("MatchUpdateDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.Update.InvalidDtoIn();
+    }
 
-    const match = await this.dao.get(awid, dtoIn.matchId, dtoIn.tournamentId)
+    const match = await this.dao.get({ awid, matchId: dtoIn.matchId, tournamentId: dtoIn.tournamentId });
+    if (!match) {
+      throw new Errors.Update.MatchNotFound();
+    }
 
-    //     {
-    //   awid: '22222222222222222222222222222222',
-    //   matchId: 246615,
-    //   name: 'Upper Round 1 - Match 3',
-    //   nextMatchId: 560472,
-    //   nextLooserMatchId: 783396,
-    //   tournamentRoundText: '1',
-    //   startTime: null,
-    //   state: 'SCHEDULED',
-    //   participants: [
-    //     {
-    //       id: '1nfmv5ijednr1agyj26r2l',
-    //       resultText: null,
-    //       isWinner: false,
-    //       status: null,
-    //       name: '五番'
-    //     },
-    //     {
-    //       id: 'u52cw6x9axznqlntikhl',
-    //       resultText: null,
-    //       isWinner: false,
-    //       status: null,
-    //       name: '六番'
-    //     }
-    //   ],
-    //   tournamentId: 'w8ndm3fulg7odhm6zd7fi',
-    //   bracket: 'upper',
-    //   sys: {
-    //     cts: 2025-11-22T18:23:11.428Z,
-    //     mts: 2025-11-22T18:23:11.428Z,
-    //     rev: 0
-    //   },
-    //   id: 6921ff8fac2b9978e794d9d8
-    // }
-
-    match.participants = dtoIn.participants
-    await this.dao.update(match)
+    match.participants = dtoIn.participants;
+    await this.dao.update(match);
 
     // Propagate winner and loser
-    const winner = dtoIn.participants.find(p => p.isWinner);
-    const loser = dtoIn.participants.find(p => !p.isWinner && p.id); // Ensure loser has an ID (not empty slot)
-
-    // console.log("Propagating match result:");
-    // console.log("Winner:", winner);
-    // console.log("Loser:", loser);
-    // console.log("Next Match ID:", match.nextMatchId);
-    // console.log("Next Loser Match ID:", match.nextLooserMatchId);
-    // console.log(match)
+    const winner = dtoIn.participants.find((p) => p.isWinner);
+    const loser = dtoIn.participants.find((p) => !p.isWinner && p.id);
 
     if (winner && match.nextMatchId) {
       try {
-        const nextMatch = await this.dao.get(awid, match.nextMatchId, dtoIn.tournamentId);
-        // console.log("Found next match:", nextMatch ? nextMatch.id : "null");
+        const nextMatch = await this.dao.getNextMatch({
+          awid,
+          matchId: match.nextMatchId,
+          tournamentId: dtoIn.tournamentId,
+        });
         if (nextMatch) {
-          // Add winner to next match participants if not already there
-          const isAlreadyIn = nextMatch.participants.some(p => p.id === winner.id);
+          const isAlreadyIn = nextMatch.participants.some((p) => p.id === winner.id);
           if (!isAlreadyIn) {
-            // Find first empty slot or push if less than 2
             if (nextMatch.participants.length < 2) {
               nextMatch.participants.push({
                 id: winner.id,
                 resultText: null,
                 isWinner: false,
                 status: null,
-                name: winner.name
+                name: winner.name,
               });
-              console.log("Adding winner to next match");
-            } else {
-              console.log("Next match full, cannot add winner");
             }
             await this.dao.update(nextMatch);
-          } else {
-            console.log("Winner already in next match");
           }
         }
       } catch (e) {
@@ -110,11 +109,13 @@ class MatchAbl {
 
     if (loser && match.nextLooserMatchId) {
       try {
-        const nextLooserMatch = await this.dao.get(awid, match.nextLooserMatchId, dtoIn.tournamentId);
-        console.log(nextLooserMatch)
-        console.log("Found next loser match:", nextLooserMatch ? nextLooserMatch.id : "null");
+        const nextLooserMatch = await this.dao.getNextLoserMatch({
+          awid,
+          matchId: match.nextLooserMatchId,
+          tournamentId: dtoIn.tournamentId,
+        });
         if (nextLooserMatch) {
-          const isAlreadyIn = nextLooserMatch.participants.some(p => p.id === loser.id);
+          const isAlreadyIn = nextLooserMatch.participants.some((p) => p.id === loser.id);
           if (!isAlreadyIn) {
             if (nextLooserMatch.participants.length < 2) {
               nextLooserMatch.participants.push({
@@ -122,37 +123,56 @@ class MatchAbl {
                 resultText: null,
                 isWinner: false,
                 status: null,
-                name: loser.name
+                name: loser.name,
               });
-              console.log("Adding loser to next loser match");
               await this.dao.update(nextLooserMatch);
-            } else {
-              console.log("Next loser match full, cannot add loser");
             }
-          } else {
-            console.log("Loser already in next loser match");
           }
         }
       } catch (e) {
         console.error("Error propagating loser:", e);
       }
     }
-
   }
 
+  /**
+   * Lists all matches for a tournament.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{tournamentId: string}} dtoIn - Tournament filter
+   * @returns {Promise<Match[]>} Array of matches
+   * @throws {Errors.List.InvalidDtoIn} If dtoIn is invalid
+   */
   async list(awid, dtoIn) {
-
-
-    if (dtoIn.tournamentId) {
-      const out = await this.dao.getAll(awid, dtoIn.tournamentId)
-      return out.itemList
+    const validationResult = this.validator.validate("MatchListDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.List.InvalidDtoIn();
     }
+
+    if (!dtoIn.tournamentId) {
+      throw new Errors.List.TournamentIdMissing();
+    }
+
+    const out = await this.dao.getAll({ awid, tournamentId: dtoIn.tournamentId });
+    return out.itemList;
   }
 
+  /**
+   * Creates a new match.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {Object} dtoIn - Match creation data
+   * @returns {Promise<Match>} Created match
+   * @throws {Errors.Create.InvalidDtoIn} If dtoIn is invalid
+   */
   async create(awid, dtoIn) {
+    const validationResult = this.validator.validate("MatchCreateDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.Create.InvalidDtoIn();
+    }
 
+    return await this.dao.create({ awid, ...dtoIn });
   }
-
 }
 
 module.exports = new MatchAbl();

@@ -2,7 +2,6 @@
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class PlayerMongo extends UuObjectDao {
-
   async createSchema() {
     // Primary lookup index
     await super.createIndex({ awid: 1, id: 1 }, { unique: true });
@@ -18,37 +17,21 @@ class PlayerMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, id) {
-    let filter = {
-      awid: awid,
-      id: id,
-    };
-    return await super.findOne(filter);
+  async get({ awid, id }) {
+    return await super.findOne({ awid, id });
   }
 
-  async getAll(awid) {
-    let filter = {
-      awid: awid,
-    };
-    return await super.find(filter);
+  async getAll({ awid }) {
+    return await super.find({ awid });
   }
 
   async update(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+    return await super.findOneAndUpdate({ awid: uuObject.awid, id: uuObject.id }, uuObject, "NONE");
   }
 
-  async remove(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.deleteOne(filter);
+  async remove({ awid, id }) {
+    return await super.deleteOne({ awid, id });
   }
-
 }
 
 module.exports = PlayerMongo;

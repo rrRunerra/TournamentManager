@@ -9,11 +9,10 @@ const Create = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Create.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
-
 };
 
 const Update = {
@@ -22,11 +21,26 @@ const Update = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
 
+  TeamNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}teamNotFound`;
+      this.message = "Team not found.";
+    }
+  },
+
+  TeamIsFull: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}teamIsFull`;
+      this.message = "Team is full.";
+    }
+  },
 };
 
 const Get = {
@@ -35,11 +49,10 @@ const Get = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
-
 };
 
 const List = {
@@ -48,16 +61,22 @@ const List = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${List.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
-
 };
 
 const Remove = {
   UC_CODE: `${TEAM_ERROR_PREFIX}remove/`,
 
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
 };
 
 module.exports = {
@@ -65,5 +84,5 @@ module.exports = {
   List,
   Get,
   Update,
-  Create
+  Create,
 };

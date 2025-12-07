@@ -9,10 +9,11 @@ const Create = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Create.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
+
   NameMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -20,6 +21,7 @@ const Create = {
       this.message = "Name is missing.";
     }
   },
+
   DescriptionMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -27,6 +29,7 @@ const Create = {
       this.message = "Description is missing.";
     }
   },
+
   StartDateMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -34,6 +37,7 @@ const Create = {
       this.message = "Start date is missing.";
     }
   },
+
   EndDateMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -41,6 +45,7 @@ const Create = {
       this.message = "End date is missing.";
     }
   },
+
   StatusMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -48,6 +53,7 @@ const Create = {
       this.message = "Status is missing.";
     }
   },
+
   TeamSizeMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -55,6 +61,7 @@ const Create = {
       this.message = "Team size is missing.";
     }
   },
+
   TeamsMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -62,6 +69,7 @@ const Create = {
       this.message = "Teams are missing.";
     }
   },
+
   BracketTypeMissing: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -69,7 +77,6 @@ const Create = {
       this.message = "Bracket type is missing.";
     }
   },
-
 };
 
 const Update = {
@@ -78,11 +85,26 @@ const Update = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
 
+  TournamentNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}tournamentNotFound`;
+      this.message = "Tournament not found.";
+    }
+  },
+
+  NotEnoughTeams: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}notEnoughTeams`;
+      this.message = "At least 2 teams are required to start a tournament.";
+    }
+  },
 };
 
 const Get = {
@@ -91,11 +113,10 @@ const Get = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
-
 };
 
 const List = {
@@ -104,23 +125,41 @@ const List = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${List.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
+};
 
+const ListByUser = {
+  UC_CODE: `${TOURNAMENT_ERROR_PREFIX}listByUser/`,
 
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${ListByUser.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
 };
 
 const Delete = {
   UC_CODE: `${TOURNAMENT_ERROR_PREFIX}delete/`,
 
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
 };
 
 module.exports = {
   Delete,
+  ListByUser,
   List,
   Get,
   Update,
-  Create
+  Create,
 };

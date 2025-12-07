@@ -2,7 +2,6 @@
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class MatchMongo extends UuObjectDao {
-
   async createSchema() {
     // Primary lookup index
     await super.createIndex({ awid: 1, id: 1 }, { unique: true });
@@ -18,40 +17,29 @@ class MatchMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, id, tournamentId) {
-    let filter = {
-      awid: awid,
-      matchId: id,
-      tournamentId: tournamentId
-    };
-    return await super.findOne(filter);
+  async get({ awid, matchId, tournamentId }) {
+    return await super.findOne({ awid, matchId, tournamentId });
   }
 
-  async getAll(awid, id) {
-    let filter = {
-      awid: awid,
-      tournamentId: id
-    };
-    return await super.find(filter);
+  async getNextMatch({ awid, matchId, tournamentId }) {
+    return await super.findOne({ awid, matchId, tournamentId });
+  }
+
+  async getNextLoserMatch({ awid, matchId, tournamentId }) {
+    return await super.findOne({ awid, matchId, tournamentId });
+  }
+
+  async getAll({ awid, tournamentId }) {
+    return await super.find({ awid, tournamentId });
   }
 
   async update(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+    return await super.findOneAndUpdate({ awid: uuObject.awid, id: uuObject.id }, uuObject, "NONE");
   }
 
-  async remove(uuObject) {
-    let filter = {
-      awid: uuObject.awid,
-      id: uuObject.id,
-    };
-    return await super.deleteOne(filter);
+  async remove({ awid, id }) {
+    return await super.deleteOne({ awid, id });
   }
-
-
 }
 
 module.exports = MatchMongo;

@@ -9,7 +9,7 @@ const Create = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Create.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
@@ -44,8 +44,7 @@ const Create = {
       this.code = `${Create.UC_CODE}userNotFound`;
       this.message = "User not found.";
     }
-  }
-
+  },
 };
 
 const Update = {
@@ -54,11 +53,10 @@ const Update = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
-
 };
 
 const Get = {
@@ -67,15 +65,82 @@ const Get = {
   InvalidDtoIn: class extends RitrMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Init.UC_CODE}invalidDtoIn`;
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
 
+  PlayerNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}playerNotFound`;
+      this.message = "Player not found.";
+    }
+  },
+};
+
+const UpdateStats = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}updateStats/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateStats.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+};
+
+const UpdateMatchStats = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}updateMatchStats/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateMatchStats.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+};
+
+const UpdateFlappyBirdScore = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}updateFlappyBirdScore/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateFlappyBirdScore.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  PlayerNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateFlappyBirdScore.UC_CODE}playerNotFound`;
+      this.message = "Player not found.";
+    }
+  },
+};
+
+const IncrementTournamentsPlayed = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}incrementTournamentsPlayed/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${IncrementTournamentsPlayed.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
 };
 
 module.exports = {
+  IncrementTournamentsPlayed,
+  UpdateFlappyBirdScore,
+  UpdateMatchStats,
+  UpdateStats,
   Get,
   Update,
-  Create
+  Create,
 };

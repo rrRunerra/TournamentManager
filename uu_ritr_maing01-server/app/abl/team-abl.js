@@ -7,66 +7,110 @@ const Errors = require("../api/errors/team-error.js");
 
 const WARNINGS = {};
 
+/**
+ * @typedef {Object} Team
+ * @property {string} id - Team ID
+ * @property {string} name - Team name
+ * @property {string[]} players - Array of player IDs
+ * @property {string} tournamentId - Tournament ID this team belongs to
+ * @property {string} awid - Application workspace ID
+ * @property {{cts: string, mts: string, rev: number}} sys - System metadata
+ */
+
+/**
+ * Application Business Logic for Team operations.
+ * Handles team management, player joining/leaving, and team removal.
+ */
 class TeamAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("team");
   }
 
+  /**
+   * Removes a team from a tournament.
+   * Also removes the team reference from the tournament's teams array.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{tournamentId: string, teamId: string}} dtoIn - Team removal data
+   * @returns {Promise<void>}
+   */
   async remove(awid, dtoIn) {
     const validationResult = this.validator.validate("TeamRemoveDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Remove.InvalidDtoIn();
     }
 
     // dtoIn.tournamentId
     // dtoIn.teamId
 
-    const tournament = await DaoFactory.getDao("tournament").get(awid, dtoIn.tournamentId);
+    const tournament = await DaoFactory.getDao("tournament").get({ awid, id: dtoIn.tournamentId });
 
+    tournament.teams = tournament.teams.filter((team) => team !== dtoIn.teamId);
 
-    tournament.teams = tournament.teams.filter((team) => team !== dtoIn.teamId)
-
-
-
-    const o = await DaoFactory.getDao("tournament").update({ awid, tournament })
-
+    const o = await DaoFactory.getDao("tournament").update({ awid, tournament });
 
     const out = await this.dao.remove({ awid, tournamentId: dtoIn.tournamentId, id: dtoIn.teamId });
     return out;
-
   }
 
-  async list(awid) { }
+  /**
+   * Lists all teams.
+   *
+   * @param {string} awid - Application workspace ID
+   * @returns {Promise<Team[]>} Array of teams
+   */
+  async list(awid) {}
 
+  /**
+   * Gets a team by ID.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string}} dtoIn - Team ID
+   * @returns {Promise<Team>} Team data
+   */
   async get(awid, dtoIn) {
     const validationResult = this.validator.validate("TeamGetDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Get.InvalidDtoIn();
     }
 
-    return this.dao.get(awid, dtoIn.id);
+    return this.dao.get({ awid, id: dtoIn.id });
   }
 
+  /**
+   * Updates a team (join/leave team functionality).
+   * Handles player joining, leaving, and switching teams.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   tournamentId: string,
+   *   id: string,
+   *   players: {id: string},
+   *   teamSize?: string
+   * }} dtoIn - Team update data
+   * @returns {Promise<Team>} Updated team
+   * @throws {Error} If team is full or not found
+   */
   async update(awid, dtoIn) {
     const validationResult = this.validator.validate("TeamUpdateDtoInType", dtoIn);
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Update.InvalidDtoIn();
     }
 
     // Get the existing team
-    const team = await this.dao.get(awid, dtoIn.id);
+    const team = await this.dao.get({ awid, id: dtoIn.id });
 
     if (!team) {
-      throw new Error("TeamNotFound");
+      throw new Errors.Update.TeamNotFound();
     }
 
-    const userInAnotherTeam = await this.dao.findOne({
+    const userInAnotherTeam = await this.dao.findByPlayerInTournament({
       awid,
       tournamentId: dtoIn.tournamentId,
-      players: dtoIn.players.id,
+      playerId: dtoIn.players.id,
     });
 
     if (userInAnotherTeam?.id && userInAnotherTeam?.id !== dtoIn.id) {
@@ -83,9 +127,9 @@ class TeamAbl {
           {
             players: [...team.players, dtoIn.players.id],
           },
-        )
-      ])
-      return
+        ),
+      ]);
+      return;
     }
 
     const updatedPlayers = [...team.players];
@@ -111,7 +155,7 @@ class TeamAbl {
     }
 
     if (dtoIn.teamSize && updatedPlayers.length > parseInt(dtoIn.teamSize)) {
-      throw new Error("TeamIsFull");
+      throw new Errors.Update.TeamIsFull();
     }
 
     const updatedTeam = await this.dao.update(
@@ -130,7 +174,7 @@ class TeamAbl {
     const validationResult = this.validator.validate("TeamCreateDtoInType", dtoIn);
 
     if (!validationResult.isValid()) {
-      throw new Error("InvalidDtoIn");
+      throw new Errors.Create.InvalidDtoIn();
     }
   }
 }
