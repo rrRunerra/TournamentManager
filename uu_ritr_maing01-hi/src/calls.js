@@ -44,93 +44,368 @@ const Calls = {
     return (!baseUri.endsWith("/") ? baseUri + "/" : baseUri) + (useCase.startsWith("/") ? useCase.slice(1) : useCase);
   },
 
-  PlayerCreate(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/create");
-    return Calls.call("post", commandUri, dtoIn);
+  player: {
+    /**
+     * Creates a player.
+     *
+     * @param {{ name: string, password: string }} dtoIn
+     * @returns {Promise<{
+     *   id: string,
+     *   name: string,
+     *   school: string,
+     *   role: "student" | "teacher",
+     *   awid: string
+     * }>}
+     */
+    create(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{id: string, school?: string}} dtoIn
+     * @returns {Promise<{
+     *   id: string,
+     *   name: string,
+     *   school: string,
+     *   role: "student" | "teacher",
+     *   awid: string,
+     *   stats: {
+     *     finals_firstPlace: number,
+     *     finals_secondPlace: number,
+     *     finals_thirdPlace: number,
+     *     finals_fourthPlace: number,
+     *     matchesWon: number,
+     *     matchesLost: number,
+     *     tournamentsPlayed: number,
+     *     flappyBirdHighScore: number
+     *   },
+     *   sys: {
+     *     cts: string,
+     *     mts: string,
+     *     rev: number
+     *   }
+     * }>}
+     */
+    get(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/get");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   tournamentId: string,
+     *   finalsFirstPlaceParticipantId: string | null,
+     *   finalsSecondPlaceParticipantId: string | null,
+     *   finalsThirdPlaceParticipantId: string | null,
+     *   finalsFourthPlaceParticipantId: string | null
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, message: string}>}
+     */
+    updateStats(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/updateStats");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   participantId: string,
+     *   won: boolean,
+     *   tournamentId: string
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, message: string}>}
+     */
+
+    updateMatchStat(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/updateMatchStats");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   tournamentId: string,
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, message: string}>}
+     */
+
+    incrementTournamentPlayedCount(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/incrementTournamentsPlayed");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   playerId: string,
+     *   score: number
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, message: string}>}
+     */
+
+    updateFlappyScore(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/updateFlappyBirdScore");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
-  PlayerUpdate(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/update");
-    return Calls.call("post", commandUri, dtoIn);
+  tournament: {
+    /**
+     *
+     * @param {{
+     *   page: number,
+     *   pageSize: number,
+     *   status: "finished" | "ongoing" | "upcoming",
+     *   year?: number,
+     *   month?: number,
+     *   search?: string
+     * }} dtoIn
+     * @returns {Promise<{
+     * itemList: {
+     *   awid: string,
+     *   name: string,
+     *   description: string,
+     *   startDate: string,
+     *   endDate: string,
+     *   teamSize: string,
+     *   status: "upcoming" | "ongoing" | "finished",
+     *   teams: string[],
+     *   owner: string,
+     *   bracketType: string,
+     *   sys: {cts: string, mts: string, rev: number},
+     *   id: string
+     * }[],
+     * total: number,
+     * hasMore: boolean
+     * }>}
+     */
+    list(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   userId: string,
+     *   status: "finished" | "ongoing" | "upcoming",
+     *   limit: number,
+     * }} dtoIn
+     * @returns {Promise<{
+     *   itemList: {
+     *     awid: string,
+     *     name: string,
+     *     description: string,
+     *     startDate: string,
+     *     endDate: string,
+     *     teamSize: string,
+     *     status: "upcoming" | "ongoing" | "finished",
+     *     teams: string[],
+     *     owner: string,
+     *     bracketType: string,
+     *     sys: {cts: string, mts: string, rev: number},
+     *     id: string,
+     *     teamName: string
+     *   }[],
+     *   total: number,
+     * }>}
+     */
+    listUserTournaments(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/listByUser");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   id: string
+     * }} dtoIn
+     * @returns {Promise<{
+     *   awid: string,
+     *   name: string,
+     *   description: string,
+     *   startDate: string,
+     *   endDate: string,
+     *   teamSize: string,
+     *   status: "upcoming" | "ongoing" | "finished",
+     *   teams: string[],
+     *   owner: string,
+     *   bracketType: string,
+     *   sys: {cts: string, mts: string, rev: number},
+     *   id: string
+     * }}
+     */
+    get(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/get");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   name: string,
+     *   description: string,
+     *   startDate: string,
+     *   endDate: string,
+     *   teamSize: string,
+     *   status: "upcoming",
+     *   teams: string[],
+     *   owner: string,
+     *   bracketType: string
+     * }} dtoIn
+     * @returns {Promise<{
+     *   awid: string,
+     *   name: string,
+     *   description: string,
+     *   startDate: string,
+     *   endDate: string,
+     *   teamSize: string,
+     *   status: "upcoming",
+     *   teams: string[],
+     *   owner: string,
+     *   bracketType: string,
+     *   sys: {cts: string, mts: string, rev: number},
+     *   id: string
+     * }>}
+     */
+
+    create(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   id: string
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    delete(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/delete");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   id: string,
+     *   status: "upcoming" | "ongoing" | "finished"
+     * }} dtoIn
+     * @returns {Promise<{
+     *  awid: string,
+     *  name: string,
+     *  description: string,
+     *  startDate: string,
+     *  endDate: string,
+     *  teamSize: string,
+     *  status: "upcoming" | "ongoing" | "finished",
+     *  teams: string[],
+     *  owner: string,
+     *  bracketType: string,
+     *  sys: {cts: string, mts: string, rev: number},
+     *  id: string
+     * }>}
+     */
+    updateStatus(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
-  listTournaments(dtoIn) {
-    const commandUri = Calls.getCommandUri("tournament/list");
-    return Calls.call("get", commandUri, dtoIn);
+  team: {
+    /**
+     *
+     * @param {{
+     *   tournamentId: string,
+     *   id: string,
+     *   players: { id: string }[],
+     *   teamSize: string
+     * }} dtoIn
+     * @returns {Promise<{
+     *   awid: string,
+     *   name: string,
+     *   players: string[],
+     *   tournamentId: string,
+     *   sys: {cts: string, mts: string, rev: number},
+     *   id: string
+     * }>}
+     */
+    join(dtoIn) {
+      const commandUri = Calls.getCommandUri("team/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *  tournamentId: string,
+     *  teamId: string
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    remove(dtoIn) {
+      const commandUri = Calls.getCommandUri("team/remove");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
-  listTournamentsByUser(dtoIn) {
-    let commandUri = Calls.getCommandUri("tournament/listByUser");
-    return Calls.call("get", commandUri, dtoIn);
+  match: {
+    /**
+     *
+     * @param {{
+     *  tournamentId: string
+     * }} dtoIn
+     * @returns {Promise<{
+     *   awid: string,
+     *   matchId: number,
+     *   name: string,
+     *   nextMatchId: number,
+     *   nextLooserMatchId: number,
+     *   tournamentRoundText: string,
+     *   startTime: string,
+     *   state: string,
+     *   participants: {
+     *     id: string,
+     *     resultText: string,
+     *     isWinner: boolean,
+     *     status: string,
+     *     name: string
+     *   }[],
+     *   tournamentId: string,
+     *   sys: {cts: string, mts: string, rev: number},
+     *   id: string
+     * }[]>}
+     */
+
+    list(dtoIn) {
+      const commandUri = Calls.getCommandUri("match/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *  matchId: string,
+     *  tournamentId: string,
+     *  participants: {
+     *    id: string,
+     *    resultText: string,
+     *    isWinner: boolean,
+     *    status: string,
+     *    name: string
+     *  }[]
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    updateScore(dtoIn) {
+      const commandUri = Calls.getCommandUri("match/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
-
-  getTournament(dtoIn) {
-    const commandUri = Calls.getCommandUri("tournament/get");
-    return Calls.call("get", commandUri, dtoIn);
-  },
-
-  createTournament(dtoIn) {
-    const commandUri = Calls.getCommandUri("tournament/create");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  deleteTournament(dtoIn) {
-    const commandUri = Calls.getCommandUri("tournament/delete");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-  updateTournament(dtoIn) {
-    const commandUri = Calls.getCommandUri("tournament/update");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  joinTeam(dtoIn) {
-    const commandUri = Calls.getCommandUri("team/update");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  removeTeam(dtoIn) {
-    const commandUri = Calls.getCommandUri("team/remove");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  getMatches(dtoIn) {
-    const commandUri = Calls.getCommandUri("match/list");
-    return Calls.call("get", commandUri, dtoIn);
-  },
-
-  updateMatchScore(dtoIn) {
-    const commandUri = Calls.getCommandUri("match/update");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  getPlayer(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/get");
-    return Calls.call("get", commandUri, dtoIn);
-  },
-
-  updatePlayerStats(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/updateStats");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  updateMatchStats(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/updateMatchStats");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  updateFlappyBirdScore(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/updateFlappyBirdScore");
-    return Calls.call("post", commandUri, dtoIn);
-  },
-
-  incrementTournamentsPlayed(dtoIn) {
-    const commandUri = Calls.getCommandUri("player/incrementTournamentsPlayed");
-    return Calls.call("post", commandUri, dtoIn);
-  }
-
-
-
-
 };
 
 export default Calls;

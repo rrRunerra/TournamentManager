@@ -7,9 +7,6 @@ import Pagination from "../bricks/pagination.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 
-
-
-
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
   const [filteredTournaments, setFilteredTournaments] = useState([]);
@@ -41,9 +38,9 @@ export default function HistoryPage() {
         status: "finished",
         year,
         month,
-        search
+        search,
       };
-      const response = await Calls.listTournaments(dtoIn);
+      const response = await Calls.tournament.list(dtoIn);
 
       setTournaments(response.itemList);
       setFilteredTournaments(response.itemList);
@@ -79,8 +76,7 @@ export default function HistoryPage() {
     };
   }, [showFilter]);
 
-  const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))]
-    .sort((a, b) => b - a);
+  const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))].sort((a, b) => b - a);
 
   // 🔍 APPLY ALL FILTERS (YEAR + MONTH + NAME SEARCH)
   // 🔍 FILTERS ARE NOW HANDLED ON SERVER
@@ -98,31 +94,21 @@ export default function HistoryPage() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) return <div className="loading-spinner">{lsi.loading}</div>;
 
   return (
     <div className="background history-background">
-
       {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
-      <button
-        ref={buttonRef}
-        className="filter-toggle-btn"
-        onClick={() => setShowFilter(!showFilter)}
-      >
+      <button ref={buttonRef} className="filter-toggle-btn" onClick={() => setShowFilter(!showFilter)}>
         🔍
       </button>
 
       {/* FILTER PANEL */}
-      <div
-        ref={filterRef}
-        className={`filter-panel-container ${showFilter ? 'visible' : 'hidden'}`}
-      >
+      <div ref={filterRef} className={`filter-panel-container ${showFilter ? "visible" : "hidden"}`}>
         <div className="filter-panel">
-
-
           {/* YEAR SELECT */}
           <select
             className="filter-select"
@@ -159,8 +145,6 @@ export default function HistoryPage() {
             value={searchQuery}
             onChange={(e) => handleFilterChange("search", e.target.value)}
           />
-
-
         </div>
       </div>
 
@@ -169,27 +153,20 @@ export default function HistoryPage() {
         {filteredTournaments.length === 0 ? (
           <div className="section-header">
             <h2 className="section-title">
-              {(selectedYear || selectedMonth || searchQuery)
-                ? lsi.noTournaments
-                : lsi.noHistory}
+              {selectedYear || selectedMonth || searchQuery ? lsi.noTournaments : lsi.noHistory}
             </h2>
           </div>
-
         ) : (
           currentItems.map((tournament) => (
-            <div
-              key={tournament.id}
-              className="tournament-card"
-              onClick={() => goToTournament(tournament.id)}
-            >
+            <div key={tournament.id} className="tournament-card" onClick={() => goToTournament(tournament.id)}>
               <div className="tournament-icon">🏆</div>
-              <h2 className="tournament-title" title={tournament.name}>{tournament.name}</h2>
+              <h2 className="tournament-title" title={tournament.name}>
+                {tournament.name}
+              </h2>
 
               <p className="tournament-details">
-                📅 {new Date(tournament.startDate).getDate()}. –
-                {new Date(tournament.endDate).getDate()}{" "}
-                {lsi.months[new Date(tournament.endDate).getMonth() + 1]}{" "}
-                {new Date(tournament.endDate).getFullYear()}
+                📅 {new Date(tournament.startDate).getDate()}. –{new Date(tournament.endDate).getDate()}{" "}
+                {lsi.months[new Date(tournament.endDate).getMonth() + 1]} {new Date(tournament.endDate).getFullYear()}
                 <br />
                 👥 {tournament.teams?.length || 0} {lsi.teamsCount}
               </p>
@@ -201,11 +178,7 @@ export default function HistoryPage() {
       </section>
 
       {filteredTournaments.length > 0 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       )}
     </div>
   );

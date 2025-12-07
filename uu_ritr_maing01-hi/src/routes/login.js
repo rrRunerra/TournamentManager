@@ -25,11 +25,7 @@ const LoginInput = ({ type = "text", placeholder, value, onChange }) => (
 
 const LoginButton = ({ text, onClick, loading, loadingText }) => {
   return (
-    <button
-      onClick={onClick}
-      className="login-button"
-      disabled={loading}
-    >
+    <button onClick={onClick} className="login-button" disabled={loading}>
       {loading ? loadingText : text}
     </button>
   );
@@ -46,7 +42,6 @@ const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, err
     <LoginButton text={lsi.login} loading={loading} loadingText={lsi.loading} />
   </form>
 );
-
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -69,7 +64,8 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const res = await Calls.PlayerCreate({ name: username, password: password });
+      const res = await Calls.player.create({ name: username, password: password });
+
       setUser(res);
       localStorage.setItem("player", JSON.stringify(res));
       setRoute("home");
@@ -113,6 +109,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-
 }
-

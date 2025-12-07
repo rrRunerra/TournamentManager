@@ -15,7 +15,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [teams, setTeams] = useState([]);
   const [teamName, setTeamName] = useState("");
   const [errors, setErrors] = useState({});
-  const [bracketType, setBracketType] = useState("single")
+  const [bracketType, setBracketType] = useState("single");
   const { showError } = useNotification();
   const lsi = useLsi(importLsi, ["CreateTournament"]);
   const [user, setUser] = useUser();
@@ -26,7 +26,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
   //   if (user) {
   //     try {
-  //       Calls.getPlayer({ id: user.id }).then((pDb) => {
+  //       Calls.player.get({ id: user.id }).then((pDb) => {
   //         if (pDb.role.toLowerCase() !== "teacher") {
   //           showError(lsi.errorTitle, lsi.errorUnauthorized);
   //           onClose();
@@ -40,9 +40,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   //   }
   // }, [isOpen, lsi, showError, onClose, user]);
 
-
-
-
   if (!isOpen) return null;
 
   const addTeam = () => {
@@ -55,26 +52,13 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
     setTeams(teams.filter((_, i) => i !== index));
   };
 
-
-
   return (
-    <div
-      className="modal-overlay"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
-    >
-      <div
-        className="modal-content"
-      >
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="modal-content">
         <h3 className="modal-header">{lsi.header}</h3>
 
         <label>{lsi.name}</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="form-control"
-          required
-        />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control" required />
 
         <label>{lsi.description}</label>
         <textarea
@@ -100,7 +84,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           className="form-control"
         />
 
-        <label >{lsi.bracketType}</label>
+        <label>{lsi.bracketType}</label>
         <select
           id="bracketType"
           value={bracketType}
@@ -111,7 +95,6 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           <option value="double">{lsi.doubleElimination}</option>
           <option value="robin">{lsi.roundRobin}</option>
         </select>
-
 
         <label>{lsi.teamSize}</label>
         <input
@@ -132,7 +115,9 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
             placeholder={lsi.teamPlaceholder}
             className="team-input"
           />
-          <button className="btn" onClick={addTeam}>{lsi.add}</button>
+          <button className="btn" onClick={addTeam}>
+            {lsi.add}
+          </button>
         </div>
 
         <ul className="teams-list">
@@ -156,15 +141,13 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               if (!startDate) newErrors.startDate = true;
               if (!endDate) newErrors.endDate = true;
 
-              if (startDate > endDate) newErrors.invalidDate = true
-
+              if (startDate > endDate) newErrors.invalidDate = true;
 
               if (!teamSize) newErrors.teamSize = true;
               if (teams.length < 3) newErrors.teams = true;
 
-              if (bracketType == "robin" && (teams.length % 2 == 1)) newErrors.robin = true
-              if (bracketType == "double" && (teams.length % 4 != 0)) newErrors.double = true
-
+              if (bracketType == "robin" && teams.length % 2 == 1) newErrors.robin = true;
+              if (bracketType == "double" && teams.length % 4 != 0) newErrors.double = true;
 
               if (Object.keys(newErrors).length > 0) {
                 setErrors(newErrors);
@@ -193,7 +176,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               setStartDate("");
               setEndDate("");
               setTeamSize("4");
-              setBracketType("single")
+              setBracketType("single");
             }}
           >
             {lsi.save}

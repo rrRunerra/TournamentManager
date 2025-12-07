@@ -7,13 +7,21 @@ import "../styles/routes/tournament.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
 
-const createTournament = ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
+const createTournament = async ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
   const status = "upcoming";
 
-  return Calls.createTournament({ name, description, startDate, endDate, teamSize, status, teams, owner, bracketType });
+  return await Calls.tournament.create({
+    name,
+    description,
+    startDate,
+    endDate,
+    teamSize,
+    status,
+    teams,
+    owner,
+    bracketType,
+  });
 };
-
-
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -28,8 +36,6 @@ export default function TournamentsPage() {
 
   const isTeacher = user?.role.toLowerCase() === "teacher";
 
-
-
   const fetchTournaments = async (pageNum) => {
     if (loading) return;
     setLoading(true);
@@ -37,11 +43,11 @@ export default function TournamentsPage() {
       const dtoIn = {
         limit: 10,
         skip: (pageNum - 1) * 10,
-        status: ["ongoing", "upcoming"]
+        status: ["ongoing", "upcoming"],
       };
-      const response = await Calls.listTournaments(dtoIn);
+      const response = await Calls.tournament.list(dtoIn);
 
-      setTournaments(prev => pageNum === 1 ? response.itemList : [...prev, ...response.itemList]);
+      setTournaments((prev) => (pageNum === 1 ? response.itemList : [...prev, ...response.itemList]));
       setHasMore(response.hasMore);
     } catch (error) {
       console.error("Error fetching tournaments:", error);
@@ -53,24 +59,21 @@ export default function TournamentsPage() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 100 &&
+        window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100 &&
         hasMore &&
         !loading
       ) {
-        setPage(prev => prev + 1);
+        setPage((prev) => prev + 1);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading]);
-
 
   useEffect(() => {
     fetchTournaments(page);
   }, [page]);
-
 
   if (!user) {
     return (
@@ -84,7 +87,7 @@ export default function TournamentsPage() {
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   const handleCreateTournament = async (data) => {
@@ -107,18 +110,25 @@ export default function TournamentsPage() {
     showSuccess(lsi.createSuccessTitle, lsi.createSuccessMessage);
   };
 
-  const ongoingTournaments = tournaments.filter(t => t.status === "ongoing");
-  const upcomingTournaments = tournaments.filter(t => t.status === "upcoming");
+  const ongoingTournaments = tournaments.filter((t) => t.status === "ongoing");
+  const upcomingTournaments = tournaments.filter((t) => t.status === "upcoming");
 
   const renderTournamentCard = (tournament) => (
-
-    <div className="tournament-card" key={tournament.id} onClick={() => {
-      setRoute("tournamentDetail", { id: tournament.id })
-    }}>
+    <div
+      className="tournament-card"
+      key={tournament.id}
+      onClick={() => {
+        setRoute("tournamentDetail", { id: tournament.id });
+      }}
+    >
       <div className="tournament-icon">🏆</div>
-      <h2 className="tournament-title" title={tournament.name}>{tournament.name}</h2>
+      <h2 className="tournament-title" title={tournament.name}>
+        {tournament.name}
+      </h2>
       <p className="tournament-details">
-        📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}. {lsi.months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}<br />
+        📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}.{" "}
+        {lsi.months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}
+        <br />
         👥 {tournament.teams?.length} {lsi.teamsCount}
       </p>
       <div className="tournament-status">
@@ -146,9 +156,7 @@ export default function TournamentsPage() {
         ) : (
           <>
             {ongoingTournaments.map(renderTournamentCard)}
-            {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && (
-              <hr className="tournament-separator" />
-            )}
+            {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && <hr className="tournament-separator" />}
             {upcomingTournaments.map(renderTournamentCard)}
           </>
         )}
