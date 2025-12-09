@@ -7,7 +7,17 @@ import "../styles/routes/tournament.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
 
-const createTournament = async ({ name, description, startDate, endDate, teamSize, teams, owner, bracketType }) => {
+const createTournament = async ({
+  name,
+  description,
+  startDate,
+  endDate,
+  teamSize,
+  teams,
+  owner,
+  bracketType,
+  school,
+}) => {
   const status = "upcoming";
 
   return await Calls.tournament.create({
@@ -20,6 +30,7 @@ const createTournament = async ({ name, description, startDate, endDate, teamSiz
     teams,
     owner,
     bracketType,
+    school,
   });
 };
 
@@ -37,13 +48,15 @@ export default function TournamentsPage() {
   const isTeacher = user?.role.toLowerCase() === "teacher";
 
   const fetchTournaments = async (pageNum) => {
-    if (loading) return;
+    if (loading || !user) return;
     setLoading(true);
+
     try {
       const dtoIn = {
         limit: 10,
         skip: (pageNum - 1) * 10,
         status: ["ongoing", "upcoming"],
+        school: user?.school,
       };
       const response = await Calls.tournament.list(dtoIn);
 
@@ -73,7 +86,7 @@ export default function TournamentsPage() {
 
   useEffect(() => {
     fetchTournaments(page);
-  }, [page]);
+  }, [page, user]);
 
   if (!user) {
     return (
@@ -103,6 +116,8 @@ export default function TournamentsPage() {
       showError(lsi.createErrorTitle, lsi.createErrorMessage);
       return;
     }
+
+    data.school = user.school;
 
     await createTournament(data);
     setPage(1); // Reset to first page to reload

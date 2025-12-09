@@ -6,11 +6,13 @@ import "../styles/routes/history.css";
 import Pagination from "../bricks/pagination.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
+import useUser from "../hooks/useUser.js";
 
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
   const [filteredTournaments, setFilteredTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useUser();
 
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -36,6 +38,7 @@ export default function HistoryPage() {
         limit: 15,
         skip: (page - 1) * 15,
         status: "finished",
+        school: user?.school,
         year,
         month,
         search,
@@ -54,7 +57,7 @@ export default function HistoryPage() {
 
   useEffect(() => {
     fetchHistory(currentPage, selectedYear, selectedMonth, searchQuery);
-  }, [currentPage, selectedYear, selectedMonth, searchQuery]);
+  }, [currentPage, selectedYear, selectedMonth, searchQuery, user]);
 
   // Close filter when clicking outside
   useEffect(() => {
@@ -75,6 +78,21 @@ export default function HistoryPage() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showFilter]);
+
+  if (!user) {
+    return (
+      <div className="background">
+        <div className="login-prompt">
+          <div className="login-prompt-icon">🔒</div>
+          <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
+          <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
+          <button className="login-prompt-button" onClick={() => setRoute("login")}>
+            {lsi.goToLogin || "Go to Login"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))].sort((a, b) => b - a);
 

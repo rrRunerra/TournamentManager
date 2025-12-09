@@ -266,7 +266,10 @@
         "noTournaments": "Žiadne turnaje pre daný filter.",
         "noHistory": "Žiadne turnaje v histórii",
         "teamsCount": "tímov v súťaži",
-        "finished": "Ukončený",
+        "finished": "Dokončené",
+        "loginRequired": "Prihlásenie vyžadované",
+        "loginMessage": "Pre zobrazenie turnajov sa prosím prihláste",
+        "goToLogin": "Prejsť na prihlásenie",
         "months": {
             "1": "Január",
             "2": "Február",

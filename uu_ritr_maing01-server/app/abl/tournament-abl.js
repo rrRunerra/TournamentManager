@@ -118,11 +118,12 @@ class TournamentAbl {
    * }} [dtoIn={}] - Filter options
    * @returns {Promise<TournamentListResponse>}
    */
-  async list(awid, dtoIn = {}) {
+  async list(awid, dtoIn) {
     const limit = parseInt(dtoIn.limit) || 1000;
     const skip = parseInt(dtoIn.skip) || 0;
 
-    let allTournaments = await this.dao.list({ awid });
+    let allTournaments = await this.dao.list({ awid, school: dtoIn.school });
+
     let itemList = allTournaments.itemList || allTournaments;
 
     // Sort by startDate to ensure stable pagination (newest first)
@@ -179,7 +180,9 @@ class TournamentAbl {
     const limit = dtoIn.limit || 3;
     const userId = dtoIn.userId;
 
-    let allTournaments = await this.dao.list({ awid, status: "finished" });
+    const user = await DaoFactory.getDao("player").get({ awid, id: userId });
+
+    let allTournaments = await this.dao.list({ awid, status: "finished", school: user.school });
 
     let itemList = allTournaments.itemList || allTournaments;
 

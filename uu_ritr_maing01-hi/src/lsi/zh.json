@@ -264,8 +264,11 @@
         "searchPlaceholder": "搜索名称...",
         "noTournaments": "未找到此过滤器的锦标赛。",
         "noHistory": "历史记录中没有锦标赛",
-        "teamsCount": "参赛团队",
-        "finished": "已完成",
+        "teamsCount": "支参赛队伍",
+        "finished": "已结束",
+        "loginRequired": "需要登录",
+        "loginMessage": "请登录以查看锦标赛",
+        "goToLogin": "前往登录",
         "months": {
             "1": "一月",
             "2": "二月",

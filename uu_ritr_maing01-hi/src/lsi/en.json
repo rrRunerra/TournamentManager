@@ -267,6 +267,9 @@
     "noHistory": "No tournaments in history.",
     "teamsCount": "teams in competition",
     "finished": "Finished",
+    "loginRequired": "Login Required",
+    "loginMessage": "Please log in to view tournaments",
+    "goToLogin": "Go to Login",
     "months": {
       "1": "January",
       "2": "February",

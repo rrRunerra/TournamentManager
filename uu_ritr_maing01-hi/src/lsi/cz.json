@@ -265,7 +265,10 @@
     "noTournaments": "Žádné turnaje pro daný filtr.",
     "noHistory": "Žádné turnaje v historii",
     "teamsCount": "týmů v soutěži",
-    "finished": "Ukončený",
+    "finished": "Dokončeno",
+    "loginRequired": "Přihlášení vyžadováno",
+    "loginMessage": "Pro zobrazení turnajů se prosím přihlaste",
+    "goToLogin": "Přejít na přihlášení",
     "months": {
       "1": "Leden",
       "2": "Únor",

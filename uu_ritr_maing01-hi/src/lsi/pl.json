@@ -266,6 +266,9 @@
         "noHistory": "Brak turniejów w historii",
         "teamsCount": "drużyn w konkursie",
         "finished": "Zakończony",
+        "loginRequired": "Wymagane logowanie",
+        "loginMessage": "Zaloguj się, aby zobaczyć turnieje",
+        "goToLogin": "Przejdź do logowania",
         "months": {
             "1": "Styczeń",
             "2": "Luty",

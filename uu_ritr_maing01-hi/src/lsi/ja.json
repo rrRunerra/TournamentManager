@@ -264,7 +264,10 @@
         "searchPlaceholder": "名前で検索...",
         "noTournaments": "このフィルターに一致するトーナメントはありません。",
         "noHistory": "履歴に大会はありません",
-        "teamsCount": "チーム参加中",
+        "teamsCount": "チームが参加中",
+        "loginRequired": "ログインが必要です",
+        "loginMessage": "トーナメントを表示するにはログインしてください",
+        "goToLogin": "ログインへ移動",
         "finished": "終了",
         "months": {
             "1": "1月",

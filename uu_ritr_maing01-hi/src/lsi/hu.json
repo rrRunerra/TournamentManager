@@ -265,7 +265,10 @@
         "noTournaments": "Nem található verseny ehhez a szűrőhöz.",
         "noHistory": "Nincsenek versenyek az előzményekben",
         "teamsCount": "csapat a versenyben",
-        "finished": "Befejezve",
+        "finished": "Befejezett",
+        "loginRequired": "Bejelentkezés szükséges",
+        "loginMessage": "Kérjük, jelentkezzen be a versenyek megtekintéséhez",
+        "goToLogin": "Ugrás a bejelentkezéshez",
         "months": {
             "1": "Január",
             "2": "Február",

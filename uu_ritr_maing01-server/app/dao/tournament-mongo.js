@@ -21,12 +21,9 @@ class TournamentMongo extends UuObjectDao {
     return await super.findOne({ awid, id });
   }
 
-  async list({ awid, status }) {
-    const filter = { awid };
-    if (status) {
-      filter.status = status;
-    }
-    return await super.find(filter);
+  async list(uuObject) {
+    console.log(uuObject);
+    return await super.find(uuObject);
   }
 
   async update({ awid, tournament }) {

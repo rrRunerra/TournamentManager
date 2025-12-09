@@ -266,6 +266,9 @@
         "noHistory": "Keine Turniere in der Historie",
         "teamsCount": "Teams im Wettbewerb",
         "finished": "Beendet",
+        "loginRequired": "Anmeldung erforderlich",
+        "loginMessage": "Bitte melden Sie sich an, um Turniere anzuzeigen",
+        "goToLogin": "Zur Anmeldung",
         "months": {
             "1": "Januar",
             "2": "Februar",

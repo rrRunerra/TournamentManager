@@ -26,14 +26,17 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
   //   if (user) {
   //     try {
-  //       Calls.player.get({ id: user.id }).then((pDb) => {
-  //         if (pDb.role.toLowerCase() !== "teacher") {
-  //           showError(lsi.errorTitle, lsi.errorUnauthorized);
-  //           onClose();
-  //         }
-  //       }).catch((error) => {
-  //         console.error("Failed to verify user role:", error);
-  //       });
+  //       Calls.player
+  //         .get({ id: user.id })
+  //         .then((pDb) => {
+  //           if (pDb.role.toLowerCase() !== "teacher") {
+  //             showError(lsi.errorTitle, lsi.errorUnauthorized);
+  //             onClose();
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.error("Failed to verify user role:", error);
+  //         });
   //     } catch (error) {
   //       console.error("Failed to parse user from localStorage:", error);
   //     }
