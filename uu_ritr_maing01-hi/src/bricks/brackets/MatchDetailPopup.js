@@ -30,9 +30,9 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
   // Check if both participants are present
   const isMatchReady = match.participants && match.participants[0]?.id && match.participants[1]?.id;
 
-  // Fetch team players when tournament is finished
+  // Fetch team players when tournament is finished or if user is owner
   useEffect(() => {
-    if (isFinishedTournament && tournamentInfo?.teams && match.participants) {
+    if ((isFinishedTournament || isOwner) && tournamentInfo?.teams && match.participants) {
       // Get players for team 1
       const team1 = tournamentInfo.teams.find((t) => t.id === match.participants[0]?.id);
       if (team1?.players) {
@@ -50,7 +50,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
         );
       }
     }
-  }, [isFinishedTournament, tournamentInfo, match.participants]);
+  }, [isFinishedTournament, isOwner, tournamentInfo, match.participants]);
 
   const handlePlayerClick = (playerId) => {
     if (playerId) {
@@ -270,7 +270,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                 {match.participants[0]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
-            {isFinishedTournament && (
+            {(isFinishedTournament || isOwner) && (
               <div className="team-players-list">
                 {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
                   const player = team1Players[index];
@@ -333,7 +333,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                 {match.participants[1]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
-            {isFinishedTournament && (
+            {(isFinishedTournament || isOwner) && (
               <div className="team-players-list">
                 {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
                   const player = team2Players[index];

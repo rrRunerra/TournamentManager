@@ -91,6 +91,11 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
+      "team/removePlayer": {
+        "realization": "api/controllers/TeamController.removePlayer",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "tournament/delete": {
         "realization": "api/controllers/TournamentController.delete",
         "httpMethod": "POST",

@@ -79,7 +79,28 @@ const Remove = {
   },
 };
 
+const RemovePlayer = {
+  UC_CODE: `${TEAM_ERROR_PREFIX}removePlayer/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${RemovePlayer.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  TeamNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${RemovePlayer.UC_CODE}teamNotFound`;
+      this.message = "Team not found.";
+    }
+  },
+};
+
 module.exports = {
+  RemovePlayer,
   Remove,
   List,
   Get,

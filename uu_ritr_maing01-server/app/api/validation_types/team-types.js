@@ -2,39 +2,35 @@
 
 const TeamCreateDtoInType = shape({
   name: uu5String(255).isRequired(),
-    players:
-        shape({
-            id: uu5String(255).isRequired()
-
-        })
-    .isRequired(),
-    tournamentId: uu5String(255).isRequired()
-})
+  players: shape({
+    id: uu5String(255).isRequired(),
+  }).isRequired(),
+  tournamentId: uu5String(255).isRequired(),
+});
 
 const TeamUpdateDtoInType = shape({
-    id: uu5String(255).isRequired(),
-    name: uu5String(255),
-    players:
-        shape({
-            id: uu5String(255)
-
-        }
-    ),
-    tournamentId: uu5String(255),
-    teamSize: uu5String()
-})
+  id: uu5String(255).isRequired(),
+  name: uu5String(255),
+  players: shape({
+    id: uu5String(255),
+  }),
+  tournamentId: uu5String(255),
+  teamSize: uu5String(),
+});
 
 const TeamGetDtoInType = shape({
-    id: uu5String(255).isRequired()
-})
+  id: uu5String(255).isRequired(),
+});
 
 const TeamRemoveDtoInType = shape({
-    tournamentId: uu5String(255).isRequired(),
-    teamId: uu5String(255).isRequired()
-})
+  tournamentId: uu5String(255).isRequired(),
+  teamId: uu5String(255).isRequired(),
+});
 
-
-
+const TeamRemovePlayerDtoInType = shape({
+  teamId: uu5String(255).isRequired(),
+  playerId: uu5String(255).isRequired(),
+});
 
 // const teamSchema = {
 //   _id: ObjectId,

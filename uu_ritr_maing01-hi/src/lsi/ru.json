@@ -163,7 +163,13 @@
         "removeTeam": "Удалить команду",
         "removeTeamMessage": "Удалить команду",
         "remove": "Удалить",
-        "removeTeamError": "Не удалось удалить команду."
+        "removeTeamError": "Не удалось удалить команду.",
+    "removePlayer": "Удалить игрока",
+    "removePlayerMessage": "Вы уверены, что хотите удалить",
+    "fromTeam": "из команды",
+    "playerRemoved": "Игрок удален",
+    "playerRemovedMessage": "Игрок был удален из команды.",
+    "removePlayerError": "Не удалось удалить игрока."
     },
     "OngoingOwnerControls": {
         "title": "Управление турниром",
@@ -227,7 +233,9 @@
         "status": "Статус:",
         "teamSize": "Размер команды:",
         "players": "Игроки:",
-        "joining": "Присоединение..."
+        "joining": "Присоединение...",
+    "bracketType": "Тип сетки:",
+    "owner": "Владелец:"
     },
     "Tournaments": {
         "createErrorTitle": "Ошибка",

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Calls from "../calls.js";
 import "../styles/bricks/ownerControls.css";
 import { useNotification } from "./NotificationProvider.js";
@@ -9,6 +10,45 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
   const { showSuccess, showError } = useNotification();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["OwnerControls"]);
+  const [playersData, setPlayersData] = useState({});
+
+  useEffect(() => {
+    async function fetchPlayers() {
+      const uniquePlayerIds = new Set();
+      info.teams.forEach((team) => {
+        if (team.players) {
+          team.players.forEach((playerId) => uniquePlayerIds.add(playerId));
+        }
+      });
+
+      if (uniquePlayerIds.size === 0) return;
+
+      const newPlayersData = { ...playersData };
+      const promises = [];
+
+      uniquePlayerIds.forEach((playerId) => {
+        if (!newPlayersData[playerId]) {
+          promises.push(
+            Calls.player
+              .get({ id: playerId })
+              .then((data) => {
+                newPlayersData[playerId] = data.name || data.username || "Unknown";
+              })
+              .catch(() => {
+                newPlayersData[playerId] = "Unknown";
+              }),
+          );
+        }
+      });
+
+      if (promises.length > 0) {
+        await Promise.all(promises);
+        setPlayersData(newPlayersData);
+      }
+    }
+
+    fetchPlayers();
+  }, [info.teams]);
 
   return (
     <div className="owner-controls-panel">
@@ -81,6 +121,47 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
               <span className="owner-controls-player-count">
                 ({team.players?.length || 0}/{info.teamSize} {lsi.players})
               </span>
+              {team.players && team.players.length > 0 && (
+                <div className="owner-controls-player-list">
+                  {team.players.map((playerId) => (
+                    <span
+                      key={playerId}
+                      className="owner-controls-player-badge clickable"
+                      title={lsi.removePlayer || "Remove player"}
+                      onClick={async () => {
+                        const playerName = playersData[playerId] || "Unknown";
+                        const confirmed = await confirm({
+                          title: lsi.removePlayer || "Remove Player",
+                          message: `${lsi.removePlayerMessage || "Are you sure you want to remove"} "${playerName}" ${lsi.fromTeam || "from"} "${team.name}"?`,
+                          confirmText: lsi.remove,
+                          cancelText: lsi.cancel,
+                          danger: true,
+                        });
+
+                        if (confirmed) {
+                          try {
+                            await Calls.team.removePlayer({
+                              teamId: team.id,
+                              playerId: playerId,
+                            });
+
+                            setInfo(await Calls.tournament.get({ id: id }));
+                            showSuccess(
+                              lsi.playerRemoved || "Player removed",
+                              lsi.playerRemovedMessage || "Player has been removed from the team.",
+                            );
+                          } catch (error) {
+                            console.error("Error removing player:", error);
+                            showError(lsi.removePlayerError || "Error removing player", lsi.tryAgain);
+                          }
+                        }
+                      }}
+                    >
+                      {playersData[playerId] || "Loading..."} ✕
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
             <button
               className="owner-controls-btn owner-controls-btn--outline"

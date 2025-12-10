@@ -163,7 +163,13 @@
         "removeTeam": "Csapat eltávolítása",
         "removeTeamMessage": "Csapat eltávolítása",
         "remove": "Eltávolítás",
-        "removeTeamError": "Nem sikerült eltávolítani a csapatot."
+        "removeTeamError": "Nem sikerült eltávolítani a csapatot.",
+    "removePlayer": "Játékos eltávolítása",
+    "removePlayerMessage": "Biztosan el akarja távolítani",
+    "fromTeam": "a csapatból",
+    "playerRemoved": "Játékos eltávolítva",
+    "playerRemovedMessage": "A játékos eltávolításra került a csapatból.",
+    "removePlayerError": "Nem sikerült eltávolítani a játékost."
     },
     "OngoingOwnerControls": {
         "title": "Versenyvezérlés",
@@ -227,7 +233,9 @@
         "status": "Állapot:",
         "teamSize": "Csapatméret:",
         "players": "Játékosok:",
-        "joining": "Csatlakozás..."
+        "joining": "Csatlakozás...",
+    "bracketType": "Ágrajz típusa:",
+    "owner": "Tulajdonos:"
     },
     "Tournaments": {
         "createErrorTitle": "Hiba",

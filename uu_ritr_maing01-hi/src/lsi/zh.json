@@ -163,7 +163,13 @@
         "removeTeam": "移除团队",
         "removeTeamMessage": "移除团队",
         "remove": "移除",
-        "removeTeamError": "无法移除团队。"
+        "removeTeamError": "无法删除队伍。",
+        "removePlayer": "移除玩家",
+        "removePlayerMessage": "您确定要移除",
+        "fromTeam": "从队伍",
+        "playerRemoved": "玩家已移除",
+        "playerRemovedMessage": "玩家已从队伍中移除。",
+        "removePlayerError": "无法移除玩家。"
     },
     "OngoingOwnerControls": {
         "title": "锦标赛控制",
@@ -227,7 +233,9 @@
         "status": "状态：",
         "teamSize": "团队规模：",
         "players": "玩家：",
-        "joining": "加入中..."
+        "joining": "加入中...",
+    "bracketType": "赛程类型:",
+    "owner": "所有者:"
     },
     "Tournaments": {
         "createErrorTitle": "错误",

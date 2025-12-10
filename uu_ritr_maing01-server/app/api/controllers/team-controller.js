@@ -2,9 +2,12 @@
 const TeamAbl = require("../../abl/team-abl.js");
 
 class TeamController {
-
   remove(ucEnv) {
     return TeamAbl.remove(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  removePlayer(ucEnv) {
+    return TeamAbl.removePlayer(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
   list(ucEnv) {
@@ -22,7 +25,6 @@ class TeamController {
   create(ucEnv) {
     return TeamAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
-
 }
 
 module.exports = new TeamController();

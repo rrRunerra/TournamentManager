@@ -1,122 +1,408 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(8px);
 }
 
 .modal-content {
-  background: #0f0f0f;
-  color: #ff8e53;
-  border-radius: 16px;
-  padding: 24px;
-  width: 420px;
-  box-shadow: 0 0 20px rgba(255, 140, 0, 0.25);
+  background: #141414;
+  color: #e0e0e0;
+  border-radius: 24px;
+  padding: 32px;
+  width: 480px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 1px solid #333;
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk", sans-serif;
+  position: relative;
+  /* overflow: hidden; Removed to allow datepicker dropdown to show */
+}
+
+/* Add a subtle gradient glow at the top */
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff8e53, #ff6b6b);
+  border-radius: 24px 24px 0 0;
 }
 
 .modal-header {
-  margin-bottom: 20px;
-  color: #ffd166;
-  font-size: 1.4rem;
+  margin-bottom: 32px;
+  color: #ffffff;
+  font-size: 1.75rem;
   text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-.form-control {
+/* Form Controls */
+input.form-control,
+select.form-control,
+textarea.form-control {
   width: 100%;
-  margin-bottom: 12px;
-}
-
-.form-control input,
-.form-control select,
-.form-control textarea {
-  width: 100%;
-  padding: 10px;
-  background: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 8px;
+  padding: 14px 18px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 12px;
   color: #fff;
-  transition: 0.2s;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  appearance: none; /* Remove default browser styling */
 }
 
-.form-control input:focus,
-.form-control select:focus,
-.form-control textarea:focus {
+input.form-control:hover,
+select.form-control:hover,
+textarea.form-control:hover {
+  border-color: #555;
+  background: #252525;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
   border-color: #ff8e53;
-  box-shadow: 0 0 8px rgba(255, 140, 0, 0.3);
+  background: #252525;
+  box-shadow: 0 0 0 4px rgba(255, 142, 83, 0.15);
   outline: none;
 }
 
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 4px;
+}
+
+/* Team Input Section */
 .team-input-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.team-input {
+.team-input-container .team-input {
   flex: 1;
+  padding: 14px 18px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 12px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
+.team-input-container .team-input:focus {
+  border-color: #ff8e53;
+  background: #252525;
+  box-shadow: 0 0 0 4px rgba(255, 142, 83, 0.15);
+  outline: none;
+}
+
+.team-input-container .btn {
+  padding: 0 24px;
+  background: #333;
+  color: #fff;
+  border-radius: 12px;
+  border: 1px solid #444;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.team-input-container .btn:hover {
+  background: #444;
+  border-color: #555;
+}
+
+/* Teams List */
 .teams-list {
-  margin-bottom: 14px;
-  padding-left: 20px;
-  color: #ddd;
+  margin-bottom: 24px;
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: #1a1a1a;
 }
 
 .team-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2a2a2a;
+  transition: background 0.2s;
+}
+
+.team-item:last-child {
+  border-bottom: none;
+}
+
+.team-item:hover {
+  background: #222;
+}
+
+.team-item span {
+  color: #e0e0e0;
+  font-size: 0.95rem;
 }
 
 .remove-team-btn {
-  background: none;
+  background: rgba(255, 77, 77, 0.1);
   border: none;
   color: #ff4d4d;
   cursor: pointer;
-  transition: 0.2s;
-  font-size: 0.9rem;
+  transition: all 0.2s;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .remove-team-btn:hover {
-  color: #ff0000;
+  background: #ff4d4d;
+  color: white;
+  transform: scale(1.1);
 }
 
+/* Modal Actions */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #2a2a2a;
 }
 
-.modal-actions button {
-  padding: 10px 16px;
-  background: #ff8e53;
+.btn-primary {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #ff8e53 0%, #ff6b6b 100%);
   border: none;
-  border-radius: 10px;
-  color: #000;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.25s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: all 0.2s;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
 }
 
-.modal-actions button:hover {
-  background: #ff7a30;
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.35);
+  filter: brightness(1.1);
 }
-.btn {  padding: 10px 16px;
-  background: #ffd166;
-  border: none;
-  border-radius: 10px;
-  color: #000;
+
+.btn-secondary {
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid #444;
+  border-radius: 12px;
+  color: #bbb;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-color: #666;
+}
+
+/* DateTimePicker Styles */
+.date-time-picker-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.date-input-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.date-input-wrapper input {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.picker-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 16px;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-top: 8px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  color: #fff;
   font-weight: bold;
-  transition: 0.25s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);}
+}
+
+.calendar-header button {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ff8e53;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.calendar-header button:hover {
+  background: #333;
+  border-color: #ff8e53;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+  padding: 4px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #ddd;
+  transition: all 0.2s;
+}
+
+.calendar-day:hover:not(.empty) {
+  background: #333;
+  color: #fff;
+}
+
+.calendar-day.selected {
+  background: #ff8e53;
+  color: #000;
+  font-weight: bold;
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.time-selector {
+  border-top: 1px solid #333;
+  padding-top: 16px;
+}
+
+.time-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.time-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-inputs input {
+  width: 60px;
+  padding: 8px;
+  background: #252525;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.time-inputs input:focus {
+  border-color: #ff8e53;
+  outline: none;
+}
+
+.ampm-toggle {
+  background: #252525;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  padding: 8px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.ampm-toggle:hover {
+  background: #333;
+  border-color: #ff8e53;
+}
+

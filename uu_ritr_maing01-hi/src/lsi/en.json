@@ -164,7 +164,13 @@
     "removeTeam": "Remove Team",
     "removeTeamMessage": "Remove team",
     "remove": "Remove",
-    "removeTeamError": "Failed to remove team."
+    "removeTeamError": "Failed to remove team.",
+    "removePlayer": "Remove Player",
+    "removePlayerMessage": "Are you sure you want to remove",
+    "fromTeam": "from",
+    "playerRemoved": "Player Removed",
+    "playerRemovedMessage": "Player has been removed from the team.",
+    "removePlayerError": "Failed to remove player."
   },
   "OngoingOwnerControls": {
     "title": "Tournament Controls",
@@ -228,7 +234,9 @@
     "status": "Status:",
     "teamSize": "Team Size:",
     "players": "Players:",
-    "joining": "Joining..."
+    "joining": "Joining...",
+    "bracketType": "Bracket Type:",
+    "owner": "Owner:"
   },
   "Tournaments": {
     "createErrorTitle": "Error",

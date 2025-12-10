@@ -177,6 +177,14 @@
           "Public"
         ]
       },
+      "team/removePlayer": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
       "tournament/delete": {
         "sysStateList": [
           "active"

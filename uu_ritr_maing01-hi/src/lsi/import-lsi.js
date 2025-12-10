@@ -9,22 +9,21 @@ import lsiDe from "./de.json";
 import lsiPl from "./pl.json";
 import lsiHu from "./hu.json";
 
-
 const libraryCode = "uu_ritr_maing01-hi";
 
 const importLsi = (lang) => import(`./${lang}.json`);
 importLsi.libraryCode = libraryCode;
 
 Utils.Lsi.setDefaultLsi(libraryCode, {
-    en: lsiEn,
-    cz: lsiCz,
-    sk: lsiSk,
-    ja: lsiJa,
-    zh: lsiZh,
-    ru: lsiRu,
-    de: lsiDe,
-    pl: lsiPl,
-    hu: lsiHu,
+  en: lsiEn,
+  cz: lsiCz,
+  sk: lsiSk,
+  ja: lsiJa,
+  zh: lsiZh,
+  ru: lsiRu,
+  de: lsiDe,
+  pl: lsiPl,
+  hu: lsiHu,
 });
 
 export default importLsi;

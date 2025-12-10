@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useRoute, useLsi } from "uu5g05";
+import { useRoute, useLsi, Environment, useLanguage } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { Card, CardDescription, CardFooter, CardTitle } from "../bricks/cards.js";
 import CustomBracket from "../bricks/brackets/CustomBracket.js";
@@ -20,13 +20,29 @@ export default function TournamentDetailPage() {
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
   const { showError } = useNotification();
-  const lsi = useLsi(importLsi, ["TournamentDetail"]);
+  const lsiDetail = useLsi(importLsi, ["TournamentDetail"]);
+  const lsiTournaments = useLsi(importLsi, ["Tournaments"]);
+  const lsi = { ...lsiDetail, ...lsiTournaments };
+  const [lang] = useLanguage();
+
+  const [ownerName, setOwnerName] = useState("");
 
   useEffect(() => {
     async function fetchTournamentDetail() {
       try {
         const response = await Calls.tournament.get({ id: id });
         setInfo(response);
+
+        // Fetch owner details
+        if (response.owner) {
+          try {
+            const ownerData = await Calls.player.get({ id: response.owner });
+            setOwnerName(ownerData.name || ownerData.username || "Unknown");
+          } catch (e) {
+            console.error("Failed to fetch owner:", e);
+            setOwnerName("Unknown");
+          }
+        }
       } catch (error) {
         console.error("Error fetching tournament detail:", error);
       }
@@ -46,8 +62,6 @@ export default function TournamentDetailPage() {
 
         if (hasBrackets) {
           // Double bracket - group by bracket
-
-          // USELESS
           processedData = response.reduce(
             (acc, match) => {
               if (match.bracket) {
@@ -157,6 +171,8 @@ export default function TournamentDetailPage() {
     );
   }
 
+  console.log();
+
   return (
     // Renamed class "tournament-container" to "tournament-detail-container"
     <div className="tournament-detail-container">
@@ -164,30 +180,61 @@ export default function TournamentDetailPage() {
       <h2 className="tournament-detail-title">{info.name}</h2>
       {/* Renamed class "tournament-description" to "tournament-detail-description" */}
       <p className="tournament-detail-description">{info.description}</p>
-      <p>
-        <strong>{lsi.startDate}</strong> {new Date(info.startDate).toLocaleString()}
-      </p>
-      <p>
-        <strong>{lsi.endDate}</strong> {new Date(info.endDate).toLocaleString()}
-      </p>
-      <p>
-        <strong>{lsi.status}</strong> {info.status}
-      </p>
-      <p>
-        <strong>{lsi.teamSize}</strong> {info.teamSize}
-      </p>
 
+      <div className="tournament-detail-info-grid">
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.startDate}</strong>
+          <span>
+            {new Intl.DateTimeFormat(lang == "cz" ? "cs" : "en", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            }).format(new Date(info.startDate))}
+          </span>
+        </div>
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.endDate}</strong>
+          <span>
+            {new Intl.DateTimeFormat(lang == "cz" ? "cs" : "en", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            }).format(new Date(info.endDate))}
+          </span>
+        </div>
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.status}</strong>
+          <span className={`status-badge ${info.status}`}>{lsi[info.status]}</span>
+        </div>
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.teamSize}</strong>
+          <span>{info.teamSize}</span>
+        </div>
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.bracketType || "Bracket Type"}</strong>
+          <span style={{ textTransform: "capitalize" }}>{info.bracketType || "Single"}</span>
+        </div>
+        <div className="tournament-detail-info-item">
+          <strong>{lsi.owner || "Owner"}</strong>
+          <span>{ownerName || "Loading..."}</span>
+        </div>
+      </div>
       {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
       <div className="tournament-detail-team-grid">
         {info.teams.map((team) => {
           const isJoined = team.players?.includes(user.id);
+          const isFull = (team.players?.length || 0) >= info.teamSize;
 
           return (
             <Card
               key={team.id}
               // Renamed class "team-card" to "tournament-detail-team-card"
-              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""}`}
-              onClick={() => joinTeam(id, team.id, user.id)}
+              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""} ${isFull ? "full" : ""}`}
+              onClick={() => !isFull && joinTeam(id, team.id, user.id)}
             >
               <CardTitle>{team.name}</CardTitle>
               <CardDescription>

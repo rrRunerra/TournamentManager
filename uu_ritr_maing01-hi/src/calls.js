@@ -351,6 +351,19 @@ const Calls = {
       const commandUri = Calls.getCommandUri("team/remove");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *  teamId: string,
+     *  playerId: string
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    removePlayer(dtoIn) {
+      const commandUri = Calls.getCommandUri("team/removePlayer");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   match: {

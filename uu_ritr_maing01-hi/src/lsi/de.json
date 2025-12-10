@@ -163,7 +163,13 @@
         "removeTeam": "Team entfernen",
         "removeTeamMessage": "Team entfernen",
         "remove": "Entfernen",
-        "removeTeamError": "Team konnte nicht entfernt werden."
+        "removeTeamError": "Team konnte nicht entfernt werden.",
+    "removePlayer": "Spieler entfernen",
+    "removePlayerMessage": "Möchten Sie wirklich entfernen",
+    "fromTeam": "aus dem Team",
+    "playerRemoved": "Spieler entfernt",
+    "playerRemovedMessage": "Spieler wurde aus dem Team entfernt.",
+    "removePlayerError": "Spieler konnte nicht entfernt werden."
     },
     "OngoingOwnerControls": {
         "title": "Turniersteuerung",
@@ -227,7 +233,9 @@
         "status": "Status:",
         "teamSize": "Teamgröße:",
         "players": "Spieler:",
-        "joining": "Beitreten..."
+        "joining": "Beitreten...",
+    "bracketType": "Turnierbaum-Typ:",
+    "owner": "Besitzer:"
     },
     "Tournaments": {
         "createErrorTitle": "Fehler",

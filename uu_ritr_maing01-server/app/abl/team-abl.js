@@ -170,6 +170,36 @@ class TeamAbl {
     return updatedTeam;
   }
 
+  /**
+   * Removes a player from a team.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{teamId: string, playerId: string}} dtoIn - Data to remove player
+   * @returns {Promise<Team>} Updated team
+   */
+  async removePlayer(awid, dtoIn) {
+    const validationResult = this.validator.validate("TeamRemovePlayerDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.RemovePlayer.InvalidDtoIn();
+    }
+
+    const team = await this.dao.get({ awid, id: dtoIn.teamId });
+    if (!team) {
+      throw new Errors.RemovePlayer.TeamNotFound();
+    }
+
+    const updatedPlayers = team.players.filter((playerId) => playerId !== dtoIn.playerId);
+
+    const updatedTeam = await this.dao.update(
+      { awid, id: dtoIn.teamId },
+      {
+        players: updatedPlayers,
+      },
+    );
+
+    return updatedTeam;
+  }
+
   async create(awid, dtoIn) {
     const validationResult = this.validator.validate("TeamCreateDtoInType", dtoIn);
 

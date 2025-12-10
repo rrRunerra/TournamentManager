@@ -163,7 +163,13 @@
         "removeTeam": "Usuń drużynę",
         "removeTeamMessage": "Usuń drużynę",
         "remove": "Usuń",
-        "removeTeamError": "Nie udało się usunąć drużyny."
+        "removeTeamError": "Nie udało się usunąć zespołu.",
+        "removePlayer": "Usuń gracza",
+        "removePlayerMessage": "Czy na pewno chcesz usunąć",
+        "fromTeam": "z zespołu",
+        "playerRemoved": "Gracz usunięty",
+        "playerRemovedMessage": "Gracz został usunięty z zespołu.",
+        "removePlayerError": "Nie udało się usunąć gracza."
     },
     "OngoingOwnerControls": {
         "title": "Kontrola turnieju",
@@ -227,7 +233,9 @@
         "status": "Status:",
         "teamSize": "Rozmiar drużyny:",
         "players": "Gracze:",
-        "joining": "Dołączanie..."
+        "joining": "Dołączanie...",
+    "bracketType": "Typ drabinki:",
+    "owner": "Właściciel:"
     },
     "Tournaments": {
         "createErrorTitle": "Błąd",

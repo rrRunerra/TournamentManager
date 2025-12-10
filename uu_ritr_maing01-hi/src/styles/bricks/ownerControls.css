@@ -134,3 +134,34 @@
   color: #aaa;
   font-family: 'Space Mono', monospace;
 }
+
+/* Player List */
+.owner-controls-player-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.owner-controls-player-badge {
+  background: #2a2a2a;
+  color: #d0d0d0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.owner-controls-player-badge.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.owner-controls-player-badge.clickable:hover {
+  background: rgba(220, 53, 69, 0.15);
+  border-color: #dc3545;
+  color: #ff6b6b;
+}

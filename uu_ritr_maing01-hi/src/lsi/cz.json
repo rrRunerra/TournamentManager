@@ -163,7 +163,13 @@
     "removeTeam": "Odstranit tým",
     "removeTeamMessage": "Odstranit tým",
     "remove": "Odstranit",
-    "removeTeamError": "Nepodařilo se odstranit tým."
+    "removeTeamError": "Nepodařilo se odstranit tým.",
+    "removePlayer": "Odstranit hráče",
+    "removePlayerMessage": "Opravdu chcete odstranit",
+    "fromTeam": "z týmu",
+    "playerRemoved": "Hráč odstraněn",
+    "playerRemovedMessage": "Hráč byl odstraněn z týmu.",
+    "removePlayerError": "Nepodařilo se odstranit hráče."
   },
   "OngoingOwnerControls": {
     "title": "Ovládání turnaje",
@@ -227,7 +233,9 @@
     "status": "Stav:",
     "teamSize": "Velikost týmu:",
     "players": "Hráči:",
-    "joining": "Připojuji se..."
+    "joining": "Připojování...",
+    "bracketType": "Typ pavouka:",
+    "owner": "Vlastník:"
   },
   "Tournaments": {
     "createErrorTitle": "Chyba",

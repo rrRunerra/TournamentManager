@@ -10,7 +10,7 @@ import Navbar from "../bricks/navbar.js";
 import { NotificationProvider } from "../bricks/NotificationProvider.js";
 import { ConfirmProvider } from "../bricks/ConfirmProvider.js";
 import importLsi from "../lsi/import-lsi.js";
-import "../styles/spa.css"
+import "../styles/spa.css";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -19,10 +19,10 @@ const Login = Utils.Component.lazy(() => import("../routes/login.js"));
 const Tournaments = Utils.Component.lazy(() => import("../routes/tournament.js"));
 const Tournament = Utils.Component.lazy(() => import("../routes/tournament-detail.js"));
 const History = Utils.Component.lazy(() => import("../routes/history.js"));
-const Profile = Utils.Component.lazy(() => import("../routes/profile.js"))
+const Profile = Utils.Component.lazy(() => import("../routes/profile.js"));
 
 const ROUTE_MAP = {
-  "": { redirect: "login" },
+  "": { redirect: "home" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   login: (props) => <Login {...props} />,
@@ -55,9 +55,11 @@ const Spa = createVisualComponent({
                   <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop={false} />
                 </main>
                 <footer className="app-footer">
-                  <p><Lsi import={importLsi} path={["Footer", "copyright"]} />
+                  <p>
+                    <Lsi import={importLsi} path={["Footer", "copyright"]} />
                     <br />
-                    <Lsi import={importLsi} path={["Footer", "collaboration"]} /></p>
+                    <Lsi import={importLsi} path={["Footer", "collaboration"]} />
+                  </p>
                 </footer>
               </div>
             </Uu5Elements.ModalBus>
