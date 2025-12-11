@@ -5,6 +5,7 @@ import DarkVeil from "../bricks/DarkVeil.js";
 import Calls from "../calls.js";
 import "../styles/routes/login.css";
 import useUser from "../hooks/useUser.js";
+import { Button } from "../bricks/atom/Button.js";
 
 const LoginLogo = () => (
   <div>
@@ -23,14 +24,6 @@ const LoginInput = ({ type = "text", placeholder, value, onChange }) => (
   />
 );
 
-const LoginButton = ({ text, onClick, loading, loadingText }) => {
-  return (
-    <button onClick={onClick} className="login-button" disabled={loading}>
-      {loading ? loadingText : text}
-    </button>
-  );
-};
-
 const LoginError = ({ message }) => (message ? <div className="login-error">{message}</div> : null);
 
 const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading, lsi }) => (
@@ -39,7 +32,9 @@ const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, err
     <LoginInput type="password" placeholder={lsi.password} value={password} onChange={setPassword} />
     <LoginError message={error} />
 
-    <LoginButton text={lsi.login} loading={loading} loadingText={lsi.loading} />
+    <Button onClick={onSubmit} type="primary-fill" disabled={loading} style={{ width: "100%" }}>
+      {loading ? lsi.loading : lsi.login}
+    </Button>
   </form>
 );
 

@@ -7,7 +7,7 @@
   border: 1px solid #2a2a2a;
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 /* Title */
@@ -40,7 +40,7 @@
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.95rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -132,7 +132,7 @@
 .owner-controls-player-count {
   font-size: 0.875rem;
   color: #aaa;
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
 }
 
 /* Player List */

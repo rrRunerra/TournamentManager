@@ -5,6 +5,7 @@ import { useNotification } from "./NotificationProvider.js";
 import { useConfirm } from "./ConfirmProvider.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
+import { Button } from "./atom/Button.js";
 
 export default function OwnerControls({ info, id, setInfo, setRoute, onTournamentStart }) {
   const { showSuccess, showError } = useNotification();
@@ -55,8 +56,8 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
       <h3 className="owner-controls-title">{lsi.title}</h3>
       <div className="owner-controls-actions">
         {info.status === "upcoming" && (
-          <button
-            className="owner-controls-btn owner-controls-btn--primary"
+          <Button
+            type="primary-fill"
             onClick={async () => {
               const confirmed = await confirm({
                 title: lsi.startTournament,
@@ -82,10 +83,10 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
             }}
           >
             {lsi.startTournament}
-          </button>
+          </Button>
         )}
-        <button
-          className="owner-controls-btn owner-controls-btn--danger"
+        <Button
+          type="danger"
           onClick={async () => {
             const confirmed = await confirm({
               title: lsi.deleteTournament,
@@ -109,7 +110,7 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
           }}
         >
           {lsi.deleteTournament}
-        </button>
+        </Button>
       </div>
 
       <div className="owner-controls-team-management">
@@ -163,8 +164,8 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
                 </div>
               )}
             </div>
-            <button
-              className="owner-controls-btn owner-controls-btn--outline"
+            <Button
+              type="primary-outline"
               onClick={async () => {
                 const confirmed = await confirm({
                   title: lsi.removeTeam,
@@ -187,7 +188,7 @@ export default function OwnerControls({ info, id, setInfo, setRoute, onTournamen
               }}
             >
               {lsi.remove}
-            </button>
+            </Button>
           </div>
         ))}
       </div>
