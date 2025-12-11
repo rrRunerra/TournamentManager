@@ -54,7 +54,7 @@ export default function TournamentsPage() {
 
     try {
       const dtoIn = {
-        limit: 10,
+        limit: 20,
         skip: (pageNum - 1) * 10,
         status: ["ongoing", "upcoming"],
         school: user?.school,

@@ -60,7 +60,6 @@ export default function LoginPage() {
 
     try {
       const res = await Calls.player.create({ name: username, password: password });
-
       setUser(res);
       localStorage.setItem("player", JSON.stringify(res));
       setRoute("home");
