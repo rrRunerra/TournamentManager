@@ -328,6 +328,9 @@
         "errorTitle": "Hiba",
         "errorName": "A név megadása kötelező",
         "errorDescription": "A leírás megadása kötelező",
-        "errorEmail": "Az e-mail cím megadása kötelező, ha választ szeretne kapni"
+        "errorEmail": "Az e-mail cím megadása kötelező, ha választ szeretne kapni",
+        "successTitle": "Siker",
+        "successMessage": "Az üzenet elküldve",
+        "errorSend": "Nem sikerült elküldeni az üzenetet"
     }
 }

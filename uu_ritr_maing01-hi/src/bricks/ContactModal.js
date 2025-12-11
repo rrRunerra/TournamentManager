@@ -102,8 +102,14 @@ export default function ContactModal({ isOpen, onClose }) {
         }
     };
 
+    const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-content contact-modal" style={{ maxWidth: "600px" }}>
                 <h3 className="modal-header">{lsi.header}</h3>
 

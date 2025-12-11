@@ -328,6 +328,9 @@
         "errorTitle": "Fehler",
         "errorName": "Name ist erforderlich",
         "errorDescription": "Beschreibung ist erforderlich",
-        "errorEmail": "E-Mail ist erforderlich, wenn Sie eine Antwort wünschen"
+        "errorEmail": "E-Mail ist erforderlich, wenn Sie eine Antwort wünschen",
+        "successTitle": "Erfolg",
+        "successMessage": "Nachricht wurde gesendet",
+        "errorSend": "Nachricht konnte nicht gesendet werden"
     }
 }

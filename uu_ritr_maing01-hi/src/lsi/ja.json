@@ -328,6 +328,9 @@
         "errorTitle": "エラー",
         "errorName": "名前は必須です",
         "errorDescription": "説明は必須です",
-        "errorEmail": "返信を希望する場合は、メールアドレスが必須です"
+        "errorEmail": "返信を希望する場合は、メールアドレスが必須です",
+        "successTitle": "成功",
+        "successMessage": "メッセージが送信されました",
+        "errorSend": "メッセージの送信に失敗しました"
     }
 }

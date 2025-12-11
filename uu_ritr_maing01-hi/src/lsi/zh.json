@@ -328,6 +328,9 @@
         "errorTitle": "错误",
         "errorName": "姓名为必填项",
         "errorDescription": "描述为必填项",
-        "errorEmail": "如果您希望收到回复，则电子邮件为必填项"
+        "errorEmail": "如果您希望收到回复，则电子邮件为必填项",
+        "successTitle": "成功",
+        "successMessage": "消息已发送",
+        "errorSend": "发送消息失败"
     }
 }

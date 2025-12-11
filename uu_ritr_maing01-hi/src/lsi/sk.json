@@ -329,6 +329,9 @@
         "errorTitle": "Chyba",
         "errorName": "Meno je povinné",
         "errorDescription": "Popis je povinný",
-        "errorEmail": "E-mail je povinný, ak chcete odpoveď"
+        "errorEmail": "E-mail je povinný, ak chcete odpoveď",
+        "successTitle": "Úspech",
+        "successMessage": "Správa bola odoslaná",
+        "errorSend": "Správu sa nepodarilo odoslať"
     }
 }

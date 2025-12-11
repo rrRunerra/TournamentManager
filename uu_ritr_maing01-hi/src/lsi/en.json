@@ -329,6 +329,9 @@
     "errorTitle": "Error",
     "errorName": "Name is required",
     "errorDescription": "Description is required",
-    "errorEmail": "Email is required if you want a reply"
+    "errorEmail": "Email is required if you want a reply",
+    "successTitle": "Success",
+    "successMessage": "Message was sent",
+    "errorSend": "Failed to send message"
   }
 }

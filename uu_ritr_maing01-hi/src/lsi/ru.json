@@ -328,6 +328,9 @@
         "errorTitle": "Ошибка",
         "errorName": "Имя обязательно",
         "errorDescription": "Описание обязательно",
-        "errorEmail": "Email обязателен, если вы хотите получить ответ"
+        "errorEmail": "Email обязателен, если вы хотите получить ответ",
+        "successTitle": "Успех",
+        "successMessage": "Сообщение отправлено",
+        "errorSend": "Не удалось отправить сообщение"
     }
 }
