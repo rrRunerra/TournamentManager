@@ -234,8 +234,8 @@
         "teamSize": "Rozmiar drużyny:",
         "players": "Gracze:",
         "joining": "Dołączanie...",
-    "bracketType": "Typ drabinki:",
-    "owner": "Właściciel:"
+        "bracketType": "Typ drabinki:",
+        "owner": "Właściciel:"
     },
     "Tournaments": {
         "createErrorTitle": "Błąd",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP Dyplom 1",
         "diploma2": "MatchUP Dyplom 2",
         "diploma3": "MatchUP Dyplom 3"
+    },
+    "ContactModal": {
+        "header": "Skontaktuj się z nami",
+        "name": "Twoje imię",
+        "questionType": "Jakiego rodzaju masz pytanie?",
+        "typeTechnical": "Problem techniczny",
+        "typeFunction": "Pytanie o funkcję / użycie",
+        "typeIdea": "Pomysł / sugestia ulepszenia",
+        "typePartnership": "Współpraca / partnerstwo",
+        "typeOther": "Inne:",
+        "typeOtherPlaceholder": "Proszę sprecyzować...",
+        "description": "Proszę podać szczegółowy opis pytania, problemu lub sugestii",
+        "replyEmailQuestion": "Czy chcesz otrzymać odpowiedź e-mailem?",
+        "emailLabel": "Twój preferowany adres e-mail",
+        "cancel": "Anuluj",
+        "send": "Wyślij",
+        "errorTitle": "Błąd",
+        "errorName": "Imię jest wymagane",
+        "errorDescription": "Opis jest wymagany",
+        "errorEmail": "E-mail jest wymagany, jeśli chcesz otrzymać odpowiedź"
     }
 }

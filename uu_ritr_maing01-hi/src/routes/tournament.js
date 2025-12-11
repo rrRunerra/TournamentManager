@@ -6,6 +6,7 @@ import Calls from "../calls.js";
 import "../styles/routes/tournament.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
+import { Button } from "../bricks/atom/Button.js";
 
 const createTournament = async ({
   name,
@@ -95,9 +96,9 @@ export default function TournamentsPage() {
           <div className="login-prompt-icon">🔒</div>
           <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
           <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
-          <button className="login-prompt-button" onClick={() => setRoute("login")}>
+          <Button onClick={() => setRoute("login")} type="primary-fill">
             {lsi.goToLogin || "Go to Login"}
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -178,9 +179,13 @@ export default function TournamentsPage() {
       </section>
 
       {isTeacher && (
-        <button className="fab" onClick={() => setIsOpen(true)}>
+        <Button
+          onClick={() => setIsOpen(true)}
+          type="fab-primary"
+          style={{ position: "fixed", bottom: "20px", right: "20px", fontSize: "24px" }}
+        >
           +
-        </button>
+        </Button>
       )}
 
       <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={handleCreateTournament} owner={user.id} />

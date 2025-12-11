@@ -7,6 +7,7 @@ import Pagination from "../bricks/pagination.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import useUser from "../hooks/useUser.js";
+import { Button } from "../bricks/atom/Button.js";
 
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -86,9 +87,9 @@ export default function HistoryPage() {
           <div className="login-prompt-icon">🔒</div>
           <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
           <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
-          <button className="login-prompt-button" onClick={() => setRoute("login")}>
+          <Button onClick={() => setRoute("login")} type="primary-fill">
             {lsi.goToLogin || "Go to Login"}
-          </button>
+          </Button>
         </div>
       </div>
     );

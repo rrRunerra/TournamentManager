@@ -165,12 +165,12 @@
         "removeTeamMessage": "Odstrániť tím",
         "remove": "Odstrániť",
         "removeTeamError": "Nepodarilo sa odstrániť tím.",
-    "removePlayer": "Odstrániť hráča",
-    "removePlayerMessage": "Naozaj chcete odstrániť",
-    "fromTeam": "z tímu",
-    "playerRemoved": "Hráč odstránený",
-    "playerRemovedMessage": "Hráč bol odstránený z tímu.",
-    "removePlayerError": "Nepodarilo sa odstrániť hráča."
+        "removePlayer": "Odstrániť hráča",
+        "removePlayerMessage": "Naozaj chcete odstrániť",
+        "fromTeam": "z tímu",
+        "playerRemoved": "Hráč odstránený",
+        "playerRemovedMessage": "Hráč bol odstránený z tímu.",
+        "removePlayerError": "Nepodarilo sa odstrániť hráča."
     },
     "OngoingOwnerControls": {
         "title": "Ovládanie turnaja",
@@ -235,8 +235,8 @@
         "teamSize": "Veľkosť tímu:",
         "players": "Hráči:",
         "joining": "Pripájam sa...",
-    "bracketType": "Typ pavúka:",
-    "owner": "Vlastník:"
+        "bracketType": "Typ pavúka:",
+        "owner": "Vlastník:"
     },
     "Tournaments": {
         "createErrorTitle": "Chyba",
@@ -310,5 +310,25 @@
         "diploma1": "MatchUP Diplom 1",
         "diploma2": "MatchUP Diplom 2",
         "diploma3": "MatchUP Diplom 3"
+    },
+    "ContactModal": {
+        "header": "Kontaktujte nás",
+        "name": "Vaše meno",
+        "questionType": "Aký typ otázky máte?",
+        "typeTechnical": "Technický problém",
+        "typeFunction": "Otázka o funkcii / použití",
+        "typeIdea": "Nápad / návrh na vylepšenie",
+        "typePartnership": "Spolupráca / partnerstvo",
+        "typeOther": "Iné:",
+        "typeOtherPlaceholder": "Prosím špecifikujte...",
+        "description": "Prosím, uveďte podrobný popis vašej otázky, problému alebo návrhu",
+        "replyEmailQuestion": "Chcete, aby sme vám odpovedali e-mailom?",
+        "emailLabel": "Vaša preferovaná e-mailová adresa",
+        "cancel": "Zrušiť",
+        "send": "Odoslať",
+        "errorTitle": "Chyba",
+        "errorName": "Meno je povinné",
+        "errorDescription": "Popis je povinný",
+        "errorEmail": "E-mail je povinný, ak chcete odpoveď"
     }
 }

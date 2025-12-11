@@ -310,5 +310,25 @@
     "diploma1": "MatchUP Diploma 1",
     "diploma2": "MatchUP Diploma 2",
     "diploma3": "MatchUP Diploma 3"
+  },
+  "ContactModal": {
+    "header": "Contact Us",
+    "name": "Your Name",
+    "questionType": "What type of question do you have?",
+    "typeTechnical": "Technical problem",
+    "typeFunction": "Question about function / usage",
+    "typeIdea": "Idea / suggestion for improvement",
+    "typePartnership": "Cooperation / partnership",
+    "typeOther": "Other:",
+    "typeOtherPlaceholder": "Please specify...",
+    "description": "Please provide a detailed description of your question, problem, or suggestion",
+    "replyEmailQuestion": "Do you want us to reply by email?",
+    "emailLabel": "Your preferred email address",
+    "cancel": "Cancel",
+    "send": "Send",
+    "errorTitle": "Error",
+    "errorName": "Name is required",
+    "errorDescription": "Description is required",
+    "errorEmail": "Email is required if you want a reply"
   }
 }

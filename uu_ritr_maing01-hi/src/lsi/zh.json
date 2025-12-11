@@ -234,8 +234,8 @@
         "teamSize": "团队规模：",
         "players": "玩家：",
         "joining": "加入中...",
-    "bracketType": "赛程类型:",
-    "owner": "所有者:"
+        "bracketType": "赛程类型:",
+        "owner": "所有者:"
     },
     "Tournaments": {
         "createErrorTitle": "错误",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP 证书 1",
         "diploma2": "MatchUP 证书 2",
         "diploma3": "MatchUP 证书 3"
+    },
+    "ContactModal": {
+        "header": "联系我们",
+        "name": "您的姓名",
+        "questionType": "您有什么类型的问题？",
+        "typeTechnical": "技术问题",
+        "typeFunction": "关于功能/使用的问题",
+        "typeIdea": "改进的想法/建议",
+        "typePartnership": "合作 / 伙伴关系",
+        "typeOther": "其他:",
+        "typeOtherPlaceholder": "请具体说明...",
+        "description": "请提供您的问题、问题或建议的详细描述",
+        "replyEmailQuestion": "您希望我们通过电子邮件回复吗？",
+        "emailLabel": "您的首选电子邮件地址",
+        "cancel": "取消",
+        "send": "发送",
+        "errorTitle": "错误",
+        "errorName": "姓名为必填项",
+        "errorDescription": "描述为必填项",
+        "errorEmail": "如果您希望收到回复，则电子邮件为必填项"
     }
 }

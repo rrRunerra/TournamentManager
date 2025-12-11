@@ -20,6 +20,7 @@ const Tournaments = Utils.Component.lazy(() => import("../routes/tournament.js")
 const Tournament = Utils.Component.lazy(() => import("../routes/tournament-detail.js"));
 const History = Utils.Component.lazy(() => import("../routes/history.js"));
 const Profile = Utils.Component.lazy(() => import("../routes/profile.js"));
+const Test = Utils.Component.lazy(() => import("../routes/test.js"));
 
 const ROUTE_MAP = {
   "": { redirect: "home" },
@@ -36,6 +37,7 @@ const ROUTE_MAP = {
   ),
   history: (props) => <History {...props} />,
   profile: (props) => <Profile {...props} />,
+  test: (props) => <Test {...props} />,
 };
 //@@viewOff:constants
 

@@ -164,12 +164,12 @@
         "removeTeamMessage": "Удалить команду",
         "remove": "Удалить",
         "removeTeamError": "Не удалось удалить команду.",
-    "removePlayer": "Удалить игрока",
-    "removePlayerMessage": "Вы уверены, что хотите удалить",
-    "fromTeam": "из команды",
-    "playerRemoved": "Игрок удален",
-    "playerRemovedMessage": "Игрок был удален из команды.",
-    "removePlayerError": "Не удалось удалить игрока."
+        "removePlayer": "Удалить игрока",
+        "removePlayerMessage": "Вы уверены, что хотите удалить",
+        "fromTeam": "из команды",
+        "playerRemoved": "Игрок удален",
+        "playerRemovedMessage": "Игрок был удален из команды.",
+        "removePlayerError": "Не удалось удалить игрока."
     },
     "OngoingOwnerControls": {
         "title": "Управление турниром",
@@ -234,8 +234,8 @@
         "teamSize": "Размер команды:",
         "players": "Игроки:",
         "joining": "Присоединение...",
-    "bracketType": "Тип сетки:",
-    "owner": "Владелец:"
+        "bracketType": "Тип сетки:",
+        "owner": "Владелец:"
     },
     "Tournaments": {
         "createErrorTitle": "Ошибка",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP Диплом 1",
         "diploma2": "MatchUP Диплом 2",
         "diploma3": "MatchUP Диплом 3"
+    },
+    "ContactModal": {
+        "header": "Свяжитесь с нами",
+        "name": "Ваше имя",
+        "questionType": "Какой у вас вопрос?",
+        "typeTechnical": "Техническая проблема",
+        "typeFunction": "Вопрос о функции / использовании",
+        "typeIdea": "Идея / предложение по улучшению",
+        "typePartnership": "Сотрудничество / партнерство",
+        "typeOther": "Другое:",
+        "typeOtherPlaceholder": "Пожалуйста, уточните...",
+        "description": "Пожалуйста, предоставьте подробное описание вашего вопроса, проблемы или предложения",
+        "replyEmailQuestion": "Хотите получить ответ по электронной почте?",
+        "emailLabel": "Ваш предпочтительный адрес электронной почты",
+        "cancel": "Отмена",
+        "send": "Отправить",
+        "errorTitle": "Ошибка",
+        "errorName": "Имя обязательно",
+        "errorDescription": "Описание обязательно",
+        "errorEmail": "Email обязателен, если вы хотите получить ответ"
     }
 }

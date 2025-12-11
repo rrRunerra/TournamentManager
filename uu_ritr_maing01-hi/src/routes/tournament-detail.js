@@ -10,6 +10,7 @@ import "../styles/routes/tournamentDetail.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import ImgEditor from "../bricks/image-editor.js";
 import useUser from "../hooks/useUser.js";
+import { Button } from "../bricks/atom/Button.js";
 
 export default function TournamentDetailPage() {
   const [info, setInfo] = useState(null);
@@ -143,11 +144,12 @@ export default function TournamentDetailPage() {
 
         {/* Diploma Editor Button - only for finished tournaments and owner */}
         {isOwner && info.status === "finished" && (
-          <button
+          <Button
             onClick={() => setIsImgEditorShown(true)}
-            className="tournament-detail-fab tournament-detail-fab-diploma"
             aria-label="Create Diploma"
             title="Create Diploma"
+            type="fab-primary"
+            style={{ position: "fixed", bottom: "20px", right: "20px", fontSize: "24px" }}
           >
             <svg
               width="24"
@@ -162,7 +164,7 @@ export default function TournamentDetailPage() {
               <path d="M12 20h9" />
               <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
             </svg>
-          </button>
+          </Button>
         )}
 
         {/* Image Editor Modal */}
@@ -259,10 +261,11 @@ export default function TournamentDetailPage() {
         />
       )}
 
-      <button
+      <Button
         onClick={() => setRoute("tournaments")}
-        className="tournament-detail-fab tournament-detail-fab-back"
+        type="fab-primary"
         aria-label="Späť na turnaje"
+        style={{ position: "fixed", bottom: "20px", right: "20px", fontSize: "24px" }}
       >
         <svg
           width="24"
@@ -277,7 +280,7 @@ export default function TournamentDetailPage() {
           <path d="M19 12H5" />
           <path d="M12 19l-7-7 7-7" />
         </svg>
-      </button>
+      </Button>
     </div>
   );
 }
