@@ -7,6 +7,7 @@
   "namespace": "UuRitr",
   "spec": "uu5-app; uu_appg01_devkit@5.22.1",
   "dependencies": {
+    "emailjs-com": "^3.2.0",
     "filerobot-image-editor": "^4.8.1",
     "ogl": "^1.0.11",
     "react-konva": "^18.2.14",
