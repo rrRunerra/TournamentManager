@@ -46,9 +46,9 @@ const Spa = createVisualComponent({
 
   render() {
     return (
-      <NotificationProvider>
-        <ConfirmProvider>
-          <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "zh", "ru", "de", "pl", "hu"]}>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "zh", "ru", "de", "pl", "hu"]}>
+        <NotificationProvider>
+          <ConfirmProvider>
             <Uu5Elements.ModalBus>
               {/* Obal pre flex layout */}
               <div className="spa-layout">
@@ -65,9 +65,9 @@ const Spa = createVisualComponent({
                 </footer>
               </div>
             </Uu5Elements.ModalBus>
-          </Plus4U5.SpaProvider>
-        </ConfirmProvider>
-      </NotificationProvider>
+          </ConfirmProvider>
+        </NotificationProvider>
+      </Plus4U5.SpaProvider>
     );
   },
 });
