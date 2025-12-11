@@ -164,12 +164,12 @@
         "removeTeamMessage": "Csapat eltávolítása",
         "remove": "Eltávolítás",
         "removeTeamError": "Nem sikerült eltávolítani a csapatot.",
-    "removePlayer": "Játékos eltávolítása",
-    "removePlayerMessage": "Biztosan el akarja távolítani",
-    "fromTeam": "a csapatból",
-    "playerRemoved": "Játékos eltávolítva",
-    "playerRemovedMessage": "A játékos eltávolításra került a csapatból.",
-    "removePlayerError": "Nem sikerült eltávolítani a játékost."
+        "removePlayer": "Játékos eltávolítása",
+        "removePlayerMessage": "Biztosan el akarja távolítani",
+        "fromTeam": "a csapatból",
+        "playerRemoved": "Játékos eltávolítva",
+        "playerRemovedMessage": "A játékos eltávolításra került a csapatból.",
+        "removePlayerError": "Nem sikerült eltávolítani a játékost."
     },
     "OngoingOwnerControls": {
         "title": "Versenyvezérlés",
@@ -234,8 +234,8 @@
         "teamSize": "Csapatméret:",
         "players": "Játékosok:",
         "joining": "Csatlakozás...",
-    "bracketType": "Ágrajz típusa:",
-    "owner": "Tulajdonos:"
+        "bracketType": "Ágrajz típusa:",
+        "owner": "Tulajdonos:"
     },
     "Tournaments": {
         "createErrorTitle": "Hiba",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP Oklevél 1",
         "diploma2": "MatchUP Oklevél 2",
         "diploma3": "MatchUP Oklevél 3"
+    },
+    "ContactModal": {
+        "header": "Lépjen kapcsolatba velünk",
+        "name": "Az Ön neve",
+        "questionType": "Milyen típusú kérdése van?",
+        "typeTechnical": "Technikai probléma",
+        "typeFunction": "Kérdés a funkcióról / használatról",
+        "typeIdea": "Ötlet / javaslat a fejlesztésre",
+        "typePartnership": "Együttműködés / partnerség",
+        "typeOther": "Egyéb:",
+        "typeOtherPlaceholder": "Kérem részletezze...",
+        "description": "Kérjük, adja meg kérdése, problémája vagy javaslata részletes leírását",
+        "replyEmailQuestion": "Szeretne e-mailben választ kapni?",
+        "emailLabel": "Az Ön preferált e-mail címe",
+        "cancel": "Mégse",
+        "send": "Küldés",
+        "errorTitle": "Hiba",
+        "errorName": "A név megadása kötelező",
+        "errorDescription": "A leírás megadása kötelező",
+        "errorEmail": "Az e-mail cím megadása kötelező, ha választ szeretne kapni"
     }
 }

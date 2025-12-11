@@ -164,12 +164,12 @@
         "removeTeamMessage": "チームを削除",
         "remove": "削除",
         "removeTeamError": "チームの削除に失敗しました。",
-    "removePlayer": "プレイヤーを削除",
-    "removePlayerMessage": "本当に削除しますか",
-    "fromTeam": "チームから",
-    "playerRemoved": "プレイヤーが削除されました",
-    "playerRemovedMessage": "プレイヤーがチームから削除されました。",
-    "removePlayerError": "プレイヤーの削除に失敗しました。"
+        "removePlayer": "プレイヤーを削除",
+        "removePlayerMessage": "本当に削除しますか",
+        "fromTeam": "チームから",
+        "playerRemoved": "プレイヤーが削除されました",
+        "playerRemovedMessage": "プレイヤーがチームから削除されました。",
+        "removePlayerError": "プレイヤーの削除に失敗しました。"
     },
     "OngoingOwnerControls": {
         "title": "トーナメント管理",
@@ -234,8 +234,8 @@
         "teamSize": "チームサイズ:",
         "players": "プレイヤー:",
         "joining": "参加中...",
-    "bracketType": "ブラケットタイプ:",
-    "owner": "オーナー:"
+        "bracketType": "ブラケットタイプ:",
+        "owner": "オーナー:"
     },
     "Tournaments": {
         "createErrorTitle": "エラー",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP ディプロマ 1",
         "diploma2": "MatchUP ディプロマ 2",
         "diploma3": "MatchUP ディプロマ 3"
+    },
+    "ContactModal": {
+        "header": "お問い合わせ",
+        "name": "お名前",
+        "questionType": "どのようなご質問ですか？",
+        "typeTechnical": "技術的な問題",
+        "typeFunction": "機能・使い方について",
+        "typeIdea": "改善のアイデア・提案",
+        "typePartnership": "協力・パートナーシップ",
+        "typeOther": "その他:",
+        "typeOtherPlaceholder": "詳細をご記入ください...",
+        "description": "ご質問、問題、または提案の詳細をご記入ください",
+        "replyEmailQuestion": "メールでの返信を希望しますか？",
+        "emailLabel": "希望するメールアドレス",
+        "cancel": "キャンセル",
+        "send": "送信",
+        "errorTitle": "エラー",
+        "errorName": "名前は必須です",
+        "errorDescription": "説明は必須です",
+        "errorEmail": "返信を希望する場合は、メールアドレスが必須です"
     }
 }

@@ -309,5 +309,25 @@
     "diploma1": "MatchUP Diplom 1",
     "diploma2": "MatchUP Diplom 2",
     "diploma3": "MatchUP Diplom 3"
+  },
+  "ContactModal": {
+    "header": "Kontaktujte nás",
+    "name": "Vaše jméno",
+    "questionType": "Jaký typ dotazu máte?",
+    "typeTechnical": "Technický problém",
+    "typeFunction": "Dotaz k funkci / použití",
+    "typeIdea": "Nápad / návrh na vylepšení",
+    "typePartnership": "Spolupráce / partnerství",
+    "typeOther": "Jiné:",
+    "typeOtherPlaceholder": "Prosím upřesněte...",
+    "description": "Prosím, uveďte podrobný popis vašeho dotazu, problému nebo návrhu",
+    "replyEmailQuestion": "Chcete, abychom vám odpověděli e-mailem?",
+    "emailLabel": "Vaše preferovaná e-mailová adresa",
+    "cancel": "Zrušit",
+    "send": "Odeslat",
+    "errorTitle": "Chyba",
+    "errorName": "Jméno je povinné",
+    "errorDescription": "Popis je povinný",
+    "errorEmail": "E-mail je povinný, pokud chcete odpověď"
   }
 }

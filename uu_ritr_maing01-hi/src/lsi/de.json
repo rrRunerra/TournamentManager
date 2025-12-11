@@ -164,12 +164,12 @@
         "removeTeamMessage": "Team entfernen",
         "remove": "Entfernen",
         "removeTeamError": "Team konnte nicht entfernt werden.",
-    "removePlayer": "Spieler entfernen",
-    "removePlayerMessage": "Möchten Sie wirklich entfernen",
-    "fromTeam": "aus dem Team",
-    "playerRemoved": "Spieler entfernt",
-    "playerRemovedMessage": "Spieler wurde aus dem Team entfernt.",
-    "removePlayerError": "Spieler konnte nicht entfernt werden."
+        "removePlayer": "Spieler entfernen",
+        "removePlayerMessage": "Möchten Sie wirklich entfernen",
+        "fromTeam": "aus dem Team",
+        "playerRemoved": "Spieler entfernt",
+        "playerRemovedMessage": "Spieler wurde aus dem Team entfernt.",
+        "removePlayerError": "Spieler konnte nicht entfernt werden."
     },
     "OngoingOwnerControls": {
         "title": "Turniersteuerung",
@@ -234,8 +234,8 @@
         "teamSize": "Teamgröße:",
         "players": "Spieler:",
         "joining": "Beitreten...",
-    "bracketType": "Turnierbaum-Typ:",
-    "owner": "Besitzer:"
+        "bracketType": "Turnierbaum-Typ:",
+        "owner": "Besitzer:"
     },
     "Tournaments": {
         "createErrorTitle": "Fehler",
@@ -309,5 +309,25 @@
         "diploma1": "MatchUP Diplom 1",
         "diploma2": "MatchUP Diplom 2",
         "diploma3": "MatchUP Diplom 3"
+    },
+    "ContactModal": {
+        "header": "Kontaktieren Sie uns",
+        "name": "Ihr Name",
+        "questionType": "Welche Art von Frage haben Sie?",
+        "typeTechnical": "Technisches Problem",
+        "typeFunction": "Frage zur Funktion / Nutzung",
+        "typeIdea": "Idee / Vorschlag zur Verbesserung",
+        "typePartnership": "Zusammenarbeit / Partnerschaft",
+        "typeOther": "Andere:",
+        "typeOtherPlaceholder": "Bitte spezifizieren...",
+        "description": "Bitte geben Sie eine detaillierte Beschreibung Ihrer Frage, Ihres Problems oder Ihres Vorschlags an",
+        "replyEmailQuestion": "Möchten Sie eine Antwort per E-Mail?",
+        "emailLabel": "Ihre bevorzugte E-Mail-Adresse",
+        "cancel": "Abbrechen",
+        "send": "Senden",
+        "errorTitle": "Fehler",
+        "errorName": "Name ist erforderlich",
+        "errorDescription": "Beschreibung ist erforderlich",
+        "errorEmail": "E-Mail ist erforderlich, wenn Sie eine Antwort wünschen"
     }
 }

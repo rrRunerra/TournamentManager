@@ -4,6 +4,7 @@ import { useRoute, Utils, Environment, useLanguage, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { useConfirm } from "./ConfirmProvider.js";
 import useUser from "../hooks/useUser.js";
+import ContactModal from "./ContactModal.js";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -25,6 +26,7 @@ export default function Navbar() {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const [fontSize, setFontSize] = useState(() => {
     const saved = localStorage.getItem("fontSize");
     return saved ? parseInt(saved, 10) : 100;
@@ -201,10 +203,7 @@ export default function Navbar() {
                     className="account-popup-item"
                     onClick={() => {
                       setIsAccountOpen(false);
-                      window.open(
-                        "https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform?usp=sharing&ouid=101372114214195565381",
-                        "_blank",
-                      );
+                      setIsContactOpen(true);
                     }}
                   >
                     <span className="account-popup-icon">❓</span>
@@ -298,10 +297,7 @@ export default function Navbar() {
                   className="account-popup-item"
                   onClick={() => {
                     setIsAccountOpen(false);
-                    window.open(
-                      "https://docs.google.com/forms/d/e/1FAIpQLScoSv7pvaFvQ1Dw8a9N9KOQJ-QluWAXdGMUT9pXPaSQucKaTw/viewform?usp=sharing&ouid=101372114214195565381",
-                      "_blank",
-                    );
+                    setIsContactOpen(true);
                   }}
                 >
                   <span className="account-popup-icon">❓</span>
@@ -421,6 +417,7 @@ export default function Navbar() {
           </div>
         </div>
       </section>
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }
