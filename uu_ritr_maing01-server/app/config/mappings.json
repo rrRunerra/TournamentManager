@@ -135,6 +135,16 @@
         "realization": "api/controllers/PlayerController.incrementTournamentsPlayed",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "player/addCredits": {
+        "realization": "api/controllers/PlayerController.addCredits",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "player/removeCredits": {
+        "realization": "api/controllers/PlayerController.removeCredits",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

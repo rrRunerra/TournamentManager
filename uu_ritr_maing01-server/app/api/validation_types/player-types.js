@@ -36,3 +36,13 @@ const PlayerUpdateFlappyBirdScoreDtoInType = shape({
 const PlayerIncrementTournamentsPlayedDtoInType = shape({
   tournamentId: uu5String(255).isRequired(),
 });
+
+const PlayerAddCreditsDtoInType = shape({
+  id: uu5String(255).isRequired(),
+  amount: number().isRequired(),
+});
+
+const PlayerRemoveCreditsDtoInType = shape({
+  id: uu5String(255).isRequired(),
+  amount: number().isRequired(),
+});

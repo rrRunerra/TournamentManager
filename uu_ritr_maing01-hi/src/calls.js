@@ -150,6 +150,32 @@ const Calls = {
       const commandUri = Calls.getCommandUri("player/updateFlappyBirdScore");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *   id: string,
+     *   amount: number
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, credits: number}>}
+     */
+    addCredits(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/addCredits");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *   id: string,
+     *   amount: number
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, credits: number}>}
+     */
+    removeCredits(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/removeCredits");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   tournament: {

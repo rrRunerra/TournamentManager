@@ -214,11 +214,11 @@ class PlayerAbl {
           finals_secondPlace: 0,
           finals_thirdPlace: 0,
           finals_fourthPlace: 0,
-          matchesWon: 0,
           matchesLost: 0,
           tournamentsPlayed: 0,
           flappyBirdHighScore: 0,
         },
+        credits: 1000,
       });
     }
 
@@ -464,6 +464,74 @@ class PlayerAbl {
     }
 
     return { success: true, message: "Tournaments played updated successfully" };
+  }
+
+  /**
+   * Adds credits to a player.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, amount: number}} dtoIn - Player ID and amount to add
+   * @returns {Promise<{success: boolean, credits: number}>}
+   */
+  async addCredits(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerAddCreditsDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Errors.Update.InvalidDtoIn();
+    }
+
+    const player = await this.dao.get({ awid, id: dtoIn.id });
+    if (!player) {
+      throw new Errors.Get.PlayerNotFound();
+    }
+
+    const currentCredits = player.credits || 0;
+    const newCredits = currentCredits + dtoIn.amount;
+
+    await this.dao.update({
+      awid,
+      id: dtoIn.id,
+      ...player,
+      credits: newCredits,
+    });
+
+    return { success: true, credits: newCredits };
+  }
+
+  /**
+   * Removes credits from a player.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, amount: number}} dtoIn - Player ID and amount to remove
+   * @returns {Promise<{success: boolean, credits: number}>}
+   */
+  async removeCredits(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerRemoveCreditsDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Errors.Update.InvalidDtoIn();
+    }
+
+    const player = await this.dao.get({ awid, id: dtoIn.id });
+    if (!player) {
+      throw new Errors.Get.PlayerNotFound();
+    }
+
+    const currentCredits = player.credits || 0;
+    if (currentCredits < dtoIn.amount) {
+      throw new Error("Insufficient credits");
+    }
+
+    const newCredits = currentCredits - dtoIn.amount;
+
+    await this.dao.update({
+      awid,
+      id: dtoIn.id,
+      ...player,
+      credits: newCredits,
+    });
+
+    return { success: true, credits: newCredits };
   }
 }
 

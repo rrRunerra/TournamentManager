@@ -2,7 +2,6 @@
 const PlayerAbl = require("../../abl/player-abl.js");
 
 class PlayerController {
-
   get(ucEnv) {
     return PlayerAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
@@ -31,6 +30,13 @@ class PlayerController {
     return PlayerAbl.incrementTournamentsPlayed(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
+  addCredits(ucEnv) {
+    return PlayerAbl.addCredits(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  removeCredits(ucEnv) {
+    return PlayerAbl.removeCredits(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
 }
 
 module.exports = new PlayerController();
