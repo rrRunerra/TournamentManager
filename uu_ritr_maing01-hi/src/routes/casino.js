@@ -6,6 +6,8 @@ import "../styles/routes/casino.css";
 import Calls from "../calls";
 import useUser from "../hooks/useUser";
 import { useNotification } from "../bricks/NotificationProvider";
+import Poker from "./poker";
+import "../styles/routes/poker.css";
 
 const chips = {
   1: "../assets/white-chip.png",
@@ -24,7 +26,9 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
   return possibleWinBets[randomIndex];
 };
 
-// https://github.com/dozsolti/react-casino-roulette
+// Roulette from : https://github.com/dozsolti/react-casino-roulette
+
+// Poker from : https://github.com/ethanbrook-dev/TexasHoldEm-poker-multiplayer (Modified a bit)
 export default function CasinoPage() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [credits, setCredits] = useState(0);
@@ -44,7 +48,7 @@ export default function CasinoPage() {
       }
     };
     fetchPlayer();
-  }, [user]);
+  }, [user, selectedGame]);
 
   const updateCredits = (newCredits) => {
     setCredits(newCredits);
@@ -67,7 +71,7 @@ export default function CasinoPage() {
             <RouletteGame layoutType="american" credits={credits} updateCredits={updateCredits} userId={user.id} />
           )}
           {selectedGame === "slots" && <PlaceholderGame title="Slots" />}
-          {selectedGame === "poker" && <PlaceholderGame title="Poker" />}
+          {selectedGame === "poker" && <Poker />}
         </>
       ) : (
         <GameMenu onSelect={setSelectedGame} />

@@ -5,6 +5,7 @@
   "license": "License Commercial",
   "spec": "nodejs-app; uu_appg01_devkit@5.22.1",
   "dependencies": {
+    "socket.io": "^4.8.1",
     "uu_appg01_server": "^5.18.0",
     "uu_apprepresentationg01": "^2.2.0"
   },
