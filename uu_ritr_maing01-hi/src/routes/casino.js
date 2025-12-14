@@ -8,6 +8,7 @@ import useUser from "../hooks/useUser";
 import { useNotification } from "../bricks/NotificationProvider";
 import Poker from "./poker";
 import "../styles/routes/poker.css";
+import { useRoute } from "uu5g05";
 
 const chips = {
   1: "../assets/white-chip.png",
@@ -32,6 +33,8 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
 export default function CasinoPage() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [credits, setCredits] = useState(0);
+  const { showError } = useNotification();
+  const [, setRoute] = useRoute();
 
   const [user] = useUser();
 
@@ -53,6 +56,12 @@ export default function CasinoPage() {
   const updateCredits = (newCredits) => {
     setCredits(newCredits);
   };
+
+  if (!user) {
+    showError("You must be logged in to play");
+    setRoute("login");
+    return;
+  }
 
   return (
     <div className="casino-container">
@@ -123,8 +132,6 @@ function PlaceholderGame({ title }) {
     </div>
   );
 }
-
-// ... (imports)
 
 function RouletteGame({ layoutType, credits, updateCredits, userId }) {
   const { bets, total, onBet, clearBets } = useRoulette();
