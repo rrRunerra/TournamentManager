@@ -57,12 +57,6 @@ export default function CasinoPage() {
     setCredits(newCredits);
   };
 
-  if (!user) {
-    showError("You must be logged in to play");
-    setRoute("login");
-    return;
-  }
-
   return (
     <div className="casino-container">
       <div className="credits-display">Credits: ${credits}</div>
