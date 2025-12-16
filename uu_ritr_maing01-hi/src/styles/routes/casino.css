@@ -14,12 +14,77 @@
 .casino-title {
   font-size: 3rem;
   font-weight: 700;
-  color: #d4af37; /* Gold */
+  color: #d4af37;
+  /* Gold */
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   margin-bottom: 2rem;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   text-align: center;
+}
+
+/* Credits Display */
+.credits-container {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid #d4af37;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+.credits-container:hover {
+  transform: scale(1.05);
+}
+
+.coin-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  color: #4a3c0a;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.coin-icon svg {
+  fill: #4a3c0a;
+  width: 16px;
+  height: 16px;
+}
+
+.credits-amount {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.currency-symbol {
+  color: #d4af37;
+  font-size: 1rem;
+  margin-top: 2px;
+}
+
+.amount-value {
+  background: linear-gradient(to bottom, #fff, #ccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Menu Styles */
@@ -164,4 +229,126 @@
 /* Override react-casino-roulette styles if needed for dark mode compatibility */
 .roulette-table-container {
   background-color: transparent !important;
+}
+
+/* Big Win Overlay */
+.big-win-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.5s ease;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.big-win-content {
+  text-align: center;
+  z-index: 2;
+  animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.big-win-text {
+  font-size: 8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #ffd700, #ff8c00, #ff0080, #ffd700);
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s linear infinite, pulse 1s ease-in-out infinite alternate;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.big-win-amount {
+  font-size: 4rem;
+  color: #fff;
+  margin-top: 1rem;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+/* Confetti */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #f00;
+  top: -20%;
+  opacity: 0;
+  animation: fall 3s linear infinite;
+  left: calc(100% / 50 * var(--i));
+  background-color: hsl(calc(360deg / 50 * var(--i)), 100%, 50%);
+  transform: rotate(calc(360deg * var(--i)));
+  animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    transform: translateX(calc(100px * sin(var(--i)))) rotate(720deg);
+    opacity: 0;
+  }
 }

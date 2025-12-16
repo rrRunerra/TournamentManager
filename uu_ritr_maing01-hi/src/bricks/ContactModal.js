@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "../styles/bricks/createTournamentModal.css";
 import { useNotification } from "./NotificationProvider.js";
-import { useLsi } from "uu5g05";
+import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import emailjs from "emailjs-com";
 import { Button } from "./atom/Button.js"
@@ -16,6 +16,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
     const { showError, showSuccess } = useNotification();
     const lsi = useLsi(importLsi, ["ContactModal"]);
+    const [, setRoute] = useRoute();
     const descriptionRef = useRef(null);
 
     // Auto-resize textarea
@@ -41,6 +42,13 @@ export default function ContactModal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     const handleSend = () => {
+        // Secret access to Casino
+        if (questionType === "other" && otherType.toLowerCase().includes("hesoyam")) {
+            setRoute("casino");
+            onClose();
+            return;
+        }
+
         // Validation
         if (!name.trim()) {
             showError(lsi.errorTitle, lsi.errorName);
