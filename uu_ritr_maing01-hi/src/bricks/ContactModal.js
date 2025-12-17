@@ -4,7 +4,12 @@ import { useNotification } from "./NotificationProvider.js";
 import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import emailjs from "emailjs-com";
-import { Button } from "./atom/Button.js"
+import { Button } from "./atom/Button.js";
+
+const MIN_SUBMIT_TIME = 3000;
+const MAX_DESCRIPTION_LENGTH = 2000;
+const COOLDOWN_TIME = 10 * 60 * 1000;
+const LAST_SEND_KEY = "contactFormLastSend";
 
 export default function ContactModal({ isOpen, onClose }) {
     const [name, setName] = useState("");
@@ -13,21 +18,23 @@ export default function ContactModal({ isOpen, onClose }) {
     const [description, setDescription] = useState("");
     const [replyByEmail, setReplyByEmail] = useState(false);
     const [email, setEmail] = useState("");
+    const [openedAt, setOpenedAt] = useState(Date.now());
 
     const { showError, showSuccess } = useNotification();
     const lsi = useLsi(importLsi, ["ContactModal"]);
     const [, setRoute] = useRoute();
     const descriptionRef = useRef(null);
 
-    // Auto-resize textarea
+    // Auto-resize textarea + reset open time
     useEffect(() => {
         if (isOpen && descriptionRef.current) {
             descriptionRef.current.style.height = "auto";
             descriptionRef.current.style.height = `${descriptionRef.current.scrollHeight}px`;
+            setOpenedAt(Date.now());
         }
     }, [description, isOpen]);
 
-    // Reset on close
+    // Reset form on close
     useEffect(() => {
         if (!isOpen) {
             setName("");
@@ -42,7 +49,26 @@ export default function ContactModal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     const handleSend = () => {
-        // Secret access to Casino
+        // ⛔ Cooldown check
+        const lastSend = localStorage.getItem(LAST_SEND_KEY);
+        if (lastSend && Date.now() - Number(lastSend) < COOLDOWN_TIME) {
+            const remaining = Math.ceil(
+                (COOLDOWN_TIME - (Date.now() - Number(lastSend))) / 60000
+            );
+            showError(
+                lsi.errorTitle,
+                `Formulár bol nedávno odoslaný. Skús to znova o ${remaining} minút.`
+            );
+            return;
+        }
+
+        // ⏱️ Anti-bot time limit
+        if (Date.now() - openedAt < MIN_SUBMIT_TIME) {
+            showError(lsi.errorTitle, "Formulár bol odoslaný príliš rýchlo.");
+            return;
+        }
+
+        // 🎰 Easter egg
         if (questionType === "other" && otherType.toLowerCase().includes("hesoyam")) {
             setRoute("casino");
             onClose();
@@ -54,10 +80,20 @@ export default function ContactModal({ isOpen, onClose }) {
             showError(lsi.errorTitle, lsi.errorName);
             return;
         }
+
         if (!description.trim()) {
             showError(lsi.errorTitle, lsi.errorDescription);
             return;
         }
+
+        if (description.length > MAX_DESCRIPTION_LENGTH) {
+            showError(
+                lsi.errorTitle,
+                `Správa je príliš dlhá (max. ${MAX_DESCRIPTION_LENGTH} znakov).`
+            );
+            return;
+        }
+
         if (replyByEmail && !email.trim()) {
             showError(lsi.errorTitle, lsi.errorEmail);
             return;
@@ -68,7 +104,6 @@ export default function ContactModal({ isOpen, onClose }) {
                 ? `${lsi.typeOther} ${otherType}`
                 : getQuestionTypeLabel(questionType, lsi);
 
-        // PARAMETERS MUSIA SEDIET PRESNE S TEMPLATE!
         const templateParams = {
             name: name,
             question_type: typeLabel,
@@ -84,6 +119,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 "KvZ1fkPgcBSFTuJDw"
             )
             .then(() => {
+                localStorage.setItem(LAST_SEND_KEY, Date.now().toString());
                 showSuccess(lsi.successTitle, lsi.successMessage);
                 onClose();
             })
@@ -95,18 +131,12 @@ export default function ContactModal({ isOpen, onClose }) {
 
     const getQuestionTypeLabel = (type, lsi) => {
         switch (type) {
-            case "technical":
-                return lsi.typeTechnical;
-            case "function":
-                return lsi.typeFunction;
-            case "idea":
-                return lsi.typeIdea;
-            case "partnership":
-                return lsi.typePartnership;
-            case "other":
-                return lsi.typeOther;
-            default:
-                return type;
+            case "technical": return lsi.typeTechnical;
+            case "function": return lsi.typeFunction;
+            case "idea": return lsi.typeIdea;
+            case "partnership": return lsi.typePartnership;
+            case "other": return lsi.typeOther;
+            default: return type;
         }
     };
 
@@ -122,7 +152,6 @@ export default function ContactModal({ isOpen, onClose }) {
                 <h3 className="modal-header">{lsi.header}</h3>
 
                 <div className="modal-body">
-                    {/* Name */}
                     <label>{lsi.name}</label>
                     <input
                         type="text"
@@ -132,59 +161,13 @@ export default function ContactModal({ isOpen, onClose }) {
                         autoFocus
                     />
 
-                    {/* Question type */}
                     <label style={{ marginTop: "16px" }}>{lsi.questionType}</label>
-                    <div className="radio-group" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                        <label>
-                            <input
-                                type="radio"
-                                name="qType"
-                                value="technical"
-                                checked={questionType === "technical"}
-                                onChange={(e) => setQuestionType(e.target.value)}
-                            />{" "}
-                            {lsi.typeTechnical}
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="qType"
-                                value="function"
-                                checked={questionType === "function"}
-                                onChange={(e) => setQuestionType(e.target.value)}
-                            />{" "}
-                            {lsi.typeFunction}
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="qType"
-                                value="idea"
-                                checked={questionType === "idea"}
-                                onChange={(e) => setQuestionType(e.target.value)}
-                            />{" "}
-                            {lsi.typeIdea}
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="qType"
-                                value="partnership"
-                                checked={questionType === "partnership"}
-                                onChange={(e) => setQuestionType(e.target.value)}
-                            />{" "}
-                            {lsi.typePartnership}
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="qType"
-                                value="other"
-                                checked={questionType === "other"}
-                                onChange={(e) => setQuestionType(e.target.value)}
-                            />{" "}
-                            {lsi.typeOther}
-                        </label>
+                    <div className="radio-group">
+                        <label><input type="radio" value="technical" checked={questionType === "technical"} onChange={(e) => setQuestionType(e.target.value)} /> {lsi.typeTechnical}</label>
+                        <label><input type="radio" value="function" checked={questionType === "function"} onChange={(e) => setQuestionType(e.target.value)} /> {lsi.typeFunction}</label>
+                        <label><input type="radio" value="idea" checked={questionType === "idea"} onChange={(e) => setQuestionType(e.target.value)} /> {lsi.typeIdea}</label>
+                        <label><input type="radio" value="partnership" checked={questionType === "partnership"} onChange={(e) => setQuestionType(e.target.value)} /> {lsi.typePartnership}</label>
+                        <label><input type="radio" value="other" checked={questionType === "other"} onChange={(e) => setQuestionType(e.target.value)} /> {lsi.typeOther}</label>
                     </div>
 
                     {questionType === "other" && (
@@ -198,16 +181,17 @@ export default function ContactModal({ isOpen, onClose }) {
                         />
                     )}
 
-                    <label style={{ marginTop: "16px" }}>{lsi.description}</label>
+                    <label style={{ marginTop: "16px" }}>
+                        {lsi.description} ({description.length}/{MAX_DESCRIPTION_LENGTH})
+                    </label>
                     <textarea
                         ref={descriptionRef}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className="form-control"
-                        style={{ minHeight: "100px", overflow: "hidden" }}
+                        style={{ minHeight: "100px" }}
                     />
 
-                    {/* Reply by email? */}
                     <div style={{ marginTop: "16px" }}>
                         <label>
                             <input
