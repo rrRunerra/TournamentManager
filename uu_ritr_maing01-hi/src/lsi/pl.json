@@ -334,6 +334,37 @@
         "errorSend": "Nie udało się wysłać wiadomości"
     },
     "Casino": {
-        "insufficientCredits": "Niewystarczające środki!"
+        "insufficientCredits": "Niewystarczające środki!",
+        "title": "MatchUP Casino",
+        "backToMenu": "Powrót do menu",
+        "totalBet": "Całkowity zakład",
+        "clearBets": "Wyczyść zakłady",
+        "spinWheel": "Zakręć kołem",
+        "playNow": "Zagraj teraz",
+        "comingSoon": "Wkrótce...",
+        "bigWin": "WIELKA WYGRANA",
+        "youWon": "Wygrałeś",
+        "betterLuck": "Powodzenia następnym razem!",
+        "ballLanded": "Piłka wylądowała na",
+        "errorPlacingBet": "Błąd podczas obstawiania",
+        "errorUpdatingCredits": "Błąd aktualizacji środków",
+        "pleaseTryAgain": "Proszę spróbować ponownie.",
+        "games": {
+            "europeanRoulette": {
+                "title": "Ruletka Europejska",
+                "description": "Klasyczna ruletka z jednym zerem."
+            },
+            "americanRoulette": {
+                "title": "Ruletka Amerykańska",
+                "description": "Ruletka z podwójnym zerem dla wysokich stawek."
+            },
+            "poker": {
+                "title": "Texas Hold'em",
+                "description": "Sprawdź swoje umiejętności przeciwko kasynu."
+            },
+            "slots": {
+                "title": "Automaty"
+            }
+        }
     }
 }

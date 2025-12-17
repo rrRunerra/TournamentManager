@@ -334,6 +334,37 @@
         "errorSend": "メッセージの送信に失敗しました"
     },
     "Casino": {
-        "insufficientCredits": "クレジット不足！"
+        "insufficientCredits": "クレジットが不足しています！",
+        "title": "MatchUPカジノ",
+        "backToMenu": "メニューに戻る",
+        "totalBet": "合計ベット",
+        "clearBets": "ベットをクリア",
+        "spinWheel": "ホイールを回す",
+        "playNow": "今すぐプレイ",
+        "comingSoon": "近日公開...",
+        "bigWin": "大当り",
+        "youWon": "あなたの勝ちです",
+        "betterLuck": "次は幸運を！",
+        "ballLanded": "ボールが落ちた場所",
+        "errorPlacingBet": "ベット中にエラーが発生しました",
+        "errorUpdatingCredits": "クレジットの更新エラー",
+        "pleaseTryAgain": "もう一度お試しください。",
+        "games": {
+            "europeanRoulette": {
+                "title": "ヨーロピアンルーレット",
+                "description": "クラシックなシングルゼロルーレット。"
+            },
+            "americanRoulette": {
+                "title": "アメリカンルーレット",
+                "description": "ハイステークス向けのダブルゼロルーレット。"
+            },
+            "poker": {
+                "title": "テキサスホールデム",
+                "description": "ハウスに対してスキルを試しましょう。"
+            },
+            "slots": {
+                "title": "スロット"
+            }
+        }
     }
 }

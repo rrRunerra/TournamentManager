@@ -334,6 +334,37 @@
         "errorSend": "发送消息失败"
     },
     "Casino": {
-        "insufficientCredits": "余额不足！"
+        "insufficientCredits": "余额不足！",
+        "title": "MatchUP 赌场",
+        "backToMenu": "返回菜单",
+        "totalBet": "总赌注",
+        "clearBets": "清除赌注",
+        "spinWheel": "旋转轮盘",
+        "playNow": "立即玩",
+        "comingSoon": "即将推出...",
+        "bigWin": "大奖",
+        "youWon": "你赢了",
+        "betterLuck": "下次好运！",
+        "ballLanded": "球落在了",
+        "errorPlacingBet": "下注错误",
+        "errorUpdatingCredits": "更新余额错误",
+        "pleaseTryAgain": "请重试。",
+        "games": {
+            "europeanRoulette": {
+                "title": "欧式轮盘",
+                "description": "经典的单零轮盘。"
+            },
+            "americanRoulette": {
+                "title": "美式轮盘",
+                "description": "适合高赌注的双零轮盘。"
+            },
+            "poker": {
+                "title": "得州扑克",
+                "description": "测试您对抗庄家的技巧。"
+            },
+            "slots": {
+                "title": "老虎机"
+            }
+        }
     }
 }

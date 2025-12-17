@@ -335,6 +335,37 @@
     "errorSend": "Failed to send message"
   },
   "Casino": {
-    "insufficientCredits": "Insufficient credits!"
+    "insufficientCredits": "Insufficient credits!",
+    "title": "MatchUP Casino",
+    "backToMenu": "Back to Menu",
+    "totalBet": "Total Bet",
+    "clearBets": "Clear Bets",
+    "spinWheel": "Spin Wheel",
+    "playNow": "Play Now",
+    "comingSoon": "Coming Soon...",
+    "bigWin": "BIG WIN",
+    "youWon": "You won",
+    "betterLuck": "Better luck next time!",
+    "ballLanded": "The ball landed on",
+    "errorPlacingBet": "Error placing bet",
+    "errorUpdatingCredits": "Error updating credits",
+    "pleaseTryAgain": "Please try again.",
+    "games": {
+      "europeanRoulette": {
+        "title": "European Roulette",
+        "description": "Classic single-zero roulette."
+      },
+      "americanRoulette": {
+        "title": "American Roulette",
+        "description": "Double-zero roulette for high stakes."
+      },
+      "poker": {
+        "title": "Texas Hold'em",
+        "description": "Test your skills against the house."
+      },
+      "slots": {
+        "title": "Slots"
+      }
+    }
   }
 }

@@ -39,6 +39,7 @@ export default function CasinoPage() {
   const [, setRoute] = useRoute();
 
   const [user] = useUser();
+  const lsi = useLsi(importLsi, ["Casino"]);
 
   useEffect(() => {
     if (!user) return;
@@ -76,7 +77,7 @@ export default function CasinoPage() {
         <>
           <div className="back-button-container">
             <Button onClick={() => setSelectedGame(null)} type="secondary">
-              Back to Menu
+              {lsi.backToMenu}
             </Button>
           </div>
           {selectedGame === "european-roulette" && (
@@ -96,23 +97,24 @@ export default function CasinoPage() {
 }
 
 function GameMenu({ onSelect }) {
+  const lsi = useLsi(importLsi, ["Casino"]);
   return (
     <>
-      <h1 className="casino-title">MatchUP Casino</h1>
+      <h1 className="casino-title">{lsi.title}</h1>
       <div className="game-menu">
         <GameCard
-          title="European Roulette"
-          description="Classic single-zero roulette."
+          title={lsi.games.europeanRoulette.title}
+          description={lsi.games.europeanRoulette.description}
           onClick={() => onSelect("european-roulette")}
         />
         <GameCard
-          title="American Roulette"
-          description="Double-zero roulette for high stakes."
+          title={lsi.games.americanRoulette.title}
+          description={lsi.games.americanRoulette.description}
           onClick={() => onSelect("american-roulette")}
         />
         <GameCard
-          title="Texas Hold'em"
-          description="Test your skills against the house."
+          title={lsi.games.poker.title}
+          description={lsi.games.poker.description}
           onClick={() => onSelect("poker")}
         />
       </div>
@@ -121,20 +123,22 @@ function GameMenu({ onSelect }) {
 }
 
 function GameCard({ title, description, onClick }) {
+  const lsi = useLsi(importLsi, ["Casino"]);
   return (
     <div className="game-card" onClick={onClick}>
       <h3>{title}</h3>
       <p>{description}</p>
-      <Button type="primary-outline">Play Now</Button>
+      <Button type="primary-outline">{lsi.playNow}</Button>
     </div>
   );
 }
 
 function PlaceholderGame({ title }) {
+  const lsi = useLsi(importLsi, ["Casino"]);
   return (
     <div className="placeholder-screen">
       <h2>{title}</h2>
-      <p>Coming Soon...</p>
+      <p>{lsi.comingSoon}</p>
     </div>
   );
 }
@@ -211,19 +215,19 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
           setTimeout(() => setShowBigWin(false), 5000); // Hide after 5 seconds
         }
 
-        showSuccess(`You won $${winnings}!`, `The ball landed on ${winner}`);
+        showSuccess(`${lsi.youWon} $${winnings}!`, `${lsi.ballLanded} ${winner}`);
       } catch (e) {
         console.error("Failed to add winnings", e);
-        showError(`You won $${winnings}!`, `Error updating credits. The ball landed on ${winner}`);
+        showError(`${lsi.youWon} $${winnings}!`, `${lsi.errorUpdatingCredits}. ${lsi.ballLanded} ${winner}`);
       }
     } else {
-      showInfo("Better luck next time!", `The ball landed on ${winner}`);
+      showInfo(lsi.betterLuck, `${lsi.ballLanded} ${winner}`);
     }
   };
 
   return (
     <>
-      <h1 className="casino-title">{layoutType === "american" ? "American" : "European"} Roulette</h1>
+      <h1 className="casino-title">{layoutType === "american" ? lsi.games.americanRoulette.title : lsi.games.europeanRoulette.title}</h1>
       <div className="roulette-container">
         <div className="game-board">
           <div className="wheel-wrapper">
@@ -246,7 +250,7 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
         </div>
 
         <div className="controls-area">
-          <div className="total-display">Total Bet: ${total}</div>
+          <div className="total-display">{lsi.totalBet}: ${total}</div>
 
           <div className="chip-list-wrapper">
             <ChipList chips={chips} selectedChip={selectedChip} onChipPressed={setSelectedChip} />
@@ -254,10 +258,10 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
 
           <div className="action-buttons">
             <Button onClick={clearBets} disabled={wheelStart} type="danger">
-              Clear Bets
+              {lsi.clearBets}
             </Button>
             <Button onClick={doSpin} disabled={wheelStart || total > credits} type="primary-fill">
-              Spin Wheel
+              {lsi.spinWheel}
             </Button>
           </div>
         </div>
@@ -268,10 +272,11 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
 }
 
 function BigWinOverlay({ amount }) {
+  const lsi = useLsi(importLsi, ["Casino"]);
   return (
     <div className="big-win-overlay">
       <div className="big-win-content">
-        <h1 className="big-win-text">BIG WIN</h1>
+        <h1 className="big-win-text">{lsi.bigWin}</h1>
         <h2 className="big-win-amount">${amount}</h2>
       </div>
       <div className="confetti-container">

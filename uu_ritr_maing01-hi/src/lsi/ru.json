@@ -334,6 +334,37 @@
         "errorSend": "Не удалось отправить сообщение"
     },
     "Casino": {
-        "insufficientCredits": "Недостаточно кредитов!"
+        "insufficientCredits": "Недостаточно кредитов!",
+        "title": "MatchUP Casino",
+        "backToMenu": "Назад в меню",
+        "totalBet": "Общая ставка",
+        "clearBets": "Очистить ставки",
+        "spinWheel": "Крутить колесо",
+        "playNow": "Играть сейчас",
+        "comingSoon": "Скоро...",
+        "bigWin": "БОЛЬШОЙ ВЫИГРЫШ",
+        "youWon": "Вы выиграли",
+        "betterLuck": "Удачи в следующий раз!",
+        "ballLanded": "Шарик приземлился на",
+        "errorPlacingBet": "Ошибка при размещении ставки",
+        "errorUpdatingCredits": "Ошибка обновления кредитов",
+        "pleaseTryAgain": "Пожалуйста, попробуйте еще раз.",
+        "games": {
+            "europeanRoulette": {
+                "title": "Европейская рулетка",
+                "description": "Классическая рулетка с одним нулем."
+            },
+            "americanRoulette": {
+                "title": "Американская рулетка",
+                "description": "Рулетка с двойным нулем для высоких ставок."
+            },
+            "poker": {
+                "title": "Техасский Холдем",
+                "description": "Проверьте свои навыки против казино."
+            },
+            "slots": {
+                "title": "Слоты"
+            }
+        }
     }
 }

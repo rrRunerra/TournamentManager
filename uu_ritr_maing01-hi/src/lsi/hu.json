@@ -334,6 +334,37 @@
         "errorSend": "Nem sikerült elküldeni az üzenetet"
     },
     "Casino": {
-        "insufficientCredits": "Nincs elég kredit!"
+        "insufficientCredits": "Nincs elég kredit!",
+        "title": "MatchUP Casino",
+        "backToMenu": "Vissza a menübe",
+        "totalBet": "Teljes tét",
+        "clearBets": "Tétek törlése",
+        "spinWheel": "Pörgetés",
+        "playNow": "Játssz most",
+        "comingSoon": "Hamarosan...",
+        "bigWin": "NAGY NYEREMÉNY",
+        "youWon": "Nyertél",
+        "betterLuck": "Sok szerencsét legközelebb!",
+        "ballLanded": "A golyó itt landolt:",
+        "errorPlacingBet": "Hiba a fogadás során",
+        "errorUpdatingCredits": "Hiba a kreditek frissítésekor",
+        "pleaseTryAgain": "Kérjük, próbálja újra.",
+        "games": {
+            "europeanRoulette": {
+                "title": "Európai Rulett",
+                "description": "Klasszikus egy nullás rulett."
+            },
+            "americanRoulette": {
+                "title": "Amerikai Rulett",
+                "description": "Dupla nullás rulett magas tétekhez."
+            },
+            "poker": {
+                "title": "Texas Hold'em",
+                "description": "Teszteld tudásod a ház ellen."
+            },
+            "slots": {
+                "title": "Nyerőgépek"
+            }
+        }
     }
 }
