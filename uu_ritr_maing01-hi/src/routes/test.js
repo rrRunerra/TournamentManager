@@ -5,6 +5,8 @@ import { useConfirm } from "../bricks/ConfirmProvider.js";
 import Pagination from "../bricks/pagination.js";
 import DateTimePicker from "../bricks/DateTimePicker.js";
 import WelcomeRow from "../bricks/welcome-row.js";
+import CasinoPage from "./casino.js";
+import Calls from "../calls";
 import {
   Card,
   CardTitle,
@@ -22,6 +24,12 @@ export default function TestPage() {
   const { confirm } = useConfirm();
   const [page, setPage] = useState(1);
   const [date, setDate] = useState(new Date());
+
+  const id = new URLSearchParams(window.location.search).get("qwerty");
+
+  if (id == "hesoyam") {
+    return <CasinoPage></CasinoPage>;
+  }
 
   const sectionStyle = {
     marginBottom: "3rem",
