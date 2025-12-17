@@ -23,7 +23,7 @@ const AVATAR_OPTIONS = [
   Profile6,
   Profile7,
   Profile8,
-  null // Represents "Default" / No Image
+  null, // Represents "Default" / No Image
 ];
 
 const StatCard = ({ label, value, color }) => (
@@ -65,7 +65,17 @@ const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title }) => {
               {src ? (
                 <img src={src} alt={`Avatar ${index + 1}`} />
               ) : (
-                <div style={{ width: "100%", height: "100%", background: "#333", display: "flex", alignItems: "center", justifyContent: "center", color: "#666" }}>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    background: "#333",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#666",
+                  }}
+                >
                   <svg viewBox="0 0 24 24" fill="currentColor" height="40" width="40">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                   </svg>
@@ -115,6 +125,7 @@ export default function ProfilePage() {
 
       const s = await Calls.player.get({ id: targetId });
       setStats(s);
+      setAvatar(s.profilePicture);
 
       try {
         const tournamentsResponse = await Calls.tournament.listUserTournaments({
@@ -138,6 +149,7 @@ export default function ProfilePage() {
     if (targetId) {
       if (newAvatar) {
         localStorage.setItem(`user_avatar_${targetId}`, newAvatar);
+        Calls.player.updateProfilePicture({ id: targetId, profilePicture: newAvatar });
       } else {
         localStorage.removeItem(`user_avatar_${targetId}`);
       }
@@ -164,7 +176,6 @@ export default function ProfilePage() {
     <div className="profile-container">
       {/* Header Section */}
       <div className="profile-header">
-
         {/* Avatar Section */}
         {avatar ? (
           <div className="profile-avatar-container">
@@ -186,7 +197,7 @@ export default function ProfilePage() {
               <div
                 className="profile-avatar-edit-icon"
                 onClick={() => setIsAvatarModalOpen(true)}
-                style={{ bottom: '-10px', right: '-10px' }} // Adjust for svg container
+                style={{ bottom: "-10px", right: "-10px" }} // Adjust for svg container
               >
                 <svg viewBox="0 0 24 24">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
