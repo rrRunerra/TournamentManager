@@ -4,6 +4,7 @@ import FlappyBird from "../bricks/flappy-bird";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { Button } from "../bricks/atom/Button.js";
+import { Card, CardTitle, CardTopLine, CardAvatar, CardRole, CardText } from "../bricks/atom/Card.js";
 
 const AboutPage = () => {
   const [showGame, setShowGame] = useState(false);
@@ -128,17 +129,15 @@ const AboutPage = () => {
 
 const TeamCard = ({ member, onClick, className }) => {
   return (
-    <div
-      className={`team-card ${className || ""}`}
-      onClick={onClick}
-      style={{ cursor: onClick ? "pointer" : "default" }}
-    >
-      <div className="card-top-line" />
-      <div className="team-avatar">{member.initials}</div>
-      <h3 className="team-name">{member.name}</h3>
-      <p className="team-role">{member.role}</p>
-      <p className="team-bio">{member.bio}</p>
-      {member.socials && <SocialIcons socials={member.socials} />}
+    <div className={className}>
+      <Card type="about" onClick={onClick} style={{ cursor: onClick ? "pointer" : "default", height: "100%" }}>
+        <CardTopLine />
+        <CardAvatar>{member.initials}</CardAvatar>
+        <CardTitle>{member.name}</CardTitle>
+        <CardRole>{member.role}</CardRole>
+        <CardText type="bio">{member.bio}</CardText>
+        {member.socials && <SocialIcons socials={member.socials} />}
+      </Card>
     </div>
   );
 };
@@ -203,9 +202,11 @@ const SocialIcons = ({ socials }) => {
 
 const MotivationCard = ({ title, text, className }) => {
   return (
-    <div className={`motivation-card ${className || ""}`}>
-      <h3 className="motivation-title">{title}</h3>
-      <p className="motivation-text">{text}</p>
+    <div className={className}>
+      <Card type="motivation" style={{ height: "100%" }}>
+        <CardTitle>{title}</CardTitle>
+        <CardText type="motivation">{text}</CardText>
+      </Card>
     </div>
   );
 };

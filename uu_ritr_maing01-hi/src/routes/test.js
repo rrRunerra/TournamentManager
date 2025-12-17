@@ -5,7 +5,17 @@ import { useConfirm } from "../bricks/ConfirmProvider.js";
 import Pagination from "../bricks/pagination.js";
 import DateTimePicker from "../bricks/DateTimePicker.js";
 import WelcomeRow from "../bricks/welcome-row.js";
-import { Card, CardTitle, CardTopLine, CardAvatar, CardRole, CardText } from "../bricks/atom/Card.js";
+import {
+  Card,
+  CardTitle,
+  CardTopLine,
+  CardAvatar,
+  CardRole,
+  CardText,
+  CardIcon,
+  CardDetails,
+  CardStatus,
+} from "../bricks/atom/Card.js";
 
 export default function TestPage() {
   const { showSuccess, showError } = useNotification();
@@ -127,22 +137,53 @@ export default function TestPage() {
       <section style={sectionStyle}>
         <h2 style={headerStyle}>Cards</h2>
         <div style={rowStyle}>
-          <Card type="tournament" style={{ width: "300px", padding: "1rem" }}>
-            <CardTopLine />
-            <CardTitle>Tournament Card</CardTitle>
-            <p>This is a tournament card description.</p>
+          {/* Tournament Card */}
+          <Card type="tournament" style={{ width: "300px", cursor: "pointer" }}>
+            <CardIcon>🏆</CardIcon>
+            <CardTitle type="tournament">Tournament Name</CardTitle>
+            <CardDetails>
+              📅 12. - 14. Dec 2025
+              <br />
+              👥 8 Teams
+            </CardDetails>
+            <CardStatus>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "10px",
+                  height: "10px",
+                  backgroundColor: "#4ade80",
+                  borderRadius: "50%",
+                  marginRight: "0.5rem",
+                  boxShadow: "0 0 0.5rem rgba(74, 222, 128, 0.6)",
+                }}
+              ></span>
+              Ongoing
+            </CardStatus>
           </Card>
 
+          {/* Team Card */}
           <Card type="team" style={{ width: "300px", padding: "1rem" }}>
             <CardAvatar>T</CardAvatar>
             <CardTitle>Team Card</CardTitle>
             <p>This is a team card description.</p>
           </Card>
 
+          {/* About Card */}
           <Card type="about" style={{ width: "300px", padding: "1rem" }}>
+            <CardTopLine />
+            <CardAvatar>LD</CardAvatar>
             <CardTitle>About Card</CardTitle>
             <CardRole>Lead Developer</CardRole>
             <CardText type="bio">Passionate about building great user experiences and robust applications.</CardText>
+          </Card>
+
+          {/* Motivation Card */}
+          <Card type="motivation" style={{ width: "300px" }}>
+            <CardTitle>Motivation</CardTitle>
+            <CardText type="motivation">
+              "Innovation distinguishes between a leader and a follower." - Steve Jobs
+            </CardText>
           </Card>
         </div>
       </section>

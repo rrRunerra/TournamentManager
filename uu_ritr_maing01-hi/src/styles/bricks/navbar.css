@@ -34,112 +34,7 @@
   }
 }
 
-.card {
-  background-color: #141414;
-  border-radius: 10px;
-  padding: 0.8rem 0;
-  border: 1px solid #2a2a2a;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1.5px;
-  background: linear-gradient(90deg, #ff6b35, #ffd166);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-/* Highlight Logic: Applies to both hover AND .active class */
-.card:hover,
-.card.active {
-  border-color: #ff6b35;
-  box-shadow: 0 8px 16px -4px rgba(255, 107, 53, 0.25);
-  transform: translateY(-3px);
-  background-color: #1a1a1a;
-}
-
-.card:hover::before,
-.card.active::before {
-  transform: scaleX(1);
-}
-
-.card-icon {
-  font-size: 1.4rem;
-  margin-right: 0.6rem;
-  transition: all 0.3s ease;
-  background: linear-gradient(90deg, #ff8e53, #ffd166);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: #ff8e53;
-}
-
-/* Icon Highlight */
-.card:hover .card-icon,
-.card.active .card-icon {
-  transform: scale(1.2) rotate(3deg);
-  filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.3));
-}
-
-.card h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ff8e53;
-  font-family: "Space Grotesk", sans-serif;
-  letter-spacing: 0.4px;
-  margin: 0;
-  text-align: center;
-}
-
-/* Text Highlight */
-.card:hover h2,
-.card.active h2 {
-  color: #ffd166;
-  text-shadow: 0 0 6px rgba(255, 209, 102, 0.3);
-}
-
-/* Logout Card Specifics */
-.card-logout {
-  background-color: #1a1414;
-}
-
-.card-logout:hover {
-  background-color: #241a1a;
-  border-color: #ff4d4d;
-}
-
-.card-logout .card-icon {
-  background: linear-gradient(90deg, #ff6b6b, #ff4d4d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: #ff4d4d;
-}
-
-.card-logout h2 {
-  color: #ff6b6b;
-}
-
-.card-logout:hover h2 {
-  color: #ff8888;
-  text-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
-}
-
-.card-logout:hover .card-icon {
-  filter: drop-shadow(0 0 6px rgba(255, 107, 107, 0.3));
-}
+/* Card styles moved to Card.css */
 
 .nav-logo-wrapper {
   position: absolute;
@@ -279,20 +174,7 @@
     max-width: 100%;
   }
 
-  .card {
-    padding: 1rem;
-    height: 60px;
-    border-radius: 12px;
-  }
-
-  .card-icon {
-    font-size: 1.6rem;
-    margin-right: 0.8rem;
-  }
-
-  .card h2 {
-    font-size: 1rem;
-  }
+  /* Mobile card styles moved to Card.css */
 }
 
 /* Language Switcher Styles */
@@ -671,7 +553,7 @@
     display: flex !important;
     margin-right: 0;
   }
-  
+
   .mobile-controls {
     display: flex;
     align-items: center;

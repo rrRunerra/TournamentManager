@@ -1,8 +1,8 @@
 import "../../styles/bricks/atom/Card.css";
 
-export const CardTypes = ["team", "tournament", "about"];
+export const CardTypes = ["team", "tournament", "about", "motivation", "navbar"];
 export const CardTitleTypes = ["orange"];
-export const CardTextTypes = ["bio", ""];
+export const CardTextTypes = ["bio", "motivation", ""];
 
 /**
  *
@@ -49,6 +49,29 @@ export function CardRole({ children, className, ...props }) {
 export function CardText({ children, className, type, ...props }) {
   return (
     <p className={`card-text-${type} ${className}`} {...props}>
+      {children}
+    </p>
+  );
+}
+export function CardIcon({ children, className, ...props }) {
+  return (
+    <div className={`card-icon ${className}`} {...props}>
+      {children}
+    </div>
+  );
+}
+
+export function CardStatus({ children, className, ...props }) {
+  return (
+    <div className={`card-status ${className}`} {...props}>
+      {children}
+    </div>
+  );
+}
+
+export function CardDetails({ children, className, ...props }) {
+  return (
+    <p className={`card-details ${className}`} {...props}>
       {children}
     </p>
   );
