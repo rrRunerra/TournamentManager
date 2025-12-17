@@ -15,6 +15,14 @@
   /* Prevent scrolling */
 }
 
+.game-selection-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../../assets/casino_bg.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .casino-title {
   font-size: 3rem;
   font-weight: 700;
@@ -42,7 +50,9 @@
   padding: 0.5rem 1.2rem;
   border-radius: 50px;
   border: 1px solid #d4af37;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 15px rgba(212, 175, 55, 0.3),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
@@ -307,7 +317,9 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 2s linear infinite, pulse 1s ease-in-out infinite alternate;
+  animation:
+    shine 2s linear infinite,
+    pulse 1s ease-in-out infinite alternate;
   margin: 0;
   line-height: 1;
   text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);

@@ -60,7 +60,7 @@ export default function CasinoPage() {
   };
 
   return (
-    <div className="casino-container">
+    <div className={`casino-container ${!selectedGame ? "game-selection-bg" : ""}`}>
       <div className="credits-container">
         <div className="coin-icon">
           <svg viewBox="0 0 24 24">
@@ -282,4 +282,3 @@ function BigWinOverlay({ amount }) {
     </div>
   );
 }
-
