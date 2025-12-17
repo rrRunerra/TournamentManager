@@ -98,7 +98,7 @@ export default function CasinoPage() {
 function GameMenu({ onSelect }) {
   return (
     <>
-      <h1 className="casino-title">Casino Royale</h1>
+      <h1 className="casino-title">MatchUP Casino</h1>
       <div className="game-menu">
         <GameCard
           title="European Roulette"
