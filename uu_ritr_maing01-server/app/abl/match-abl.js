@@ -173,6 +173,41 @@ class MatchAbl {
 
     return await this.dao.create({ awid, ...dtoIn });
   }
+
+  /**
+   * Adds a bet to a match.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {Object} dtoIn - Bet data
+   * @returns {Promise<Match>} Updated match
+   * @throws {Errors.AddBet.InvalidDtoIn} If dtoIn is invalid
+   * @throws {Errors.AddBet.MatchNotFound} If match not found
+   */
+  async addBet(awid, dtoIn) {
+    const validationResult = this.validator.validate("MatchAddBetDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.AddBet.InvalidDtoIn();
+    }
+
+    const match = await this.dao.get({ awid, matchId: dtoIn.matchId, tournamentId: dtoIn.tournamentId });
+    if (!match) {
+      throw new Errors.AddBet.MatchNotFound();
+    }
+
+    if (!match.bets) {
+      match.bets = [];
+    }
+
+    match.bets.push({
+      userId: dtoIn.userId,
+      teamId: dtoIn.teamId,
+      bet: dtoIn.bet,
+      betAmount: dtoIn.betAmount,
+      timestamp: new Date().toISOString(),
+    });
+
+    return await this.dao.update(match);
+  }
 }
 
 module.exports = new MatchAbl();

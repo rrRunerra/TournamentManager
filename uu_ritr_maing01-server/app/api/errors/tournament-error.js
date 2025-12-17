@@ -161,5 +161,25 @@ module.exports = {
   List,
   Get,
   Update,
+  Update,
   Create,
+  AddBet: {
+    UC_CODE: `${TOURNAMENT_ERROR_PREFIX}addBet/`,
+
+    InvalidDtoIn: class extends RitrMainUseCaseError {
+      constructor() {
+        super(...arguments);
+        this.code = `${TOURNAMENT_ERROR_PREFIX}addBet/invalidDtoIn`;
+        this.message = "DtoIn is not valid.";
+      }
+    },
+
+    TournamentNotFound: class extends RitrMainUseCaseError {
+      constructor() {
+        super(...arguments);
+        this.code = `${TOURNAMENT_ERROR_PREFIX}addBet/tournamentNotFound`;
+        this.message = "Tournament not found.";
+      }
+    },
+  },
 };

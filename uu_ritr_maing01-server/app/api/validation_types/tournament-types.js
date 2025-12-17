@@ -62,3 +62,10 @@ const TournamentListByUserDtoInType = shape({
 //     }
 //   ]
 // }
+const TournamentAddBetDtoInType = shape({
+  tournamentId: uu5String(255).isRequired(),
+  userId: uu5String(255).isRequired(),
+  teamId: uu5String(255).isRequired(),
+  position: integer().isRequired(),
+  betAmount: integer().isRequired(),
+});

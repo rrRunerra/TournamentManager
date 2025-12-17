@@ -30,3 +30,11 @@ const MatchCreateDtoInType = shape({
   participants: array(),
   bracket: uu5String(50),
 });
+const MatchAddBetDtoInType = shape({
+  matchId: integer().isRequired(),
+  tournamentId: uu5String(255).isRequired(),
+  userId: uu5String(255).isRequired(),
+  teamId: uu5String(255).isRequired(),
+  bet: oneOf(["win", "lose"]).isRequired(),
+  betAmount: integer().isRequired(),
+});

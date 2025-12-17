@@ -116,6 +116,16 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
+      "match/setBet": {
+        "realization": "api/controllers/MatchController.setBet",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "tournament/setBet": {
+        "realization": "api/controllers/TournamentController.setBet",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "player/updateStats": {
         "realization": "api/controllers/PlayerController.updatePlayerStats",
         "httpMethod": "POST",

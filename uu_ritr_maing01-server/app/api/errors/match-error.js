@@ -59,4 +59,23 @@ module.exports = {
   Update,
   List,
   Create,
+  AddBet: {
+    UC_CODE: `${MATCH_ERROR_PREFIX}addBet/`,
+
+    InvalidDtoIn: class extends RitrMainUseCaseError {
+      constructor() {
+        super(...arguments);
+        this.code = `${MATCH_ERROR_PREFIX}addBet/invalidDtoIn`;
+        this.message = "DtoIn is not valid.";
+      }
+    },
+
+    MatchNotFound: class extends RitrMainUseCaseError {
+      constructor() {
+        super(...arguments);
+        this.code = `${MATCH_ERROR_PREFIX}addBet/matchNotFound`;
+        this.message = "Match not found.";
+      }
+    },
+  },
 };

@@ -353,6 +353,22 @@ const Calls = {
       const commandUri = Calls.getCommandUri("tournament/update");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *  tournamentId: string,
+     *  userId: string,
+     *  teamId: string,
+     *  position: number,
+     *  betAmount: number
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    setBet(dtoIn) {
+      const commandUri = Calls.getCommandUri("tournament/setBet");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   team: {
@@ -455,6 +471,22 @@ const Calls = {
      */
     updateScore(dtoIn) {
       const commandUri = Calls.getCommandUri("match/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+
+    /**
+     *
+     * @param {{
+     *  matchId: number,
+     *  tournamentId: string,
+     *  userId: string,
+     *  bet: "win" | "lose",
+     *  betAmount: number
+     * }} dtoIn
+     * @returns {Promise<void>}
+     */
+    setBet(dtoIn) {
+      const commandUri = Calls.getCommandUri("match/setBet");
       return Calls.call("post", commandUri, dtoIn);
     },
   },

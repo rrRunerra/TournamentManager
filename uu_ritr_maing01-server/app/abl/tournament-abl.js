@@ -268,6 +268,44 @@ class TournamentAbl {
     if (dtoIn?.status) {
       tournament.status = dtoIn.status;
 
+      if (dtoIn.status == "finished") {
+        const playerdb = DaoFactory.getDao("player");
+        const matchDb = DaoFactory.getDao("match");
+        const tournament = await this.dao.get({ awid, id: dtoIn.id });
+
+        //       bets: [
+        //   {
+        //     userId: '408089',
+        //     teamId: 'rq4j59d8k1cpx05sx7fpcg',
+        //     position: 1,
+        //     betAmount: 10,
+        //     timestamp: '2025-12-17T18:13:01.210Z'
+        //   },
+        //   {
+        //     userId: '408089',
+        //     teamId: 'qqj3plcqeva5p84yg3gseo',
+        //     position: 2,
+        //     betAmount: 10,
+        //     timestamp: '2025-12-17T18:13:02.229Z'
+        //   }
+        // ],
+
+        tournament?.bets?.map(async (bet) => {
+          const player = await playerdb.get({ awid, id: bet.userId });
+          const matches = await matchDb.getAll({ awid, tournamentId: dtoIn.id });
+          //console.log(matches);
+
+          if (tournament.bracketType == "single") {
+            const filtered = matches.itemList?.filter((match) => match.name.toLowerCase().includes("final"));
+            console.log(filtered[0].bets);
+
+            // TODO tomorrow
+          }
+        });
+
+        throw new Error("Not implemented");
+      }
+
       //  bracketType 'double' 'single'
       if (dtoIn.status === "ongoing") {
         const teams = tournament.teams || [];
@@ -437,6 +475,46 @@ class TournamentAbl {
       awid,
       ...dtoIn,
     });
+    return out;
+  }
+
+  /**
+   * Adds a bet to an upcoming tournament.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   tournamentId: string,
+   *   userId: string,
+   *   teamId: string,
+   *   position: number,
+   *   betAmount: number
+   * }} dtoIn - Bet data
+   * @returns {Promise<Tournament>} Updated tournament
+   */
+  async addBet(awid, dtoIn) {
+    const validationResult = this.validator.validate("TournamentAddBetDtoInType", dtoIn);
+    if (!validationResult.isValid()) {
+      throw new Errors.AddBet.InvalidDtoIn();
+    }
+
+    const tournament = await this.dao.get({ awid, id: dtoIn.tournamentId });
+    if (!tournament) {
+      throw new Errors.AddBet.TournamentNotFound();
+    }
+
+    if (!tournament.bets) {
+      tournament.bets = [];
+    }
+
+    tournament.bets.push({
+      userId: dtoIn.userId,
+      teamId: dtoIn.teamId,
+      position: dtoIn.position,
+      betAmount: dtoIn.betAmount,
+      timestamp: new Date().toISOString(),
+    });
+
+    const out = await this.dao.update({ awid, tournament });
     return out;
   }
 }

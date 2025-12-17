@@ -2,7 +2,6 @@
 const TournamentAbl = require("../../abl/tournament-abl.js");
 
 class TournamentController {
-
   delete(ucEnv) {
     return TournamentAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
@@ -27,6 +26,9 @@ class TournamentController {
     return TournamentAbl.listByUser(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
+  setBet(ucEnv) {
+    return TournamentAbl.addBet(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
 }
 
 module.exports = new TournamentController();
