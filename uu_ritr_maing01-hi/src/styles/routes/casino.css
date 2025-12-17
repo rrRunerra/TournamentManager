@@ -2,13 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
   color: #fff;
   font-family: "Inter", sans-serif;
-  padding: 2rem;
+  padding: 1rem;
+  padding-top: 4rem;
+  /* Reduced top padding */
   position: relative;
+  overflow: hidden;
+  /* Prevent scrolling */
 }
 
 .casino-title {
@@ -19,6 +23,8 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   margin-bottom: 2rem;
+  margin-top: 0;
+  /* Align top */
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   text-align: center;
 }
@@ -28,6 +34,7 @@
   position: absolute;
   top: 2rem;
   right: 2rem;
+  /* Moved to Right */
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -39,7 +46,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
-  z-index: 1;
+  z-index: 10;
   transition: transform 0.2s ease;
 }
 
@@ -134,45 +141,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
+  height: auto;
 }
 
-.game-area {
+.game-board {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
-  gap: 3rem;
-  width: 100%;
   align-items: center;
+  gap: 2rem;
+  /* Increased gap */
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .wheel-wrapper {
-  transform: scale(0.8);
+  transform: scale(0.85);
+  /* Increased size */
+  margin-right: -20px;
 }
 
 .table-wrapper {
   overflow-x: auto;
-  padding: 1rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  transform: scale(1);
+  /* Full size */
 }
 
 .controls-area {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  /* Horizontal controls */
   align-items: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: -1rem;
+  /* Adjusted margin */
   width: 100%;
+  z-index: 5;
+  transform: scale(1.1);
+  /* Slightly larger controls */
 }
 
 .total-display {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
   background: rgba(0, 0, 0, 0.5);
@@ -183,27 +203,33 @@
 }
 
 .chip-list-wrapper {
-  padding: 1rem;
+  padding: 0.5rem;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
+  transform: scale(1);
+  /* Full size */
 }
 
 .action-buttons {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .action-buttons button {
   min-width: 120px;
+  /* Larger buttons */
   font-weight: 600;
   letter-spacing: 0.05rem;
+  font-size: 1rem;
+  /* Larger font */
 }
 
 .back-button-container {
   position: absolute;
   top: 2rem;
   left: 2rem;
+  z-index: 10;
 }
 
 .placeholder-screen {

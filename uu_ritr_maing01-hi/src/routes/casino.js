@@ -225,7 +225,7 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
     <>
       <h1 className="casino-title">{layoutType === "american" ? "American" : "European"} Roulette</h1>
       <div className="roulette-container">
-        <div className="game-area">
+        <div className="game-board">
           <div className="wheel-wrapper">
             <RouletteWheel
               start={wheelStart}
@@ -234,7 +234,6 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
               layoutType={layoutType}
             />
           </div>
-
           <div className="table-wrapper">
             <RouletteTable
               chips={chips}
