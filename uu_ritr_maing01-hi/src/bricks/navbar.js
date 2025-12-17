@@ -328,8 +328,8 @@ export default function Navbar() {
                   <div className="font-size-control">
                     <button
                       className="font-size-btn"
-                      onClick={() => handleFontSizeChange(Math.max(70, fontSize - 10))}
-                      disabled={fontSize <= 70}
+                      onClick={() => handleFontSizeChange(Math.max(50, fontSize - 10))}
+                      disabled={fontSize <= 50}
                     >
                       A-
                     </button>
@@ -344,7 +344,7 @@ export default function Navbar() {
                   </div>
                   <input
                     type="range"
-                    min="70"
+                    min="50"
                     max="150"
                     step="10"
                     value={fontSize}

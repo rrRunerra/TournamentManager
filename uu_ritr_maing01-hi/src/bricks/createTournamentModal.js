@@ -251,7 +251,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   };
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && handleClose()}>
       <div className="modal-content">
         <h3 className="modal-header">
           {lsi.header} - {lsi.step || "Step"} {currentStep}/4
