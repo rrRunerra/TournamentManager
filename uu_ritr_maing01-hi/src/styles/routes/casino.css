@@ -4,7 +4,12 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  /* Applied background from game selection globally */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../../assets/casino_bg.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #fff;
   font-family: "Inter", sans-serif;
   padding: 1rem;
