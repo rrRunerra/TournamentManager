@@ -9,6 +9,7 @@ import importLsi from "../lsi/import-lsi.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/atom/Button.js";
 import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
+import LoginRequired from "../bricks/LoginRequired.js";
 
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -83,18 +84,7 @@ export default function HistoryPage() {
   }, [showFilter]);
 
   if (!user) {
-    return (
-      <div className="background">
-        <div className="login-prompt">
-          <div className="login-prompt-icon">🔒</div>
-          <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
-          <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
-          <Button onClick={() => setRoute("login")} type="primary-fill">
-            {lsi.goToLogin || "Go to Login"}
-          </Button>
-        </div>
-      </div>
-    );
+    return <LoginRequired lsi={lsi} />;
   }
 
   const availableYears = [...new Set(tournaments.map((t) => new Date(t.endDate).getFullYear()))].sort((a, b) => b - a);

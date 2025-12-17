@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function useUser() {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("player")));
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("player"));
-        setUser(user);
-    }, [localStorage.getItem("player")]);
-
-    return [user, setUser];
+  return [user, setUser];
 }

@@ -8,6 +8,7 @@ import { useNotification } from "../bricks/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/atom/Button.js";
 import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
+import LoginRequired from "../bricks/LoginRequired.js";
 
 const createTournament = async ({
   name,
@@ -90,19 +91,8 @@ export default function TournamentsPage() {
     fetchTournaments(page);
   }, [page, user]);
 
-  if (!user && !loading) {
-    return (
-      <div className="background">
-        <div className="login-prompt">
-          <div className="login-prompt-icon">🔒</div>
-          <h2 className="login-prompt-title">{lsi.loginRequired || "Login Required"}</h2>
-          <p className="login-prompt-message">{lsi.loginMessage || "Please log in to view tournaments"}</p>
-          <Button onClick={() => setRoute("login")} type="primary-fill">
-            {lsi.goToLogin || "Go to Login"}
-          </Button>
-        </div>
-      </div>
-    );
+  if (!user) {
+    return <LoginRequired lsi={lsi} />;
   }
 
   const handleCreateTournament = async (data) => {
