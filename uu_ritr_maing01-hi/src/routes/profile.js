@@ -3,6 +3,28 @@ import { useEffect, useState } from "react";
 import Calls from "../calls.js";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/routes/profile.css";
+import useUser from "../hooks/useUser.js";
+import { Button } from "../bricks/atom/Button.js";
+import Profile1 from "../assets/profiles/1.png";
+import Profile2 from "../assets/profiles/2.png";
+import Profile3 from "../assets/profiles/3.png";
+import Profile4 from "../assets/profiles/4.png";
+import Profile5 from "../assets/profiles/5.png";
+import Profile6 from "../assets/profiles/6.png";
+import Profile7 from "../assets/profiles/7.png";
+import Profile8 from "../assets/profiles/8.png";
+
+const AVATAR_OPTIONS = [
+  Profile1,
+  Profile2,
+  Profile3,
+  Profile4,
+  Profile5,
+  Profile6,
+  Profile7,
+  Profile8,
+  null // Represents "Default" / No Image
+];
 
 const StatCard = ({ label, value, color }) => (
   <div
@@ -25,23 +47,78 @@ const StatCard = ({ label, value, color }) => (
   </div>
 );
 
+const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="avatar-modal-overlay" onClick={onClose}>
+      <div className="avatar-modal-content" onClick={(e) => e.stopPropagation()}>
+        <h3 className="avatar-modal-title">{title}</h3>
+        <div className="avatar-grid">
+          {AVATAR_OPTIONS.map((src, index) => (
+            <div
+              key={index}
+              className={`avatar-option ${currentAvatar === src ? "selected" : ""}`}
+              onClick={() => onSelect(src)}
+              title={src ? "Custom Avatar" : "Default Avatar"}
+            >
+              {src ? (
+                <img src={src} alt={`Avatar ${index + 1}`} />
+              ) : (
+                <div style={{ width: "100%", height: "100%", background: "#333", display: "flex", alignItems: "center", justifyContent: "center", color: "#666" }}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" height="40" width="40">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="avatar-modal-actions">
+          <Button onClick={onClose} type="secondary">
+            Close
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function ProfilePage() {
   const id = new URLSearchParams(window.location.search).get("id");
   const [stats, setStats] = useState(null);
   const [lastTournaments, setLastTournaments] = useState([]);
   const lsi = useLsi(importLsi, ["Profile"]);
   const [route, setRoute] = useRoute();
+  const [user] = useUser();
+
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+  const [avatar, setAvatar] = useState(null);
+
+  // Determine if viewing own profile
+  // If no ID param, it's my profile (loaded via user object or handled by fetchData)
+  // If ID param equals my ID, it's my profile
+  const isOwner = user && (id === user.id || !id);
 
   useEffect(() => {
     async function fetchData() {
-      const s = await Calls.player.get({ id: id });
-      setStats(s);
+      const targetId = id || (user ? user.id : null);
+      if (!targetId) return; // Should handle not logged in state better if needed
 
-      const playerId = id || s.id;
+      // Load avatar from localStorage
+      const savedAvatar = localStorage.getItem(`user_avatar_${targetId}`);
+      if (savedAvatar) {
+        setAvatar(savedAvatar);
+      } else {
+        setAvatar(null);
+      }
+
+      const s = await Calls.player.get({ id: targetId });
+      setStats(s);
 
       try {
         const tournamentsResponse = await Calls.tournament.listUserTournaments({
-          userId: playerId,
+          userId: targetId,
           limit: 3,
           status: "finished",
         });
@@ -53,7 +130,22 @@ export default function ProfilePage() {
       }
     }
     fetchData();
-  }, [id]);
+  }, [id, user]);
+
+  const handleAvatarSelect = (newAvatar) => {
+    setAvatar(newAvatar);
+    const targetId = id || (user ? user.id : null);
+    if (targetId) {
+      if (newAvatar) {
+        localStorage.setItem(`user_avatar_${targetId}`, newAvatar);
+      } else {
+        localStorage.removeItem(`user_avatar_${targetId}`);
+      }
+      // Dispatch event for Navbar
+      window.dispatchEvent(new Event("avatarUpdated"));
+    }
+    setIsAvatarModalOpen(false);
+  };
 
   if (!stats) return <div style={{ padding: "2rem", color: "#fff" }}>Loading...</div>;
 
@@ -72,11 +164,38 @@ export default function ProfilePage() {
     <div className="profile-container">
       {/* Header Section */}
       <div className="profile-header">
-        <div className="profile-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor" height="120" width="120">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-          </svg>
-        </div>
+
+        {/* Avatar Section */}
+        {avatar ? (
+          <div className="profile-avatar-container">
+            <img src={avatar} alt="Profile" className="profile-avatar-image" />
+            {isOwner && (
+              <div className="profile-avatar-edit-icon" onClick={() => setIsAvatarModalOpen(true)}>
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="profile-icon" style={{ position: "relative" }}>
+            <svg viewBox="0 0 24 24" fill="currentColor" height="120" width="120">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            {isOwner && (
+              <div
+                className="profile-avatar-edit-icon"
+                onClick={() => setIsAvatarModalOpen(true)}
+                style={{ bottom: '-10px', right: '-10px' }} // Adjust for svg container
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
+              </div>
+            )}
+          </div>
+        )}
+
         <h1 className="profile-name">{stats.name}</h1>
         <div className="profile-details">
           <span>{stats.role}</span>
@@ -156,6 +275,14 @@ export default function ProfilePage() {
           </div>
         </div>
       )}
+
+      <AvatarModal
+        isOpen={isAvatarModalOpen}
+        onClose={() => setIsAvatarModalOpen(false)}
+        onSelect={handleAvatarSelect}
+        currentAvatar={avatar}
+        title={lsi.selectProfilePicture}
+      />
     </div>
   );
 }

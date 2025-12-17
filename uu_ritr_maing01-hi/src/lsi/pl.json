@@ -9,7 +9,8 @@
         "matchesLost": "Przegrane mecze",
         "tournamentsPlayed": "Rozegrane turnieje",
         "flappyBirdHighScore": "Flappy Bird wynik",
-        "totalTournaments": "Łącznie rozegranych turniejów"
+        "totalTournaments": "Łącznie rozegranych turniejów",
+        "selectProfilePicture": "Wybierz zdjęcie profilowe"
     },
     "appName": "Aplikacja uuRitr",
     "About": {

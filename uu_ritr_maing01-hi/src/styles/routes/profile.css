@@ -164,3 +164,137 @@
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+/* Avatar Editing Styles */
+.profile-avatar-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    width: calc(120px + 3rem);
+    height: calc(120px + 3rem);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(255, 142, 83, 0.1);
+}
+
+.profile-avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar-edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    background-color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s;
+    z-index: 10;
+}
+
+.profile-avatar-edit-icon:hover {
+    transform: scale(1.1);
+    background-color: #222;
+}
+
+.profile-avatar-edit-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+}
+
+/* Avatar Selection Modal */
+.avatar-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.avatar-modal-content {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.avatar-modal-title {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+}
+
+.avatar-option {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 3px solid transparent;
+    overflow: hidden;
+}
+
+.avatar-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-option:hover,
+.avatar-option.selected {
+    transform: scale(1.1);
+    border-color: #ff8e53;
+    box-shadow: 0 0 15px rgba(255, 142, 83, 0.4);
+}
+
+.avatar-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-close {
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

@@ -35,10 +35,28 @@ export default function Navbar() {
   const [lang, setLang] = useLanguage();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["Navbar"]);
+  const [avatar, setAvatar] = useState(null);
   const accountPopupRef = useRef(null);
   const mobileAccountRef = useRef(null);
   const langPopupRef = useRef(null);
   const settingsPopupRef = useRef(null);
+
+  useEffect(() => {
+    const updateAvatar = () => {
+      if (user) {
+        const stored = localStorage.getItem(`user_avatar_${user.id}`);
+        setAvatar(stored);
+      } else {
+        setAvatar(null);
+      }
+    };
+
+    // Update initially
+    updateAvatar();
+
+    window.addEventListener("avatarUpdated", updateAvatar);
+    return () => window.removeEventListener("avatarUpdated", updateAvatar);
+  }, [user]);
 
   // Handler to update route
   const handleCardClick = (newRoute) => {
@@ -59,6 +77,7 @@ export default function Navbar() {
     if (confirmed) {
       setUser(null);
       localStorage.removeItem("player");
+      setAvatar(null);
       setRoute("home");
     }
   };
@@ -162,15 +181,25 @@ export default function Navbar() {
         <div className="mobile-controls">
           {user && (
             <div className="account-icon-wrapper mobile-account-icon" ref={mobileAccountRef}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="account-icon"
-                onClick={() => setIsAccountOpen(!isAccountOpen)}
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-              </svg>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  className="account-icon"
+                  style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }}
+                  onClick={() => setIsAccountOpen(!isAccountOpen)}
+                />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="account-icon"
+                  onClick={() => setIsAccountOpen(!isAccountOpen)}
+                >
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                </svg>
+              )}
 
               {isAccountOpen && user && (
                 <div className="account-popup mobile-account-popup">
@@ -256,15 +285,25 @@ export default function Navbar() {
         {/* Account Icon (Desktop) */}
         {user && (
           <div className="account-icon-wrapper desktop-only" ref={accountPopupRef}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="account-icon"
-              onClick={() => setIsAccountOpen(!isAccountOpen)}
-            >
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-            </svg>
+            {avatar ? (
+              <img
+                src={avatar}
+                alt="Avatar"
+                className="account-icon"
+                style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
+                onClick={() => setIsAccountOpen(!isAccountOpen)}
+              />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="account-icon"
+                onClick={() => setIsAccountOpen(!isAccountOpen)}
+              >
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+              </svg>
+            )}
 
             {isAccountOpen && user && (
               <div className="account-popup">

@@ -5,11 +5,12 @@
         "secondPlace": "第二名",
         "thirdPlace": "第三名",
         "fourthPlace": "第四名",
-        "matchesWon": "赢得的比赛",
-        "matchesLost": "输掉的比赛",
-        "tournamentsPlayed": "参加的锦标赛",
-        "flappyBirdHighScore": "Flappy Bird 分数",
-        "totalTournaments": "参加锦标赛总数"
+        "matchesWon": "胜场",
+        "matchesLost": "负场",
+        "tournamentsPlayed": "参与锦标赛",
+        "flappyBirdHighScore": "Flappy Bird 最高分",
+        "totalTournaments": "参加锦标赛总数",
+        "selectProfilePicture": "选择个人资料图片"
     },
     "appName": "uuRitr 应用程序",
     "About": {
@@ -19,18 +20,18 @@
     },
     "AboutContent": {
         "content": "<uu5string/>演示应用程序是开发新应用程序的模板。",
-        "technologiesContent": "<uu5string/>使用的其他技术：<Uu5Elements.Link href='http://www.w3schools.com/html/default.asp' target='_blank'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/css/default.asp' target='_blank'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/js/default.asp' target='_blank'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href='http://getbootstrap.com' target='_blank'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href='https://reactjs.org' target='_blank'>React</Uu5Elements.Link>, <Uu5Elements.Link href='https://www.ruby-lang.org' target='_blank'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href='http://puma.io' target='_blank'>Puma</Uu5Elements.Link> 和 <Uu5Elements.Link href='https://www.docker.com' target='_blank'>Docker</Uu5Elements.Link>。应用程序在 <Uu5Elements.Link href='https://plus4u.net' target='_blank'>Plus4U</Uu5Elements.Link> 互联网服务中运行，使用 <Uu5Elements.Link href='https://azure.microsoft.com' target='_blank'>Microsoft Azure</Uu5Elements.Link> 云。"
+        "technologiesContent": "<uu5string/>其他使用的技术: <Uu5Elements.Link href='http://www.w3schools.com/html/default.asp' target='_blank'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/css/default.asp' target='_blank'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/js/default.asp' target='_blank'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href='http://getbootstrap.com' target='_blank'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href='https://reactjs.org' target='_blank'>React</Uu5Elements.Link>, <Uu5Elements.Link href='https://www.ruby-lang.org' target='_blank'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href='http://puma.io' target='_blank'>Puma</Uu5Elements.Link> 和 <Uu5Elements.Link href='https://www.docker.com' target='_blank'>Docker</Uu5Elements.Link>. 应用程序在互联网服务 <Uu5Elements.Link href='https://plus4u.net' target='_blank'>Plus4U</Uu5Elements.Link> 中运行，使用云 <Uu5Elements.Link href='https://azure.microsoft.com' target='_blank'>Microsoft Azure</Uu5Elements.Link>."
     },
     "ControlPanel": {
         "rightsError": "您没有足够的权限查看此组件。",
-        "btNotConnected": "应用程序未连接到业务领域。"
+        "btNotConnected": "应用程序未连接到 Business Territory."
     },
     "Home": {
         "welcome": "欢迎来到",
-        "intro": "<uu5string/>此模板包含准备好的客户端和服务器端。显示的组件演示了使用的可能性和方式。为了应用程序开发目的，它们适合修改、复制和删除。有关 uuApp 结构的更多信息，请参阅文档 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuAppDevKit</Uu5Elements.Link>。",
-        "clientSide": "<uu5string/>客户端开发使用了库 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\" target=\"_blank\">uu5</Uu5Elements.Link> 和 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\" target=\"_blank\">uuPlus4U5</Uu5Elements.Link>。",
-        "serverSide": "<uu5string/>运行服务器端需要初始化应用程序工作区。请参阅手册 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuApp 模板开发人员指南</Uu5Elements.Link>",
-        "subtitle": "简单高效地组织您的锦标赛。您需要的一切都在一个地方。",
+        "intro": "<uu5string/>此模板由准备好的客户端和服务器端组成。显示的组件演示了功能和使用方法。用于应用程序开发目的，它们适合修改、复制和删除。有关 uuApp 结构的更多信息，请参阅文档 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuAppDevKit</Uu5Elements.Link>.",
+        "clientSide": "<uu5string/>客户端开发使用了库 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\" target=\"_blank\">uu5</Uu5Elements.Link> 和 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\" target=\"_blank\">uuPlus4U5</Uu5Elements.Link>.",
+        "serverSide": "<uu5string/>需要初始化应用程序工作区以运行服务器端。请参阅手册 <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuApp Template Developer Guide</Uu5Elements.Link>",
+        "subtitle": "简单高效地管理您的锦标赛。所有您需要的都在一个地方。",
         "tournamentsBtn": "锦标赛概览",
         "aboutBtn": "关于我们",
         "whyTitle": "为什么选择 MatchUP？",
@@ -39,18 +40,18 @@
         "resultsTitle": "清晰的结果",
         "resultsDesc": "实时跟踪锦标赛进度",
         "flexibleTitle": "灵活的格式",
-        "flexibleDesc": "单败淘汰制和双败淘汰制",
+        "flexibleDesc": "单败淘汰赛和双败淘汰赛",
         "historyTitle": "锦标赛历史",
-        "historyDesc": "所有锦标赛集中在一处",
+        "historyDesc": "您所有的锦标赛都在一个地方",
         "partnersTitle": "合作伙伴"
     },
     "InitAppWorkspace": {
         "notAuthorized": "您没有足够的权限使用该应用程序。",
         "formHeader": "初始化 uuApp",
-        "formHeaderInfo": "<uu5string/>您的 uuApp 正在运行，但需要初始化。如果您需要填写此表格的帮助，请参阅\n<Uu5Elements.Link target=\"_blank\" href=\"#\">文档</Uu5Elements.Link>。",
+        "formHeaderInfo": "<uu5string/>您的 uuApp 正在运行，但需要初始化。如果您需要帮助填写此表格，请参阅\n<Uu5Elements.Link target=\"_blank\" href=\"#\">文档</Uu5Elements.Link>.",
         "notAuthorizedForInit": "应用程序正在运行，但尚未初始化，并且您没有足够的权限进行初始化。",
         "uuBtLocationUriLabel": "uuBusinessTerritory 位置",
-        "uuBtLocationUriInfo": "将创建 AWSC 的 uuBt 位置的 URI",
+        "uuBtLocationUriInfo": "将创建 AWSC 的 uuBt 位置的 Uri",
         "nameLabel": "名称",
         "initialize": "初始化"
     },
@@ -64,13 +65,13 @@
         "history": "历史",
         "about": "关于我们",
         "logout": "注销",
-        "loggedInAs": "登录身份:",
+        "loggedInAs": "登录为",
         "profile": "我的个人资料",
         "settings": "设置",
         "contactUs": "联系我们",
         "logoutConfirmTitle": "确认注销",
-        "logoutConfirmMessage": "您真的要注销吗？",
-        "logoutConfirm": "是的，注销",
+        "logoutConfirmMessage": "您确定要注销吗？",
+        "logoutConfirm": "是，注销",
         "logoutCancel": "取消",
         "fontSize": "字体大小",
         "fontSmall": "小",
@@ -90,7 +91,7 @@
         "description": "描述",
         "startDate": "开始日期",
         "endDate": "结束日期",
-        "bracketType": "赛程类型",
+        "bracketType": "赛制类型",
         "singleElimination": "单败淘汰",
         "doubleElimination": "双败淘汰",
         "roundRobin": "循环赛",
@@ -106,11 +107,11 @@
         "errorStartDate": "开始日期是必填项。",
         "errorEndDate": "结束日期是必填项。",
         "errorTeamSize": "团队规模是必填项。",
-        "errorTeams": "至少需要 3 个团队。",
+        "errorTeams": "至少需要3个团队。",
         "errorInvalidDate": "开始日期不能晚于结束日期。",
         "errorRobin": "循环赛需要偶数个团队。",
-        "errorDouble": "双淘汰赛要求团队数量必须是4的倍数。",
-        "errorUnauthorized": "您无权创建锦标赛。只有教师才能创建锦标赛。"
+        "errorDouble": "双败淘汰赛要求队伍数量能被4整除。",
+        "errorUnauthorized": "您没有权限创建锦标赛。只有老师可以创建锦标赛。"
     },
     "Pagination": {
         "previous": "上一页",
@@ -133,10 +134,10 @@
         "upperBracket": "胜者组",
         "lowerBracket": "败者组",
         "scoreWarningTitle": "非标准比分",
-        "scoreWarningMessage": "被标记为获胜者，但得分较低",
+        "scoreWarningMessage": "被标记为获胜者，但比分较低",
         "scoreWarningConfirm": "您确定要保存吗？",
-        "yesSave": "是的，保存",
-        "updateErrorTitle": "无法更新比分",
+        "yesSave": "是，保存",
+        "updateErrorTitle": "更新比分失败",
         "updateErrorMessage": "请重试。",
         "participant1": "参与者 1",
         "participant2": "参与者 2",
@@ -163,18 +164,18 @@
         "removeTeam": "移除团队",
         "removeTeamMessage": "移除团队",
         "remove": "移除",
-        "removeTeamError": "无法删除队伍。",
+        "removeTeamError": "无法移除团队。",
         "removePlayer": "移除玩家",
         "removePlayerMessage": "您确定要移除",
-        "fromTeam": "从队伍",
+        "fromTeam": "从团队",
         "playerRemoved": "玩家已移除",
-        "playerRemovedMessage": "玩家已从队伍中移除。",
+        "playerRemovedMessage": "玩家已从团队中移除。",
         "removePlayerError": "无法移除玩家。"
     },
     "OngoingOwnerControls": {
         "title": "锦标赛控制",
         "endTournament": "结束锦标赛",
-        "endTournamentMessage": "结束此锦标赛？这将标记为已完成。",
+        "endTournamentMessage": "结束此锦标赛？它将被标记为已完成。",
         "end": "结束",
         "cancel": "取消",
         "tournamentEnded": "锦标赛已结束！",
@@ -191,16 +192,16 @@
     "AboutPage": {
         "title": "关于我们的",
         "team": "团队",
-        "subtitle": "我们是来自斯尼纳工业中学的这三名学生，我们对技术、编码和创造有着共同的热情。我们的目标是开发不仅对我们，而且对我们的学校和社区有意义的项目。我们共同组成了 MatchUP——一个与 Unicorn 合作创建的学生项目，它不仅推动我们在知识方面，而且在团队合作和实际问题解决方面不断前进。",
-        "subtitle2": "我们相信，即使是拥有大想法的小团队也能有所作为。",
+        "subtitle": "我们是来自斯尼纳工业中学的三个学生，我们对技术、编程和创造有着共同的热情。我们的目标是开发不仅对我们自己，而且对我们的学校和周围社区都有意义的项目。我们共同创建了 MatchUP——这是与 Unicorn 合作创建的学生项目，它不仅在知识上，而且在团队合作和解决实际问题方面都推动了我们前进。",
+        "subtitle2": "我们相信，即使是一个拥有大想法的小团队也能带来改变。",
         "ourTeam": "我们的团队",
-        "motivationTitle": "我们的动力",
+        "motivationTitle": "什么激励着我们",
         "collaborationTitle": "合作",
-        "collaborationText": "我们相信合作是成功的关键。每个团队成员都贡献自己的长处，我们共同创造伟大的事物。",
+        "collaborationText": "我们相信合作是成功的关键。每个团队成员都贡献自己的长处，我们共同创造出伟大的东西。",
         "innovationTitle": "创新",
-        "innovationText": "我们不断寻求可以改善我们的应用程序和用户体验的新解决方案和技术。",
+        "innovationText": "我们不断寻找新的解决方案和技术，以改善我们的应用程序和用户体验。",
         "ctaTitle": "有问题吗？",
-        "ctaText": "我们在这里为您服务。联系我们，我们将很乐意为您提供帮助。",
+        "ctaText": "我们为您服务。联系我们，我们会很乐意提供帮助。",
         "contactUs": "联系我们",
         "roles": {
             "backend": "后端开发人员",
@@ -208,15 +209,15 @@
             "uiux": "UI/UX 设计师"
         },
         "bios": {
-            "backend": "管理应用程序的服务器逻辑、数据库和 API 集成。",
-            "frontend": "负责开发用户界面和交互组件。",
-            "uiux": "设计用户界面并确保最佳用户体验。"
+            "backend": "管理我们应用程序的服务器逻辑、数据库和 API 集成。",
+            "frontend": "负责开发用户界面和交互式组件。",
+            "uiux": "设计用户界面并确保最佳的用户体验。"
         },
         "thanksTitle": "特别感谢",
-        "thanksText": "我们要向 Unicorn 和斯尼纳工业中学表示最诚挚的感谢，感谢他们在此项目开发过程中的支持和指导。没有他们的专业建议和技术支持，这个项目将不可能实现.",
-        "thanksUnicorn": "我们也感谢在这一路上支持和激励我们的每一个人。",
-        "specialThanks": "特别感谢:",
-        "thanksAppreciation": "没有他们，这一切都不可能实现。💛"
+        "thanksText": "我们要非常感谢 Unicorn 和斯尼纳工业中学在本项目开发过程中给予的支持和指导。没有他们的专家建议和技术背景，这个项目是不可能的。",
+        "thanksUnicorn": "也感谢所有在这一路上支持和激励我们的人。",
+        "specialThanks": "特此感谢：",
+        "thanksAppreciation": "没有他们，这一切都不可能。 💛"
     },
     "Login": {
         "username": "用户名",
@@ -226,26 +227,26 @@
     },
     "TournamentDetail": {
         "loading": "加载中...",
-        "joinError": "无法加入团队。",
+        "joinError": "加入团队失败。",
         "tryAgain": "请重试。",
-        "startDate": "开始日期：",
-        "endDate": "结束日期：",
-        "status": "状态：",
-        "teamSize": "团队规模：",
-        "players": "玩家：",
+        "startDate": "开始日期:",
+        "endDate": "结束日期:",
+        "status": "状态:",
+        "teamSize": "团队规模:",
+        "players": "玩家:",
         "joining": "加入中...",
-        "bracketType": "赛程类型:",
-        "owner": "所有者:"
+        "bracketType": "赛制类型:",
+        "owner": "拥有者:"
     },
     "Tournaments": {
         "createErrorTitle": "错误",
-        "createErrorMessage": "所有字段均为必填项，并且必须添加至少 2 个团队。",
+        "createErrorMessage": "所有字段都是必填的，并且必须添加至少 2 个团队。",
         "createSuccessTitle": "锦标赛已创建！",
         "createSuccessMessage": "锦标赛已成功创建。",
         "teamsCount": "参赛团队",
         "ongoing": "进行中",
-        "finished": "已完成",
-        "upcoming": "报名开放",
+        "finished": "已结束",
+        "upcoming": "注册开放",
         "noTournaments": "没有可用的锦标赛。",
         "loginRequired": "需要登录",
         "loginMessage": "请登录以查看和参与锦标赛",
@@ -269,10 +270,10 @@
         "loading": "加载历史记录...",
         "year": "年",
         "month": "月",
-        "searchPlaceholder": "搜索名称...",
+        "searchPlaceholder": "按名称搜索...",
         "noTournaments": "未找到此过滤器的锦标赛。",
         "noHistory": "历史记录中没有锦标赛",
-        "teamsCount": "支参赛队伍",
+        "teamsCount": "参赛团队",
         "finished": "已结束",
         "loginRequired": "需要登录",
         "loginMessage": "请登录以查看锦标赛",
@@ -301,7 +302,7 @@
     },
     "Footer": {
         "copyright": "© 2025 MatchUP. 保留所有权利。",
-        "collaboration": "与Unicorn合作的学生项目"
+        "collaboration": "与 Unicorn 合作的学生项目"
     },
     "ImageEditor": {
         "selectTemplate": "选择证书模板",
@@ -312,42 +313,42 @@
     },
     "ContactModal": {
         "header": "联系我们",
-        "name": "您的姓名",
+        "name": "您的名字",
         "questionType": "您有什么类型的问题？",
         "typeTechnical": "技术问题",
         "typeFunction": "关于功能/使用的问题",
         "typeIdea": "改进的想法/建议",
-        "typePartnership": "合作 / 伙伴关系",
+        "typePartnership": "合作/伙伴关系",
         "typeOther": "其他:",
         "typeOtherPlaceholder": "请具体说明...",
-        "description": "请提供您的问题、问题或建议的详细描述",
-        "replyEmailQuestion": "您希望我们通过电子邮件回复吗？",
+        "description": "请详细描述您的问题、困难或建议",
+        "replyEmailQuestion": "您希望通过电子邮件收到回复吗？",
         "emailLabel": "您的首选电子邮件地址",
         "cancel": "取消",
         "send": "发送",
         "errorTitle": "错误",
-        "errorName": "姓名为必填项",
-        "errorDescription": "描述为必填项",
-        "errorEmail": "如果您希望收到回复，则电子邮件为必填项",
+        "errorName": "名字是必填项",
+        "errorDescription": "描述是必填项",
+        "errorEmail": "如果您希望收到回复，电子邮件是必填项",
         "successTitle": "成功",
         "successMessage": "消息已发送",
-        "errorSend": "发送消息失败"
+        "errorSend": "无法发送消息"
     },
     "Casino": {
-        "insufficientCredits": "余额不足！",
-        "title": "MatchUP 赌场",
+        "insufficientCredits": "积分不足！",
+        "title": "MatchUP Casino",
         "backToMenu": "返回菜单",
         "totalBet": "总赌注",
         "clearBets": "清除赌注",
         "spinWheel": "旋转轮盘",
         "playNow": "立即玩",
         "comingSoon": "即将推出...",
-        "bigWin": "大奖",
-        "youWon": "你赢了",
-        "betterLuck": "下次好运！",
-        "ballLanded": "球落在了",
+        "bigWin": "大赢家",
+        "youWon": "您赢了",
+        "betterLuck": "祝下次好运！",
+        "ballLanded": "球停在",
         "errorPlacingBet": "下注错误",
-        "errorUpdatingCredits": "更新余额错误",
+        "errorUpdatingCredits": "更新积分错误",
         "pleaseTryAgain": "请重试。",
         "games": {
             "europeanRoulette": {
@@ -356,11 +357,11 @@
             },
             "americanRoulette": {
                 "title": "美式轮盘",
-                "description": "适合高赌注的双零轮盘。"
+                "description": "高风险的双零轮盘。"
             },
             "poker": {
-                "title": "得州扑克",
-                "description": "测试您对抗庄家的技巧。"
+                "title": "德州扑克",
+                "description": "与赌场对抗，测试您的技巧。"
             },
             "slots": {
                 "title": "老虎机"

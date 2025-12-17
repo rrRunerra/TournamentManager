@@ -9,7 +9,8 @@
         "matchesLost": "Verlorene Spiele",
         "tournamentsPlayed": "Gespielte Turniere",
         "flappyBirdHighScore": "Flappy Bird Punktzahl",
-        "totalTournaments": "Insgesamt gespielte Turniere"
+        "totalTournaments": "Insgesamt gespielte Turniere",
+        "selectProfilePicture": "Profilbild auswählen"
     },
     "appName": "Anwendung uuRitr",
     "About": {
@@ -334,6 +335,37 @@
         "errorSend": "Nachricht konnte nicht gesendet werden"
     },
     "Casino": {
-        "insufficientCredits": "Unzureichendes Guthaben!"
+        "insufficientCredits": "Unzureichendes Guthaben!",
+        "title": "MatchUP Casino",
+        "backToMenu": "Späť do menu",
+        "totalBet": "Celková stávka",
+        "clearBets": "Vymazať stávky",
+        "spinWheel": "Roztočiť koleso",
+        "playNow": "Hrať teraz",
+        "comingSoon": "Čoskoro...",
+        "bigWin": "VEĽKÁ VÝHRA",
+        "youWon": "Vyhrali ste",
+        "betterLuck": "Veľa šťastia nabudúce!",
+        "ballLanded": "Loptička pristála na",
+        "errorPlacingBet": "Chyba pri stávkovaní",
+        "errorUpdatingCredits": "Chyba pri aktualizácii kreditov",
+        "pleaseTryAgain": "Skúste to prosím znova.",
+        "games": {
+            "europeanRoulette": {
+                "title": "Európska ruleta",
+                "description": "Klasická ruleta s jednou nulou."
+            },
+            "americanRoulette": {
+                "title": "Americká ruleta",
+                "description": "Ruleta s dvoma nulami pre vysoké stávky."
+            },
+            "poker": {
+                "title": "Texas Hold'em",
+                "description": "Otestujte svoje schopnosti proti kasínu."
+            },
+            "slots": {
+                "title": "Automaty"
+            }
+        }
     }
 }
