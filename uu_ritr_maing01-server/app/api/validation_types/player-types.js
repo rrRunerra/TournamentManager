@@ -46,3 +46,8 @@ const PlayerRemoveCreditsDtoInType = shape({
   id: uu5String(255).isRequired(),
   amount: number().isRequired(),
 });
+
+const PlayerUpdateProfilePictureDtoInType = shape({
+  id: uu5String(255).isRequired(),
+  profilePicture: uu5String(255).isRequired(),
+});

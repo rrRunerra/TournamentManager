@@ -37,6 +37,10 @@ class PlayerController {
   removeCredits(ucEnv) {
     return PlayerAbl.removeCredits(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
+
+  updateProfilePicture(ucEnv) {
+    return PlayerAbl.updateProfilePicture(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
 }
 
 module.exports = new PlayerController();

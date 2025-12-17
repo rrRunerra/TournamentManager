@@ -176,6 +176,19 @@ const Calls = {
       const commandUri = Calls.getCommandUri("player/removeCredits");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *   id: string,
+     *   profilePicture: string
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, profilePicture: string}>}
+     */
+    updateProfilePicture(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/updateProfilePicture");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   tournament: {

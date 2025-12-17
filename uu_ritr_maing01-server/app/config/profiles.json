@@ -128,6 +128,10 @@
       "player/removeCredits": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "player/updateProfilePicture": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

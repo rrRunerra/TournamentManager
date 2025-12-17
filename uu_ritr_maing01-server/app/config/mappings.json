@@ -145,6 +145,11 @@
         "realization": "api/controllers/PlayerController.removeCredits",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "player/updateProfilePicture": {
+        "realization": "api/controllers/PlayerController.updateProfilePicture",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

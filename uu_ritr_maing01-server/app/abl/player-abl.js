@@ -218,6 +218,7 @@ class PlayerAbl {
           tournamentsPlayed: 0,
           flappyBirdHighScore: 0,
         },
+        profilePicture: null,
         credits: 1000,
       });
     }
@@ -532,6 +533,35 @@ class PlayerAbl {
     });
 
     return { success: true, credits: newCredits };
+  }
+
+  /**
+   * Updates the profile picture of a player.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, profilePicture: string}} dtoIn - Player ID and profile picture filename
+   * @returns {Promise<{success: boolean, profilePicture: string}>}
+   */
+  async updateProfilePicture(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerUpdateProfilePictureDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Errors.Update.InvalidDtoIn();
+    }
+
+    const player = await this.dao.get({ awid, id: dtoIn.id });
+    if (!player) {
+      throw new Errors.Get.PlayerNotFound();
+    }
+
+    await this.dao.update({
+      awid,
+      id: dtoIn.id,
+      ...player,
+      profilePicture: dtoIn.profilePicture,
+    });
+
+    return { success: true, profilePicture: dtoIn.profilePicture };
   }
 }
 
