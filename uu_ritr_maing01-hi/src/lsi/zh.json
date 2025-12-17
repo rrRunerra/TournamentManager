@@ -332,5 +332,8 @@
         "successTitle": "成功",
         "successMessage": "消息已发送",
         "errorSend": "发送消息失败"
+    },
+    "Casino": {
+        "insufficientCredits": "余额不足！"
     }
 }

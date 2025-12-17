@@ -333,5 +333,8 @@
     "successTitle": "Success",
     "successMessage": "Message was sent",
     "errorSend": "Failed to send message"
+  },
+  "Casino": {
+    "insufficientCredits": "Insufficient credits!"
   }
 }

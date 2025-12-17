@@ -332,5 +332,8 @@
         "successTitle": "Sukces",
         "successMessage": "Wiadomość została wysłana",
         "errorSend": "Nie udało się wysłać wiadomości"
+    },
+    "Casino": {
+        "insufficientCredits": "Niewystarczające środki!"
     }
 }

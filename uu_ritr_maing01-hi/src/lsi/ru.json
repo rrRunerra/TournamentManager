@@ -332,5 +332,8 @@
         "successTitle": "Успех",
         "successMessage": "Сообщение отправлено",
         "errorSend": "Не удалось отправить сообщение"
+    },
+    "Casino": {
+        "insufficientCredits": "Недостаточно кредитов!"
     }
 }

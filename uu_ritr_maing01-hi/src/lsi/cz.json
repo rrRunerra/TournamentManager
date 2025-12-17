@@ -332,5 +332,8 @@
     "successTitle": "Úspěch",
     "successMessage": "Zpráva byla odeslána",
     "errorSend": "Zprávu se nepodařilo odeslat"
+  },
+  "Casino": {
+    "insufficientCredits": "Nedostatek kreditů!"
   }
 }

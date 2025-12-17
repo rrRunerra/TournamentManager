@@ -332,5 +332,8 @@
         "successTitle": "Siker",
         "successMessage": "Az üzenet elküldve",
         "errorSend": "Nem sikerült elküldeni az üzenetet"
+    },
+    "Casino": {
+        "insufficientCredits": "Nincs elég kredit!"
     }
 }

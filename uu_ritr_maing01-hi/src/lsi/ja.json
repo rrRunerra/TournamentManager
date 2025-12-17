@@ -332,5 +332,8 @@
         "successTitle": "成功",
         "successMessage": "メッセージが送信されました",
         "errorSend": "メッセージの送信に失敗しました"
+    },
+    "Casino": {
+        "insufficientCredits": "クレジット不足！"
     }
 }

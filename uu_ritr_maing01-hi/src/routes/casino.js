@@ -6,6 +6,8 @@ import "../styles/routes/casino.css";
 import Calls from "../calls";
 import useUser from "../hooks/useUser";
 import { useNotification } from "../bricks/NotificationProvider";
+import { useLsi } from "uu5g05";
+import importLsi from "../lsi/import-lsi";
 import Poker from "./poker";
 import "../styles/routes/poker.css";
 import { useRoute } from "uu5g05";
@@ -140,6 +142,7 @@ function PlaceholderGame({ title }) {
 function RouletteGame({ layoutType, credits, updateCredits, userId }) {
   const { bets, total, onBet, clearBets } = useRoulette();
   const { showSuccess, showError, showInfo } = useNotification();
+  const lsi = useLsi(importLsi, ["Casino"]);
 
   const [selectedChip, setSelectedChip] = useState(Object.keys(chips)[0]);
   const [winningBet, setWinningBet] = useState("-1");
@@ -171,6 +174,15 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
       console.error("Failed to place bet", e);
       showError("Error placing bet", "Please try again.");
     }
+  };
+
+  const handlePlaceBet = (e) => {
+    const chipValue = parseInt(selectedChip, 10);
+    if (total + chipValue > credits) {
+      showError(lsi.insufficientCredits);
+      return;
+    }
+    onBet(selectedChip)(e);
   };
 
   const handleEndSpin = async (winner) => {
@@ -227,7 +239,7 @@ function RouletteGame({ layoutType, credits, updateCredits, userId }) {
             <RouletteTable
               chips={chips}
               bets={bets}
-              onBet={onBet(selectedChip)}
+              onBet={handlePlaceBet}
               readOnly={wheelStart}
               layoutType={layoutType}
             />
