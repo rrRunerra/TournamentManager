@@ -5,6 +5,7 @@ import { useConfirm } from "../ConfirmProvider.js";
 import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../../lsi/import-lsi.js";
 import { STATUS_OPTIONS } from "./bracketUtils.js";
+import useUser from "../../hooks/useUser.js";
 
 const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentInfo }) => {
   const [score1, setScore1] = useState(match.participants[0]?.resultText || "0");
@@ -17,9 +18,14 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["CustomBracket"]);
   const [, setRoute] = useRoute();
+  const [user] = useUser();
 
   const isFinal = match.name.toLowerCase().includes("final");
   const isFinishedTournament = tournamentInfo?.status === "finished";
+
+  // Check if current user is a participant in the tournament
+  const isParticipant =
+    user && tournamentInfo?.teams?.some((team) => team.players?.includes(user.id));
 
   // Determine initial winner
   const initialWinnerId = match.participants.find((p) => p.isWinner)?.id || null;
@@ -30,9 +36,12 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
   // Check if both participants are present
   const isMatchReady = match.participants && match.participants[0]?.id && match.participants[1]?.id;
 
-  // Fetch team players when tournament is finished or if user is owner
+  // Decide if we should show players list
+  const canViewPlayers = isFinishedTournament || isOwner || isParticipant;
+
+  // Fetch team players
   useEffect(() => {
-    if ((isFinishedTournament || isOwner) && tournamentInfo?.teams && match.participants) {
+    if (canViewPlayers && tournamentInfo?.teams && match.participants) {
       // Get players for team 1
       const team1 = tournamentInfo.teams.find((t) => t.id === match.participants[0]?.id);
       if (team1?.players) {
@@ -50,7 +59,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
         );
       }
     }
-  }, [isFinishedTournament, isOwner, tournamentInfo, match.participants]);
+  }, [canViewPlayers, tournamentInfo, match.participants]);
 
   const handlePlayerClick = (playerId) => {
     if (playerId) {
@@ -217,6 +226,33 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
     }
   };
 
+  const renderPlayerItem = (player, index) => {
+    const isCurrentUser = user && player && user.id === player.id;
+    return (
+      <div
+        key={index}
+        className={`player-item ${!player ? "empty" : "clickable"}`}
+        onClick={() => player && handlePlayerClick(player.id)}
+        style={{
+          backgroundColor: isCurrentUser ? "#2a1f1f" : undefined,
+          border: isCurrentUser ? "1px solid #ff8e53" : undefined,
+        }}
+      >
+        {player?.profilePicture ? (
+          <img
+            src={player.profilePicture}
+            alt={player.name}
+            style={{ width: "20px", height: "20px", borderRadius: "50%", objectFit: "cover" }}
+          />
+        ) : (
+          "👤"
+        )}{" "}
+        {player?.name || "---"}
+        {isCurrentUser && <span style={{ marginLeft: "auto", fontSize: "0.8em", color: "#ff8e53" }}>(Ty)</span>}
+      </div>
+    );
+  };
+
   return (
     <div className="match-popup-overlay" onClick={onClose}>
       <div className="match-popup-content" onClick={(e) => e.stopPropagation()}>
@@ -270,19 +306,11 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                 {match.participants[0]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
-            {(isFinishedTournament || isOwner) && (
+            {canViewPlayers && (
               <div className="team-players-list">
                 {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
                   const player = team1Players[index];
-                  return (
-                    <div
-                      key={index}
-                      className={`player-item ${!player ? "empty" : "clickable"}`}
-                      onClick={() => player && handlePlayerClick(player.id)}
-                    >
-                      👤 {player?.name || "---"}
-                    </div>
-                  );
+                  return renderPlayerItem(player, index);
                 })}
               </div>
             )}
@@ -333,19 +361,11 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                 {match.participants[1]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
-            {(isFinishedTournament || isOwner) && (
+            {canViewPlayers && (
               <div className="team-players-list">
                 {Array.from({ length: tournamentInfo?.teamSize || 1 }).map((_, index) => {
                   const player = team2Players[index];
-                  return (
-                    <div
-                      key={index}
-                      className={`player-item ${!player ? "empty" : "clickable"}`}
-                      onClick={() => player && handlePlayerClick(player.id)}
-                    >
-                      👤 {player?.name || "---"}
-                    </div>
-                  );
+                  return renderPlayerItem(player, index);
                 })}
               </div>
             )}
