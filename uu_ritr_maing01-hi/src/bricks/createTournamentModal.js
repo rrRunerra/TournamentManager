@@ -178,7 +178,13 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           <>
             <DateTimePicker label={lsi.startDate} value={startDate} onChange={setStartDate} locale={lang} />
 
-            <DateTimePicker label={lsi.endDate} value={endDate} onChange={setEndDate} locale={lang} />
+            <DateTimePicker
+              label={lsi.endDate}
+              value={endDate}
+              onChange={setEndDate}
+              locale={lang}
+              direction="up"
+            />
           </>
         );
       case 3:

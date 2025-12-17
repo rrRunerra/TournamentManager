@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import "../styles/bricks/createTournamentModal.css";
 
-export default function DateTimePicker({ value, onChange, label, locale = "en" }) {
+export default function DateTimePicker({ value, onChange, label, locale = "en", direction = "down" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(value ? new Date(value) : new Date());
   const [viewDate, setViewDate] = useState(value ? new Date(value) : new Date());
@@ -185,7 +185,15 @@ export default function DateTimePicker({ value, onChange, label, locale = "en" }
       </div>
 
       {isOpen && (
-        <div className="picker-dropdown">
+        <div
+          className="picker-dropdown"
+          style={{
+            top: direction === "up" ? "auto" : "100%",
+            bottom: direction === "up" ? "100%" : "auto",
+            marginTop: direction === "up" ? 0 : "8px",
+            marginBottom: direction === "up" ? "8px" : 0,
+          }}
+        >
           <div className="calendar-header">
             <button onClick={() => changeMonth(-1)}>&lt;</button>
             <span>
