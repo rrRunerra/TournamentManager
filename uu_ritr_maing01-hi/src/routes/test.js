@@ -5,6 +5,7 @@ import { useConfirm } from "../bricks/ConfirmProvider.js";
 import Pagination from "../bricks/pagination.js";
 import DateTimePicker from "../bricks/DateTimePicker.js";
 import WelcomeRow from "../bricks/welcome-row.js";
+import { Card, CardTitle, CardTopLine, CardAvatar, CardRole, CardText } from "../bricks/atom/Card.js";
 
 export default function TestPage() {
   const { showSuccess, showError } = useNotification();
@@ -120,6 +121,30 @@ export default function TestPage() {
         <h2 style={headerStyle}>Pagination</h2>
         <p style={{ marginBottom: "1rem" }}>Current Page: {page}</p>
         <Pagination currentPage={page} totalPages={10} onPageChange={setPage} />
+      </section>
+
+      {/* Cards Section */}
+      <section style={sectionStyle}>
+        <h2 style={headerStyle}>Cards</h2>
+        <div style={rowStyle}>
+          <Card type="tournament" style={{ width: "300px", padding: "1rem" }}>
+            <CardTopLine />
+            <CardTitle>Tournament Card</CardTitle>
+            <p>This is a tournament card description.</p>
+          </Card>
+
+          <Card type="team" style={{ width: "300px", padding: "1rem" }}>
+            <CardAvatar>T</CardAvatar>
+            <CardTitle>Team Card</CardTitle>
+            <p>This is a team card description.</p>
+          </Card>
+
+          <Card type="about" style={{ width: "300px", padding: "1rem" }}>
+            <CardTitle>About Card</CardTitle>
+            <CardRole>Lead Developer</CardRole>
+            <CardText type="bio">Passionate about building great user experiences and robust applications.</CardText>
+          </Card>
+        </div>
       </section>
     </div>
   );

@@ -4,7 +4,7 @@
 .about-page {
   background-color: #0d0d0d;
   color: #d1d5db;
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
   min-height: 100vh;
   padding: 2rem;
   padding-bottom: 6rem;
@@ -23,7 +23,7 @@
 }
 
 .main-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -32,7 +32,7 @@
 }
 
 .section-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
@@ -122,7 +122,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
   color: #ff8e53;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 2rem;
   font-weight: 700;
   display: flex;
@@ -142,7 +142,7 @@
 
 /* Team Card: Text */
 .team-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
   color: #ff8e53;
@@ -194,7 +194,7 @@
 }
 
 .motivation-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: #ff8e53;
@@ -233,7 +233,7 @@
 }
 
 .cta-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #ff8e53;
@@ -253,7 +253,7 @@
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   color: #fff;
   background: linear-gradient(90deg, #ff8e53, #ff6b35);
   border: none;
@@ -357,17 +357,17 @@
 
 /* Social Icon Colors - Using Project Orange Gradient */
 .social-icons .icon-content a[data-social="discord"] .filled,
-.social-icons .icon-content a[data-social="discord"]~.tooltip {
+.social-icons .icon-content a[data-social="discord"] ~ .tooltip {
   background: linear-gradient(135deg, #ff8e53, #ff6b35);
 }
 
 .social-icons .icon-content a[data-social="email"] .filled,
-.social-icons .icon-content a[data-social="email"]~.tooltip {
+.social-icons .icon-content a[data-social="email"] ~ .tooltip {
   background: linear-gradient(135deg, #ffd166, #ff8e53);
 }
 
 .social-icons .icon-content a[data-social="instagram"] .filled,
-.social-icons .icon-content a[data-social="instagram"]~.tooltip {
+.social-icons .icon-content a[data-social="instagram"] ~ .tooltip {
   background: linear-gradient(135deg, #ff6b35, #ffd166);
 }
 
@@ -375,7 +375,9 @@
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
   will-change: opacity, transform;
 }
 
@@ -411,7 +413,7 @@
 }
 
 .thanks-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -422,7 +424,7 @@
 }
 
 .thanks-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -487,7 +489,7 @@
 }
 
 .thanks-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;

@@ -60,7 +60,7 @@ export default function CasinoPage() {
   };
 
   return (
-    <div className="casino-container">
+    <div className={`casino-container ${!selectedGame ? "game-selection-bg" : ""}`}>
       <div className="credits-container">
         <div className="coin-icon">
           <svg viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ export default function CasinoPage() {
 function GameMenu({ onSelect }) {
   return (
     <>
-      <h1 className="casino-title">Casino Royale</h1>
+      <h1 className="casino-title">MatchUP Casino</h1>
       <div className="game-menu">
         <GameCard
           title="European Roulette"
@@ -282,4 +282,3 @@ function BigWinOverlay({ amount }) {
     </div>
   );
 }
-
