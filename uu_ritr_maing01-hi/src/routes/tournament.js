@@ -89,7 +89,7 @@ export default function TournamentsPage() {
     fetchTournaments(page);
   }, [page, user]);
 
-  if (!user) {
+  if (!user && !loading) {
     return (
       <div className="background">
         <div className="login-prompt">
@@ -163,32 +163,36 @@ export default function TournamentsPage() {
   );
 
   return (
-    <div className="background">
-      <section className="tournaments-section">
-        {tournaments.length === 0 ? (
-          <div className="section-header">
-            <h2 className="section-title">{lsi.noTournaments}</h2>
-          </div>
-        ) : (
-          <>
-            {ongoingTournaments.map(renderTournamentCard)}
-            {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && <hr className="tournament-separator" />}
-            {upcomingTournaments.map(renderTournamentCard)}
-          </>
+    user && (
+      <div className="background">
+        <section className="tournaments-section">
+          {tournaments.length === 0 ? (
+            <div className="section-header">
+              <h2 className="section-title">{lsi.noTournaments}</h2>
+            </div>
+          ) : (
+            <>
+              {ongoingTournaments.map(renderTournamentCard)}
+              {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && (
+                <hr className="tournament-separator" />
+              )}
+              {upcomingTournaments.map(renderTournamentCard)}
+            </>
+          )}
+        </section>
+
+        {isTeacher && (
+          <Button
+            onClick={() => setIsOpen(true)}
+            type="fab-primary"
+            style={{ position: "fixed", bottom: "20px", right: "20px", fontSize: "24px" }}
+          >
+            +
+          </Button>
         )}
-      </section>
 
-      {isTeacher && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          type="fab-primary"
-          style={{ position: "fixed", bottom: "20px", right: "20px", fontSize: "24px" }}
-        >
-          +
-        </Button>
-      )}
-
-      <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={handleCreateTournament} owner={user.id} />
-    </div>
+        <CreateModal isOpen={isOpen} onClose={() => setIsOpen(false)} onSave={handleCreateTournament} owner={user.id} />
+      </div>
+    )
   );
 }

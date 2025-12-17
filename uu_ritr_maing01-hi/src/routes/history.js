@@ -34,12 +34,13 @@ export default function HistoryPage() {
 
   async function fetchHistory(page = 1, year = "", month = "", search = "") {
     setLoading(true);
+    if (!user) return;
     try {
       const dtoIn = {
         limit: 15,
         skip: (page - 1) * 15,
         status: "finished",
-        school: user?.school,
+        school: user.school,
         year,
         month,
         search,
@@ -119,86 +120,88 @@ export default function HistoryPage() {
   if (loading) return <div className="loading-spinner">{lsi.loading}</div>;
 
   return (
-    <div className="background history-background">
-      {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
-      <button ref={buttonRef} className="filter-toggle-btn" onClick={() => setShowFilter(!showFilter)}>
-        🔍
-      </button>
+    user && (
+      <div className="background history-background">
+        {/* 🔍 ALWAYS VISIBLE SEARCH BUTTON */}
+        <button ref={buttonRef} className="filter-toggle-btn" onClick={() => setShowFilter(!showFilter)}>
+          🔍
+        </button>
 
-      {/* FILTER PANEL */}
-      <div ref={filterRef} className={`filter-panel-container ${showFilter ? "visible" : "hidden"}`}>
-        <div className="filter-panel">
-          {/* YEAR SELECT */}
-          <select
-            className="filter-select"
-            value={selectedYear}
-            onChange={(e) => handleFilterChange("year", e.target.value)}
-          >
-            <option value="">{lsi.year}</option>
-            {availableYears.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+        {/* FILTER PANEL */}
+        <div ref={filterRef} className={`filter-panel-container ${showFilter ? "visible" : "hidden"}`}>
+          <div className="filter-panel">
+            {/* YEAR SELECT */}
+            <select
+              className="filter-select"
+              value={selectedYear}
+              onChange={(e) => handleFilterChange("year", e.target.value)}
+            >
+              <option value="">{lsi.year}</option>
+              {availableYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
 
-          {/* MONTH SELECT */}
-          <select
-            className="filter-select month-select"
-            value={selectedMonth}
-            onChange={(e) => handleFilterChange("month", e.target.value)}
-          >
-            <option value="">{lsi.month}</option>
-            {Object.entries(lsi.months).map(([num, label]) => (
-              <option key={num} value={num}>
-                {label}
-              </option>
-            ))}
-          </select>
+            {/* MONTH SELECT */}
+            <select
+              className="filter-select month-select"
+              value={selectedMonth}
+              onChange={(e) => handleFilterChange("month", e.target.value)}
+            >
+              <option value="">{lsi.month}</option>
+              {Object.entries(lsi.months).map(([num, label]) => (
+                <option key={num} value={num}>
+                  {label}
+                </option>
+              ))}
+            </select>
 
-          {/* 🔍 SEARCH BY NAME */}
-          <input
-            className="filter-input"
-            type="text"
-            placeholder={lsi.searchPlaceholder}
-            value={searchQuery}
-            onChange={(e) => handleFilterChange("search", e.target.value)}
-          />
-        </div>
-      </div>
-
-      {/* TOURNAMENT LIST */}
-      <section className="tournaments-section">
-        {filteredTournaments.length === 0 ? (
-          <div className="section-header">
-            <h2 className="section-title">
-              {selectedYear || selectedMonth || searchQuery ? lsi.noTournaments : lsi.noHistory}
-            </h2>
+            {/* 🔍 SEARCH BY NAME */}
+            <input
+              className="filter-input"
+              type="text"
+              placeholder={lsi.searchPlaceholder}
+              value={searchQuery}
+              onChange={(e) => handleFilterChange("search", e.target.value)}
+            />
           </div>
-        ) : (
-          currentItems.map((tournament) => (
-            <div key={tournament.id} className="tournament-card" onClick={() => goToTournament(tournament.id)}>
-              <div className="tournament-icon">🏆</div>
-              <h2 className="tournament-title" title={tournament.name}>
-                {tournament.name}
+        </div>
+
+        {/* TOURNAMENT LIST */}
+        <section className="tournaments-section">
+          {filteredTournaments.length === 0 ? (
+            <div className="section-header">
+              <h2 className="section-title">
+                {selectedYear || selectedMonth || searchQuery ? lsi.noTournaments : lsi.noHistory}
               </h2>
-
-              <p className="tournament-details">
-                📅 {new Date(tournament.startDate).getDate()}. –{new Date(tournament.endDate).getDate()}{" "}
-                {lsi.months[new Date(tournament.endDate).getMonth() + 1]} {new Date(tournament.endDate).getFullYear()}
-                <br />
-                👥 {tournament.teams?.length || 0} {lsi.teamsCount}
-              </p>
-
-              <div className="tournament-status">{lsi.finished}</div>
             </div>
-          ))
-        )}
-      </section>
+          ) : (
+            currentItems.map((tournament) => (
+              <div key={tournament.id} className="tournament-card" onClick={() => goToTournament(tournament.id)}>
+                <div className="tournament-icon">🏆</div>
+                <h2 className="tournament-title" title={tournament.name}>
+                  {tournament.name}
+                </h2>
 
-      {filteredTournaments.length > 0 && (
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-      )}
-    </div>
+                <p className="tournament-details">
+                  📅 {new Date(tournament.startDate).getDate()}. –{new Date(tournament.endDate).getDate()}{" "}
+                  {lsi.months[new Date(tournament.endDate).getMonth() + 1]} {new Date(tournament.endDate).getFullYear()}
+                  <br />
+                  👥 {tournament.teams?.length || 0} {lsi.teamsCount}
+                </p>
+
+                <div className="tournament-status">{lsi.finished}</div>
+              </div>
+            ))
+          )}
+        </section>
+
+        {filteredTournaments.length > 0 && (
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+        )}
+      </div>
+    )
   );
 }
