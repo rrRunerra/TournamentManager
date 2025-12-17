@@ -204,7 +204,8 @@
 
 .chip-list-wrapper {
   padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
+  /* Made transparent */
   border-radius: 1rem;
   transform: scale(1);
   /* Full size */
