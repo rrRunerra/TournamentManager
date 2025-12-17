@@ -46,7 +46,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
-  z-index: 10;
+  z-index: 1;
   transition: transform 0.2s ease;
 }
 
@@ -209,6 +209,21 @@
   border-radius: 1rem;
   transform: scale(1);
   /* Full size */
+}
+
+/* Hide text rendered by the library on chips */
+.chip-list-wrapper div,
+.chip-list-wrapper span,
+.chip-list-wrapper p {
+  color: transparent !important;
+  font-size: 0 !important;
+  text-shadow: none !important;
+}
+
+/* Ensure images remain visible and unaffected */
+.chip-list-wrapper img {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .action-buttons {
