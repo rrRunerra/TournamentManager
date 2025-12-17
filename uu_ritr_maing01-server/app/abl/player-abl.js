@@ -8,6 +8,14 @@ const { Edu } = require("../edu.js");
 
 const WARNINGS = {};
 
+const CREDITS = {
+  finals_firstPlace: 500,
+  finals_secondPlace: 250,
+  finals_thirdPlace: 100,
+  finals_fourthPlace: 50,
+  matchPlayed: 10,
+};
+
 /**
  * @typedef {Object} PlayerStats
  * @property {number} finals_firstPlace - Number of first place finishes
@@ -283,6 +291,7 @@ class PlayerAbl {
         };
 
         // Update with incremented stat
+
         await this.dao.update({
           awid,
           id: playerId,
@@ -291,6 +300,7 @@ class PlayerAbl {
             ...currentStats,
             [statField]: currentStats[statField] + 1,
           },
+          credits: playerObj.credits + CREDITS[statField],
         });
         console.log(`Updated ${statField} for player ${playerId}`);
       }
@@ -460,6 +470,7 @@ class PlayerAbl {
             ...currentStats,
             tournamentsPlayed: currentStats.tournamentsPlayed + 1,
           },
+          credits: playerObj.credits + CREDITS.matchPlayed,
         });
       }
     }

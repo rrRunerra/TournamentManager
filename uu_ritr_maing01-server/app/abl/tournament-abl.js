@@ -172,7 +172,6 @@ class TournamentAbl {
    */
   async listByUser(awid, dtoIn) {
     const validationResult = this.validator.validate("TournamentListByUserDtoInType", dtoIn);
-    console.log(dtoIn);
     if (!validationResult.isValid()) {
       throw new Errors.ListByUser.InvalidDtoIn();
     }
