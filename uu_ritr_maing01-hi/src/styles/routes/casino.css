@@ -43,11 +43,22 @@
 }
 
 /* Credits Display */
-.credits-container {
+/* Credits Display */
+.right-controls {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  /* Moved to Right */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.credits-container {
+  /* position: absolute; - Removed as it's now in right-controls */
+  /* top: 2rem; */
+  /* right: 2rem; */
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -67,6 +78,32 @@
 
 .credits-container:hover {
   transform: scale(1.05);
+}
+
+.shop-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, filter 0.2s;
+  color: #4a3c0a;
+}
+
+.shop-button:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+.shop-button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
 }
 
 .coin-icon {
