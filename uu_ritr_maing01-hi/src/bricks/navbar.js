@@ -5,6 +5,7 @@ import importLsi from "../lsi/import-lsi.js";
 import { useConfirm } from "./ConfirmProvider.js";
 import useUser from "../hooks/useUser.js";
 import ContactModal from "./ContactModal.js";
+import { Card, CardIcon } from "./atom/Card.js";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -372,49 +373,56 @@ export default function Navbar() {
         )}
 
         <div className="cards-container">
-          <div className={`card ${activeLink === "home" ? "active" : ""}`} onClick={() => handleCardClick("home")}>
-            <span className="card-icon">🏠</span>
+          <Card type="navbar" className={activeLink === "home" ? "active" : ""} onClick={() => handleCardClick("home")}>
+            <CardIcon>🏠</CardIcon>
             <h2>
               <Lsi import={importLsi} path={["Navbar", "home"]} />
             </h2>
-          </div>
+          </Card>
 
-          <div
-            className={`card ${activeLink === "tournaments" || activeLink === "tournamentDetail" ? "active" : ""}`}
+          <Card
+            type="navbar"
+            className={activeLink === "tournaments" || activeLink === "tournamentDetail" ? "active" : ""}
             onClick={() => handleCardClick("tournaments")}
           >
-            <span className="card-icon">🏆</span>
+            <CardIcon>🏆</CardIcon>
             <h2>
               <Lsi import={importLsi} path={["Navbar", "tournaments"]} />
             </h2>
-          </div>
+          </Card>
 
-          <div
-            className={`card ${activeLink === "history" ? "active" : ""}`}
+          <Card
+            type="navbar"
+            className={activeLink === "history" ? "active" : ""}
             onClick={() => handleCardClick("history")}
           >
-            <span className="card-icon">📜</span>
+            <CardIcon>📜</CardIcon>
             <h2>
               <Lsi import={importLsi} path={["Navbar", "history"]} />
             </h2>
-          </div>
+          </Card>
 
-          <div className={`card ${activeLink === "about" ? "active" : ""}`} onClick={() => handleCardClick("about")}>
-            <span className="card-icon">👥</span>
+          <Card
+            type="navbar"
+            className={activeLink === "about" ? "active" : ""}
+            onClick={() => handleCardClick("about")}
+          >
+            <CardIcon>👥</CardIcon>
             <h2>
               <Lsi import={importLsi} path={["Navbar", "about"]} />
             </h2>
-          </div>
+          </Card>
 
-          <div
-            className={`card ${user ? "card-logout" : ""} ${activeLink === "login" ? "active" : ""}`}
+          <Card
+            type="navbar"
+            className={`${user ? "card-logout" : ""} ${activeLink === "login" ? "active" : ""}`}
             onClick={user ? handleLogout : () => setRoute("login")}
           >
-            <span className="card-icon">{user ? "🚪" : "🔑"}</span>
+            <CardIcon>{user ? "🚪" : "🔑"}</CardIcon>
             <h2>
               <Lsi import={importLsi} path={user ? ["Navbar", "logout"] : ["Login", "login"]} />
             </h2>
-          </div>
+          </Card>
         </div>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />

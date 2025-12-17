@@ -7,6 +7,7 @@ import "../styles/routes/tournament.css";
 import { useNotification } from "../bricks/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/atom/Button.js";
+import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
 
 const createTournament = async ({
   name,
@@ -130,24 +131,25 @@ export default function TournamentsPage() {
   const upcomingTournaments = tournaments.filter((t) => t.status === "upcoming");
 
   const renderTournamentCard = (tournament) => (
-    <div
-      className="tournament-card"
+    <Card
+      type="tournament"
       key={tournament.id}
       onClick={() => {
         setRoute("tournamentDetail", { id: tournament.id });
       }}
+      style={{ cursor: "pointer" }}
     >
-      <div className="tournament-icon">🏆</div>
-      <h2 className="tournament-title" title={tournament.name}>
+      <CardIcon>🏆</CardIcon>
+      <CardTitle type="tournament" title={tournament.name}>
         {tournament.name}
-      </h2>
-      <p className="tournament-details">
+      </CardTitle>
+      <CardDetails>
         📅 {new Date(tournament.startDate).getDate()}. - {new Date(tournament.endDate).getDate()}.{" "}
         {lsi.months[new Date(tournament.endDate).getMonth() + 1]}. {new Date(tournament.endDate).getFullYear()}
         <br />
         👥 {tournament.teams?.length} {lsi.teamsCount}
-      </p>
-      <div className="tournament-status">
+      </CardDetails>
+      <CardStatus>
         {tournament.status === "ongoing" ? (
           <>
             <span className="status-dot"></span>
@@ -158,8 +160,8 @@ export default function TournamentsPage() {
         ) : (
           lsi.upcoming
         )}
-      </div>
-    </div>
+      </CardStatus>
+    </Card>
   );
 
   return (

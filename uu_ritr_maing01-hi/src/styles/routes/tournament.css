@@ -1,10 +1,10 @@
 .tournaments-section {
-    padding: 1rem 1rem 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
 /* dynamic columns:
@@ -12,274 +12,138 @@
    medium screens → 2 per row
    small screens → 1 per row
 */
-.tournament-card {
-    flex: 1 1 calc(33.333% - 2rem);
-    max-width: 23.75rem;
-    min-width: 17.5rem;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border-radius: 1.125rem;
-    padding: 2.2rem;
-    border: 0.0625rem solid #3a3a5a;
-    height: 20rem;
-    text-align: left;
-    box-shadow: 0 0.75rem 2.1875rem rgba(0, 0, 0, 0.35);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-/* medium screens */
-@media (max-width: 1200px) {
-    .tournament-card {
-        flex: 1 1 calc(50% - 2rem);
-    }
-}
-
-/* small screens */
-@media (max-width: 700px) {
-    .tournament-card {
-        flex: 1 1 100%;
-        max-width: none;
-    }
-}
-
-
-.tournament-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0.3125rem;
-    background: linear-gradient(90deg, #ff6b35, #ffd166, #ff6b35);
-    animation: tournamentGlow 3s ease-in-out infinite;
-}
-
-@keyframes tournamentGlow {
-
-    0%,
-    100% {
-        opacity: 0.7;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-.tournament-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ffd166, #ff6b35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.tournament-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    color: #ffd166;
-    font-family: 'Space Grotesk', sans-serif;
-    letter-spacing: 0.03125rem;
-    flex-shrink: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tournament-details {
-    color: #e0e0e0;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    /* Zmenšený text */
-    flex-grow: 1;
-}
-
-.tournament-details strong {
-    color: #ffd166;
-    font-size: 1.1rem;
-    /* Zmenšený tučný text */
-}
-
-.tournament-status {
-    display: inline-block;
-    background: linear-gradient(90deg, #ff6b35, #ff8e53);
-    color: white;
-    padding: 0.5rem 1.2rem;
-    border-radius: 1.25rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    /* Zmenšený status text */
-    letter-spacing: 0.03125rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(255, 107, 53, 0.3);
-    align-self: flex-start;
-}
+/* Styles moved to Card.css */
 
 .fab {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    border: none;
-    background-color: #ff8e53;
-    color: white;
-    font-size: 2rem;
-    line-height: 0;
-    box-shadow: 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #ff8e53;
+  color: white;
+  font-size: 2rem;
+  line-height: 0;
+  box-shadow: 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .fab:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0.3125rem 0.625rem rgba(0, 0, 0, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 0.3125rem 0.625rem rgba(0, 0, 0, 0.4);
 }
 
 .background {
-    background-color: #0d0d0d;
+  background-color: #0d0d0d;
 }
 
 .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 
 .section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
-    margin-bottom: 1rem;
-    /* Gradient Text */
-    background: linear-gradient(90deg, #ff8e53, #ffd166);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 1rem;
+  /* Gradient Text */
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
 }
 
-.status-dot {
-    display: inline-block;
-    width: 0.625rem;
-    height: 0.625rem;
-    background-color: #4ade80;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    animation: blink 1.5s infinite;
-    box-shadow: 0 0 0.5rem rgba(74, 222, 128, 0.6);
-}
-
-@keyframes blink {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.5;
-        transform: scale(0.9);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.tournament-status {
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-}
+/* Status dot and blink animation moved to Card.css */
 
 .tournament-separator {
-    flex-basis: 100%;
-    width: 100%;
-    height: 0.0625rem;
-    background-color: #333;
-    border: none;
-    margin: 1rem 0;
+  flex-basis: 100%;
+  width: 100%;
+  height: 0.0625rem;
+  background-color: #333;
+  border: none;
+  margin: 1rem 0;
 }
 
 /* Login Prompt Styles */
 .login-prompt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    padding: 2rem;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+  text-align: center;
 }
 
 .login-prompt-icon {
-    font-size: 5rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, #ff8e53, #ffd166);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: float 3s ease-in-out infinite;
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-0.625rem);
-    }
+  50% {
+    transform: translateY(-0.625rem);
+  }
 }
 
 .login-prompt-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ff8e53, #ffd166);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .login-prompt-message {
-    font-size: 1.2rem;
-    color: #e0e0e0;
-    margin-bottom: 2rem;
-    max-width: 31.25rem;
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 2rem;
+  max-width: 31.25rem;
 }
 
 .login-prompt-button {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    background: linear-gradient(90deg, #ff6b35, #ff8e53);
-    color: white;
-    border: none;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0.25rem 0.9375rem rgba(255, 107, 53, 0.3);
-    font-family: 'Space Grotesk', sans-serif;
-    letter-spacing: 0.03125rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff6b35, #ff8e53);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.25rem 0.9375rem rgba(255, 107, 53, 0.3);
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 0.03125rem;
 }
 
 .login-prompt-button:hover {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.375rem 1.25rem rgba(255, 107, 53, 0.4);
-    background: linear-gradient(90deg, #ff8e53, #ffd166);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.375rem 1.25rem rgba(255, 107, 53, 0.4);
+  background: linear-gradient(90deg, #ff8e53, #ffd166);
 }
 
 .login-prompt-button:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }

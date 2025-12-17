@@ -8,6 +8,7 @@ import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/atom/Button.js";
+import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
 
 export default function HistoryPage() {
   const [tournaments, setTournaments] = useState([]);
@@ -179,21 +180,26 @@ export default function HistoryPage() {
             </div>
           ) : (
             currentItems.map((tournament) => (
-              <div key={tournament.id} className="tournament-card" onClick={() => goToTournament(tournament.id)}>
-                <div className="tournament-icon">🏆</div>
-                <h2 className="tournament-title" title={tournament.name}>
+              <Card
+                type="tournament"
+                key={tournament.id}
+                onClick={() => goToTournament(tournament.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <CardIcon>🏆</CardIcon>
+                <CardTitle type="tournament" title={tournament.name}>
                   {tournament.name}
-                </h2>
+                </CardTitle>
 
-                <p className="tournament-details">
+                <CardDetails>
                   📅 {new Date(tournament.startDate).getDate()}. –{new Date(tournament.endDate).getDate()}{" "}
                   {lsi.months[new Date(tournament.endDate).getMonth() + 1]} {new Date(tournament.endDate).getFullYear()}
                   <br />
                   👥 {tournament.teams?.length || 0} {lsi.teamsCount}
-                </p>
+                </CardDetails>
 
-                <div className="tournament-status">{lsi.finished}</div>
-              </div>
+                <CardStatus>{lsi.finished}</CardStatus>
+              </Card>
             ))
           )}
         </section>
