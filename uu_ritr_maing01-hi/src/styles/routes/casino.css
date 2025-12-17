@@ -186,7 +186,7 @@
   border-radius: 1rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid #ffffff2e;
   transform: scale(1);
   /* Full size */
 }
@@ -410,4 +410,21 @@
     transform: translateX(calc(100px * sin(var(--i)))) rotate(720deg);
     opacity: 0;
   }
+}
+
+/* Override Play Now Button Hover */
+.game-card .button-primary-outline:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  filter: brightness(0.8);
+  box-shadow: none;
+  border-color: #ffffff2e;
+  color: #ffffff2e;
+}
+
+/* Override Back to Menu Button Hover */
+.back-button-container .button-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  filter: brightness(0.8);
+  border-color: #666;
+  color: #fff;
 }
