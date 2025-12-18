@@ -9,22 +9,16 @@ import "../styles/bricks/official-shop.css";
 
 const OFFICIAL_SHOP_ITEMS = [
     {
-        id: "os1",
-        name: "Gamer Cat",
-        price: 2000,
-        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/10vXU6Z9GpK6I8/giphy.gif"
-    },
-    {
-        id: "os2",
-        name: "Neon Robot",
-        price: 4000,
-        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpGZf9U3xW76/giphy.gif"
-    },
-    {
         id: "os3",
         name: "Pixel Ninja",
         price: 1500,
         image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/iXI36c6v8B0pG/giphy.gif"
+    },
+    {
+        id: "os1",
+        name: "Gamer Cat",
+        price: 2000,
+        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/10vXU6Z9GpK6I8/giphy.gif"
     },
     {
         id: "os4",
@@ -33,16 +27,22 @@ const OFFICIAL_SHOP_ITEMS = [
         image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l0ExghDSR7YjR4fTO/giphy.gif"
     },
     {
-        id: "os5",
-        name: "Golden Lion",
-        price: 10000,
-        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKSjRrfIPjeiZfG/giphy.gif"
+        id: "os2",
+        name: "Neon Robot",
+        price: 4000,
+        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpGZf9U3xW76/giphy.gif"
     },
     {
         id: "os6",
         name: "Space Dog",
         price: 5000,
         image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/xT9IgzoKnwUtNpavS0/giphy.gif"
+    },
+    {
+        id: "os5",
+        name: "Golden Lion",
+        price: 10000,
+        image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mnh6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKSjRrfIPjeiZfG/giphy.gif"
     }
 ];
 
