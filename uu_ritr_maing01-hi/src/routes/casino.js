@@ -34,9 +34,95 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
 // Roulette from : https://github.com/dozsolti/react-casino-roulette
 
 // Poker from : https://github.com/ethanbrook-dev/TexasHoldEm-poker-multiplayer (Modified a bit)
+// Shop items - placeholder for profile pictures to be added later
+const SHOP_ITEMS = [
+  { id: 1, name: "Profile 1", price: 100, image: null },
+  { id: 2, name: "Profile 2", price: 200, image: null },
+  { id: 3, name: "Profile 3", price: 300, image: null },
+  { id: 4, name: "Profile 4", price: 500, image: null },
+  { id: 5, name: "Profile 5", price: 750, image: null },
+  { id: 6, name: "Profile 6", price: 1000, image: null },
+];
+
+function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
+  const { showSuccess, showError } = useNotification();
+  const { confirm } = useConfirm();
+  const lsi = useLsi(importLsi, ["Casino"]);
+
+  if (!isOpen) return null;
+
+  const handlePurchase = async (item) => {
+    if (credits < item.price) {
+      showError(lsi.insufficientCredits || "Insufficient Credits", "You don't have enough credits for this item.");
+      return;
+    }
+
+    const confirmed = await confirm({
+      title: lsi.confirmPurchase || "Confirm Purchase",
+      message: `${lsi.confirmPurchaseMessage || "Are you sure you want to buy"} "${item.name}" for $${item.price}?`,
+      confirmText: lsi.buy || "Buy",
+      cancelText: lsi.cancel || "Cancel",
+    });
+
+    if (!confirmed) return;
+
+    try {
+      await Calls.player.removeCredits({ id: userId, amount: item.price });
+      // TODO: Save purchased profile picture to user's account
+      onPurchase(item.price);
+      showSuccess(lsi.purchaseSuccess || "Purchase Successful!", `You bought "${item.name}"`);
+    } catch (e) {
+      console.error("Purchase failed", e);
+      showError(lsi.purchaseError || "Purchase Failed", "Please try again.");
+    }
+  };
+
+  return (
+    <div className="shop-popup-overlay" onClick={onClose}>
+      <div className="shop-popup-content" onClick={(e) => e.stopPropagation()}>
+        <div className="shop-popup-header">
+          <h2>{lsi.shopTitle || "Profile Shop"}</h2>
+          <button className="shop-popup-close" onClick={onClose}>×</button>
+        </div>
+        <div className="shop-popup-credits">
+          <span>{lsi.yourCredits || "Your Credits"}: </span>
+          <span className="shop-credits-value">${credits}</span>
+        </div>
+        <div className="shop-items-grid">
+          {SHOP_ITEMS.map((item) => (
+            <div key={item.id} className="shop-item-card">
+              <div className="shop-item-image">
+                {item.image ? (
+                  <img src={item.image} alt={item.name} />
+                ) : (
+                  <div className="shop-item-placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div className="shop-item-name">{item.name}</div>
+              <div className="shop-item-price">${item.price}</div>
+              <Button
+                type={credits >= item.price ? "primary-fill" : "secondary"}
+                onClick={() => handlePurchase(item)}
+                disabled={credits < item.price}
+              >
+                {lsi.buy || "Buy"}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CasinoPage() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [credits, setCredits] = useState(0);
+  const [isShopOpen, setIsShopOpen] = useState(false);
   const { showError } = useNotification();
   const [, setRoute] = useRoute();
 
@@ -62,6 +148,10 @@ export default function CasinoPage() {
     setCredits(newCredits);
   };
 
+  const handleShopPurchase = (amount) => {
+    setCredits((prev) => prev - amount);
+  };
+
   return (
     <div className={`casino-container ${!selectedGame ? "game-selection-bg" : ""}`}>
       <div className="right-controls">
@@ -78,7 +168,7 @@ export default function CasinoPage() {
         </div>
         <div
           className="shop-button"
-          onClick={() => showError("Shop Coming Soon!", "The shop is under construction.")}
+          onClick={() => setIsShopOpen(true)}
           title={lsi.shop || "Shop"}
         >
           <svg viewBox="0 0 24 24">
@@ -86,6 +176,14 @@ export default function CasinoPage() {
           </svg>
         </div>
       </div>
+
+      <ShopPopup
+        isOpen={isShopOpen}
+        onClose={() => setIsShopOpen(false)}
+        credits={credits}
+        userId={user?.id}
+        onPurchase={handleShopPurchase}
+      />
       {selectedGame ? (
         <>
           <div className="back-button-container">
