@@ -6,6 +6,7 @@ import { useConfirm } from "./ConfirmProvider.js";
 import useUser from "../hooks/useUser.js";
 import ContactModal from "./ContactModal.js";
 import { Card, CardIcon } from "./atom/Card.js";
+import OfficialShopPopup from "./OfficialShopPopup.js";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -28,6 +29,7 @@ export default function Navbar() {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isOfficialShopOpen, setIsOfficialShopOpen] = useState(false);
   const [fontSize, setFontSize] = useState(() => {
     const saved = localStorage.getItem("fontSize");
     return saved ? parseInt(saved, 10) : 100;
@@ -223,7 +225,7 @@ export default function Navbar() {
                     className="account-popup-item"
                     onClick={() => {
                       setIsAccountOpen(false);
-                      setRoute("test", { qwerty: "hesoyam", shop: "true" });
+                      setIsOfficialShopOpen(true);
                     }}
                   >
                     <span className="account-popup-icon">🛒</span>
@@ -337,7 +339,7 @@ export default function Navbar() {
                   className="account-popup-item"
                   onClick={() => {
                     setIsAccountOpen(false);
-                    setRoute("test", { qwerty: "hesoyam", shop: "true" });
+                    setIsOfficialShopOpen(true);
                   }}
                 >
                   <span className="account-popup-icon">🛒</span>
@@ -485,6 +487,7 @@ export default function Navbar() {
         </div>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      <OfficialShopPopup isOpen={isOfficialShopOpen} onClose={() => setIsOfficialShopOpen(false)} user={user} />
     </div>
   );
 }

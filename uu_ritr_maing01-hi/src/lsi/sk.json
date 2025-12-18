@@ -375,5 +375,18 @@
                 "lastWin": "Posledná výhra"
             }
         }
+    },
+    "OfficialShop": {
+        "title": "MatchUP obchod",
+        "yourCredits": "Vaše kredity",
+        "buy": "Kúpiť",
+        "cancel": "Zrušiť",
+        "owned": "Vlastnené",
+        "confirmPurchase": "Potvrdiť nákup",
+        "confirmPurchaseMessage": "Naozaj chcete kúpiť",
+        "purchaseSuccess": "Nákup úspešný!",
+        "purchaseError": "Nákup zlyhal",
+        "insufficientCredits": "Nedostatok kreditov!",
+        "alreadyOwned": "Už vlastnené"
     }
 }

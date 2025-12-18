@@ -80,6 +80,19 @@
     "resetDefault": "Obnovit výchozí",
     "shop": "Obchod"
   },
+  "OfficialShop": {
+    "title": "MatchUP Obchod",
+    "yourCredits": "Vaše kredity",
+    "buy": "Koupit",
+    "cancel": "Zrušit",
+    "owned": "Vlastněno",
+    "confirmPurchase": "Potvrdit nákup",
+    "confirmPurchaseMessage": "Opravdu chcete koupit",
+    "purchaseSuccess": "Nákup úspěšný!",
+    "purchaseError": "Nákup selhal",
+    "insufficientCredits": "Nedostatek kreditů!",
+    "alreadyOwned": "Již vlastněno"
+  },
   "Confirm": {
     "confirmDefault": "Potvrdit",
     "cancelDefault": "Zrušit",

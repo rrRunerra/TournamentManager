@@ -374,5 +374,18 @@
                 "lastWin": "Letzter Gewinn"
             }
         }
+    },
+    "OfficialShop": {
+        "title": "MatchUP Shop",
+        "yourCredits": "Ihre Credits",
+        "buy": "Kaufen",
+        "cancel": "Abbrechen",
+        "owned": "Im Besitz",
+        "confirmPurchase": "Kauf bestätigen",
+        "confirmPurchaseMessage": "Sind Sie sicher, dass Sie kaufen möchten",
+        "purchaseSuccess": "Kauf erfolgreich!",
+        "purchaseError": "Kauf fehlgeschlagen",
+        "insufficientCredits": "Unzureichende Credits!",
+        "alreadyOwned": "Bereits im Besitz"
     }
 }

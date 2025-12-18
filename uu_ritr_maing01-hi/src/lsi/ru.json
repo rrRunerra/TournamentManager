@@ -80,6 +80,19 @@
         "resetDefault": "Сбросить по умолчанию",
         "shop": "Магазин"
     },
+    "OfficialShop": {
+        "title": "Магазин MatchUP",
+        "yourCredits": "Ваши кредиты",
+        "buy": "Купить",
+        "cancel": "Отмена",
+        "owned": "В наличии",
+        "confirmPurchase": "Подтвердить покупку",
+        "confirmPurchaseMessage": "Вы уверены, что хотите купить",
+        "purchaseSuccess": "Покупка прошла успешно!",
+        "purchaseError": "Ошибка при покупке",
+        "insufficientCredits": "Недостаточно кредитов!",
+        "alreadyOwned": "Уже есть в наличии"
+    },
     "Confirm": {
         "confirmDefault": "Подтвердить",
         "cancelDefault": "Отмена",

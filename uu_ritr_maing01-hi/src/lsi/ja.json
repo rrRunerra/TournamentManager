@@ -374,5 +374,18 @@
                 "lastWin": "前回の勝利"
             }
         }
+    },
+    "OfficialShop": {
+        "title": "MatchUP ショップ",
+        "yourCredits": "あなたのクレジット",
+        "buy": "購入",
+        "cancel": "キャンセル",
+        "owned": "所有済み",
+        "confirmPurchase": "購入の確認",
+        "confirmPurchaseMessage": "本当に購入しますか",
+        "purchaseSuccess": "購入に成功しました！",
+        "purchaseError": "購入に失敗しました",
+        "insufficientCredits": "クレジットが不足しています！",
+        "alreadyOwned": "既に所有しています"
     }
 }

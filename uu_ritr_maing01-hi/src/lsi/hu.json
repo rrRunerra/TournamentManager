@@ -374,5 +374,18 @@
                 "lastWin": "Utolsó nyeremény"
             }
         }
+    },
+    "OfficialShop": {
+        "title": "MatchUP Bolt",
+        "yourCredits": "Kredited",
+        "buy": "Vásárlás",
+        "cancel": "Mégse",
+        "owned": "Saját",
+        "confirmPurchase": "Vásárlás megerősítése",
+        "confirmPurchaseMessage": "Biztosan meg akarod venni",
+        "purchaseSuccess": "Sikeres vásárlás!",
+        "purchaseError": "Sikertelen vásárlás",
+        "insufficientCredits": "Nincs elég kredited!",
+        "alreadyOwned": "Már megvan"
     }
 }

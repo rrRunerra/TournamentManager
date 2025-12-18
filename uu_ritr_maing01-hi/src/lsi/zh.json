@@ -80,6 +80,19 @@
         "resetDefault": "恢复默认",
         "shop": "商店"
     },
+    "OfficialShop": {
+        "title": "MatchUP 商店",
+        "yourCredits": "您的积分",
+        "buy": "购买",
+        "cancel": "取消",
+        "owned": "已拥有",
+        "confirmPurchase": "确认购买",
+        "confirmPurchaseMessage": "您确定要购买吗",
+        "purchaseSuccess": "购买成功！",
+        "purchaseError": "购买失败",
+        "insufficientCredits": "积分不足！",
+        "alreadyOwned": "已拥有"
+    },
     "Confirm": {
         "confirmDefault": "确认",
         "cancelDefault": "取消",
