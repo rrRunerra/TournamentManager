@@ -105,14 +105,7 @@
         "sysStateList": ["active"],
         "profileList": ["Public"]
       },
-      "match/setBet": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "tournament/setBet": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
+
       "player/updateStats": {
         "sysStateList": ["active"],
         "profileList": ["Public"]

@@ -25,10 +25,6 @@ class TournamentController {
   listByUser(ucEnv) {
     return TournamentAbl.listByUser(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
-
-  setBet(ucEnv) {
-    return TournamentAbl.addBet(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
-  }
 }
 
 module.exports = new TournamentController();

@@ -13,10 +13,6 @@ class MatchController {
   create(ucEnv) {
     return MatchAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
-
-  setBet(ucEnv) {
-    return MatchAbl.addBet(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
-  }
 }
 
 module.exports = new MatchController();

@@ -91,7 +91,9 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s, filter 0.2s;
+  transition:
+    transform 0.2s,
+    filter 0.2s;
   color: #4a3c0a;
 }
 
@@ -465,67 +467,4 @@
   filter: brightness(0.8);
   border-color: #666;
   color: #fff;
-}
-
-/* Betting Game Styles */
-.betting-game-container {
-  width: 100%;
-  height: calc(100vh - 4rem);
-  /* Adjust for padding */
-  overflow-y: auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Scrollbar styling */
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(0, 0, 0, 0.5);
-}
-
-.betting-game-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.betting-game-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-}
-
-.betting-game-container::-webkit-scrollbar-thumb {
-  background-color: #d4af37;
-  border-radius: 4px;
-}
-
-.tournaments-list {
-  width: 100%;
-  max-width: 1200px; /* Increased to allow multiple columns */
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  padding-bottom: 2rem;
-}
-
-.tournament-separator {
-  flex-basis: 100%;
-  width: 100%;
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
-  margin: 2rem 0;
-}
-
-.no-tournaments {
-  text-align: center;
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 2rem;
-}
-
-.loading-spinner {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #d4af37;
-  margin-top: 1rem;
 }
