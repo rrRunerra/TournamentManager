@@ -38,43 +38,43 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
 const SHOP_ITEMS = [
   {
     id: 1,
-    name: "Golden Doge",
-    price: 100,
+    name: "Kobe Bryant",
+    price: 5000,
     image:
       "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnM0NHdta2tqeXQ0Zjd4YnV6OGRxemc4ZGl1dDVwY3Nzd2V4cWVtdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iVOfL6bfanQw80zqmb/giphy.gif",
   },
   {
     id: 2,
-    name: "Neon Cat",
-    price: 200,
+    name: "Gonzo",
+    price: 20000,
     image:
       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTI3NmdmNjBnemdqbDI2N3Q1bHRucmlrcHpvbGk1MTg1a2FzZXF5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GvdifEjs1kfyNuZ6tv/giphy.gif",
   },
   {
     id: 3,
-    name: "Pixel Mario",
-    price: 300,
+    name: "Ronaldinho",
+    price: 1000,
     image:
       "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZoNThjd3FxNzdtMXV0MXNlcThucDVmM2wwaTNjZ2wyMTM2dHJnbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Zesaf6z5hUWAsKI/giphy.gif",
   },
   {
     id: 4,
-    name: "Cyber Punk",
-    price: 500,
+    name: "Ovi Ovi",
+    price: 150000,
     image:
       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDlzcXBkeDNiZ2w2YjZydTFzOHM3OTNyaDltdHo0YjdjcnI3a2kxbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JFVx03XKGqtcvf7iRZ/giphy.gif",
   },
   {
     id: 5,
-    name: "Space Astronaut",
-    price: 750,
+    name: "NFL Legend",
+    price: 10000,
     image:
       "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjBnajQwYnpwaTNnYWhwYmxwdjNmbDVvZzdoZno3ejFqd3c0d2U4aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wYTpPax479uUTaOzeJ/giphy.gif",
   },
   {
     id: 6,
-    name: "Diamond Hands",
-    price: 1000,
+    name: "NBA Greedy",
+    price: 250000,
     image:
       "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaThpNW56cWJhbmdmZjRrZjlycjU0N2luNGVjYTJwdmxqMHduMXlibCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PO4exUD3Ywa64Ej7tg/giphy.gif",
   },
