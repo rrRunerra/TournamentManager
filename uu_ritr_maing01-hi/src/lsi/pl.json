@@ -364,7 +364,13 @@
                 "description": "Sprawdź swoje umiejętności przeciwko kasynu."
             },
             "slots": {
-                "title": "Automaty"
+                "title": "Automaty",
+                "description": "Klasyczny automat z 3 bębnami.",
+                "spin": "Zakręć",
+                "spinning": "Kręci się...",
+                "bet": "Zakład",
+                "paytable": "Tabela wypłat",
+                "lastWin": "Ostatnia wygrana"
             }
         }
     }

@@ -364,7 +364,13 @@
                 "description": "与赌场对抗，测试您的技巧。"
             },
             "slots": {
-                "title": "老虎机"
+                "title": "老虎机",
+                "description": "经典的3轴老虎机。",
+                "spin": "旋转",
+                "spinning": "旋转中...",
+                "bet": "赌注",
+                "paytable": "赔付表",
+                "lastWin": "上次獲勝"
             }
         }
     }

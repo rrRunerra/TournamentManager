@@ -365,7 +365,13 @@
                 "description": "Otestujte svoje schopnosti proti kasínu."
             },
             "slots": {
-                "title": "Automaty"
+                "title": "Automaty",
+                "description": "Klasické hracie automaty s 3 valcami.",
+                "spin": "Roztočiť",
+                "spinning": "Točí sa...",
+                "bet": "Stávka",
+                "paytable": "Výplatná tabuľka",
+                "lastWin": "Posledná výhra"
             }
         }
     }

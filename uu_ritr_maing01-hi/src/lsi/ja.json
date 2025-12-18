@@ -364,7 +364,13 @@
                 "description": "カジノに対してスキルを試しましょう。"
             },
             "slots": {
-                "title": "スロット"
+                "title": "スロット",
+                "description": "クラシック3リールスロットマシン。",
+                "spin": "スピン",
+                "spinning": "スピン中...",
+                "bet": "ベット",
+                "paytable": "配当表",
+                "lastWin": "前回の勝利"
             }
         }
     }

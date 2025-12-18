@@ -364,7 +364,13 @@
                 "description": "Otestujte svoje schopnosti proti kasínu."
             },
             "slots": {
-                "title": "Automaty"
+                "title": "Spielautomaten",
+                "description": "Klassischer 3-Walzen-Spielautomat.",
+                "spin": "Drehen",
+                "spinning": "Dreht sich...",
+                "bet": "Einsatz",
+                "paytable": "Auszahlungstabelle",
+                "lastWin": "Letzter Gewinn"
             }
         }
     }

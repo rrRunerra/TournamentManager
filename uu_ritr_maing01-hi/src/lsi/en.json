@@ -365,7 +365,13 @@
         "description": "Test your skills against the house."
       },
       "slots": {
-        "title": "Slots"
+        "title": "Slots",
+        "description": "Classic 3-reel slot machine.",
+        "spin": "Spin",
+        "spinning": "Spinning...",
+        "bet": "Bet",
+        "paytable": "Paytable",
+        "lastWin": "Last Win"
       }
     }
   }

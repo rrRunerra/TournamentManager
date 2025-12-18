@@ -245,6 +245,9 @@ export default function CasinoPage() {
           )}
 
           {selectedGame === "poker" && <Poker />}
+          {selectedGame === "slots" && (
+            <SlotMachine credits={credits} updateCredits={updateCredits} userId={user.id} />
+          )}
         </>
       ) : (
         <GameMenu onSelect={setSelectedGame} />
@@ -273,6 +276,11 @@ function GameMenu({ onSelect }) {
           title={lsi.games.poker.title}
           description={lsi.games.poker.description}
           onClick={() => onSelect("poker")}
+        />
+        <GameCard
+          title={lsi.games.slots.title}
+          description={lsi.games.slots.description}
+          onClick={() => onSelect("slots")}
         />
       </div>
     </>
@@ -446,5 +454,234 @@ function BigWinOverlay({ amount }) {
         ))}
       </div>
     </div>
+  );
+}
+
+// Slot Machine Symbols
+const SLOT_SYMBOLS = ["🍒", "🍋", "🔔", "💎", "7️⃣", "⭐"];
+
+// Payout table (multipliers for matching symbols)
+const PAYOUTS = {
+  "🍒🍒🍒": 5,
+  "🍋🍋🍋": 10,
+  "🔔🔔🔔": 15,
+  "💎💎💎": 25,
+  "⭐⭐⭐": 50,
+  "7️⃣7️⃣7️⃣": 100,
+  // Two matching
+  "🍒🍒": 2,
+  "🍋🍋": 2,
+  "🔔🔔": 3,
+  "💎💎": 4,
+  "⭐⭐": 5,
+  "7️⃣7️⃣": 10,
+};
+
+function SlotMachine({ credits, updateCredits, userId }) {
+  const lsi = useLsi(importLsi, ["Casino"]);
+  const { showSuccess, showError, showInfo } = useNotification();
+
+  const [reels, setReels] = useState(["🍒", "🍒", "🍒"]);
+  const [spinning, setSpinning] = useState([false, false, false]);
+  const [bet, setBet] = useState(10);
+  const [showBigWin, setShowBigWin] = useState(false);
+  const [winAmount, setWinAmount] = useState(0);
+  const [lastWin, setLastWin] = useState(0);
+
+  const getRandomSymbol = () => {
+    const randomIndex = window.crypto.getRandomValues(new Uint32Array(1))[0] % SLOT_SYMBOLS.length;
+    return SLOT_SYMBOLS[randomIndex];
+  };
+
+  const calculateWin = (result) => {
+    const key3 = result.join("");
+    if (PAYOUTS[key3]) {
+      return bet * PAYOUTS[key3];
+    }
+
+    // Check for two matching (first two or last two)
+    if (result[0] === result[1]) {
+      const key2 = result[0] + result[1];
+      if (PAYOUTS[key2]) {
+        return bet * PAYOUTS[key2];
+      }
+    }
+    if (result[1] === result[2]) {
+      const key2 = result[1] + result[2];
+      if (PAYOUTS[key2]) {
+        return bet * PAYOUTS[key2];
+      }
+    }
+
+    return 0;
+  };
+
+  const spin = async () => {
+    if (bet > credits) {
+      showError(lsi.insufficientCredits);
+      return;
+    }
+
+    try {
+      // Deduct bet
+      const removeResult = await Calls.player.removeCredits({ id: userId, amount: bet });
+      updateCredits(removeResult.credits);
+
+      // Start spinning all reels
+      setSpinning([true, true, true]);
+      setLastWin(0);
+
+      // Generate final results
+      const finalResults = [getRandomSymbol(), getRandomSymbol(), getRandomSymbol()];
+
+      // Stop reels one by one
+      setTimeout(() => {
+        setReels((prev) => [finalResults[0], prev[1], prev[2]]);
+        setSpinning((prev) => [false, prev[1], prev[2]]);
+      }, 1000);
+
+      setTimeout(() => {
+        setReels((prev) => [prev[0], finalResults[1], prev[2]]);
+        setSpinning((prev) => [prev[0], false, prev[2]]);
+      }, 1500);
+
+      setTimeout(async () => {
+        setReels(finalResults);
+        setSpinning([false, false, false]);
+
+        // Calculate winnings
+        const winnings = calculateWin(finalResults);
+        setLastWin(winnings);
+
+        if (winnings > 0) {
+          try {
+            const addResult = await Calls.player.addCredits({ id: userId, amount: winnings });
+            updateCredits(addResult.credits);
+
+            if (winnings >= bet * 25) {
+              setWinAmount(winnings);
+              setShowBigWin(true);
+              setTimeout(() => setShowBigWin(false), 5000);
+            }
+
+            showSuccess(`${lsi.youWon} $${winnings}!`);
+          } catch (e) {
+            console.error("Failed to add winnings", e);
+            showError(lsi.errorUpdatingCredits);
+          }
+        } else {
+          showInfo(lsi.betterLuck);
+        }
+      }, 2000);
+    } catch (e) {
+      console.error("Failed to place bet", e);
+      showError(lsi.errorPlacingBet);
+      setSpinning([false, false, false]);
+    }
+  };
+
+  const isSpinning = spinning.some((s) => s);
+
+  return (
+    <>
+      <h1 className="casino-title">{lsi.games.slots.title}</h1>
+      <div className="slot-machine-container">
+        <div className="slot-machine">
+          <div className="slot-machine-frame">
+            <div className="slot-reels">
+              {reels.map((symbol, index) => (
+                <div key={index} className={`slot-reel ${spinning[index] ? "spinning" : ""}`}>
+                  <div className="slot-reel-inner">
+                    {spinning[index] ? (
+                      <>
+                        {SLOT_SYMBOLS.map((s, i) => (
+                          <div key={i} className="slot-symbol">
+                            {s}
+                          </div>
+                        ))}
+                        {SLOT_SYMBOLS.map((s, i) => (
+                          <div key={`dup-${i}`} className="slot-symbol">
+                            {s}
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <div className="slot-symbol result">{symbol}</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="slot-payline"></div>
+          </div>
+
+          {lastWin > 0 && !isSpinning && (
+            <div className="slot-last-win">
+              {lsi.games.slots.lastWin}: <span>${lastWin}</span>
+            </div>
+          )}
+
+          <div className="slot-controls">
+            <div className="slot-bet-control">
+              <span>{lsi.games.slots.bet}:</span>
+              <button
+                className="bet-btn"
+                onClick={() => setBet((b) => Math.max(10, b - 10))}
+                disabled={isSpinning}
+              >
+                -
+              </button>
+              <span className="bet-amount">${bet}</span>
+              <button
+                className="bet-btn"
+                onClick={() => setBet((b) => Math.min(credits, b + 10))}
+                disabled={isSpinning}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              className={`spin-btn ${isSpinning ? "disabled" : ""}`}
+              onClick={spin}
+              disabled={isSpinning || bet > credits}
+            >
+              {isSpinning ? lsi.games.slots.spinning : lsi.games.slots.spin}
+            </button>
+          </div>
+        </div>
+
+        <div className="slot-paytable">
+          <h3>{lsi.games.slots.paytable}</h3>
+          <div className="paytable-items">
+            <div className="paytable-item">
+              <span>7️⃣ 7️⃣ 7️⃣</span>
+              <span>x100</span>
+            </div>
+            <div className="paytable-item">
+              <span>⭐ ⭐ ⭐</span>
+              <span>x50</span>
+            </div>
+            <div className="paytable-item">
+              <span>💎 💎 💎</span>
+              <span>x25</span>
+            </div>
+            <div className="paytable-item">
+              <span>🔔 🔔 🔔</span>
+              <span>x15</span>
+            </div>
+            <div className="paytable-item">
+              <span>🍋 🍋 🍋</span>
+              <span>x10</span>
+            </div>
+            <div className="paytable-item">
+              <span>🍒 🍒 🍒</span>
+              <span>x5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {showBigWin && <BigWinOverlay amount={winAmount} />}
+    </>
   );
 }

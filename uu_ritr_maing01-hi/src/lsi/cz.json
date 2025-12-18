@@ -335,6 +335,43 @@
     "errorSend": "Zprávu se nepodařilo odeslat"
   },
   "Casino": {
-    "insufficientCredits": "Nedostatek kreditů!"
+    "insufficientCredits": "Nedostatek kreditů!",
+    "title": "MatchUP Casino",
+    "backToMenu": "Zpět do menu",
+    "totalBet": "Celková sázka",
+    "clearBets": "Vymazat sázky",
+    "spinWheel": "Roztočit kolo",
+    "playNow": "Hrát nyní",
+    "comingSoon": "Již brzy...",
+    "bigWin": "VELKÁ VÝHRA",
+    "youWon": "Vyhráli jste",
+    "betterLuck": "Hodně štěstí příště!",
+    "ballLanded": "Kulička přistála na",
+    "errorPlacingBet": "Chyba při sázení",
+    "errorUpdatingCredits": "Chyba při aktualizaci kreditů",
+    "pleaseTryAgain": "Zkuste to prosím znovu.",
+    "games": {
+      "europeanRoulette": {
+        "title": "Evropská ruleta",
+        "description": "Klasická ruleta s jednou nulou."
+      },
+      "americanRoulette": {
+        "title": "Americká ruleta",
+        "description": "Ruleta s dvěma nulami pro vysoké sázky."
+      },
+      "poker": {
+        "title": "Texas Hold'em",
+        "description": "Otestujte své schopnosti proti kasinu."
+      },
+      "slots": {
+        "title": "Automaty",
+        "description": "Klasické hrací automaty se 3 válci.",
+        "spin": "Roztočit",
+        "spinning": "Točí se...",
+        "bet": "Sázka",
+        "paytable": "Výplatní tabulka",
+        "lastWin": "Poslední výhra"
+      }
+    }
   }
 }

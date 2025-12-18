@@ -364,7 +364,13 @@
                 "description": "Teszteld tudásod a ház ellen."
             },
             "slots": {
-                "title": "Nyerőgépek"
+                "title": "Nyerőgépek",
+                "description": "Klasszikus 3 tárcsás nyerőgép.",
+                "spin": "Pörgetés",
+                "spinning": "Pörög...",
+                "bet": "Tét",
+                "paytable": "Kifizetési táblázat",
+                "lastWin": "Utolsó nyeremény"
             }
         }
     }
