@@ -653,30 +653,58 @@ function SlotMachine({ credits, updateCredits, userId }) {
 
         <div className="slot-paytable">
           <h3>{lsi.games.slots.paytable}</h3>
-          <div className="paytable-items">
-            <div className="paytable-item">
-              <span>7️⃣ 7️⃣ 7️⃣</span>
-              <span>x100</span>
+          <div className="paytable-columns">
+            <div className="paytable-items">
+              <div className="paytable-item">
+                <span>7️⃣ 7️⃣ 7️⃣</span>
+                <span>x100</span>
+              </div>
+              <div className="paytable-item">
+                <span>⭐ ⭐ ⭐</span>
+                <span>x50</span>
+              </div>
+              <div className="paytable-item">
+                <span>💎 💎 💎</span>
+                <span>x25</span>
+              </div>
+              <div className="paytable-item">
+                <span>🔔 🔔 🔔</span>
+                <span>x15</span>
+              </div>
+              <div className="paytable-item">
+                <span>🍋 🍋 🍋</span>
+                <span>x10</span>
+              </div>
+              <div className="paytable-item">
+                <span>🍒 🍒 🍒</span>
+                <span>x5</span>
+              </div>
             </div>
-            <div className="paytable-item">
-              <span>⭐ ⭐ ⭐</span>
-              <span>x50</span>
-            </div>
-            <div className="paytable-item">
-              <span>💎 💎 💎</span>
-              <span>x25</span>
-            </div>
-            <div className="paytable-item">
-              <span>🔔 🔔 🔔</span>
-              <span>x15</span>
-            </div>
-            <div className="paytable-item">
-              <span>🍋 🍋 🍋</span>
-              <span>x10</span>
-            </div>
-            <div className="paytable-item">
-              <span>🍒 🍒 🍒</span>
-              <span>x5</span>
+            <div className="paytable-items two-match-column">
+              <div className="paytable-item two-match">
+                <span>7️⃣ 7️⃣</span>
+                <span>x10</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>⭐ ⭐</span>
+                <span>x5</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>💎 💎</span>
+                <span>x4</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>🔔 🔔</span>
+                <span>x3</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>🍋 🍋</span>
+                <span>x2</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>🍒 🍒</span>
+                <span>x2</span>
+              </div>
             </div>
           </div>
         </div>

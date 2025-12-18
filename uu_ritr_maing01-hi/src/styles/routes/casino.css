@@ -796,6 +796,10 @@
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .bet-btn:hover:not(:disabled) {
@@ -872,6 +876,11 @@
   padding-bottom: 0.5rem;
 }
 
+.paytable-columns {
+  display: flex;
+  gap: 1rem;
+}
+
 .paytable-items {
   display: flex;
   flex-direction: column;
@@ -900,6 +909,12 @@
   color: #4ade80;
   font-weight: 700;
   font-size: 1rem;
+}
+
+.paytable-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+  margin: 0.5rem 0;
 }
 
 /* Responsive styles for slot machine */
