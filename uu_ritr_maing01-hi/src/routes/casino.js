@@ -165,7 +165,7 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase, ownedProfileP
   );
 }
 
-export default function CasinoPage() {
+export default function CasinoPage(props) {
   const [selectedGame, setSelectedGame] = useState(null);
   const [credits, setCredits] = useState(0);
   const [ownedProfilePics, setOwnedProfilePics] = useState([]);
@@ -191,6 +191,13 @@ export default function CasinoPage() {
     };
     fetchPlayer();
   }, [user, selectedGame]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (props.shop === "true" || params.get("shop") === "true") {
+      setIsShopOpen(true);
+    }
+  }, [props.shop]);
 
   const updateCredits = (newCredits) => {
     setCredits(newCredits);

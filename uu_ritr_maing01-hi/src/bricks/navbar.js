@@ -223,6 +223,16 @@ export default function Navbar() {
                     className="account-popup-item"
                     onClick={() => {
                       setIsAccountOpen(false);
+                      setRoute("test", { qwerty: "hesoyam", shop: "true" });
+                    }}
+                  >
+                    <span className="account-popup-icon">🛒</span>
+                    <Lsi import={importLsi} path={["Navbar", "shop"]} />
+                  </div>
+                  <div
+                    className="account-popup-item"
+                    onClick={() => {
+                      setIsAccountOpen(false);
                       setIsSettingsOpen(true);
                     }}
                   >
@@ -322,6 +332,16 @@ export default function Navbar() {
                 >
                   <span className="account-popup-icon">👤</span>
                   <Lsi import={importLsi} path={["Navbar", "profile"]} />
+                </div>
+                <div
+                  className="account-popup-item"
+                  onClick={() => {
+                    setIsAccountOpen(false);
+                    setRoute("test", { qwerty: "hesoyam", shop: "true" });
+                  }}
+                >
+                  <span className="account-popup-icon">🛒</span>
+                  <Lsi import={importLsi} path={["Navbar", "shop"]} />
                 </div>
                 <div
                   className="account-popup-item"

@@ -78,7 +78,8 @@
         "fontSmall": "Malé",
         "fontNormal": "Normálne",
         "fontLarge": "Veľké",
-        "resetDefault": "Obnoviť predvolené"
+        "resetDefault": "Obnoviť predvolené",
+        "shop": "Obchod"
     },
     "Confirm": {
         "confirmDefault": "Potvrdiť",

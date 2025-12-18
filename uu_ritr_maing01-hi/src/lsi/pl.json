@@ -77,7 +77,8 @@
         "fontSmall": "Mały",
         "fontNormal": "Normalny",
         "fontLarge": "Duży",
-        "resetDefault": "Przywróć domyślne"
+        "resetDefault": "Przywróć domyślne",
+        "shop": "Sklep"
     },
     "Confirm": {
         "confirmDefault": "Potwierdź",

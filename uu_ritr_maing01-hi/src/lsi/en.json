@@ -78,7 +78,8 @@
     "fontSmall": "Small",
     "fontNormal": "Normal",
     "fontLarge": "Large",
-    "resetDefault": "Reset to Default"
+    "resetDefault": "Reset to Default",
+    "shop": "Shop"
   },
   "Confirm": {
     "confirmDefault": "Confirm",

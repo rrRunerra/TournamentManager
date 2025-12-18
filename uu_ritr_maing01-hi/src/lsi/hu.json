@@ -77,7 +77,8 @@
         "fontSmall": "Kicsi",
         "fontNormal": "Normál",
         "fontLarge": "Nagy",
-        "resetDefault": "Alapértelmezett visszaállítása"
+        "resetDefault": "Alapértelmezett visszaállítása",
+        "shop": "Bolt"
     },
     "Confirm": {
         "confirmDefault": "Megerősítés",

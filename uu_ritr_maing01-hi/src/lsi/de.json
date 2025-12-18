@@ -77,7 +77,8 @@
         "fontSmall": "Klein",
         "fontNormal": "Normal",
         "fontLarge": "Groß",
-        "resetDefault": "Standard wiederherstellen"
+        "resetDefault": "Standard wiederherstellen",
+        "shop": "Shop"
     },
     "Confirm": {
         "confirmDefault": "Bestätigen",

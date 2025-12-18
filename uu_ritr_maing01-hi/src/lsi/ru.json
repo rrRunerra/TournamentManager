@@ -77,7 +77,8 @@
         "fontSmall": "Маленький",
         "fontNormal": "Обычный",
         "fontLarge": "Большой",
-        "resetDefault": "Сбросить по умолчанию"
+        "resetDefault": "Сбросить по умолчанию",
+        "shop": "Магазин"
     },
     "Confirm": {
         "confirmDefault": "Подтвердить",

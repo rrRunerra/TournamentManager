@@ -19,16 +19,16 @@ import {
   CardStatus,
 } from "../bricks/atom/Card.js";
 
-export default function TestPage() {
+export default function TestPage(props) {
   const { showSuccess, showError } = useNotification();
   const { confirm } = useConfirm();
   const [page, setPage] = useState(1);
   const [date, setDate] = useState(new Date());
 
-  const id = new URLSearchParams(window.location.search).get("qwerty");
+  const id = props.qwerty || new URLSearchParams(window.location.search).get("qwerty");
 
   if (id == "hesoyam") {
-    return <CasinoPage></CasinoPage>;
+    return <CasinoPage {...props}></CasinoPage>;
   }
 
   const sectionStyle = {

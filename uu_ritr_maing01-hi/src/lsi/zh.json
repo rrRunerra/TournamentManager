@@ -77,7 +77,8 @@
         "fontSmall": "小",
         "fontNormal": "正常",
         "fontLarge": "大",
-        "resetDefault": "恢复默认"
+        "resetDefault": "恢复默认",
+        "shop": "商店"
     },
     "Confirm": {
         "confirmDefault": "确认",

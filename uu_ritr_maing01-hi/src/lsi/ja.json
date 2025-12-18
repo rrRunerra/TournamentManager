@@ -77,7 +77,8 @@
         "fontSmall": "小",
         "fontNormal": "通常",
         "fontLarge": "大",
-        "resetDefault": "デフォルトに戻す"
+        "resetDefault": "デフォルトに戻す",
+        "shop": "ショップ"
     },
     "Confirm": {
         "confirmDefault": "確認",
