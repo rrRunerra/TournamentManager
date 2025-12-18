@@ -574,6 +574,47 @@ class PlayerAbl {
 
     return { success: true, profilePicture: dtoIn.profilePicture };
   }
+
+  /**
+   * Buys a profile picture for a player.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{id: string, profilePicUrl: string, price: number}} dtoIn - Player ID, picture URL and price
+   * @returns {Promise<{success: boolean, credits: number, ownedProfilePics: string[]}>}
+   */
+  async buyProfilePic(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerBuyProfilePicDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Errors.BuyProfilePic.InvalidDtoIn();
+    }
+
+    const player = await this.dao.get({ awid, id: dtoIn.id });
+    if (!player) {
+      throw new Errors.BuyProfilePic.PlayerNotFound();
+    }
+
+    if (player.credits < dtoIn.price) {
+      throw new Errors.BuyProfilePic.InsufficientCredits();
+    }
+
+    const ownedProfilePics = player.ownedProfilePics || [];
+    if (!ownedProfilePics.includes(dtoIn.profilePicUrl)) {
+      ownedProfilePics.push(dtoIn.profilePicUrl);
+    }
+
+    const newCredits = player.credits - dtoIn.price;
+
+    await this.dao.update({
+      awid,
+      id: dtoIn.id,
+      ...player,
+      credits: newCredits,
+      ownedProfilePics: ownedProfilePics,
+    });
+
+    return { success: true, credits: newCredits, ownedProfilePics: ownedProfilePics };
+  }
 }
 
 module.exports = new PlayerAbl();

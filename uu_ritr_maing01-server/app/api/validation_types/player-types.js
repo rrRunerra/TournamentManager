@@ -51,3 +51,9 @@ const PlayerUpdateProfilePictureDtoInType = shape({
   id: uu5String(255).isRequired(),
   profilePicture: uu5String(255).isRequired(),
 });
+
+const PlayerBuyProfilePicDtoInType = shape({
+  id: uu5String(255).isRequired(),
+  profilePicUrl: uu5String(1000).isRequired(),
+  price: number().isRequired(),
+});

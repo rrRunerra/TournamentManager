@@ -189,6 +189,20 @@ const Calls = {
       const commandUri = Calls.getCommandUri("player/updateProfilePicture");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *   id: string,
+     *   profilePicUrl: string,
+     *   price: number
+     * }} dtoIn
+     * @returns {Promise<{success: boolean, credits: number, ownedProfilePics: string[]}>}
+     */
+    buyProfilePic(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/buyProfilePic");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   tournament: {

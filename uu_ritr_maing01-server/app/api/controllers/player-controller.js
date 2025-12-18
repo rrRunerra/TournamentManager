@@ -41,6 +41,10 @@ class PlayerController {
   updateProfilePicture(ucEnv) {
     return PlayerAbl.updateProfilePicture(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
+
+  buyProfilePic(ucEnv) {
+    return PlayerAbl.buyProfilePic(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
 }
 
 module.exports = new PlayerController();

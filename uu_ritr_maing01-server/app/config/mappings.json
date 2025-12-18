@@ -151,6 +151,11 @@
         "realization": "api/controllers/PlayerController.updateProfilePicture",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "player/buyProfilePic": {
+        "realization": "api/controllers/PlayerController.buyProfilePic",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

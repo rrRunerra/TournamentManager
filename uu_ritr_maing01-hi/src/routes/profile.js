@@ -47,15 +47,17 @@ const StatCard = ({ label, value, color }) => (
   </div>
 );
 
-const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title }) => {
+const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title, ownedAvatars = [] }) => {
   if (!isOpen) return null;
+
+  const allOptions = [...AVATAR_OPTIONS, ...ownedAvatars];
 
   return (
     <div className="avatar-modal-overlay" onClick={onClose}>
       <div className="avatar-modal-content" onClick={(e) => e.stopPropagation()}>
         <h3 className="avatar-modal-title">{title}</h3>
         <div className="avatar-grid">
-          {AVATAR_OPTIONS.map((src, index) => (
+          {allOptions.map((src, index) => (
             <div
               key={index}
               className={`avatar-option ${currentAvatar === src ? "selected" : ""}`}
@@ -293,6 +295,7 @@ export default function ProfilePage() {
         onSelect={handleAvatarSelect}
         currentAvatar={avatar}
         title={lsi.selectProfilePicture}
+        ownedAvatars={stats.ownedProfilePics || []}
       />
     </div>
   );

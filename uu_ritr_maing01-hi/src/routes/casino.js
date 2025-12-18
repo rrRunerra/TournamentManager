@@ -36,15 +36,51 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
 // Poker from : https://github.com/ethanbrook-dev/TexasHoldEm-poker-multiplayer (Modified a bit)
 // Shop items - placeholder for profile pictures to be added later
 const SHOP_ITEMS = [
-  { id: 1, name: "Profile 1", price: 100, image: null },
-  { id: 2, name: "Profile 2", price: 200, image: null },
-  { id: 3, name: "Profile 3", price: 300, image: null },
-  { id: 4, name: "Profile 4", price: 500, image: null },
-  { id: 5, name: "Profile 5", price: 750, image: null },
-  { id: 6, name: "Profile 6", price: 1000, image: null },
+  {
+    id: 1,
+    name: "Golden Doge",
+    price: 100,
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnM0NHdta2tqeXQ0Zjd4YnV6OGRxemc4ZGl1dDVwY3Nzd2V4cWVtdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iVOfL6bfanQw80zqmb/giphy.gif",
+  },
+  {
+    id: 2,
+    name: "Neon Cat",
+    price: 200,
+    image:
+      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTI3NmdmNjBnemdqbDI2N3Q1bHRucmlrcHpvbGk1MTg1a2FzZXF5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GvdifEjs1kfyNuZ6tv/giphy.gif",
+  },
+  {
+    id: 3,
+    name: "Pixel Mario",
+    price: 300,
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZoNThjd3FxNzdtMXV0MXNlcThucDVmM2wwaTNjZ2wyMTM2dHJnbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Zesaf6z5hUWAsKI/giphy.gif",
+  },
+  {
+    id: 4,
+    name: "Cyber Punk",
+    price: 500,
+    image:
+      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDlzcXBkeDNiZ2w2YjZydTFzOHM3OTNyaDltdHo0YjdjcnI3a2kxbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JFVx03XKGqtcvf7iRZ/giphy.gif",
+  },
+  {
+    id: 5,
+    name: "Space Astronaut",
+    price: 750,
+    image:
+      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjBnajQwYnpwaTNnYWhwYmxwdjNmbDVvZzdoZno3ejFqd3c0d2U4aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wYTpPax479uUTaOzeJ/giphy.gif",
+  },
+  {
+    id: 6,
+    name: "Diamond Hands",
+    price: 1000,
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaThpNW56cWJhbmdmZjRrZjlycjU0N2luNGVjYTJwdmxqMHduMXlibCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PO4exUD3Ywa64Ej7tg/giphy.gif",
+  },
 ];
 
-function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
+function ShopPopup({ isOpen, onClose, credits, userId, onPurchase, ownedProfilePics }) {
   const { showSuccess, showError } = useNotification();
   const { confirm } = useConfirm();
   const lsi = useLsi(importLsi, ["Casino"]);
@@ -54,6 +90,12 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
   const handlePurchase = async (item) => {
     if (credits < item.price) {
       showError(lsi.insufficientCredits || "Insufficient Credits", "You don't have enough credits for this item.");
+      return;
+    }
+
+    const isOwned = ownedProfilePics.includes(item.image);
+    if (isOwned) {
+      showError("Already Owned", "You already own this profile picture.");
       return;
     }
 
@@ -67,9 +109,8 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
     if (!confirmed) return;
 
     try {
-      await Calls.player.removeCredits({ id: userId, amount: item.price });
-      // TODO: Save purchased profile picture to user's account
-      onPurchase(item.price);
+      const result = await Calls.player.buyProfilePic({ id: userId, profilePicUrl: item.image, price: item.price });
+      onPurchase(result.credits, result.ownedProfilePics);
       showSuccess(lsi.purchaseSuccess || "Purchase Successful!", `You bought "${item.name}"`);
     } catch (e) {
       console.error("Purchase failed", e);
@@ -82,37 +123,42 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
       <div className="shop-popup-content" onClick={(e) => e.stopPropagation()}>
         <div className="shop-popup-header">
           <h2>{lsi.shopTitle || "Profile Shop"}</h2>
-          <button className="shop-popup-close" onClick={onClose}>×</button>
+          <button className="shop-popup-close" onClick={onClose}>
+            ×
+          </button>
         </div>
         <div className="shop-popup-credits">
           <span>{lsi.yourCredits || "Your Credits"}: </span>
           <span className="shop-credits-value">${credits}</span>
         </div>
         <div className="shop-items-grid">
-          {SHOP_ITEMS.map((item) => (
-            <div key={item.id} className="shop-item-card">
-              <div className="shop-item-image">
-                {item.image ? (
-                  <img src={item.image} alt={item.name} />
-                ) : (
-                  <div className="shop-item-placeholder">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                    </svg>
-                  </div>
-                )}
+          {SHOP_ITEMS.map((item) => {
+            const isOwned = ownedProfilePics.includes(item.image);
+            return (
+              <div key={item.id} className={`shop-item-card ${isOwned ? "owned" : ""}`}>
+                <div className="shop-item-image">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} />
+                  ) : (
+                    <div className="shop-item-placeholder">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div className="shop-item-name">{item.name}</div>
+                <div className="shop-item-price">${item.price}</div>
+                <Button
+                  type={isOwned ? "secondary" : credits >= item.price ? "primary-fill" : "secondary"}
+                  onClick={() => handlePurchase(item)}
+                  disabled={isOwned || credits < item.price}
+                >
+                  {isOwned ? "Owned" : lsi.buy || "Buy"}
+                </Button>
               </div>
-              <div className="shop-item-name">{item.name}</div>
-              <div className="shop-item-price">${item.price}</div>
-              <Button
-                type={credits >= item.price ? "primary-fill" : "secondary"}
-                onClick={() => handlePurchase(item)}
-                disabled={credits < item.price}
-              >
-                {lsi.buy || "Buy"}
-              </Button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -122,6 +168,7 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase }) {
 export default function CasinoPage() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [credits, setCredits] = useState(0);
+  const [ownedProfilePics, setOwnedProfilePics] = useState([]);
   const [isShopOpen, setIsShopOpen] = useState(false);
   const { showError } = useNotification();
   const [, setRoute] = useRoute();
@@ -137,6 +184,7 @@ export default function CasinoPage() {
         const userId = user.id;
         const player = await Calls.player.get({ id: userId });
         setCredits(player.credits || 0);
+        setOwnedProfilePics(player.ownedProfilePics || []);
       } catch (e) {
         console.error("Failed to fetch player credits", e);
       }
@@ -148,8 +196,9 @@ export default function CasinoPage() {
     setCredits(newCredits);
   };
 
-  const handleShopPurchase = (amount) => {
-    setCredits((prev) => prev - amount);
+  const handleShopPurchase = (newCredits, newOwnedProfilePics) => {
+    setCredits(newCredits);
+    setOwnedProfilePics(newOwnedProfilePics);
   };
 
   return (
@@ -166,11 +215,7 @@ export default function CasinoPage() {
             <span className="amount-value">{credits}</span>
           </div>
         </div>
-        <div
-          className="shop-button"
-          onClick={() => setIsShopOpen(true)}
-          title={lsi.shop || "Shop"}
-        >
+        <div className="shop-button" onClick={() => setIsShopOpen(true)} title={lsi.shop || "Shop"}>
           <svg viewBox="0 0 24 24">
             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
           </svg>
@@ -183,6 +228,7 @@ export default function CasinoPage() {
         credits={credits}
         userId={user?.id}
         onPurchase={handleShopPurchase}
+        ownedProfilePics={ownedProfilePics}
       />
       {selectedGame ? (
         <>

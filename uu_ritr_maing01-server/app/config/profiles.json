@@ -133,6 +133,10 @@
       "player/updateProfilePicture": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "player/buyProfilePic": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

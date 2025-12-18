@@ -135,7 +135,36 @@ const IncrementTournamentsPlayed = {
   },
 };
 
+const BuyProfilePic = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}buyProfilePic/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${BuyProfilePic.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  PlayerNotFound: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${BuyProfilePic.UC_CODE}playerNotFound`;
+      this.message = "Player not found.";
+    }
+  },
+
+  InsufficientCredits: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${BuyProfilePic.UC_CODE}insufficientCredits`;
+      this.message = "Insufficient credits.";
+    }
+  },
+};
+
 module.exports = {
+  BuyProfilePic,
   IncrementTournamentsPlayed,
   UpdateFlappyBirdScore,
   UpdateMatchStats,

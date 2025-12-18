@@ -631,3 +631,13 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.shop-item-card.owned {
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.shop-item-card.owned .shop-item-price {
+  color: #4caf50;
+  text-decoration: line-through;
+}
