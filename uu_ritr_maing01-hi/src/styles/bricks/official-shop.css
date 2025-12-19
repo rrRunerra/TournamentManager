@@ -79,17 +79,9 @@
 }
 
 .official-shop-close {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
     width: 44px;
     height: 44px;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
+    padding: 0;
     position: absolute;
     top: 50%;
     right: 0;
@@ -97,10 +89,11 @@
 }
 
 .official-shop-close:hover {
-    background: rgba(255, 59, 48, 0.1);
-    border-color: rgba(255, 59, 48, 0.2);
-    color: #ff3b30;
-    transform: rotate(90deg);
+    background: rgba(255, 59, 48, 0.1) !important;
+    border-color: rgba(255, 59, 48, 0.2) !important;
+    color: #ff3b30 !important;
+    transform: translateY(-50%) rotate(90deg) scale(1.1) !important;
+    box-shadow: none !important;
 }
 
 .official-shop-grid {

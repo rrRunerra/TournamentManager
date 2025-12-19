@@ -124,7 +124,7 @@ export default function OfficialShopPopup({ isOpen, onClose, user }) {
                             <span className="official-shop-credits-value">${credits}</span>
                         </div>
                     </div>
-                    <button className="official-shop-close" onClick={onClose}>✕</button>
+                    <Button className="official-shop-close" type="secondary" onClick={onClose}>✕</Button>
                 </div>
 
                 <div className="official-shop-grid">
