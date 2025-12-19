@@ -502,11 +502,12 @@
 
 .shop-popup-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 1rem;
+  padding: 1rem 0;
+  position: relative;
 }
 
 .shop-popup-header h2 {
@@ -532,12 +533,16 @@
   justify-content: center;
   transition: all 0.2s;
   line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-80%);
 }
 
 .shop-popup-close:hover {
   border-color: #d4af37;
   color: #d4af37;
-  transform: rotate(90deg);
+  transform: translateY(-80%) rotate(90deg);
 }
 
 .shop-popup-credits {

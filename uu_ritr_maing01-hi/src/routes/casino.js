@@ -111,10 +111,10 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase, ownedProfileP
     try {
       const result = await Calls.player.buyProfilePic({ id: userId, profilePicUrl: item.image, price: item.price });
       onPurchase(result.credits, result.ownedProfilePics);
-      showSuccess(lsi.purchaseSuccess || "Purchase Successful!", `You bought "${item.name}"`);
+      showSuccess(lsi.purchaseSuccess || "Purchase Successful!", (lsi.youBoughtPrefix || "You bought") + " " + item.name + (lsi.youBoughtSuffix || ""));
     } catch (e) {
       console.error("Purchase failed", e);
-      showError(lsi.purchaseError || "Purchase Failed", "Please try again.");
+      showError(lsi.purchaseError || "Purchase Failed", lsi.pleaseTryAgain || "Please try again.");
     }
   };
 
@@ -154,7 +154,7 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase, ownedProfileP
                   onClick={() => handlePurchase(item)}
                   disabled={isOwned || credits < item.price}
                 >
-                  {isOwned ? "Owned" : lsi.buy || "Buy"}
+                  {isOwned ? lsi.owned || "Owned" : lsi.buy || "Buy"}
                 </Button>
               </div>
             );
