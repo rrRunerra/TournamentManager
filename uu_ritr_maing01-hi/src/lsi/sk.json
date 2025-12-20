@@ -44,7 +44,12 @@
         "flexibleDesc": "Single a double elimination turnaje",
         "historyTitle": "História turnajov",
         "historyDesc": "Všetky vaše turnaje na jednom mieste",
-        "partnersTitle": "Partneri"
+        "partnersTitle": "Partneri",
+        "ratingTitle": "Ohodnoťte našu aplikáciu",
+        "ratingSubtitle": "Vaša spätná väzba nám pomáha zlepšovať sa",
+        "ratingThanks": "Ďakujeme za vaše hodnotenie!",
+        "feedbackPlaceholder": "Podeľte sa s nami o vašu spätnú väzbu... (voliteľné)",
+        "submitFeedback": "Odoslať spätnú väzbu"
     },
     "InitAppWorkspace": {
         "notAuthorized": "Nemáte dostatočné práva na použitie aplikácie.",

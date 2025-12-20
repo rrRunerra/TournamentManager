@@ -1,12 +1,19 @@
-import React, { useEffect } from "react";
-import { useRoute, Lsi } from "uu5g05";
+import React, { useEffect, useState } from "react";
+import { useRoute, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/routes/home.css";
 import heroGif from "../assets/gif.gif";
 import { Button } from "../bricks/components/ui/Button.js";
+import emailjs from "emailjs-com";
 
 export default function Home() {
   const [, setRoute] = useRoute();
+  const lsi = useLsi(importLsi);
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [hasRated, setHasRated] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [showFeedback, setShowFeedback] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,10 +34,57 @@ export default function Home() {
     const hiddenElements = document.querySelectorAll(".animate-on-scroll");
     hiddenElements.forEach((el) => observer.observe(el));
 
+    // Load saved rating from localStorage
+    const savedRating = localStorage.getItem("matchup_rating");
+    const savedFeedback = localStorage.getItem("matchup_feedback");
+    if (savedRating) {
+      setRating(parseInt(savedRating));
+      setHasRated(true);
+    }
+    if (savedFeedback) {
+      setFeedback(savedFeedback);
+    }
+
     return () => {
       hiddenElements.forEach((el) => observer.unobserve(el));
     };
   }, []);
+
+  const handleRating = (value) => {
+    if (rating === value) {
+      // Toggle off if same star clicked
+      setRating(0);
+      setHasRated(false);
+      setShowFeedback(false);
+      setFeedback("");
+      localStorage.removeItem("matchup_rating");
+      localStorage.removeItem("matchup_feedback");
+    } else {
+      setRating(value);
+      setHasRated(false); // Reset to show feedback form
+      setShowFeedback(true);
+      localStorage.setItem("matchup_rating", value.toString());
+    }
+  };
+
+  const handleSubmitFeedback = () => {
+    setHasRated(true);
+    setShowFeedback(false);
+    if (feedback.trim()) {
+      localStorage.setItem("matchup_feedback", feedback);
+    }
+    emailjs.send(
+      "service_mekjy8j",              // 👈 tvoj service ID
+      "template_tr4crjo",      // 👈 tvoj template ID
+      {
+        rating: `${rating}/5`,
+        feedback: feedback.trim() || "Bez spätnej väzby"
+      },
+      "KvZ1fkPgcBSFTuJDw"              // 👈 tvoj public key
+    ).catch((err) => {
+      console.error("EmailJS rating error:", err);
+    });
+  };
 
   return (
     <div className="home-container">
@@ -104,6 +158,53 @@ export default function Home() {
               <Lsi import={importLsi} path={["Home", "historyDesc"]} />
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Rating Section */}
+      <section className="rating-section">
+        <div className="rating-content animate-on-scroll">
+          <h2 className="rating-title">
+            <Lsi import={importLsi} path={["Home", "ratingTitle"]} />
+          </h2>
+          <p className="rating-subtitle">
+            <Lsi import={importLsi} path={["Home", "ratingSubtitle"]} />
+          </p>
+          <div className="stars-container">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                className={`star-button ${star <= (hoverRating || rating) ? "active" : ""}`}
+                onClick={() => handleRating(star)}
+                onMouseEnter={() => setHoverRating(star)}
+                onMouseLeave={() => setHoverRating(0)}
+                aria-label={`Rate ${star} stars`}
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </button>
+            ))}
+          </div>
+          {showFeedback && !hasRated && (
+            <div className="feedback-form">
+              <textarea
+                className="feedback-textarea"
+                placeholder={lsi?.Home?.feedbackPlaceholder}
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                rows={4}
+              />
+              <Button onClick={handleSubmitFeedback} type="primary-fill" style={{ marginTop: "1rem" }}>
+                <Lsi import={importLsi} path={["Home", "submitFeedback"]} />
+              </Button>
+            </div>
+          )}
+          {hasRated && (
+            <p className="rating-thanks">
+              <Lsi import={importLsi} path={["Home", "ratingThanks"]} />
+            </p>
+          )}
         </div>
       </section>
 
