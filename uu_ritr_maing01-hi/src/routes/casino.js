@@ -118,7 +118,10 @@ function ShopPopup({ isOpen, onClose, credits, userId, onPurchase, ownedProfileP
     try {
       const result = await Calls.player.buyProfilePic({ id: userId, profilePicUrl: item.image, price: item.price });
       onPurchase(result.credits, result.ownedProfilePics);
-      showSuccess(lsi.purchaseSuccess || "Purchase Successful!", (lsi.youBoughtPrefix || "You bought") + " " + item.name + (lsi.youBoughtSuffix || ""));
+      showSuccess(
+        lsi.purchaseSuccess || "Purchase Successful!",
+        (lsi.youBoughtPrefix || "You bought") + " " + item.name + (lsi.youBoughtSuffix || ""),
+      );
     } catch (e) {
       console.error("Purchase failed", e);
       showError(lsi.purchaseError || "Purchase Failed", lsi.pleaseTryAgain || "Please try again.");
@@ -259,9 +262,7 @@ export default function CasinoPage(props) {
           )}
 
           {selectedGame === "poker" && <Poker />}
-          {selectedGame === "slots" && (
-            <SlotMachine credits={credits} updateCredits={updateCredits} userId={user.id} />
-          )}
+          {selectedGame === "slots" && <SlotMachine credits={credits} updateCredits={updateCredits} userId={user.id} />}
         </>
       ) : (
         <GameMenu onSelect={setSelectedGame} />
@@ -638,11 +639,7 @@ function SlotMachine({ credits, updateCredits, userId }) {
           <div className="slot-controls">
             <div className="slot-bet-control">
               <span>{lsi.games.slots.bet}:</span>
-              <button
-                className="bet-btn"
-                onClick={() => setBet((b) => Math.max(10, b - 10))}
-                disabled={isSpinning}
-              >
+              <button className="bet-btn" onClick={() => setBet((b) => Math.max(10, b - 10))} disabled={isSpinning}>
                 -
               </button>
               <span className="bet-amount">${bet}</span>
