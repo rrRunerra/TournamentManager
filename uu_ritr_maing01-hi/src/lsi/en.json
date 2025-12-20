@@ -44,7 +44,14 @@
     "flexibleDesc": "Single and double elimination tournaments",
     "historyTitle": "Tournament History",
     "historyDesc": "All your tournaments in one place",
-    "partnersTitle": "Partners"
+    "partnersTitle": "Partners",
+    "ratingTitle": "Rate our application",
+    "ratingSubtitle": "Your feedback helps us improve",
+    "ratingThanks": "Thank you for your rating!",
+    "feedbackPlaceholder": "Share your feedback with us... (optional)",
+    "submitFeedback": "Submit feedback",
+    "ratingStarAriaLabel": "Rate {star} stars",
+    "noFeedback": "No feedback"
   },
   "InitAppWorkspace": {
     "notAuthorized": "You do not have sufficient rights to use the application.",

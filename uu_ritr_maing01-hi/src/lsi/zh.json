@@ -43,7 +43,14 @@
         "flexibleDesc": "单败淘汰赛和双败淘汰赛",
         "historyTitle": "锦标赛历史",
         "historyDesc": "您所有的锦标赛都在一个地方",
-        "partnersTitle": "合作伙伴"
+        "partnersTitle": "合作伙伴",
+        "ratingTitle": "评价我们的应用程序",
+        "ratingSubtitle": "您的反馈能帮助我们做得更好",
+        "ratingThanks": "感谢您的评价！",
+        "feedbackPlaceholder": "分享您的反馈...（可选）",
+        "submitFeedback": "提交反馈",
+        "ratingStarAriaLabel": "评分 {star} 星",
+        "noFeedback": "无反馈"
     },
     "InitAppWorkspace": {
         "notAuthorized": "您没有足够的权限使用该应用程序。",

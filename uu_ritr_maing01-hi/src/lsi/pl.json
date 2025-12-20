@@ -43,7 +43,14 @@
         "flexibleDesc": "Turnieje pojedynczej i podwójnej eliminacji",
         "historyTitle": "Historia turniejów",
         "historyDesc": "Wszystkie Twoje turnieje w jednym miejscu",
-        "partnersTitle": "Partnerzy"
+        "partnersTitle": "Partnerzy",
+        "ratingTitle": "Oceń naszą aplikację",
+        "ratingSubtitle": "Twoja opinia pomaga nam się doskonalić",
+        "ratingThanks": "Dziękujemy za Twoją ocenę!",
+        "feedbackPlaceholder": "Podziel się z nami swoją opinią... (opcjonalnie)",
+        "submitFeedback": "Wyślij opinię",
+        "ratingStarAriaLabel": "Oceń na {star} gwiazdek",
+        "noFeedback": "Brak opinii"
     },
     "InitAppWorkspace": {
         "notAuthorized": "Nie masz wystarczających uprawnień do korzystania z aplikacji.",

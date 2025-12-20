@@ -43,7 +43,14 @@
     "flexibleDesc": "Single a double elimination turnaje",
     "historyTitle": "Historie turnajů",
     "historyDesc": "Všechny vaše turnaje na jednom místě",
-    "partnersTitle": "Partneři"
+    "partnersTitle": "Partneři",
+    "ratingTitle": "Ohodnoťte naši aplikaci",
+    "ratingSubtitle": "Vaše zpětná vazba nám pomáhá se zlepšovat",
+    "ratingThanks": "Děkujeme za vaše hodnocení!",
+    "feedbackPlaceholder": "Podělte se s námi o vaši zpětnou vazbu... (volitelné)",
+    "submitFeedback": "Odeslat zpětnou vazbu",
+    "ratingStarAriaLabel": "Ohodnoťte {star} hvězdičkami",
+    "noFeedback": "Bez zpětné vazby"
   },
   "InitAppWorkspace": {
     "notAuthorized": "Nemáte dostatečná práva k použití aplikace.",
