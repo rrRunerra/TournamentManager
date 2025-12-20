@@ -2,37 +2,37 @@
   {
     "id": 3,
     "name": "Micka",
-    "price": 2000,
+    "price": 100000,
     "image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjZjamU0Mmtxa3MyeTJyZ3ZjeTZwMW8wZWNtajB3Mjk4MGNzN2E2dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PUBxelwT57jsQ/giphy.gif"
   },
   {
     "id": 1,
     "name": ":(",
-    "price": 5000,
+    "price": 250000,
     "image": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYm9rejNzNmR0cTU2aXJ3N3o5c2lrYmp6amJnOXQ2aWJpenhtdzR2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZBK7b4vHYyb0n70zJq/giphy.gif"
   },
   {
     "id": 5,
     "name": "Khamzat Chimaev",
-    "price": 10000,
+    "price": 500000,
     "image": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2NtdzR0dWdsNTgzOGwwdWc3dDQ4NmF2ZGJ6aTByaTd0Nmh2cmZjNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8wNLwk2GbzfAxB0yt5/giphy.gif"
   },
   {
     "id": 2,
     "name": "Eminem",
-    "price": 20000,
+    "price": 1000000,
     "image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjUxNHdkYTZqcGpwdjdwMjhuNDhweGljaHluMG93bThqZzJqNjNxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6fIYAIgb8IskmXBe/giphy.gif"
   },
   {
     "id": 7,
     "name": "Homer Simpson",
-    "price": 75000,
+    "price": 2000000,
     "image": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmNiZ3h0cGljbTlkcGNtaGM5eWV0M2lkb3JlazR3bWxlaGhoMWI4dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVUn7iM8FMEU24/giphy.gif"
   },
   {
     "id": 4,
     "name": "Cartman",
-    "price": 150000,
+    "price": 5000000,
     "image": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXVscThiaDk1NmxyYmVhajV2NWN0dnBwamp5bmt2YmhnYjNhcmp2OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NaxKt9aSzAspO/giphy.gif"
   },
   {
