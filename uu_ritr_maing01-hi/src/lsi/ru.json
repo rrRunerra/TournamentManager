@@ -43,7 +43,14 @@
         "flexibleDesc": "Турниры на выбывание и с двойным выбыванием",
         "historyTitle": "История турниров",
         "historyDesc": "Все ваши турниры в одном месте",
-        "partnersTitle": "Партнёры"
+        "partnersTitle": "Партнёры",
+        "ratingTitle": "Оцените наше приложение",
+        "ratingSubtitle": "Ваш отзыв помогает нам становиться лучше",
+        "ratingThanks": "Спасибо за вашу оценку!",
+        "feedbackPlaceholder": "Поделитесь своим отзывом... (необязательно)",
+        "submitFeedback": "Отправить отзыв",
+        "ratingStarAriaLabel": "Оценить на {star} звезд",
+        "noFeedback": "Нет отзыва"
     },
     "InitAppWorkspace": {
         "notAuthorized": "У вас недостаточно прав для использования приложения.",

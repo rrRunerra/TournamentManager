@@ -43,7 +43,14 @@
         "flexibleDesc": "Egyenes kieséses és vigaszágas versenyek",
         "historyTitle": "Versenyelőzmények",
         "historyDesc": "Minden versenye egy helyen",
-        "partnersTitle": "Partnerek"
+        "partnersTitle": "Partnerek",
+        "ratingTitle": "Értékelje alkalmazásunkat",
+        "ratingSubtitle": "Visszajelzése segít nekünk a fejlődésben",
+        "ratingThanks": "Köszönjük az értékelését!",
+        "feedbackPlaceholder": "Ossza meg velünk visszajelzését... (opcionális)",
+        "submitFeedback": "Visszajelzés küldése",
+        "ratingStarAriaLabel": "{star} csillagos értékelés",
+        "noFeedback": "Nincs visszajelzés"
     },
     "InitAppWorkspace": {
         "notAuthorized": "Nincs elegendő jogosultsága az alkalmazás használatához.",

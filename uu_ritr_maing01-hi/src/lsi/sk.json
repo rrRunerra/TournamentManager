@@ -48,8 +48,10 @@
         "ratingTitle": "Ohodnoťte našu aplikáciu",
         "ratingSubtitle": "Vaša spätná väzba nám pomáha zlepšovať sa",
         "ratingThanks": "Ďakujeme za vaše hodnotenie!",
-        "feedbackPlaceholder": "Podeľte sa s nami o vašu spätnú väzbu... (voliteľné)",
-        "submitFeedback": "Odoslať spätnú väzbu"
+        "feedbackPlaceholder": "Podeľte sa s nami o vašu spätnú väzbe... (voliteľné)",
+        "submitFeedback": "Odoslať spätnú väzbu",
+        "ratingStarAriaLabel": "Ohodnoťte {star} hviezdičkami",
+        "noFeedback": "Bez spätnej väzby"
     },
     "InitAppWorkspace": {
         "notAuthorized": "Nemáte dostatočné práva na použitie aplikácie.",

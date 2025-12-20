@@ -43,7 +43,14 @@
         "flexibleDesc": "Single- und Double-Elimination-Turniere",
         "historyTitle": "Turnierverlauf",
         "historyDesc": "Alle Ihre Turniere an einem Ort",
-        "partnersTitle": "Partner"
+        "partnersTitle": "Partner",
+        "ratingTitle": "Bewerten Sie unsere App",
+        "ratingSubtitle": "Ihr Feedback hilft uns, besser zu werden",
+        "ratingThanks": "Vielen Dank für Ihre Bewertung!",
+        "feedbackPlaceholder": "Teilen Sie uns Ihr Feedback mit... (optional)",
+        "submitFeedback": "Feedback senden",
+        "ratingStarAriaLabel": "Bewerten mit {star} Sternen",
+        "noFeedback": "Kein Feedback"
     },
     "InitAppWorkspace": {
         "notAuthorized": "Sie haben keine ausreichenden Rechte, um die Anwendung zu verwenden.",
@@ -347,31 +354,31 @@
         "purchaseError": "Kauf fehlgeschlagen",
         "youBoughtPrefix": "Sie haben gekauft",
         "youBoughtSuffix": "",
-        "backToMenu": "Späť do menu",
-        "totalBet": "Celková stávka",
-        "clearBets": "Vymazať stávky",
-        "spinWheel": "Roztočiť koleso",
-        "playNow": "Hrať teraz",
-        "comingSoon": "Čoskoro...",
-        "bigWin": "VEĽKÁ VÝHRA",
-        "youWon": "Vyhrali ste",
-        "betterLuck": "Veľa šťastia nabudúce!",
-        "ballLanded": "Loptička pristála na",
-        "errorPlacingBet": "Chyba pri stávkovaní",
-        "errorUpdatingCredits": "Chyba pri aktualizácii kreditov",
-        "pleaseTryAgain": "Skúste to prosím znova.",
+        "backToMenu": "Zurück zum Menü",
+        "totalBet": "Gesamteinsatz",
+        "clearBets": "Einsätze löschen",
+        "spinWheel": "Rad drehen",
+        "playNow": "Jetzt spielen",
+        "comingSoon": "Demnächst...",
+        "bigWin": "GROSSER GEWINN",
+        "youWon": "Sie haben gewonnen",
+        "betterLuck": "Viel Glück beim nächsten Mal!",
+        "ballLanded": "Die Kugel landete auf",
+        "errorPlacingBet": "Fehler beim Platzieren des Einsatzes",
+        "errorUpdatingCredits": "Fehler beim Aktualisieren der Credits",
+        "pleaseTryAgain": "Bitte versuchen Sie es erneut.",
         "games": {
             "europeanRoulette": {
-                "title": "Európska ruleta",
-                "description": "Klasická ruleta s jednou nulou."
+                "title": "Europäisches Roulette",
+                "description": "Klassisches Roulette mit einer Null."
             },
             "americanRoulette": {
-                "title": "Americká ruleta",
-                "description": "Ruleta s dvoma nulami pre vysoké stávky."
+                "title": "Amerikanisches Roulette",
+                "description": "Doppel-Null-Roulette für hohe Einsätze."
             },
             "poker": {
                 "title": "Texas Hold'em",
-                "description": "Otestujte svoje schopnosti proti kasínu."
+                "description": "Testen Sie Ihre Fähigkeiten gegen die Bank."
             },
             "slots": {
                 "title": "Spielautomaten",

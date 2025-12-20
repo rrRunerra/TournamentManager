@@ -43,7 +43,14 @@
         "flexibleDesc": "シングルエリミネーションおよびダブルエリミネーショントーナメント",
         "historyTitle": "トーナメント履歴",
         "historyDesc": "すべてのトーナメントを1か所で",
-        "partnersTitle": "パートナー"
+        "partnersTitle": "パートナー",
+        "ratingTitle": "アプリケーションを評価する",
+        "ratingSubtitle": "あなたのフィードバックは私たちの向上に役立ちます",
+        "ratingThanks": "評価ありがとうございます！",
+        "feedbackPlaceholder": "フィードバックを共有してください...（任意）",
+        "submitFeedback": "フィードバックを送信",
+        "ratingStarAriaLabel": "星{star}つで評価",
+        "noFeedback": "フィードバックなし"
     },
     "InitAppWorkspace": {
         "notAuthorized": "アプリケーションを使用する十分な権限がありません。",
