@@ -1,10 +1,10 @@
 import Calls from "../calls.js";
 import "../styles/bricks/ownerControls.css"; // Reusing existing styles
-import { useNotification } from "./NotificationProvider.js";
-import { useConfirm } from "./ConfirmProvider.js";
+import { useNotification } from "./components/notifications/NotificationProvider.js";
+import { useConfirm } from "./components/confirm/ConfirmProvider.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import { Button } from "./atom/Button.js";
+import { Button } from "./components/ui/Button.js";
 
 export default function OngoingOwnerControls({ info, id, setInfo, setRoute }) {
   const { showSuccess, showError } = useNotification();

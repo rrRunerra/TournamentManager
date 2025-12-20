@@ -4,10 +4,11 @@ import importLsi from "../lsi/import-lsi.js";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Calls from "../calls.js";
 import "../styles/routes/tournament.css";
-import { useNotification } from "../bricks/NotificationProvider.js";
+import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
 import useUser from "../hooks/useUser.js";
-import { Button } from "../bricks/atom/Button.js";
-import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/components/ui/Card.js";
+import Grid from "../bricks/components/ui/Grid.js";
 import LoginRequired from "../bricks/LoginRequired.js";
 
 const createTournament = async ({
@@ -163,13 +164,13 @@ export default function TournamentsPage() {
               <h2 className="section-title">{lsi.noTournaments}</h2>
             </div>
           ) : (
-            <>
+            <Grid type="5x6" className="tournaments-section">
               {ongoingTournaments.map(renderTournamentCard)}
               {ongoingTournaments.length > 0 && upcomingTournaments.length > 0 && (
                 <hr className="tournament-separator" />
               )}
               {upcomingTournaments.map(renderTournamentCard)}
-            </>
+            </Grid>
           )}
         </section>
 

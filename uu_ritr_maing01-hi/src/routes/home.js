@@ -3,7 +3,7 @@ import { useRoute, Lsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/routes/home.css";
 import heroGif from "../assets/gif.gif";
-import { Button } from "../bricks/atom/Button.js";
+import { Button } from "../bricks/components/ui/Button.js";
 
 export default function Home() {
   const [, setRoute] = useRoute();

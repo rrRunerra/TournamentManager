@@ -1,0 +1,44 @@
+[
+  {
+    "id": 3,
+    "name": "Boxer",
+    "price": 500,
+    "image": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXE0cng1eno5OGFyaDdoeG5kZHQxZHJ1MmZwdXVlZm96Y3JocHcyOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wMnZ4nIh1VgcM/giphy.gif"
+  },
+  {
+    "id": 1,
+    "name": "Kobe Bryant",
+    "price": 1000,
+    "image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnM0NHdta2tqeXQ0Zjd4YnV6OGRxemc4ZGl1dDVwY3Nzd2V4cWVtdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iVOfL6bfanQw80zqmb/giphy.gif"
+  },
+  {
+    "id": 5,
+    "name": "NFL Legend",
+    "price": 2000,
+    "image": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjBnajQwYnpwaTNnYWhwYmxwdjNmbDVvZzdoZno3ejFqd3c0d2U4aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wYTpPax479uUTaOzeJ/giphy.gif"
+  },
+  {
+    "id": 2,
+    "name": "Gonzo",
+    "price": 3500,
+    "image": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTI3NmdmNjBnemdqbDI2N3Q1bHRucmlrcHpvbGk1MTg1a2FzZXF5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GvdifEjs1kfyNuZ6tv/giphy.gif"
+  },
+  {
+    "id": 7,
+    "name": "Soccer Legend",
+    "price": 5000,
+    "image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3QwZnpuMGx1emlyOXc1OXkxdTRxbWhqeXRiczFxZmdjN3F6Nm5zciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QmEV0BAC1xk0ZL4iAx/giphy.gif"
+  },
+  {
+    "id": 4,
+    "name": "Ovi Ovi",
+    "price": 7500,
+    "image": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDlzcXBkeDNiZ2w2YjZydTFzOHM3OTNyaDltdHo0YjdjcnI3a2kxbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JFVx03XKGqtcvf7iRZ/giphy.gif"
+  },
+  {
+    "id": 6,
+    "name": "NBA Greedy",
+    "price": 10000,
+    "image": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaThpNW56cWJhbmdmZjRrZjlycjU0N2luNGVjYTJwdmxqMHduMXlibCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PO4exUD3Ywa64Ej7tg/giphy.gif"
+  }
+]

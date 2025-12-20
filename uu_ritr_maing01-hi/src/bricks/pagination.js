@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/bricks/pagination.css";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import { Button } from "./atom/Button.js";
+import { Button } from "./components/ui/Button.js";
 
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
   const lsi = useLsi(importLsi, ["Pagination"]);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { SocketContext, socket } from "../context/SocketContext";
 import useUser from "../hooks/useUser";
-import Lobby from "../bricks/components/Lobby";
-import Room from "../bricks/components/Room";
+import Lobby from "../bricks/components/poker/Lobby";
+import Room from "../bricks/components/poker/Room";
 
 export default function App() {
   const [players, setPlayers] = useState([]);
@@ -44,7 +44,6 @@ export default function App() {
   return (
     <SocketContext.Provider value={socket}>
       <div className="App">
-        <h1>🃏 Poker Room Multiplayer 🃏</h1>
         {!inRoom ? (
           <Lobby onJoinRoom={handleJoinRoom} />
         ) : (

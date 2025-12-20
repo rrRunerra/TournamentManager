@@ -2,11 +2,12 @@ import "../styles/bricks/navbar.css";
 import { useEffect, useState, useRef } from "react";
 import { useRoute, Utils, Environment, useLanguage, Lsi, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import { useConfirm } from "./ConfirmProvider.js";
+import { useConfirm } from "./components/confirm/ConfirmProvider.js";
 import useUser from "../hooks/useUser.js";
 import ContactModal from "./ContactModal.js";
-import { Card, CardIcon } from "./atom/Card.js";
-import OfficialShopPopup from "./OfficialShopPopup.js";
+import { Card, CardIcon } from "../bricks/components/ui/Card.js";
+import Shop from "./shop/shop.js";
+import shopItems from "./shop/shop_items.json";
 
 const LANGUAGES = [
   { code: "en", label: "EN", icon: "🇬🇧" },
@@ -188,7 +189,7 @@ export default function Navbar() {
                   src={avatar}
                   alt="Avatar"
                   className="account-icon"
-                  style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }}
+                  style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
                   onClick={() => setIsAccountOpen(!isAccountOpen)}
                 />
               ) : (
@@ -302,7 +303,7 @@ export default function Navbar() {
                 src={avatar}
                 alt="Avatar"
                 className="account-icon"
-                style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
+                style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }}
                 onClick={() => setIsAccountOpen(!isAccountOpen)}
               />
             ) : (
@@ -487,7 +488,7 @@ export default function Navbar() {
         </div>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-      <OfficialShopPopup isOpen={isOfficialShopOpen} onClose={() => setIsOfficialShopOpen(false)} user={user} />
+      <Shop isOpen={isOfficialShopOpen} onClose={() => setIsOfficialShopOpen(false)} user={user} items={shopItems} />
     </div>
   );
 }

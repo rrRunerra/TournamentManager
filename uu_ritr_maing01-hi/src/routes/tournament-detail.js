@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRoute, useLsi, Environment, useLanguage } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import { Card, CardDescription, CardFooter, CardTitle } from "../bricks/cards.js";
-import CustomBracket from "../bricks/brackets/CustomBracket.js";
+import { Card, CardDetails, CardStatus, CardTitle, CardText, CardFooter } from "../bricks/components/ui/Card.js";
+import CustomBracket from "../bricks/components/brackets/CustomBracket.js";
 import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
 import OwnerControls from "../bricks/ownerControls.js";
 import Calls from "../calls.js";
 import "../styles/routes/tournamentDetail.css";
-import { useNotification } from "../bricks/NotificationProvider.js";
+import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
 import ImgEditor from "../bricks/image-editor.js";
 import useUser from "../hooks/useUser.js";
-import { Button } from "../bricks/atom/Button.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import Grid from "../bricks/components/ui/Grid.js";
 
 export default function TournamentDetailPage() {
   const [info, setInfo] = useState(null);
@@ -226,7 +227,7 @@ export default function TournamentDetailPage() {
         </div>
       </div>
       {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
-      <div className="tournament-detail-team-grid">
+      <Grid type="default" className="tournament-detail-team-grid">
         {info.teams.map((team) => {
           const isJoined = team.players?.includes(user.id);
           const isFull = (team.players?.length || 0) >= info.teamSize;
@@ -234,22 +235,22 @@ export default function TournamentDetailPage() {
           return (
             <Card
               key={team.id}
+              type="team"
               // Renamed class "team-card" to "tournament-detail-team-card"
               className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""} ${isFull ? "full" : ""}`}
               onClick={() => !isFull && joinTeam(id, team.id, user.id)}
             >
               <CardTitle>{team.name}</CardTitle>
-              <CardDescription>
+              <CardText>
                 {lsi.players} {team.players?.length || 0} / {info.teamSize}
-              </CardDescription>
+              </CardText>
               {/* Note: CardFooter content doesn't have a direct class change,
                   but its container selector was updated in the CSS. */}
-              <CardFooter>{joiningTeam === team.id ? lsi.joining : ""}</CardFooter>
+              {joiningTeam === team.id && <CardFooter>{lsi.joining}</CardFooter>}
             </Card>
           );
         })}
-      </div>
-
+      </Grid>
       {isOwner && (
         <OwnerControls
           id={id}

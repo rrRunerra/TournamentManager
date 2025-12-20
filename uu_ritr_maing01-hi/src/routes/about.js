@@ -3,8 +3,8 @@ import "../styles/routes/about.css"; // Import your new CSS file
 import FlappyBird from "../bricks/flappy-bird";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import { Button } from "../bricks/atom/Button.js";
-import { Card, CardTitle, CardTopLine, CardAvatar, CardRole, CardText } from "../bricks/atom/Card.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import { Card, CardTitle, CardTopLine, CardAvatar, CardRole, CardText } from "../bricks/components/ui/Card.js";
 
 const AboutPage = () => {
   const [showGame, setShowGame] = useState(false);

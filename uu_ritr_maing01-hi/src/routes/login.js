@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRoute, useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
-import DarkVeil from "../bricks/DarkVeil.js";
+import DarkVeil from "../bricks/components/backgrounds/DarkVeil.js";
 import Calls from "../calls.js";
 import "../styles/routes/login.css";
 import useUser from "../hooks/useUser.js";
-import { Button } from "../bricks/atom/Button.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import Input from "../bricks/components/ui/Input.js";
 
 const LoginLogo = () => (
   <div>
@@ -14,22 +15,14 @@ const LoginLogo = () => (
   </div>
 );
 
-const LoginInput = ({ type = "text", placeholder, value, onChange }) => (
-  <input
-    type={type}
-    placeholder={placeholder}
-    value={value}
-    onChange={(e) => onChange(e.target.value)}
-    className="login-input"
-  />
-);
+// LoginInput removed in favor of reusable Input component
 
 const LoginError = ({ message }) => (message ? <div className="login-error">{message}</div> : null);
 
 const LoginForm = ({ onSubmit, username, setUsername, password, setPassword, error, loading, lsi }) => (
   <form onSubmit={onSubmit}>
-    <LoginInput placeholder={lsi.username} value={username} onChange={setUsername} />
-    <LoginInput type="password" placeholder={lsi.password} value={password} onChange={setPassword} />
+    <Input placeholder={lsi.username} value={username} onChange={setUsername} className="login-input" />
+    <Input type="password" placeholder={lsi.password} value={password} onChange={setPassword} className="login-input" />
     <LoginError message={error} />
 
     <Button onClick={onSubmit} type="primary-fill" disabled={loading} style={{ width: "100%" }}>

@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/bricks/createTournamentModal.css";
-import { useNotification } from "./NotificationProvider.js";
+import { useNotification } from "./components/notifications/NotificationProvider.js";
 import { useLsi, useLanguage } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import Calls from "../calls.js";
 import useUser from "../hooks/useUser.js";
-import DateTimePicker from "./DateTimePicker.js";
+import DateTimePicker from "./components/input/DateTimePicker.js";
+import Input from "./components/ui/Input.js";
+import { Button } from "./components/ui/Button.js";
+import Select from "./components/ui/Select.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -152,22 +155,14 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
       case 1:
         return (
           <>
-            <label>{lsi.name}</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="form-control"
-              required
-              autoFocus
-            />
+            <Input label={lsi.name} type="text" value={name} onChange={setName} required autoFocus />
 
-            <label>{lsi.description}</label>
-            <textarea
-              ref={descriptionRef}
+            <Input
+              label={lsi.description}
+              type="textarea"
+              inputRef={descriptionRef}
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="form-control"
+              onChange={setDescription}
               required
               style={{ overflow: "hidden" }}
             />
@@ -178,39 +173,25 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           <>
             <DateTimePicker label={lsi.startDate} value={startDate} onChange={setStartDate} locale={lang} />
 
-            <DateTimePicker
-              label={lsi.endDate}
-              value={endDate}
-              onChange={setEndDate}
-              locale={lang}
-              direction="up"
-            />
+            <DateTimePicker label={lsi.endDate} value={endDate} onChange={setEndDate} locale={lang} direction="up" />
           </>
         );
       case 3:
         return (
           <>
-            <label>{lsi.bracketType}</label>
-            <select
-              id="bracketType"
+            <Select
+              label={lsi.bracketType}
               value={bracketType}
-              onChange={(e) => setBracketType(e.target.value)}
-              className="form-control"
-            >
-              <option value="single">{lsi.singleElimination}</option>
-              <option value="double">{lsi.doubleElimination}</option>
-              <option value="robin">{lsi.roundRobin}</option>
-            </select>
+              onChange={setBracketType}
+              options={[
+                { value: "single", label: lsi.singleElimination },
+                { value: "double", label: lsi.doubleElimination },
+                { value: "robin", label: lsi.roundRobin },
+              ]}
+            />
 
             <label>{lsi.teamSize}</label>
-            <input
-              type="number"
-              value={teamSize}
-              onChange={(e) => setTeamSize(e.target.value)}
-              className="form-control"
-              min="1"
-              required
-            />
+            <Input type="number" value={teamSize} onChange={setTeamSize} min="1" required />
           </>
         );
       case 4:
@@ -218,28 +199,29 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
           <>
             <label>{lsi.teams}</label>
             <div className="team-input-container">
-              <input
+              <Input
                 type="text"
                 value={teamName}
-                onChange={(e) => setTeamName(e.target.value)}
+                onChange={setTeamName}
                 placeholder={lsi.teamPlaceholder}
                 className="team-input"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") addTeam();
                 }}
+                noMargin
               />
-              <button className="btn" onClick={addTeam}>
+              <Button onClick={addTeam} type="primary-fill">
                 {lsi.add}
-              </button>
+              </Button>
             </div>
 
             <ul className="teams-list">
               {teams.map((team, index) => (
                 <li key={index} className="team-item">
                   <span>{team}</span>
-                  <button onClick={() => removeTeam(index)} className="remove-team-btn">
+                  <Button onClick={() => removeTeam(index)} type="danger" size="small">
                     ✕
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -261,23 +243,23 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
         <div className="modal-actions">
           {currentStep > 1 && (
-            <button onClick={handleBack} className="btn-secondary">
+            <Button onClick={handleBack} type="secondary">
               {lsi.back || "Back"}
-            </button>
+            </Button>
           )}
 
-          <button onClick={handleClose} className="btn-secondary">
+          <Button onClick={handleClose} type="secondary">
             {lsi.cancel}
-          </button>
+          </Button>
 
           {currentStep < 4 ? (
-            <button onClick={handleNext} className="btn-primary">
+            <Button onClick={handleNext} type="primary-fill">
               {lsi.next || "Next"}
-            </button>
+            </Button>
           ) : (
-            <button onClick={handleFinalSave} className="btn-primary">
+            <Button onClick={handleFinalSave} type="primary-fill">
               {lsi.save}
-            </button>
+            </Button>
           )}
         </div>
       </div>

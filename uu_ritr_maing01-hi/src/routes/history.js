@@ -7,8 +7,9 @@ import Pagination from "../bricks/pagination.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import useUser from "../hooks/useUser.js";
-import { Button } from "../bricks/atom/Button.js";
-import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/atom/Card.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/components/ui/Card.js";
+import Grid from "../bricks/components/ui/Grid.js";
 import LoginRequired from "../bricks/LoginRequired.js";
 
 export default function HistoryPage() {
@@ -161,7 +162,7 @@ export default function HistoryPage() {
         </div>
 
         {/* TOURNAMENT LIST */}
-        <section className="tournaments-section">
+        <Grid type="5x3" className="tournaments-section">
           {filteredTournaments.length === 0 ? (
             <div className="section-header">
               <h2 className="section-title">
@@ -192,7 +193,7 @@ export default function HistoryPage() {
               </Card>
             ))
           )}
-        </section>
+        </Grid>
 
         {filteredTournaments.length > 0 && (
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

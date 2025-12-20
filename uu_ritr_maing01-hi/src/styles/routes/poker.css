@@ -1,42 +1,90 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1e1e1e;
-  color: white;
-}
-
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../assets/casino_bg.gif");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-input,
-button {
-  margin: 8px;
-  padding: 10px;
-  font-size: 16px;
+.lobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 24px;
+  border: 1px solid #333;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  width: 90%;
+  margin: 2rem auto;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+.lobby-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-button:hover:not(:disabled) {
-  background-color: #0056b3;
+.lobby-header h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
 
-button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
+.lobby-emoji {
+  font-size: 2rem;
+}
+
+.lobby h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.5rem;
+  color: #ff8e53;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.lobby-description {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.lobby-form {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.lobby-form > * {
+  flex: 1;
+}
+
+.lobby-form .input-wrapper {
+  margin-bottom: 0;
+}
+
+.lobby-form .custom-input,
+.lobby-form button {
+  height: 3.2rem;
+  box-sizing: border-box;
+}
+
+.lobby-form button {
+  flex: 0.8;
+  padding: 0 1.5rem; /* Horizontal padding only, height is fixed */
 }
 
 .room h2 {
@@ -124,31 +172,12 @@ button:disabled {
 
 .player-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 1rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.btn-red {
-  background-color: #d9534f;
-}
-.btn-red:hover:not(:disabled) {
-  background-color: #c9302c;
-}
-
-.btn-green {
-  background-color: #5cb85c;
-}
-.btn-green:hover:not(:disabled) {
-  background-color: #449d44;
-}
-
-.btn-blue {
-  background-color: #0275d8;
-}
-.btn-blue:hover:not(:disabled) {
-  background-color: #025aa5;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .showdown-container {

@@ -4,7 +4,8 @@ import Calls from "../calls.js";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/routes/profile.css";
 import useUser from "../hooks/useUser.js";
-import { Button } from "../bricks/atom/Button.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import Grid from "../bricks/components/ui/Grid.js";
 import Profile1 from "../assets/profiles/1.png";
 import Profile2 from "../assets/profiles/2.png";
 import Profile3 from "../assets/profiles/3.png";
@@ -261,33 +262,47 @@ export default function ProfilePage() {
       </div>
 
       {/* Last Played Tournaments Section */}
-      {lastTournaments.length > 0 && (
-        <div style={{ marginTop: "2rem" }}>
-          <h2 className="stats-title">{lsi.lastTournaments}</h2>
-          <div className="stats-grid">
-            {lastTournaments.map((t) => {
-              const playerId = id || stats.id;
-
-              return (
-                <div
-                  key={t.id}
-                  className="profile-tournament-card"
-                  onClick={() => {
-                    setRoute("tournamentDetail", { id: t.id });
-                  }}
-                >
-                  <div className="profile-tournament-card-name">{t.name}</div>
-                  <div className="profile-tournament-card-date">{new Date(t.endDate).toLocaleDateString()}</div>
-                  <div style={{ marginTop: "1rem" }}>
-                    <div className="profile-tournament-card-team-label">Tím</div>
-                    <div className="profile-tournament-card-team-name">{t.teamName}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      <div style={{ marginTop: "2rem" }}>
+        <h2 className="stats-title">{lsi.lastTournaments}</h2>
+        <Grid type="3x1" className="stats-grid">
+          {/* Render real tournaments */}
+          {lastTournaments.map((t) => (
+            <div
+              key={t.id}
+              className="profile-tournament-card"
+              onClick={() => {
+                setRoute("tournamentDetail", { id: t.id });
+              }}
+            >
+              <div className="profile-tournament-card-name">{t.name}</div>
+              <div className="profile-tournament-card-date">{new Date(t.endDate).toLocaleDateString()}</div>
+              <div style={{ marginTop: "1rem" }}>
+                <div className="profile-tournament-card-team-label">Tím</div>
+                <div className="profile-tournament-card-team-name">{t.teamName}</div>
+              </div>
+            </div>
+          ))}
+          {/* Render placeholders for remaining spots up to 3 */}
+          {[...Array(Math.max(0, 3 - lastTournaments.length))].map((_, i) => (
+            <div key={`placeholder-${i}`} className="profile-tournament-card-placeholder">
+              <div className="placeholder-title" />
+              <div className="placeholder-line" />
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "1rem",
+                }}
+              >
+                <div className="placeholder-line" style={{ width: "30%", height: "0.8rem" }} />
+                <div className="placeholder-team" />
+              </div>
+            </div>
+          ))}
+        </Grid>
+      </div>
 
       <AvatarModal
         isOpen={isAvatarModalOpen}

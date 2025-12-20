@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "../bricks/atom/Button.js";
-import { useNotification } from "../bricks/NotificationProvider.js";
-import { useConfirm } from "../bricks/ConfirmProvider.js";
+import { Button } from "../bricks/components/ui/Button.js";
+import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
+import { useConfirm } from "../bricks/components/confirm/ConfirmProvider.js";
 import Pagination from "../bricks/pagination.js";
-import DateTimePicker from "../bricks/DateTimePicker.js";
+import DateTimePicker from "../bricks/components/input/DateTimePicker.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import CasinoPage from "./casino.js";
 import Calls from "../calls";
@@ -17,7 +17,7 @@ import {
   CardIcon,
   CardDetails,
   CardStatus,
-} from "../bricks/atom/Card.js";
+} from "../bricks/components/ui/Card.js";
 
 export default function TestPage(props) {
   const { showSuccess, showError } = useNotification();

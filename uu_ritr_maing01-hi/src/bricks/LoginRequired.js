@@ -1,6 +1,6 @@
 import React from "react";
 import { useRoute } from "uu5g05";
-import { Button } from "./atom/Button.js";
+import { Button } from "./components/ui/Button.js";
 import "../styles/bricks/LoginRequired.css";
 
 export default function LoginRequired({ lsi }) {

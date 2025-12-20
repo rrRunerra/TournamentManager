@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import "../styles/bricks/createTournamentModal.css";
-import { useNotification } from "./NotificationProvider.js";
+import { useNotification } from "./components/notifications/NotificationProvider.js";
 import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import emailjs from "emailjs-com";
-import { Button } from "./atom/Button.js";
+import { Button } from "./components/ui/Button.js";
+import Input from "./components/ui/Input.js";
+import Select from "./components/ui/Select.js";
 
 const MIN_SUBMIT_TIME = 3000;
 const MAX_DESCRIPTION_LENGTH = 2000;
@@ -143,84 +145,38 @@ export default function ContactModal({ isOpen, onClose }) {
         <h3 className="modal-header">{lsi.header}</h3>
 
         <div className="modal-body">
-          <label>{lsi.name}</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-control"
-            autoFocus
+          <Input label={lsi.name} type="text" value={name} onChange={setName} autoFocus />
+
+          <Select
+            label={lsi.questionType}
+            value={questionType}
+            onChange={setQuestionType}
+            options={[
+              { value: "technical", label: lsi.typeTechnical },
+              { value: "function", label: lsi.typeFunction },
+              { value: "idea", label: lsi.typeIdea },
+              { value: "partnership", label: lsi.typePartnership },
+              { value: "other", label: lsi.typeOther },
+            ]}
           />
 
-          <label style={{ marginTop: "16px" }}>{lsi.questionType}</label>
-          <div className="radio-group">
-            <label>
-              <input
-                type="radio"
-                value="technical"
-                checked={questionType === "technical"}
-                onChange={(e) => setQuestionType(e.target.value)}
-              />{" "}
-              {lsi.typeTechnical}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="function"
-                checked={questionType === "function"}
-                onChange={(e) => setQuestionType(e.target.value)}
-              />{" "}
-              {lsi.typeFunction}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="idea"
-                checked={questionType === "idea"}
-                onChange={(e) => setQuestionType(e.target.value)}
-              />{" "}
-              {lsi.typeIdea}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="partnership"
-                checked={questionType === "partnership"}
-                onChange={(e) => setQuestionType(e.target.value)}
-              />{" "}
-              {lsi.typePartnership}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="other"
-                checked={questionType === "other"}
-                onChange={(e) => setQuestionType(e.target.value)}
-              />{" "}
-              {lsi.typeOther}
-            </label>
-          </div>
-
           {questionType === "other" && (
-            <input
+            <Input
               type="text"
               value={otherType}
-              onChange={(e) => setOtherType(e.target.value)}
+              onChange={setOtherType}
               placeholder={lsi.typeOtherPlaceholder}
-              className="form-control"
               style={{ marginTop: "8px" }}
             />
           )}
 
-          <label style={{ marginTop: "16px" }}>
-            {lsi.description} ({description.length}/{MAX_DESCRIPTION_LENGTH})
-          </label>
-          <textarea
-            ref={descriptionRef}
+          <Input
+            label={`${lsi.description} (${description.length}/${MAX_DESCRIPTION_LENGTH})`}
+            type="textarea"
+            inputRef={descriptionRef}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="form-control"
-            style={{ minHeight: "100px" }}
+            onChange={setDescription}
+            style={{ minHeight: "100px", overflow: "hidden" }}
           />
 
           <div style={{ marginTop: "16px" }}>
@@ -237,8 +193,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
           {replyByEmail && (
             <div style={{ marginTop: "8px" }}>
-              <label>{lsi.emailLabel}</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" />
+              <Input label={lsi.emailLabel} type="email" value={email} onChange={setEmail} />
             </div>
           )}
         </div>

@@ -1,0 +1,57 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ff8e53;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.custom-input {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  outline: none;
+}
+
+.custom-input:focus {
+  border-color: #ff6b35;
+  background-color: #1f1f1f;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.custom-input::placeholder {
+  color: #666;
+}
+
+textarea.custom-input {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Number input specific styles */
+.custom-input[type="number"]::-webkit-inner-spin-button,
+.custom-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.custom-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
