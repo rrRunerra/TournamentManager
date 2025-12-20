@@ -38,10 +38,10 @@ export const getRandomRouletteWinBet = (layoutType = "european") => {
 const SHOP_ITEMS = [
   {
     id: 3,
-    name: "Ronaldinho",
-    price: 1000,
+    name: "Boxer",
+    price: 2000,
     image:
-      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZoNThjd3FxNzdtMXV0MXNlcThucDVmM2wwaTNjZ2wyMTM2dHJnbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Zesaf6z5hUWAsKI/giphy.gif",
+      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXE0cng1eno5OGFyaDdoeG5kZHQxZHJ1MmZwdXVlZm96Y3JocHcyOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wMnZ4nIh1VgcM/giphy.gif",
   },
   {
     id: 1,
@@ -63,6 +63,13 @@ const SHOP_ITEMS = [
     price: 20000,
     image:
       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTI3NmdmNjBnemdqbDI2N3Q1bHRucmlrcHpvbGk1MTg1a2FzZXF5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GvdifEjs1kfyNuZ6tv/giphy.gif",
+  },
+  {
+    id: 7,
+    name: "Soccer Legend",
+    price: 75000,
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3QwZnpuMGx1emlyOXc1OXkxdTRxbWhqeXRiczFxZmdjN3F6Nm5zciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QmEV0BAC1xk0ZL4iAx/giphy.gif",
   },
   {
     id: 4,
