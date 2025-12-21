@@ -174,8 +174,6 @@ export default function TournamentDetailPage() {
     );
   }
 
-  console.log();
-
   return (
     // Renamed class "tournament-container" to "tournament-detail-container"
     <div className="tournament-detail-container">
@@ -231,14 +229,16 @@ export default function TournamentDetailPage() {
         {info.teams.map((team) => {
           const isJoined = team.players?.includes(user.id);
           const isFull = (team.players?.length || 0) >= info.teamSize;
+          const canJoin = !isFull && team.allowedClasses.includes(user.class);
 
           return (
             <Card
               key={team.id}
               type="team"
               // Renamed class "team-card" to "tournament-detail-team-card"
-              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""} ${isFull ? "full" : ""}`}
-              onClick={() => !isFull && joinTeam(id, team.id, user.id)}
+              className={`tournament-detail-team-card ${joiningTeam === team.id ? "joining" : ""} ${isJoined ? "joined" : ""} ${isFull ? "full" : ""} ${!canJoin && !isJoined && !isFull ? "disabled" : ""}`}
+              onClick={() => canJoin && joinTeam(id, team.id, user.id)}
+              style={{ cursor: canJoin ? "pointer" : "not-allowed", opacity: canJoin || isJoined ? 1 : 0.6 }}
             >
               <CardTitle>{team.name}</CardTitle>
               <CardText>
@@ -247,6 +247,13 @@ export default function TournamentDetailPage() {
               {/* Note: CardFooter content doesn't have a direct class change,
                   but its container selector was updated in the CSS. */}
               {joiningTeam === team.id && <CardFooter>{lsi.joining}</CardFooter>}
+              {!canJoin && !isJoined && !isFull && (
+                <CardFooter style={{ color: "red", fontSize: "0.8rem" }}>
+                  {team.allowedClasses && team.allowedClasses.length > 0
+                    ? `Only for: ${team.allowedClasses.join(", ")}`
+                    : "Cannot join"}
+                </CardFooter>
+              )}
             </Card>
           );
         })}

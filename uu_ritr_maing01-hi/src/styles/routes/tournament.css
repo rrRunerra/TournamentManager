@@ -68,4 +68,8 @@
   margin: 1rem 0;
 }
 
+.no-tournaments-message {
+  margin-top: 5rem;
+}
+
 /* Login Prompt Styles moved to LoginRequired.css */

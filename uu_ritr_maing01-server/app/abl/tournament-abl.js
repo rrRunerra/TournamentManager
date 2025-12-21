@@ -240,6 +240,7 @@ class TournamentAbl {
           name: t?.name,
           id: t?.id,
           players: t?.players,
+          allowedClasses: t?.allowedClasses,
         };
       }),
     );
@@ -415,7 +416,8 @@ class TournamentAbl {
     const teams = dtoIn.teams.map((team) => {
       return {
         id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-        name: team,
+        name: typeof team === "object" ? team.name : team,
+        allowedClasses: typeof team === "object" ? team.allowedClasses : [],
         players: [],
         tournamentId: tId,
       };

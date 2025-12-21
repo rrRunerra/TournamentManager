@@ -162,15 +162,15 @@ export default function HistoryPage() {
         </div>
 
         {/* TOURNAMENT LIST */}
-        <Grid type="5x3" className="tournaments-section">
-          {filteredTournaments.length === 0 ? (
-            <div className="section-header">
-              <h2 className="section-title">
-                {selectedYear || selectedMonth || searchQuery ? lsi.noTournaments : lsi.noHistory}
-              </h2>
-            </div>
-          ) : (
-            currentItems.map((tournament) => (
+        {filteredTournaments.length === 0 ? (
+          <div className="section-header no-tournaments-message">
+            <h2 className="section-title">
+              {selectedYear || selectedMonth || searchQuery ? lsi.noTournaments : lsi.noHistory}
+            </h2>
+          </div>
+        ) : (
+          <Grid type="5x3" className="tournaments-section">
+            {currentItems.map((tournament) => (
               <Card
                 type="tournament"
                 key={tournament.id}
@@ -191,9 +191,9 @@ export default function HistoryPage() {
 
                 <CardStatus>{lsi.finished}</CardStatus>
               </Card>
-            ))
-          )}
-        </Grid>
+            ))}
+          </Grid>
+        )}
 
         {filteredTournaments.length > 0 && (
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

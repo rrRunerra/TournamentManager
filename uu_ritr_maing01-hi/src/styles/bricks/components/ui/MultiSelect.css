@@ -1,0 +1,171 @@
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.select-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ff8e53;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.custom-select-container {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.custom-select-trigger {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-select-container.open .custom-select-trigger {
+  border-color: #ff6b35;
+  background-color: #1f1f1f;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.select-arrow {
+  color: #ff8e53;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.custom-select-container.open .select-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s ease;
+}
+
+.custom-select-container.open {
+  z-index: 100;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-select-option {
+  padding: 0.8rem 1rem;
+  color: #bbb;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.custom-select-option:hover {
+  background-color: #252525;
+  color: #fff;
+}
+
+.custom-select-option.selected {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: #ff8e53;
+  font-weight: 600;
+}
+
+.checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  transition: all 0.2s;
+}
+
+.custom-select-option.selected .checkbox {
+  background: #ff8e53;
+  border-color: #ff8e53;
+  color: #1a1a1a;
+}
+
+/* Minimal Mode */
+.custom-select-container.minimal {
+  width: auto;
+  display: inline-block;
+}
+
+.custom-select-trigger-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%; /* Match remove button shape if desired, or keep rounded rect */
+  color: #666;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05); /* Slight background to match button feel */
+  padding: 0;
+}
+
+.custom-select-trigger-icon:hover,
+.custom-select-container.open .custom-select-trigger-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.custom-select-trigger-icon.active {
+  color: #ff8e53;
+  background: rgba(255, 142, 83, 0.15);
+}
+
+.badge-check {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #ff8e53;
+  color: #1a1a1a;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1a1a1a; /* Border to separate from icon */
+}

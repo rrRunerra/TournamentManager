@@ -117,7 +117,7 @@
 .profile-tournament-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,6 +129,7 @@
   flex: 1;
   min-width: 200px;
   text-align: center;
+  height: 12rem;
 }
 
 .profile-tournament-card:hover {
@@ -139,8 +140,8 @@
 }
 
 .profile-tournament-card-name {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
   font-weight: bold;
   color: #fff;
 }
@@ -163,21 +164,6 @@
   color: #ff8e53;
   font-weight: bold;
   font-size: 1.2rem;
-}
-
-.profile-tournament-card-placeholder {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 16px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px dashed rgba(255, 255, 255, 0.05);
-  height: 200px; /* Match the height of the real cards roughly */
-  flex: 1;
-  min-width: 200px;
-  margin-bottom: 1rem;
 }
 
 /* Avatar Editing Styles */

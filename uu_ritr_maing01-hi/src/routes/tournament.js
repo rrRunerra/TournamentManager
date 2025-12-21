@@ -160,7 +160,7 @@ export default function TournamentsPage() {
       <div className="background">
         <section className="tournaments-section">
           {tournaments.length === 0 ? (
-            <div className="section-header">
+            <div className="section-header no-tournaments-message">
               <h2 className="section-title">{lsi.noTournaments}</h2>
             </div>
           ) : (

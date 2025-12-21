@@ -22,7 +22,19 @@
   border: 1px solid #333;
   font-family: "Space Grotesk", sans-serif;
   position: relative;
+  transition:
+    width 0.3s ease,
+    max-width 0.3s ease,
+    min-height 0.3s ease;
   /* overflow: hidden; Removed to allow datepicker dropdown to show */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content-large {
+  width: 50rem;
+  max-width: 90vw;
+  min-height: 40rem;
 }
 
 .modal-header {
@@ -32,6 +44,12 @@
   text-align: center;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.modal-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Form Controls */
@@ -86,6 +104,14 @@ label {
   margin-left: 0.25rem;
 }
 
+.helper-text {
+  color: #999;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  margin-left: 0.25rem;
+}
+
 /* Team Input Section */
 .team-input-container {
   display: flex;
@@ -134,24 +160,42 @@ label {
   margin-bottom: 1.5rem;
   padding: 0;
   list-style: none;
-  max-height: 12.5rem;
+  max-height: 25rem;
   overflow-y: auto;
-  border: 1px solid #333;
-  border-radius: 0.75rem;
-  background: #1a1a1a;
+  /* border: 1px solid #333; */
+  /* border-radius: 0.75rem; */
+  /* background: #1a1a1a; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .team-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #2a2a2a;
+  padding: 0.5rem 1rem;
+  border: 1px solid #333;
+  border-radius: 0.75rem;
+  background: #1a1a1a;
   transition: background 0.2s;
+  aspect-ratio: 3/1;
+  position: relative;
+}
+
+.team-item.placeholder {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.team-placeholder {
+  height: 100% !important;
+  margin-bottom: 0 !important;
 }
 
 .team-item:last-child {
-  border-bottom: none;
+  border-bottom: none; /* Not needed for cards, but keeping for safety if reused */
 }
 
 .team-item:hover {
@@ -161,6 +205,36 @@ label {
 .team-item span {
   color: #e0e0e0;
   font-size: 0.95rem;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  /* overflow: hidden; Removed to allow MultiSelect dropdown to show */
+  width: 100%;
+}
+
+.team-name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.team-classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.class-tag {
+  font-size: 0.7rem !important;
+  background: rgba(255, 142, 83, 0.15);
+  color: #ff8e53 !important;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .remove-team-btn {
@@ -189,7 +263,7 @@ label {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
-  margin-top: 2rem;
+  margin-top: auto;
   padding-top: 1.5rem;
   border-top: 1px solid #2a2a2a;
 }

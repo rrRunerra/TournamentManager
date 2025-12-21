@@ -6,6 +6,7 @@ import "../styles/routes/profile.css";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/components/ui/Button.js";
 import Grid from "../bricks/components/ui/Grid.js";
+import GridPlaceholder from "../bricks/components/ui/GridPlaceholder.js";
 import Profile1 from "../assets/profiles/1.png";
 import Profile2 from "../assets/profiles/2.png";
 import Profile3 from "../assets/profiles/3.png";
@@ -215,6 +216,8 @@ export default function ProfilePage() {
           <span>{stats.role}</span>
           <span>•</span>
           <span>{stats.school}</span>
+          <span>•</span>
+          <span>{stats.class}</span>
         </div>
       </div>
 
@@ -284,22 +287,7 @@ export default function ProfilePage() {
           ))}
           {/* Render placeholders for remaining spots up to 3 */}
           {[...Array(Math.max(0, 3 - lastTournaments.length))].map((_, i) => (
-            <div key={`placeholder-${i}`} className="profile-tournament-card-placeholder">
-              <div className="placeholder-title" />
-              <div className="placeholder-line" />
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "1rem",
-                }}
-              >
-                <div className="placeholder-line" style={{ width: "30%", height: "0.8rem" }} />
-                <div className="placeholder-team" />
-              </div>
-            </div>
+            <GridPlaceholder key={`placeholder-${i}`} type="3x1" />
           ))}
         </Grid>
       </div>

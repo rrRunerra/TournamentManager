@@ -9,6 +9,8 @@ import DateTimePicker from "./components/input/DateTimePicker.js";
 import Input from "./components/ui/Input.js";
 import { Button } from "./components/ui/Button.js";
 import Select from "./components/ui/Select.js";
+import MultiSelect from "./components/ui/MultiSelect.js";
+import GridPlaceholder from "./components/ui/GridPlaceholder.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -25,6 +27,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [user, setUser] = useUser();
   const descriptionRef = useRef(null);
   const [lang] = useLanguage();
+  const [classes, setClasses] = useState([]);
 
   // Auto-resize description textarea
   useEffect(() => {
@@ -35,27 +38,28 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   }, [description, currentStep]);
 
   // Check if user is teacher in db | fix for localstorage bypass
-  // useEffect(() => {
-  //   if (!isOpen) return;
+  useEffect(() => {
+    if (!isOpen) return;
 
-  //   if (user) {
-  //     try {
-  //       Calls.player
-  //         .get({ id: user.id })
-  //         .then((pDb) => {
-  //           if (pDb.role.toLowerCase() !== "teacher") {
-  //             showError(lsi.errorTitle, lsi.errorUnauthorized);
-  //             onClose();
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.error("Failed to verify user role:", error);
-  //         });
-  //     } catch (error) {
-  //       console.error("Failed to parse user from localStorage:", error);
-  //     }
-  //   }
-  // }, [isOpen, lsi, showError, onClose, user]);
+    if (user) {
+      try {
+        Calls.player
+          .get({ id: user.id })
+          .then((pDb) => {
+            // if (pDb.role.toLowerCase() !== "teacher") {
+            //   showError(lsi.errorTitle, lsi.errorUnauthorized);
+            //   onClose();
+            // }
+            setClasses(pDb.classes);
+          })
+          .catch((error) => {
+            console.error("Failed to verify user role:", error);
+          });
+      } catch (error) {
+        console.error("Failed to parse user from localStorage:", error);
+      }
+    }
+  }, [isOpen, lsi, showError, onClose, user]);
 
   // Reset state when modal is closed or opened
   useEffect(() => {
@@ -71,8 +75,14 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
   const addTeam = () => {
     if (!teamName.trim()) return;
-    setTeams([...teams, teamName.trim()]);
+    setTeams([...teams, { name: teamName.trim(), allowedClasses: [] }]);
     setTeamName("");
+  };
+
+  const updateTeam = (index, newData) => {
+    const newTeams = [...teams];
+    newTeams[index] = { ...newTeams[index], ...newData };
+    setTeams(newTeams);
   };
 
   const removeTeam = (index) => {
@@ -198,32 +208,70 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         return (
           <>
             <label>{lsi.teams}</label>
+            <div className="helper-text">
+              {bracketType === "single" && (lsi.helperSingle || "Minimum 3 teams required.")}
+              {bracketType === "double" && (lsi.helperDouble || "Number of teams must be a multiple of 4.")}
+              {bracketType === "robin" && (lsi.helperRobin || "Number of teams must be a multiple of 2.")}
+            </div>
             <div className="team-input-container">
-              <Input
-                type="text"
-                value={teamName}
-                onChange={setTeamName}
-                placeholder={lsi.teamPlaceholder}
-                className="team-input"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") addTeam();
-                }}
-                noMargin
-              />
-              <Button onClick={addTeam} type="primary-fill">
-                {lsi.add}
-              </Button>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <Input
+                  type="text"
+                  value={teamName}
+                  onChange={setTeamName}
+                  placeholder={lsi.teamPlaceholder}
+                  className="team-input"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") addTeam();
+                  }}
+                  noMargin
+                />
+                <Button onClick={addTeam} type="primary-fill" style={{ height: "fit-content", alignSelf: "flex-end" }}>
+                  {lsi.add}
+                </Button>
+              </div>
             </div>
 
             <ul className="teams-list">
               {teams.map((team, index) => (
                 <li key={index} className="team-item">
-                  <span>{team}</span>
+                  <div className="team-info">
+                    <span className="team-name">{team.name}</span>
+                    <MultiSelect
+                      value={team.allowedClasses || []}
+                      onChange={(newClasses) => updateTeam(index, { allowedClasses: newClasses })}
+                      options={classes.map((c) => ({ value: c.short, label: c.short }))}
+                      noMargin
+                      minimal
+                    />
+                  </div>
                   <Button onClick={() => removeTeam(index)} type="danger" size="small">
                     ✕
                   </Button>
                 </li>
               ))}
+              {(() => {
+                let placeholdersNeeded = 0;
+                const count = teams.length;
+
+                if (bracketType === "single") {
+                  if (count < 3) {
+                    placeholdersNeeded = 3 - count;
+                  }
+                } else if (bracketType === "double") {
+                  const remainder = count % 4;
+                  placeholdersNeeded = 4 - remainder;
+                } else if (bracketType === "robin") {
+                  const remainder = count % 2;
+                  placeholdersNeeded = 2 - remainder;
+                }
+
+                return Array.from({ length: placeholdersNeeded }).map((_, i) => (
+                  <li key={`placeholder-${i}`} className="team-item placeholder">
+                    <GridPlaceholder type="3x1" className="team-placeholder" />
+                  </li>
+                ));
+              })()}
             </ul>
           </>
         );
@@ -234,7 +282,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
 
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && handleClose()}>
-      <div className="modal-content">
+      <div className={`modal-content ${currentStep === 4 ? "modal-content-large" : ""}`}>
         <h3 className="modal-header">
           {lsi.header} - {lsi.step || "Step"} {currentStep}/4
         </h3>
