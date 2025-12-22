@@ -460,6 +460,22 @@ function SlotMachine({ credits, updateCredits, userId }) {
 
   const isSpinning = spinning.some((s) => s);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (!isSpinning) {
+          spin();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isSpinning, spin]);
+
   return (
     <>
       <h1 className="casino-title">{lsi.games.slots.title}</h1>

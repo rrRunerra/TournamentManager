@@ -17,6 +17,7 @@ import Profile7 from "../assets/profiles/7.png";
 import Profile8 from "../assets/profiles/8.png";
 
 const AVATAR_OPTIONS = [
+  null, // Represents "Default" / No Image
   Profile1,
   Profile2,
   Profile3,
@@ -25,7 +26,6 @@ const AVATAR_OPTIONS = [
   Profile6,
   Profile7,
   Profile8,
-  null, // Represents "Default" / No Image
 ];
 
 const StatCard = ({ label, value, color }) => (
@@ -52,7 +52,12 @@ const StatCard = ({ label, value, color }) => (
 const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title, ownedAvatars = [] }) => {
   if (!isOpen) return null;
 
-  const allOptions = [...AVATAR_OPTIONS, ...ownedAvatars];
+  const BROKEN_IMAGE_ID = "ZBK7b4vHYyb0n70zJq";
+
+  const allOptions = [...AVATAR_OPTIONS, ...ownedAvatars].filter((src) => {
+    if (!src) return true; // Keep null/undefined (default avatar)
+    return !src.includes(BROKEN_IMAGE_ID);
+  });
 
   return (
     <div className="avatar-modal-overlay" onClick={onClose}>

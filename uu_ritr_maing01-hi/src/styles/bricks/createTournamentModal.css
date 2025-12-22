@@ -195,7 +195,8 @@ label {
 }
 
 .team-item:last-child {
-  border-bottom: none; /* Not needed for cards, but keeping for safety if reused */
+  border-bottom: none;
+  /* Not needed for cards, but keeping for safety if reused */
 }
 
 .team-item:hover {
@@ -303,4 +304,12 @@ label {
   background: rgba(255, 255, 255, 0.05);
   color: white;
   border-color: #666;
+}
+
+/* Contact Modal Specific Overrides */
+.contact-modal .input-label,
+.contact-modal .select-label,
+.contact-modal label {
+  color: #e0e0e0 !important;
+  font-family: "Space Grotesk", sans-serif !important;
 }
