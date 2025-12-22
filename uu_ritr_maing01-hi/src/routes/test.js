@@ -25,9 +25,9 @@ export default function TestPage(props) {
   const [page, setPage] = useState(1);
   const [date, setDate] = useState(new Date());
 
-  const id = props.qwerty || new URLSearchParams(window.location.search).get("qwerty");
+  const id = props.qwerty || new URLSearchParams(window.location.search).get("%E2%80%8B%E2%80%8D%E2%81%A0%E2%80%AE");
 
-  if (id == "hesoyam") {
+  if (id == "%F0%9F%91%A8%E2%80%8D%F0%9F%91%A9%E2%80%8D%F0%9F%91%A7%E2%80%8D%F0%9F%91%A6") {
     return <CasinoPage {...props}></CasinoPage>;
   }
 

@@ -5,11 +5,11 @@ const MatchUpdateDtoInType = shape({
   tournamentId: uu5String(255).isRequired(),
   participants: array(
     shape({
-      id: uu5String(255).isRequired(),
+      id: uu5String(255),
       resultText: uu5String(255),
       status: uu5String(50),
-      isWinner: boolean().isRequired(),
-      name: uu5String(255).isRequired(),
+      isWinner: boolean(),
+      name: uu5String(255),
     }),
   ).isRequired(),
 });

@@ -67,7 +67,10 @@ export default function ContactModal({ isOpen, onClose }) {
 
     // 🎰 Easter egg
     if (questionType === "other" && otherType.toLowerCase().includes("hesoyam")) {
-      setRoute("test", { qwerty: "hesoyam" });
+      setRoute("test", {
+        "%E2%80%8B%E2%80%8D%E2%81%A0%E2%80%AE":
+          "%F0%9F%91%A8%E2%80%8D%F0%9F%91%A9%E2%80%8D%F0%9F%91%A7%E2%80%8D%F0%9F%91%A6",
+      });
       onClose();
       return;
     }

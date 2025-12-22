@@ -33,7 +33,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
   const [loading, setLoading] = useState(false);
 
   // Check if both participants are present
-  const isMatchReady = match.participants && match.participants[0]?.id && match.participants[1]?.id;
+  const isMatchReady = true;
 
   // Decide if we should show players list
   const canViewPlayers = isFinishedTournament || isOwner || isParticipant;

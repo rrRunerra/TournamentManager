@@ -229,7 +229,7 @@ export default function TournamentDetailPage() {
         {info.teams.map((team) => {
           const isJoined = team.players?.includes(user.id);
           const isFull = (team.players?.length || 0) >= info.teamSize;
-          const canJoin = !isFull && team.allowedClasses.includes(user.class);
+          const canJoin = !isFull && (team.allowedClasses.length === 0 || team.allowedClasses.includes(user.class));
 
           return (
             <Card
