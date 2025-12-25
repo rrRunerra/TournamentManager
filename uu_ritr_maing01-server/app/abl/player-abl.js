@@ -107,7 +107,7 @@ class PlayerAbl {
 
     const edu = new Edu(dtoIn.name, dtoIn.password);
     const loginResponse = await edu.login();
-    const c = await edu.getClass();
+    const schoolData = await edu.getSchoolData();
 
     if (!loginResponse.users || loginResponse.users.length == 0) {
       throw new Errors.Create.UserNotFound();
@@ -118,11 +118,16 @@ class PlayerAbl {
       name: `${loginResponse.users[0].firstname} ${loginResponse.users[0].lastname}`,
       school: loginResponse.users[0].edupage.toLowerCase(),
       role: loginResponse.users[0].userid?.replace(/\d+/g, "")?.trim()?.toLowerCase() ?? "a",
-      class: c.class,
-      classes: c.classes,
+      class: schoolData.class,
+      classes: schoolData.classes,
+      classRooms: schoolData.classRooms,
     };
 
     const existing = await this.dao.get({ awid, id: user.id });
+
+    if (existing) {
+      user.profilePicture = existing.profilePicture;
+    }
 
     if (!existing) {
       const out = await this.dao.create({
@@ -131,8 +136,8 @@ class PlayerAbl {
         name: user.name,
         school: user.school,
         role: user.role,
-        class: c.class,
-        classes: c.classes,
+        class: schoolData.class,
+        classes: schoolData.classes,
         stats: {
           finals_firstPlace: 0,
           finals_secondPlace: 0,

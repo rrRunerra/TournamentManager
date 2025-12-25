@@ -1,0 +1,30 @@
+/* Scrollable container */
+.scroll-container {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Custom scrollbar styling */
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #ff8e53;
+  border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #ff6b35;
+}
+
+/* Firefox scrollbar */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #ff8e53 #1a1a1a;
+}

@@ -7,6 +7,10 @@ import DateTimePicker from "../bricks/components/input/DateTimePicker.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import CasinoPage from "./casino.js";
 import Calls from "../calls";
+import Grid from "../bricks/components/ui/Grid.js";
+import Input from "../bricks/components/ui/Input.js";
+import Select from "../bricks/components/ui/Select.js";
+import MultiSelect from "../bricks/components/ui/MultiSelect.js";
 import {
   Card,
   CardTitle,
@@ -17,13 +21,34 @@ import {
   CardIcon,
   CardDetails,
   CardStatus,
+  CardDescription,
+  CardFooter,
 } from "../bricks/components/ui/Card.js";
+import { ScrollContainer } from "../bricks/components/ui/ScrollContainer.js";
 
 export default function TestPage(props) {
   const { showSuccess, showError } = useNotification();
   const { confirm } = useConfirm();
   const [page, setPage] = useState(1);
   const [date, setDate] = useState(new Date());
+  const [textInput, setTextInput] = useState("");
+  const [numberInput, setNumberInput] = useState("");
+  const [selectValue, setSelectValue] = useState("");
+  const [multiSelectValue, setMultiSelectValue] = useState([]);
+
+  const selectOptions = [
+    { value: "single", label: "Single Elimination" },
+    { value: "double", label: "Double Elimination" },
+    { value: "round-robin", label: "Round Robin" },
+  ];
+
+  const multiSelectOptions = [
+    { value: "1A", label: "Class 1.A" },
+    { value: "1B", label: "Class 1.B" },
+    { value: "2A", label: "Class 2.A" },
+    { value: "2B", label: "Class 2.B" },
+    { value: "3A", label: "Class 3.A" },
+  ];
 
   const id = props.qwerty || new URLSearchParams(window.location.search).get("%E2%80%8B%E2%80%8D%E2%81%A0%E2%80%AE");
 
@@ -79,14 +104,41 @@ export default function TestPage(props) {
       {/* Buttons Section */}
       <section style={sectionStyle}>
         <h2 style={headerStyle}>Buttons</h2>
+        <p style={{ marginBottom: "1rem", color: "#888" }}>
+          Available types: primary-fill, primary-outline, secondary, danger, success, info, fab-primary
+        </p>
         <div style={rowStyle}>
           <Button type="primary-fill">Primary Fill</Button>
           <Button type="primary-outline">Primary Outline</Button>
           <Button type="secondary">Secondary</Button>
           <Button type="danger">Danger</Button>
+          <Button type="success">Success</Button>
+          <Button type="info">Info</Button>
         </div>
-        <div style={{ marginTop: "2rem" }}>
-          <p style={{ marginBottom: "0.5rem", color: "#888" }}>Floating Action Button (Fixed Position Demo)</p>
+        <div style={{ marginTop: "1.5rem" }}>
+          <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>Size Variants</p>
+          <div style={rowStyle}>
+            <Button type="primary-fill" size="medium">
+              Medium (default)
+            </Button>
+            <Button type="primary-fill" size="small">
+              Small
+            </Button>
+          </div>
+        </div>
+        <div style={{ marginTop: "1.5rem" }}>
+          <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>Disabled State</p>
+          <div style={rowStyle}>
+            <Button type="primary-fill" disabled>
+              Disabled
+            </Button>
+            <Button type="danger" disabled>
+              Disabled Danger
+            </Button>
+          </div>
+        </div>
+        <div style={{ marginTop: "1.5rem" }}>
+          <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>Floating Action Button (FAB)</p>
           <div style={{ position: "relative", height: "60px", border: "1px dashed #444", borderRadius: "8px" }}>
             <Button type="fab-primary" style={{ position: "absolute", bottom: "5px", right: "5px" }}>
               +
@@ -141,12 +193,106 @@ export default function TestPage(props) {
         <Pagination currentPage={page} totalPages={10} onPageChange={setPage} />
       </section>
 
+      {/* Grid Section */}
+      <section style={sectionStyle}>
+        <h2 style={headerStyle}>Grid</h2>
+        <p style={{ marginBottom: "1rem", color: "#888" }}>Responsive grid layouts with different configurations</p>
+        <div style={{ marginBottom: "1.5rem" }}>
+          <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>Default Grid</p>
+          <Grid type="default">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} style={{ padding: "1rem", background: "#252525", borderRadius: "8px", textAlign: "center" }}>
+                Item {i}
+              </div>
+            ))}
+          </Grid>
+        </div>
+      </section>
+
+      {/* Input Components Section */}
+      <section style={sectionStyle}>
+        <h2 style={headerStyle}>Input Components</h2>
+        <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Text Input</h3>
+            <Input
+              type="text"
+              label="Username"
+              value={textInput}
+              onChange={setTextInput}
+              placeholder="Enter your username..."
+            />
+            <p style={{ color: "#666", fontSize: "0.85rem" }}>Value: "{textInput}"</p>
+          </div>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Number Input</h3>
+            <Input
+              type="number"
+              label="Team Size"
+              value={numberInput}
+              onChange={setNumberInput}
+              placeholder="Enter team size..."
+              min={1}
+              max={10}
+            />
+            <p style={{ color: "#666", fontSize: "0.85rem" }}>Value: "{numberInput}"</p>
+          </div>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Textarea</h3>
+            <Input
+              type="textarea"
+              label="Description"
+              value={textInput}
+              onChange={setTextInput}
+              placeholder="Enter description..."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Select Components Section */}
+      <section style={sectionStyle}>
+        <h2 style={headerStyle}>Select Components</h2>
+        <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Single Select</h3>
+            <Select label="Bracket Type" value={selectValue} onChange={setSelectValue} options={selectOptions} />
+            <p style={{ color: "#666", fontSize: "0.85rem" }}>Selected: "{selectValue}"</p>
+          </div>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Multi Select</h3>
+            <MultiSelect
+              label="Allowed Classes"
+              value={multiSelectValue}
+              onChange={setMultiSelectValue}
+              options={multiSelectOptions}
+            />
+            <p style={{ color: "#666", fontSize: "0.85rem" }}>Selected: [{multiSelectValue.join(", ")}]</p>
+          </div>
+          <div style={{ flex: "1", minWidth: "280px" }}>
+            <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Minimal Multi Select</h3>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <MultiSelect
+                value={multiSelectValue}
+                onChange={setMultiSelectValue}
+                options={multiSelectOptions}
+                minimal
+              />
+              <span style={{ color: "#666" }}>Icon-only variant</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cards Section */}
       <section style={sectionStyle}>
         <h2 style={headerStyle}>Cards</h2>
-        <div style={rowStyle}>
+        <p style={{ marginBottom: "1rem", color: "#888" }}>
+          Available types: tournament, team, about, motivation, navbar
+        </p>
+        <div style={{ ...rowStyle, alignItems: "flex-start" }}>
           {/* Tournament Card */}
-          <Card type="tournament" style={{ width: "300px", cursor: "pointer" }}>
+          <Card type="tournament" style={{ width: "280px", cursor: "pointer" }}>
             <CardIcon>🏆</CardIcon>
             <CardTitle type="tournament">Tournament Name</CardTitle>
             <CardDetails>
@@ -171,28 +317,107 @@ export default function TestPage(props) {
           </Card>
 
           {/* Team Card */}
-          <Card type="team" style={{ width: "300px", padding: "1rem" }}>
+          <Card type="team" style={{ width: "280px", padding: "1rem" }}>
             <CardAvatar>T</CardAvatar>
-            <CardTitle>Team Card</CardTitle>
-            <p>This is a team card description.</p>
+            <CardTitle>Team Alpha</CardTitle>
+            <CardDescription>A competitive team ready for action.</CardDescription>
+            <CardFooter>4/4 Players</CardFooter>
           </Card>
 
           {/* About Card */}
-          <Card type="about" style={{ width: "300px", padding: "1rem" }}>
+          <Card type="about" style={{ width: "280px", padding: "1rem" }}>
             <CardTopLine />
             <CardAvatar>LD</CardAvatar>
             <CardTitle>About Card</CardTitle>
             <CardRole>Lead Developer</CardRole>
-            <CardText type="bio">Passionate about building great user experiences and robust applications.</CardText>
+            <CardText type="bio">Passionate about building great user experiences.</CardText>
           </Card>
 
           {/* Motivation Card */}
-          <Card type="motivation" style={{ width: "300px" }}>
+          <Card type="motivation" style={{ width: "280px" }}>
             <CardTitle>Motivation</CardTitle>
             <CardText type="motivation">
               "Innovation distinguishes between a leader and a follower." - Steve Jobs
             </CardText>
           </Card>
+
+          {/* Navbar Card */}
+          <Card type="navbar" style={{ width: "280px", padding: "1rem" }}>
+            <CardTitle>Navbar Card</CardTitle>
+            <CardText>Used for navigation-related components.</CardText>
+          </Card>
+        </div>
+
+        <div style={{ marginTop: "2rem" }}>
+          <h3 style={{ color: "#aaa", marginBottom: "1rem", fontSize: "1rem" }}>Card Subcomponents</h3>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", color: "#666", fontSize: "0.9rem" }}>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardTitle</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardTopLine</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardAvatar</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardRole</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardText</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardIcon</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardDetails</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardStatus</code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>
+              CardDescription
+            </code>
+            <code style={{ background: "#252525", padding: "0.25rem 0.5rem", borderRadius: "4px" }}>CardFooter</code>
+          </div>
+        </div>
+      </section>
+
+      {/* Scroll Container Section */}
+      <section style={sectionStyle}>
+        <h2 style={headerStyle}>Scroll Container</h2>
+        <p style={{ marginBottom: "1rem", color: "#888" }}>
+          A reusable scrollable container with custom themed scrollbar
+        </p>
+        <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+          <div>
+            <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>maxHeight={200}</p>
+            <ScrollContainer
+              maxHeight={200}
+              style={{ width: "300px", background: "#141414", padding: "1rem", borderRadius: "8px" }}
+            >
+              {[...Array(10)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "0.75rem",
+                    marginBottom: "0.5rem",
+                    background: "#1a1a1a",
+                    borderRadius: "6px",
+                    border: "1px solid #333",
+                  }}
+                >
+                  Item {i + 1}
+                </div>
+              ))}
+            </ScrollContainer>
+          </div>
+          <div>
+            <p style={{ marginBottom: "0.5rem", color: "#aaa" }}>maxHeight={300}</p>
+            <ScrollContainer
+              maxHeight={300}
+              style={{ width: "300px", background: "#141414", padding: "1rem", borderRadius: "8px" }}
+            >
+              {[...Array(15)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "0.75rem",
+                    marginBottom: "0.5rem",
+                    background: "#1a1a1a",
+                    borderRadius: "6px",
+                    border: "1px solid #333",
+                  }}
+                >
+                  Team {i + 1} - (0/4 players)
+                </div>
+              ))}
+            </ScrollContainer>
+          </div>
         </div>
       </section>
     </div>

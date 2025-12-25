@@ -56,6 +56,8 @@ export default function LoginPage() {
       setUser(res);
       localStorage.setItem("player", JSON.stringify(res));
       setRoute("home");
+      console.log(res);
+      localStorage.setItem(`user_avatar_${res.id}`, res?.profilePicture ?? "");
     } catch (e) {
       console.error(e);
       setError(e.message);

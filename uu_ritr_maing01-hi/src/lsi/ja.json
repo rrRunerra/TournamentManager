@@ -119,7 +119,8 @@
         "errorInvalidDate": "開始日は終了日より後にはできません。",
         "errorRobin": "ラウンドロビンには偶数のチーム数が必要です。",
         "errorDouble": "ダブルエリミネーションには、チーム数が4で割り切れる必要があります。",
-        "errorUnauthorized": "トーナメントを作成する権限がありません。教師のみがトーナメントを作成できます。"
+        "errorUnauthorized": "トーナメントを作成する権限がありません。教師のみがトーナメントを作成できます。",
+        "classRoom": "教室"
     },
     "Pagination": {
         "previous": "前へ",
@@ -244,7 +245,8 @@
         "players": "プレーヤー:",
         "joining": "参加中...",
         "bracketType": "ブラケットタイプ:",
-        "owner": "所有者:"
+        "owner": "所有者:",
+        "classRoom": "教室:"
     },
     "Tournaments": {
         "createErrorTitle": "エラー",

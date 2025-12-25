@@ -119,7 +119,8 @@
         "errorInvalidDate": "A kezdés dátuma nem lehet később, mint a befejezés dátuma.",
         "errorRobin": "A körmérkőzéshez páros számú csapat szükséges.",
         "errorDouble": "A dupla kieséses rendszerhez a csapatok számának oszthatónak kell lennie 4-gyel.",
-        "errorUnauthorized": "Nincs jogosultsága versenyt létrehozni. Csak a tanárok hozhatnak létre versenyeket."
+        "errorUnauthorized": "Nincs jogosultsága versenyt létrehozni. Csak a tanárok hozhatnak létre versenyeket.",
+        "classRoom": "Tanterem"
     },
     "Pagination": {
         "previous": "Előző",
@@ -244,7 +245,8 @@
         "players": "Játékosok:",
         "joining": "Csatlakozás...",
         "bracketType": "Ágrajz típusa:",
-        "owner": "Tulajdonos:"
+        "owner": "Tulajdonos:",
+        "classRoom": "Tanterem:"
     },
     "Tournaments": {
         "createErrorTitle": "Hiba",

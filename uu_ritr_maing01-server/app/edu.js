@@ -60,7 +60,7 @@ export class Edu {
     }
   }
 
-  async getClass() {
+  async getSchoolData() {
     const response = await fetch(`https://${this.edupageLink}.edupage.org/user/?`, {
       method: "GET",
       headers: {
@@ -90,6 +90,7 @@ export class Edu {
 
     const user = e.userrow;
     const classes = e.dbi.classes;
+    const classRooms = e.dbi.classrooms;
 
     const classList = [];
     for (const key in classes) {
@@ -100,9 +101,20 @@ export class Edu {
       });
     }
 
+    const classRoomList = [];
+    for (const key in classRooms) {
+      const d = classRooms[key];
+      classRoomList.push({
+        id: d.id,
+        name: d.name,
+        short: d.short,
+      });
+    }
+
     return {
       class: classes[user.TriedaID].short,
       classes: classList,
+      classRooms: classRoomList.filter((n) => n.name != ""),
     };
   }
 

@@ -119,7 +119,8 @@
         "errorInvalidDate": "Startdatum darf nicht nach dem Enddatum liegen.",
         "errorRobin": "Jeder gegen Jeden erfordert eine gerade Anzahl von Teams.",
         "errorDouble": "Doppel-Eliminierung erfordert, dass die Anzahl der Teams durch 4 teilbar ist.",
-        "errorUnauthorized": "Sie sind nicht berechtigt, ein Turnier zu erstellen. Nur Lehrer können Turniere erstellen."
+        "errorUnauthorized": "Sie sind nicht berechtigt, ein Turnier zu erstellen. Nur Lehrer können Turniere erstellen.",
+        "classRoom": "Klassenzimmer"
     },
     "Pagination": {
         "previous": "Zurück",
@@ -244,7 +245,8 @@
         "players": "Spieler:",
         "joining": "Beitreten...",
         "bracketType": "Turnierbaum-Typ:",
-        "owner": "Besitzer:"
+        "owner": "Besitzer:",
+        "classRoom": "Klassenzimmer:"
     },
     "Tournaments": {
         "createErrorTitle": "Fehler",

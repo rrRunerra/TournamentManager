@@ -132,7 +132,8 @@
     "errorInvalidDate": "Datum začátku nemůže být později než datum konce.",
     "errorRobin": "Každý s každým vyžaduje sudý počet týmů.",
     "errorDouble": "Dvojitá eliminace vyžaduje, aby počet týmů byl dělitelný 4.",
-    "errorUnauthorized": "Nemáte oprávnění k vytvoření turnaje. Pouze učitelé mohou vytvářet turnaje."
+    "errorUnauthorized": "Nemáte oprávnění k vytvoření turnaje. Pouze učitelé mohou vytvářet turnaje.",
+    "classRoom": "Učebna"
   },
   "Pagination": {
     "previous": "Předchozí",
@@ -257,7 +258,8 @@
     "players": "Hráči:",
     "joining": "Připojování...",
     "bracketType": "Typ pavouka:",
-    "owner": "Vlastník:"
+    "owner": "Vlastník:",
+    "classRoom": "Učebna:"
   },
   "Tournaments": {
     "createErrorTitle": "Chyba",

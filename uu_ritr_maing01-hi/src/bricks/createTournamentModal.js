@@ -28,6 +28,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const descriptionRef = useRef(null);
   const [lang] = useLanguage();
   const [classes, setClasses] = useState([]);
+  const [classRoom, setClassRoom] = useState([]);
 
   // Auto-resize description textarea
   useEffect(() => {
@@ -142,7 +143,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
       return;
     }
 
-    onSave({ name, description, startDate, endDate, teamSize, teams, owner, bracketType });
+    onSave({ name, description, startDate, endDate, teamSize, teams, owner, bracketType, classRoom });
     handleClose();
   };
 
@@ -158,6 +159,8 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
     setEndDate("");
     setTeamSize("4");
     setBracketType("single");
+    setClassRoom("");
+    setClasses("");
   };
 
   const renderStepContent = () => {
@@ -175,6 +178,14 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               onChange={setDescription}
               required
               style={{ overflow: "hidden" }}
+            />
+            <Select
+              label={lsi.classRoom}
+              value={classRoom}
+              onChange={setClassRoom}
+              options={user.classRooms
+                .map((c) => ({ value: c.name, label: c.name }))
+                .sort((a, b) => a.label.localeCompare(b.label))}
             />
           </>
         );

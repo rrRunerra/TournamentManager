@@ -132,7 +132,8 @@
         "errorInvalidDate": "开始日期不能晚于结束日期。",
         "errorRobin": "循环赛需要偶数个团队。",
         "errorDouble": "双败淘汰赛要求队伍数量能被4整除。",
-        "errorUnauthorized": "您没有权限创建锦标赛。只有老师可以创建锦标赛。"
+        "errorUnauthorized": "您没有权限创建锦标赛。只有老师可以创建锦标赛。",
+        "classRoom": "教室"
     },
     "Pagination": {
         "previous": "上一页",
@@ -257,7 +258,8 @@
         "players": "玩家:",
         "joining": "加入中...",
         "bracketType": "赛制类型:",
-        "owner": "拥有者:"
+        "owner": "拥有者:",
+        "classRoom": "教室:"
     },
     "Tournaments": {
         "createErrorTitle": "错误",

@@ -120,7 +120,8 @@
     "errorInvalidDate": "Start date cannot be later than end date.",
     "errorRobin": "Round Robin requires an even number of teams.",
     "errorDouble": "Double elimination requires the number of teams to be divisible by 4.",
-    "errorUnauthorized": "You are not authorized to create a tournament. Only teachers can create tournaments."
+    "errorUnauthorized": "You are not authorized to create a tournament. Only teachers can create tournaments.",
+    "classRoom": "Classroom"
   },
   "Pagination": {
     "previous": "Previous",
@@ -245,7 +246,8 @@
     "players": "Players:",
     "joining": "Joining...",
     "bracketType": "Bracket Type:",
-    "owner": "Owner:"
+    "owner": "Owner:",
+    "classRoom": "Classroom:"
   },
   "Tournaments": {
     "createErrorTitle": "Error",

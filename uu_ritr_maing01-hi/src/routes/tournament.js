@@ -21,6 +21,7 @@ const createTournament = async ({
   owner,
   bracketType,
   school,
+  classRoom,
 }) => {
   const status = "upcoming";
 
@@ -35,6 +36,7 @@ const createTournament = async ({
     owner,
     bracketType,
     school,
+    classRoom,
   });
 };
 

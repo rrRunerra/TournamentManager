@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { toPng } from "html-to-image";
 import { useRoute, useLsi, Environment, useLanguage } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import { Card, CardDetails, CardStatus, CardTitle, CardText, CardFooter } from "../bricks/components/ui/Card.js";
@@ -19,6 +20,8 @@ export default function TournamentDetailPage() {
   const [joiningTeam, setJoiningTeam] = useState(null);
   const [matches, setMatches] = useState([]);
   const [isImgEditorShown, setIsImgEditorShown] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const bracketRef = useRef(null);
   const id = new URLSearchParams(window.location.search).get("id");
   const [, setRoute] = useRoute();
   const { showError } = useNotification();
@@ -124,23 +127,112 @@ export default function TournamentDetailPage() {
 
   const bracketsType = info?.bracketType;
 
+  const handleExportBracket = async () => {
+    if (!bracketRef.current) return;
+    setIsExporting(true);
+    try {
+      // Get the actual scroll dimensions
+      const element = bracketRef.current;
+      const originalStyle = element.style.cssText;
+      const originalOverflow = element.style.overflow;
+      const originalWidth = element.style.width;
+      const originalHeight = element.style.height;
+
+      // Temporarily expand to full scroll size
+      element.style.overflow = "visible";
+      element.style.width = `${element.scrollWidth}px`;
+      element.style.height = `${element.scrollHeight}px`;
+
+      const dataUrl = await toPng(element, {
+        backgroundColor: "#1a1a2e",
+        pixelRatio: 2,
+        cacheBust: true,
+        skipFonts: true,
+        width: element.scrollWidth,
+        height: element.scrollHeight,
+        style: {
+          overflow: "visible",
+        },
+        fetchRequestInit: {
+          mode: "no-cors",
+        },
+        filter: (node) => {
+          // Skip external stylesheet links that cause CORS errors
+          if (node.tagName === "LINK" && node.rel === "stylesheet") {
+            return false;
+          }
+          return true;
+        },
+      });
+
+      // Restore original styles
+      element.style.overflow = originalOverflow;
+      element.style.width = originalWidth;
+      element.style.height = originalHeight;
+      element.style.cssText = originalStyle;
+
+      const link = document.createElement("a");
+      link.download = `${info.name.replace(/[^a-z0-9]/gi, "_")}_bracket.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error("Failed to export bracket:", error);
+      showError("Export failed", "Please try again.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   if (info.status === "ongoing" || info.status === "finished") {
     return (
       <div>
         <h2 className="tournament-detail-title tournament-detail-title-centered">{info.name}</h2>
-        <CustomBracket
-          matches={matches}
-          bracketType={bracketsType}
-          isOwner={isOwner}
-          currentUserId={user?.id}
-          tournamentInfo={info}
-          onMatchUpdate={fetchMatches}
-        />
+        <div ref={bracketRef}>
+          <CustomBracket
+            matches={matches}
+            bracketType={bracketsType}
+            isOwner={isOwner}
+            currentUserId={user?.id}
+            tournamentInfo={info}
+            onMatchUpdate={fetchMatches}
+          />
+        </div>
 
         {isOwner && info.status === "ongoing" && (
           <div className="tournament-detail-ongoing-controls">
             <OngoingOwnerControls info={info} id={id} setInfo={setInfo} setRoute={setRoute} />
           </div>
+        )}
+
+        {/* Export Bracket Button - for finished tournaments */}
+        {info.status === "finished" && (
+          <Button
+            onClick={handleExportBracket}
+            aria-label="Export Bracket"
+            title="Export Bracket as Image"
+            type="fab-primary"
+            disabled={isExporting}
+            style={{ position: "fixed", bottom: "20px", right: "80px", fontSize: "24px" }}
+          >
+            {isExporting ? (
+              <span style={{ fontSize: "14px" }}>...</span>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            )}
+          </Button>
         )}
 
         {/* Diploma Editor Button - only for finished tournaments and owner */}
@@ -223,6 +315,12 @@ export default function TournamentDetailPage() {
           <strong>{lsi.owner || "Owner"}</strong>
           <span>{ownerName || "Loading..."}</span>
         </div>
+        {info.classRoom && (
+          <div className="tournament-detail-info-item">
+            <strong>{lsi.classRoom || "Classroom:"}</strong>
+            <span>{info.classRoom}</span>
+          </div>
+        )}
       </div>
       {/* Renamed class "team-grid" to "tournament-detail-team-grid" */}
       <Grid type="default" className="tournament-detail-team-grid">
