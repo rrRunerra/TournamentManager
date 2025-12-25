@@ -10,7 +10,20 @@
     "tournamentsPlayed": "Odehrané turnaje",
     "flappyBirdHighScore": "Flappy Bird skóre",
     "totalTournaments": "Celkem odehraných turnajů",
+    "lastTournaments": "Posledné odehrané turnaje",
     "selectProfilePicture": "Vyberte profilový obrázek"
+  },
+  "Leaderboard": {
+    "name": "Jméno",
+    "school": "Škola",
+    "class": "Třída",
+    "matchesWon": "Výhry",
+    "matchesLost": "Prohry",
+    "tournamentsPlayed": "Účasti",
+    "firstPlace": "1. Místo",
+    "secondPlace": "2. Místo",
+    "thirdPlace": "3. Místo",
+    "fourthPlace": "4. Místo"
   },
   "appName": "Aplikace uuRitr",
   "About": {

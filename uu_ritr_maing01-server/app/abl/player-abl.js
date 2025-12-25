@@ -536,6 +536,35 @@ class PlayerAbl {
 
     return { success: true, credits: newCredits, ownedProfilePics: ownedProfilePics };
   }
+
+  /**
+   * Lists players with optional filtering and pagination.
+   *
+   * @param {string} awid - Application workspace ID
+   * @param {{
+   *   school?: string,
+   *   pageInfo?: {pageIndex: number, pageSize: number}
+   * }} dtoIn - List criteria
+   * @returns {Promise<{itemList: Player[], pageInfo: Object}>}
+   */
+  async list(awid, dtoIn) {
+    const validationResult = this.validator.validate("PlayerListDtoInType", dtoIn);
+
+    if (!validationResult.isValid()) {
+      throw new Errors.List.InvalidDtoIn();
+    }
+
+    const filter = {};
+    if (dtoIn.school) {
+      filter.school = dtoIn.school;
+    }
+
+    // Default sorting could be added here if needed, or passed from dtoIn
+    const sortBy = "stats.matchesWon";
+    const order = "desc";
+
+    return await this.dao.list(awid, sortBy, order, dtoIn.pageInfo, filter);
+  }
 }
 
 module.exports = new PlayerAbl();

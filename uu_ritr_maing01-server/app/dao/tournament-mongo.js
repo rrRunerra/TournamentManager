@@ -22,7 +22,6 @@ class TournamentMongo extends UuObjectDao {
   }
 
   async list(uuObject) {
-    console.log(uuObject);
     return await super.find(uuObject);
   }
 

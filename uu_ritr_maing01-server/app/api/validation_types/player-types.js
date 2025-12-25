@@ -57,3 +57,11 @@ const PlayerBuyProfilePicDtoInType = shape({
   profilePicUrl: uu5String(1000).isRequired(),
   price: number().isRequired(),
 });
+
+const PlayerListDtoInType = shape({
+  school: uu5String(255),
+  pageInfo: shape({
+    pageIndex: integer(),
+    pageSize: integer(),
+  }),
+});

@@ -163,6 +163,18 @@ const BuyProfilePic = {
   },
 };
 
+const List = {
+  UC_CODE: `${PLAYER_ERROR_PREFIX}list/`,
+
+  InvalidDtoIn: class extends RitrMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+};
+
 module.exports = {
   BuyProfilePic,
   IncrementTournamentsPlayed,
@@ -172,4 +184,5 @@ module.exports = {
   Get,
   Update,
   Create,
+  List,
 };

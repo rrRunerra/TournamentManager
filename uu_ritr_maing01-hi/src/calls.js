@@ -203,6 +203,35 @@ const Calls = {
       const commandUri = Calls.getCommandUri("player/buyProfilePic");
       return Calls.call("post", commandUri, dtoIn);
     },
+
+    /**
+     *
+     * @param {{
+     *   school?: string,
+     * }} dtoIn
+     * @returns {Promise<{
+     *   itemList: {
+     *     id: string,
+     *     name: string,
+     *     school: string,
+     *     class: string,
+     *     stats: {
+     *       finals_firstPlace: number,
+     *       finals_secondPlace: number,
+     *       finals_thirdPlace: number,
+     *       finals_fourthPlace: number,
+     *       matchesWon: number,
+     *       matchesLost: number,
+     *       tournamentsPlayed: number,
+     *       flappyBirdHighScore: number
+     *     }
+     *   }[]
+     * }>}
+     */
+    list(dtoIn) {
+      const commandUri = Calls.getCommandUri("player/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
   },
 
   tournament: {

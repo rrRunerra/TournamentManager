@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "Bestenliste",
+        "loading": "Laden...",
+        "name": "Name",
+        "school": "Schule",
+        "class": "Klasse",
+        "matchesWon": "Siege",
+        "matchesLost": "Niederlagen",
+        "tournamentsPlayed": "Teilnahmen",
+        "firstPlace": "1. Platz",
+        "secondPlace": "2. Platz",
+        "thirdPlace": "3. Platz",
+        "fourthPlace": "4. Platz"
+    },
     "Profile": {
         "statsTitle": "Spielerstatistiken",
         "firstPlace": "1. Platz",

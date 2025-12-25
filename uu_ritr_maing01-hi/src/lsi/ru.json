@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "Таблица лидеров",
+        "loading": "Загрузка...",
+        "name": "Имя",
+        "school": "Школа",
+        "class": "Класс",
+        "matchesWon": "Победы",
+        "matchesLost": "Поражения",
+        "tournamentsPlayed": "Участия",
+        "firstPlace": "1-е место",
+        "secondPlace": "2-е место",
+        "thirdPlace": "3-е место",
+        "fourthPlace": "4-е место"
+    },
     "Profile": {
         "statsTitle": "Статистика игрока",
         "firstPlace": "1-е место",

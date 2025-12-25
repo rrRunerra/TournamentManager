@@ -13,6 +13,20 @@
         "lastTournaments": "Posledné odohrané turnaje",
         "selectProfilePicture": "Vyberte profilovú fotku"
     },
+    "Leaderboard": {
+        "title": "Rebríček",
+        "loading": "Načítavam...",
+        "name": "Meno",
+        "school": "Škola",
+        "class": "Trieda",
+        "matchesWon": "Výhry",
+        "matchesLost": "Prehry",
+        "tournamentsPlayed": "Účasti",
+        "firstPlace": "1. Miesto",
+        "secondPlace": "2. Miesto",
+        "thirdPlace": "3. Miesto",
+        "fourthPlace": "4. Miesto"
+    },
     "appName": "Aplikácia uuRitr",
     "About": {
         "header": "O aplikácii uuRitr",

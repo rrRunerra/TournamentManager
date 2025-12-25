@@ -13,6 +13,20 @@
     "lastTournaments": "Last Played Tournaments",
     "selectProfilePicture": "Select Profile Picture"
   },
+  "Leaderboard": {
+    "title": "Leaderboard",
+    "loading": "Loading...",
+    "name": "Name",
+    "school": "School",
+    "class": "Class",
+    "matchesWon": "Matches Won",
+    "matchesLost": "Matches Lost",
+    "tournamentsPlayed": "Tournaments played",
+    "firstPlace": "1st Place",
+    "secondPlace": "2nd Place",
+    "thirdPlace": "3rd Place",
+    "fourthPlace": "4th Place"
+  },
   "appName": "Application uuRitr",
   "About": {
     "header": "About application uuRitr",

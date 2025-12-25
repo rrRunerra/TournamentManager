@@ -29,6 +29,11 @@ class PlayerMongo extends UuObjectDao {
     return await super.findOneAndUpdate({ awid: uuObject.awid, id: uuObject.id }, uuObject, "NONE");
   }
 
+  async list(awid, sortBy, order, pageInfo, filter = {}) {
+    const query = { awid, ...filter };
+    return await super.find(query, pageInfo, sortBy ? { [sortBy]: order === "asc" ? 1 : -1 } : {});
+  }
+
   async remove({ awid, id }) {
     return await super.deleteOne({ awid, id });
   }

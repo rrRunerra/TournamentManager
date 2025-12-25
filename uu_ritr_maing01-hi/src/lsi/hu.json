@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "Ranglista",
+        "loading": "Betöltés...",
+        "name": "Név",
+        "school": "Iskola",
+        "class": "Osztály",
+        "matchesWon": "Győzelmek",
+        "matchesLost": "Vereségek",
+        "tournamentsPlayed": "Részvételek",
+        "firstPlace": "1. Hely",
+        "secondPlace": "2. Hely",
+        "thirdPlace": "3. Hely",
+        "fourthPlace": "4. Hely"
+    },
     "Profile": {
         "statsTitle": "Játékos statisztikák",
         "firstPlace": "1. hely",

@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "排行榜",
+        "loading": "加载中...",
+        "name": "姓名",
+        "school": "学校",
+        "class": "班级",
+        "matchesWon": "胜场",
+        "matchesLost": "负场",
+        "tournamentsPlayed": "参赛次数",
+        "firstPlace": "第一名",
+        "secondPlace": "第二名",
+        "thirdPlace": "第三名",
+        "fourthPlace": "第四名"
+    },
     "Profile": {
         "statsTitle": "玩家统计",
         "firstPlace": "第一名",

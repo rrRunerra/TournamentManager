@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "Tablica wyników",
+        "loading": "Ładowanie...",
+        "name": "Imię",
+        "school": "Szkoła",
+        "class": "Klasa",
+        "matchesWon": "Wygrane",
+        "matchesLost": "Przegrane",
+        "tournamentsPlayed": "Udziały",
+        "firstPlace": "1. Miejsce",
+        "secondPlace": "2. Miejsce",
+        "thirdPlace": "3. Miejsce",
+        "fourthPlace": "4. Miejsce"
+    },
     "Profile": {
         "statsTitle": "Statystyki gracza",
         "firstPlace": "1. miejsce",

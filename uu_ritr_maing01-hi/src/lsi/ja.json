@@ -1,4 +1,18 @@
 {
+    "Leaderboard": {
+        "title": "リーダーボード",
+        "loading": "読み込み中...",
+        "name": "名前",
+        "school": "学校",
+        "class": "クラス",
+        "matchesWon": "勝利数",
+        "matchesLost": "敗北数",
+        "tournamentsPlayed": "参加数",
+        "firstPlace": "1位",
+        "secondPlace": "2位",
+        "thirdPlace": "3位",
+        "fourthPlace": "4位"
+    },
     "Profile": {
         "statsTitle": "プレイヤー統計",
         "firstPlace": "1位",

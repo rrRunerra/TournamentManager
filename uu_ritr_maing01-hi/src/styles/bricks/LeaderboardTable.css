@@ -1,0 +1,91 @@
+.leaderboard-table-container {
+  overflow-x: auto;
+  margin-top: 2rem;
+  background-color: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leaderboard-table-container:hover {
+  border-color: #ff6b35;
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.1);
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.leaderboard-table th {
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  transition: color 0.2s, background 0.2s;
+  user-select: none;
+}
+
+.leaderboard-table th:hover {
+  color: #ff8e53;
+  background: rgba(255, 142, 83, 0.05);
+  border-radius: 8px;
+}
+
+.leaderboard-table tr:last-child td {
+  border-bottom: none;
+}
+
+.leaderboard-table tr {
+  transition: background-color 0.2s;
+}
+
+.leaderboard-table tr:hover td {
+  background-color: #1a1a1a;
+  color: #ffd166;
+}
+
+/* Rank column specific if needed, or first column emphasis */
+.leaderboard-table td:first-child {
+  font-weight: 600;
+  color: #fff;
+}
+
+.leaderboard-table tr:hover td:first-child {
+  color: #ff6b35;
+}
+
+@media (max-width: 768px) {
+  .leaderboard-table {
+    font-size: 0.85rem;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 0.8rem 0.5rem;
+  }
+}
+
+.current-user-row td {
+  background: rgba(255, 107, 53, 0.15) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.current-user-row:hover td {
+  background: rgba(255, 107, 53, 0.25) !important;
+}

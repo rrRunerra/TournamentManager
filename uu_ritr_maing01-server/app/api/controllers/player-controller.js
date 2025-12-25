@@ -45,6 +45,10 @@ class PlayerController {
   buyProfilePic(ucEnv) {
     return PlayerAbl.buyProfilePic(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
+
+  list(ucEnv) {
+    return PlayerAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
 }
 
 module.exports = new PlayerController();

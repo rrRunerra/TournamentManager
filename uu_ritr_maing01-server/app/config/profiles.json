@@ -1,6 +1,11 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities", "AsidExecutives", "AsidLicenseOwner", "Public"],
+    "profileList": [
+      "AsidAuthorities",
+      "AsidExecutives",
+      "AsidLicenseOwner",
+      "Public"
+    ],
     "useCaseMap": {}
   },
   "*": {
@@ -15,128 +20,274 @@
     ],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "sysStateList": ["created", "assigned"],
-        "profileList": ["AwidLicenseOwner", "AwidInitiator"]
+        "sysStateList": [
+          "created",
+          "assigned"
+        ],
+        "profileList": [
+          "AwidLicenseOwner",
+          "AwidInitiator"
+        ]
       },
       "sys/uuAppWorkspace/load": {
-        "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
-        "profileList": ["Authenticated"]
+        "sysStateList": [
+          "created",
+          "assigned",
+          "active",
+          "restricted",
+          "readOnly",
+          "closed",
+          "suspended"
+        ],
+        "profileList": [
+          "Authenticated"
+        ]
       },
       "sys/uuAppWorkspace/loadBasicData": {
-        "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "created",
+          "assigned",
+          "active",
+          "restricted",
+          "readOnly",
+          "closed",
+          "suspended"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "defaultUve": {
-        "profileList": ["Public"]
+        "profileList": [
+          "Public"
+        ]
       },
       "sys/uuAppWorkspace/initUve": {
-        "sysStateList": ["created", "assigned"],
-        "profileList": ["Public", "AwidLicenseOwner", "AwidInitiator"]
+        "sysStateList": [
+          "created",
+          "assigned"
+        ],
+        "profileList": [
+          "Public",
+          "AwidLicenseOwner",
+          "AwidInitiator"
+        ]
       },
       "player/create": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/update": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/create": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/update": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/get": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/list": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/listByUser": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/get": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/create": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/update": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/get": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/list": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/remove": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "team/removePlayer": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "tournament/delete": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "match/create": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "match/list": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "match/update": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
-
       "player/updateStats": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/updateMatchStats": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/updateFlappyBirdScore": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/incrementTournamentsPlayed": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/addCredits": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/removeCredits": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/updateProfilePicture": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       },
       "player/buyProfilePic": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
+      "player/list": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       }
     }
   }
