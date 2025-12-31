@@ -32,7 +32,7 @@ export default function Navbar() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isOfficialShopOpen, setIsOfficialShopOpen] = useState(false);
   const [fontSize, setFontSize] = useState(() => {
-    const saved = localStorage.getItem("fontSize");
+    const saved = localStorage?.getItem("fontSize");
     return saved ? parseInt(saved, 10) : 100;
   });
   const [lang, setLang] = useLanguage();
@@ -47,7 +47,7 @@ export default function Navbar() {
   useEffect(() => {
     const updateAvatar = () => {
       if (user) {
-        const stored = localStorage.getItem(`user_avatar_${user.id}`);
+        const stored = localStorage?.getItem(`user_avatar_${user.id}`);
         setAvatar(stored);
       } else {
         setAvatar(null);
@@ -87,7 +87,7 @@ export default function Navbar() {
 
   useEffect(() => {
     // Load language from localStorage
-    const savedLang = localStorage.getItem("language");
+    const savedLang = localStorage?.getItem("language");
     if (savedLang) {
       setLang(savedLang);
     }

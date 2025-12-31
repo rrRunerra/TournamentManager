@@ -52,7 +52,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
   const handleSend = () => {
     // ⛔ Cooldown check
-    const lastSend = localStorage.getItem(LAST_SEND_KEY);
+    const lastSend = localStorage?.getItem(LAST_SEND_KEY);
     if (lastSend && Date.now() - Number(lastSend) < COOLDOWN_TIME) {
       const remaining = Math.ceil((COOLDOWN_TIME - (Date.now() - Number(lastSend))) / 60000);
       showError(lsi.errorTitle, `Formulár bol nedávno odoslaný. Skús to znova o ${remaining} minút.`);

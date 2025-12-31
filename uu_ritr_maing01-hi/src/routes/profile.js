@@ -125,7 +125,7 @@ export default function ProfilePage() {
       if (!targetId) return; // Should handle not logged in state better if needed
 
       // Load avatar from localStorage
-      // const savedAvatar = localStorage.getItem(`user_avatar_${targetId}`);
+      // const savedAvatar = localStorage?.getItem(`user_avatar_${targetId}`);
       // if (savedAvatar) {
       //   setAvatar(savedAvatar);
       // } else {

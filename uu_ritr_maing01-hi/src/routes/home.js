@@ -35,8 +35,8 @@ export default function Home() {
     hiddenElements.forEach((el) => observer.observe(el));
 
     // Load saved rating from localStorage
-    const savedRating = localStorage.getItem("matchup_rating");
-    const savedFeedback = localStorage.getItem("matchup_feedback");
+    const savedRating = localStorage?.getItem("matchup_rating");
+    const savedFeedback = localStorage?.getItem("matchup_feedback");
     if (savedRating) {
       setRating(parseInt(savedRating));
       setHasRated(true);

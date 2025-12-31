@@ -43,7 +43,7 @@ const FlappyBird = ({ onClose }) => {
   };
 
   useEffect(() => {
-    const savedHighScore = localStorage.getItem("flappyHighScore");
+    const savedHighScore = localStorage?.getItem("flappyHighScore");
     if (savedHighScore) {
       setHighScore(parseInt(savedHighScore, 10));
     }
