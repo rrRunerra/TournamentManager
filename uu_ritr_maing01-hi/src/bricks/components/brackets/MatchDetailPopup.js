@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Calls from "../../../calls.js";
-import { useNotification } from "../notifications/NotificationProvider.js";
+import { useNotification } from "../../../hooks/useNotification.js";
 import { useConfirm } from "../confirm/ConfirmProvider.js";
 import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../../../lsi/import-lsi.js";

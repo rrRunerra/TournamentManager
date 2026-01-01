@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "../styles/bricks/createTournamentModal.css";
-import { useNotification } from "./components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import { useLsi, useRoute } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import emailjs from "emailjs-com";

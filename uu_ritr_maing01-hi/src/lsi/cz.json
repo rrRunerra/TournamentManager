@@ -84,6 +84,7 @@
     "tournaments": "Turnaje",
     "history": "Historie",
     "about": "O nás",
+    "leaderboard": "Žebříček",
     "logout": "Odhlásit se",
     "loggedInAs": "Přihlášen jako",
     "profile": "Můj profil",
@@ -240,11 +241,13 @@
     "contactUs": "Kontaktuj nás",
     "roles": {
       "backend": "Backend vývojář",
+      "fullstack": "Fullstack vývojář",
       "frontend": "Frontend vývojář",
       "uiux": "UI/UX designér"
     },
     "bios": {
       "backend": "Spravuje serverovou logiku, databáze a API integrace pro naši aplikaci.",
+      "fullstack": "Vyvinul celý backend, vlastní hooky, pavouky a většinu komponent.",
       "frontend": "Zodpovědný za vývoj uživatelského rozhraní a interaktivních komponent.",
       "uiux": "Navrhuje uživatelská rozhraní a zajišťuje optimální uživatelskou zkušenost."
     },

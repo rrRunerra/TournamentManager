@@ -6,7 +6,7 @@ import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/co
 import "../styles/routes/casino.css";
 import Calls from "../calls";
 import useUser from "../hooks/useUser";
-import { useNotification } from "../bricks/components/notifications/NotificationProvider";
+import { useNotification } from "../hooks/useNotification.js";
 import { useConfirm } from "../bricks/components/confirm/ConfirmProvider";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi";

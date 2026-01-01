@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/bricks/createTournamentModal.css";
-import { useNotification } from "./components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import { useLsi, useLanguage } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";
 import Calls from "../calls.js";
@@ -11,6 +11,7 @@ import { Button } from "./components/ui/Button.js";
 import Select from "./components/ui/Select.js";
 import MultiSelect from "./components/ui/MultiSelect.js";
 import GridPlaceholder from "./components/ui/GridPlaceholder.js";
+import Combobox from "./components/ui/Combobox.js";
 
 export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -28,7 +29,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const descriptionRef = useRef(null);
   const [lang] = useLanguage();
   const [classes, setClasses] = useState([]);
-  const [classRoom, setClassRoom] = useState([]);
+  const [classRoom, setClassRoom] = useState("");
 
   // Auto-resize description textarea
   useEffect(() => {
@@ -179,13 +180,12 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               required
               style={{ overflow: "hidden" }}
             />
-            <Select
+            <Combobox
               label={lsi.classRoom}
               value={classRoom}
               onChange={setClassRoom}
-              options={user.classRooms
-                .map((c) => ({ value: c.name, label: c.name }))
-                .sort((a, b) => a.label.localeCompare(b.label))}
+              options={(user.classRooms || []).map((c) => c.name).sort((a, b) => a.localeCompare(b))}
+              required
             />
           </>
         );

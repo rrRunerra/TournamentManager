@@ -85,6 +85,7 @@
         "tournaments": "Turnieje",
         "history": "Historia",
         "about": "O nas",
+    "leaderboard": "Ranking",
         "logout": "Wyloguj się",
         "loggedInAs": "Zalogowany jako",
         "profile": "Mój profil",
@@ -228,11 +229,13 @@
         "contactUs": "Skontaktuj się z nami",
         "roles": {
             "backend": "Programista Backend",
+            "fullstack": "Programista Fullstack",
             "frontend": "Programista Frontend",
             "uiux": "Projektant UI/UX"
         },
         "bios": {
             "backend": "Zarządza logiką serwera, bazami danych i integracjami API dla naszej aplikacji.",
+            "fullstack": "Opracował cały backend, niestandardowe hooki, drabinki turniejowe i większość komponentów.",
             "frontend": "Odpowiedzialny za tworzenie interfejsu użytkownika i interaktywnych komponentów.",
             "uiux": "Projektuje interfejsy użytkownika i zapewnia optymalne wrażenia użytkownika."
         },

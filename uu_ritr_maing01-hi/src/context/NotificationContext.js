@@ -1,16 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import NotificationCard from "./NotificationCard";
-import "../../../styles/bricks/components/notifications/notificationContainer.css";
+import NotificationCard from "../bricks/components/notifications/NotificationCard";
 
-const NotificationContext = createContext();
-
-export const useNotification = () => {
-  const context = useContext(NotificationContext);
-  if (!context) {
-    throw new Error("useNotification must be used within NotificationProvider");
-  }
-  return context;
-};
+export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);

@@ -86,6 +86,7 @@
     "tournaments": "Tournaments",
     "history": "History",
     "about": "About Us",
+    "leaderboard": "Leaderboard",
     "logout": "Logout",
     "loggedInAs": "Logged in as",
     "profile": "My Profile",
@@ -229,11 +230,13 @@
     "contactUs": "Contact Us",
     "roles": {
       "backend": "Backend Developer",
+      "fullstack": "Fullstack Developer",
       "frontend": "Frontend Developer",
       "uiux": "UI/UX Designer"
     },
     "bios": {
       "backend": "Manages server logic, databases, and API integrations for our application.",
+      "fullstack": "Developed the entire backend, custom hooks, brackets, and most of the components.",
       "frontend": "Responsible for developing the user interface and interactive components.",
       "uiux": "Designs user interfaces and ensures optimal user experience."
     },

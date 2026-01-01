@@ -85,6 +85,7 @@
         "tournaments": "Versenyek",
         "history": "Előzmények",
         "about": "Rólunk",
+    "leaderboard": "Ranglista",
         "logout": "Kijelentk ezés",
         "loggedInAs": "Bejelentkezve mint",
         "profile": "Saját profil",
@@ -228,11 +229,13 @@
         "contactUs": "Lépjen kapcsolatba velünk",
         "roles": {
             "backend": "Backend fejlesztő",
+            "fullstack": "Fullstack fejlesztő",
             "frontend": "Frontend fejlesztő",
             "uiux": "UI/UX tervező"
         },
         "bios": {
             "backend": "Kezeli a szerver logikát, az adatbázisokat és az API integrációkat alkalmazásunkhoz.",
+            "fullstack": "A teljes backendet, egyedi hookokat, ágrajzokat és a legtöbb komponenst fejlesztette.",
             "frontend": "Felelős a felhasználói felület és az interaktív komponensek fejlesztéséért.",
             "uiux": "Tervezi a felhasználói felületeket és biztosítja az optimális felhasználói élményt."
         },

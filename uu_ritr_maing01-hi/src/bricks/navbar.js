@@ -466,12 +466,12 @@ export default function Navbar() {
 
           <Card
             type="navbar"
-            className={activeLink === "about" ? "active" : ""}
-            onClick={() => handleCardClick("about")}
+            className={activeLink === "leaderboard" ? "active" : ""}
+            onClick={() => handleCardClick("leaderboard")}
           >
-            <CardIcon>👥</CardIcon>
+            <CardIcon>📊</CardIcon>
             <h2>
-              <Lsi import={importLsi} path={["Navbar", "about"]} />
+              <Lsi import={importLsi} path={["Navbar", "leaderboard"]} />
             </h2>
           </Card>
 

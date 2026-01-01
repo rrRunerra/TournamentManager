@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Calls from "../calls.js";
 import "../styles/bricks/ownerControls.css";
-import { useNotification } from "./components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import { useConfirm } from "./components/confirm/ConfirmProvider.js";
 import { useLsi } from "uu5g05";
 import importLsi from "../lsi/import-lsi.js";

@@ -166,7 +166,7 @@ label {
   /* border-radius: 0.75rem; */
   /* background: #1a1a1a; */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
   gap: 1rem;
 }
 
@@ -179,7 +179,7 @@ label {
   border-radius: 0.75rem;
   background: #1a1a1a;
   transition: background 0.2s;
-  aspect-ratio: 3/1;
+  min-height: 4.5rem; /* Replaces aspect-ratio with a reasonable min-height */
   position: relative;
 }
 
@@ -214,6 +214,8 @@ label {
   gap: 0.25rem;
   /* overflow: hidden; Removed to allow MultiSelect dropdown to show */
   width: 100%;
+  min-width: 0; /* Critical for text-overflow: ellipsis to work in flex child */
+  margin-right: 0.5rem; /* Add some spacing between text and button */
 }
 
 .team-name {

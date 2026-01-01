@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLsi } from "uu5g05";
 import importLsi from "../../lsi/import-lsi";
-import { useNotification } from "../components/notifications/NotificationProvider";
+import { useNotification } from "../../hooks/useNotification.js";
 import { useConfirm } from "../components/confirm/ConfirmProvider";
 import { Button } from "../components/ui/Button";
 import Grid from "../components/ui/Grid";

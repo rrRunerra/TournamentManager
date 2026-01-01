@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../bricks/components/ui/Button.js";
-import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import { useConfirm } from "../bricks/components/confirm/ConfirmProvider.js";
 import Pagination from "../bricks/pagination.js";
 import DateTimePicker from "../bricks/components/input/DateTimePicker.js";

@@ -85,6 +85,7 @@
         "tournaments": "锦标赛",
         "history": "历史",
         "about": "关于我们",
+    "leaderboard": "排行榜",
         "logout": "注销",
         "loggedInAs": "登录为",
         "profile": "我的个人资料",
@@ -241,11 +242,13 @@
         "contactUs": "联系我们",
         "roles": {
             "backend": "后端开发人员",
+            "fullstack": "全栈开发人员",
             "frontend": "前端开发人员",
             "uiux": "UI/UX 设计师"
         },
         "bios": {
             "backend": "管理我们应用程序的服务器逻辑、数据库和 API 集成。",
+            "fullstack": "开发了整个后端、自定义钩子、对阵表以及大部分组件。",
             "frontend": "负责开发用户界面和交互式组件。",
             "uiux": "设计用户界面并确保最佳的用户体验。"
         },

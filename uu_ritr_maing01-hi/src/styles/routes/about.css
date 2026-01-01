@@ -242,6 +242,11 @@
   background: linear-gradient(135deg, #ff6b35, #ffd166);
 }
 
+.social-icons .icon-content a[data-social="github"] .filled,
+.social-icons .icon-content a[data-social="github"] ~ .tooltip {
+  background: linear-gradient(135deg, #ff6b35, #ffd166);
+}
+
 /* --- Scroll Animations --- */
 .animate-on-scroll {
   opacity: 0;

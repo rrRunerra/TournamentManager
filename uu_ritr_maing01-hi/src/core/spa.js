@@ -7,7 +7,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Navbar from "../bricks/navbar.js";
-import { NotificationProvider } from "../bricks/components/notifications/NotificationProvider.js";
+import { NotificationProvider } from "../context/NotificationContext.js";
 import { ConfirmProvider } from "../bricks/components/confirm/ConfirmProvider.js";
 import importLsi from "../lsi/import-lsi.js";
 import "../styles/spa.css";

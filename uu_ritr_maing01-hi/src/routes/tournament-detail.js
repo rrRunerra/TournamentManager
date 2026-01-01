@@ -8,7 +8,7 @@ import OngoingOwnerControls from "../bricks/OngoingOwnerControls.js";
 import OwnerControls from "../bricks/ownerControls.js";
 import Calls from "../calls.js";
 import "../styles/routes/tournamentDetail.css";
-import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import ImgEditor from "../bricks/image-editor.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/components/ui/Button.js";

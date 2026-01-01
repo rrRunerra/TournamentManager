@@ -1,0 +1,5 @@
+change callsBaseUri in development.json in hi env  to https://matchup.runerra.org/api
+
+
+change mongo address in development.json in server env
+

@@ -4,7 +4,7 @@ import importLsi from "../lsi/import-lsi.js";
 import CreateModal from "../bricks/createTournamentModal.js";
 import Calls from "../calls.js";
 import "../styles/routes/tournament.css";
-import { useNotification } from "../bricks/components/notifications/NotificationProvider.js";
+import { useNotification } from "../hooks/useNotification.js";
 import useUser from "../hooks/useUser.js";
 import { Button } from "../bricks/components/ui/Button.js";
 import { Card, CardTitle, CardIcon, CardDetails, CardStatus } from "../bricks/components/ui/Card.js";
