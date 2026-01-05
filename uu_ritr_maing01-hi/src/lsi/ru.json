@@ -11,7 +11,10 @@
         "firstPlace": "1-е место",
         "secondPlace": "2-е место",
         "thirdPlace": "3-е место",
-        "fourthPlace": "4-е место"
+        "fourthPlace": "4-е место",
+        "loginRequired": "Требуется вход",
+        "loginMessage": "Пожалуйста, войдите, чтобы просмотреть таблицу лидеров",
+        "goToLogin": "Перейти ко входу"
     },
     "Profile": {
         "statsTitle": "Статистика игрока",

@@ -14,6 +14,8 @@
     "selectProfilePicture": "Vyberte profilový obrázek"
   },
   "Leaderboard": {
+    "title": "Žebříček",
+    "loading": "Načítám...",
     "name": "Jméno",
     "school": "Škola",
     "class": "Třída",
@@ -23,7 +25,10 @@
     "firstPlace": "1. Místo",
     "secondPlace": "2. Místo",
     "thirdPlace": "3. Místo",
-    "fourthPlace": "4. Místo"
+    "fourthPlace": "4. Místo",
+    "loginRequired": "Vyžaduje se přihlášení",
+    "loginMessage": "Přihlaste se prosím pro zobrazení žebříčku",
+    "goToLogin": "Přejít k přihlášení"
   },
   "appName": "Aplikace uuRitr",
   "About": {

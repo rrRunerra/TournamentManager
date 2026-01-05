@@ -11,7 +11,10 @@
         "firstPlace": "第一名",
         "secondPlace": "第二名",
         "thirdPlace": "第三名",
-        "fourthPlace": "第四名"
+        "fourthPlace": "第四名",
+        "loginRequired": "需要登录",
+        "loginMessage": "请登录以查看排行榜",
+        "goToLogin": "前往登录"
     },
     "Profile": {
         "statsTitle": "玩家统计",

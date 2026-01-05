@@ -11,7 +11,10 @@
         "firstPlace": "1. Miejsce",
         "secondPlace": "2. Miejsce",
         "thirdPlace": "3. Miejsce",
-        "fourthPlace": "4. Miejsce"
+        "fourthPlace": "4. Miejsce",
+        "loginRequired": "Wymagane logowanie",
+        "loginMessage": "Zaloguj się, aby zobaczyć tablicę wyników",
+        "goToLogin": "Przejdź do logowania"
     },
     "Profile": {
         "statsTitle": "Statystyki gracza",

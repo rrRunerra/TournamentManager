@@ -25,7 +25,10 @@
         "firstPlace": "1. Miesto",
         "secondPlace": "2. Miesto",
         "thirdPlace": "3. Miesto",
-        "fourthPlace": "4. Miesto"
+        "fourthPlace": "4. Miesto",
+        "loginRequired": "Vyžaduje sa prihlásenie",
+        "loginMessage": "Prihláste sa prosím na zobrazenie rebríčka",
+        "goToLogin": "Prejsť na prihlásenie"
     },
     "appName": "Aplikácia uuRitr",
     "About": {

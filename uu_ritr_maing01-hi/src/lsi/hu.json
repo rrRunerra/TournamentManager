@@ -11,7 +11,10 @@
         "firstPlace": "1. Hely",
         "secondPlace": "2. Hely",
         "thirdPlace": "3. Hely",
-        "fourthPlace": "4. Hely"
+        "fourthPlace": "4. Hely",
+        "loginRequired": "Bejelentkezés szükséges",
+        "loginMessage": "Kérjük, jelentkezzen be a ranglista megtekintéséhez",
+        "goToLogin": "Ugrás a bejelentkezéshez"
     },
     "Profile": {
         "statsTitle": "Játékos statisztikák",

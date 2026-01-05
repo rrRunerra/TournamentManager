@@ -1,11 +1,7 @@
 // IDFK macos crying
 // prob error with node version 25
 
-if (
-  typeof localStorage === "undefined" ||
-  localStorage === null ||
-  typeof localStorage.getItem !== "function"
-) {
+if (typeof localStorage === "undefined" || localStorage === null || typeof localStorage.getItem !== "function") {
   // Simple in-memory mock for localStorage to fix crash on Node.js v25+
   global.localStorage = {
     getItem: function (key) {
@@ -20,11 +16,11 @@ if (
     clear: function () {
       // clear all keys
       for (const key in this) {
-        if (this.hasOwnProperty(key) && typeof this[key] !== 'function') {
+        if (this.hasOwnProperty(key) && typeof this[key] !== "function") {
           delete this[key];
         }
       }
-    }
+    },
   };
 }
 
@@ -41,8 +37,10 @@ const io = new Server(8082, {
   },
 });
 
+const socketNamespace = io.of("/socket");
+
 // Socket.IO connection handler
-io.on("connection", (socket) => {
+socketNamespace.on("connection", (socket) => {
   console.log(`🔌 New client connected: ${socket.id}`);
-  socketHandlers(io, socket);
+  socketHandlers(socketNamespace, socket);
 });

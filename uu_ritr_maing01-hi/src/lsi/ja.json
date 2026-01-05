@@ -11,7 +11,10 @@
         "firstPlace": "1位",
         "secondPlace": "2位",
         "thirdPlace": "3位",
-        "fourthPlace": "4位"
+        "fourthPlace": "4位",
+        "loginRequired": "ログインが必要です",
+        "loginMessage": "リーダーボードを表示するにはログインしてください",
+        "goToLogin": "ログインへ移動"
     },
     "Profile": {
         "statsTitle": "プレイヤー統計",

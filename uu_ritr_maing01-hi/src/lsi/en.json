@@ -25,7 +25,10 @@
     "firstPlace": "1st Place",
     "secondPlace": "2nd Place",
     "thirdPlace": "3rd Place",
-    "fourthPlace": "4th Place"
+    "fourthPlace": "4th Place",
+    "loginRequired": "Login Required",
+    "loginMessage": "Please log in to view the leaderboard",
+    "goToLogin": "Go to Login"
   },
   "appName": "Application uuRitr",
   "About": {
