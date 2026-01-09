@@ -5,8 +5,12 @@ const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/player-error.js");
 const { Edu } = require("../edu.js");
+const jwt = require("jsonwebtoken");
+const env = require("../../env/development.json");
 
 const WARNINGS = {};
+
+const JWT_SECRET = env.JWT_SECRET || "uMatchup3456^#$@W%@$^&@#*";
 
 const CREDITS = {
   finals_firstPlace: 500,
@@ -64,7 +68,23 @@ class PlayerAbl {
       throw new Errors.Get.InvalidDtoIn();
     }
 
-    const out = await this.dao.get({ awid, id: dtoIn.id });
+    let playerId = dtoIn.id;
+
+    // If no ID provided but token is, try to verify token
+    if (!playerId && dtoIn.token) {
+      try {
+        const decoded = jwt.verify(dtoIn.token, JWT_SECRET);
+        playerId = decoded.id;
+      } catch (e) {
+        throw new Error("Invalid token");
+      }
+    }
+
+    if (!playerId) {
+      throw new Errors.Get.InvalidDtoIn({ message: "ID or valid token required" });
+    }
+
+    const out = await this.dao.get({ awid, id: playerId });
     return out;
   }
 
@@ -113,7 +133,7 @@ class PlayerAbl {
       throw new Errors.Create.UserNotFound();
     }
 
-    const user = {
+    let user = {
       id: loginResponse.users[0].userid.replace(/\D+/g, ""),
       name: `${loginResponse.users[0].firstname} ${loginResponse.users[0].lastname}`,
       school: loginResponse.users[0].edupage.toLowerCase(),
@@ -126,18 +146,13 @@ class PlayerAbl {
     const existing = await this.dao.get({ awid, id: user.id });
 
     if (existing) {
-      user.profilePicture = existing.profilePicture;
+      user = existing;
     }
 
     if (!existing) {
       const out = await this.dao.create({
         awid,
-        id: user.id,
-        name: user.name,
-        school: user.school,
-        role: user.role,
-        class: schoolData.class,
-        classes: schoolData.classes,
+        ...user,
         stats: {
           finals_firstPlace: 0,
           finals_secondPlace: 0,
@@ -152,7 +167,20 @@ class PlayerAbl {
       });
     }
 
-    return user;
+    // Generate JWT
+    const token = jwt.sign(
+      {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        school: user.school,
+        awid: awid,
+      },
+      JWT_SECRET,
+      { expiresIn: "7d" },
+    );
+
+    return { ...user, token };
   }
 
   /**
@@ -176,7 +204,7 @@ class PlayerAbl {
       throw new Errors.UpdateStats.InvalidDtoIn();
     }
 
-    console.log(dtoIn);
+    //console.log(dtoIn);
     //     {
     //   tournamentId: 'rsmqy3e1e0h246boknzjky',
     //   finalsFirstPlaceParticipantId: '8ijppe8mlynf5io5xuqbv',

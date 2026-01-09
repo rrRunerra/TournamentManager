@@ -27,7 +27,9 @@
         "tournamentsPlayed": "Rozegrane turnieje",
         "flappyBirdHighScore": "Flappy Bird wynik",
         "totalTournaments": "Łącznie rozegranych turniejów",
-        "selectProfilePicture": "Wybierz zdjęcie profilowe"
+        "selectProfilePicture": "Wybierz zdjęcie profilowe",
+        "close": "Zamknij",
+        "team": "Drużyna"
     },
     "appName": "Aplikacja uuRitr",
     "About": {
@@ -153,6 +155,7 @@
         "saving": "Zapisywanie...",
         "saveScore": "Zapisz wynik",
         "cancel": "Anuluj",
+        "close": "Zamknij",
         "matchPrefix": "Mecz #",
         "grandFinal": "Wielki Finał",
         "semifinal": "Półfinał",
@@ -168,7 +171,8 @@
         "updateErrorMessage": "Spróbuj ponownie.",
         "participant1": "Uczestnik 1",
         "participant2": "Uczestnik 2",
-        "vs": "VS"
+        "vs": "VS",
+        "you": "(Ty)"
     },
     "OwnerControls": {
         "title": "Kontrola turnieju",
@@ -219,7 +223,7 @@
     "AboutPage": {
         "title": "O naszym",
         "team": "Zespole",
-        "subtitle": "Jesteśmy trójką uczniów ze Średniej Szkoły Przemysłowej w Sninie, których łączy pasja do technologii, kodowania i tworzenia. Naszym celem jest tworzenie projektów, które mają znaczenie nie tylko dla nas, ale także dla naszej szkoły i społeczności wokół niej. Razem tworzymy MatchUP – projekt studencki stworzony we współpracy z Unicorn, który popycha nas do przodu nie tylko w wiedzy, ale także w pracy zespołowej i rozwiązywaniu rzeczywistych problemów.",
+        "subtitle": "Jesteśmy trójką uczniów ze Stredná priemyselná škola, Partizánska 1059, Snina, których łączy pasja do technologii, kodowania i tworzenia. Naszym celem jest tworzenie projektów, które mają znaczenie nie tylko dla nas, ale także dla naszej szkoły i społeczności wokół niej. Razem tworzymy MatchUP – projekt studencki stworzony we współpracy z Unicorn, który popycha nas do przodu nie tylko w wiedzy, ale także w pracy zespołowej i rozwiązywaniu rzeczywistych problemów.",
         "subtitle2": "Wierzymy, że nawet mały zespół z wielkimi pomysłami może coś zmienić.",
         "ourTeam": "Nasz zespół",
         "motivationTitle": "Co nas motywuje",
@@ -243,7 +247,7 @@
             "uiux": "Projektuje interfejsy użytkownika i zapewnia optymalne wrażenia użytkownika."
         },
         "thanksTitle": "Specjalne podziękowania",
-        "thanksText": "Chcielibyśmy wyrazić wielkie podziękowania firmie Unicorn i Średniej Szkole Przemysłowej w Sninie za wsparcie i mentoring podczas rozwoju tego projektu. Bez ich fachowych porad i wsparcia technologicznego ten projekt nie byłby możliwy.",
+        "thanksText": "Chcielibyśmy wyrazić wielkie podziękowania firmie Unicorn i Stredná priemyselná škola, Partizánska 1059, Snina za wsparcie i mentoring podczas rozwoju tego projektu. Bez ich fachowych porad i wsparcia technologicznego ten projekt nie byłby możliwy.",
         "thanksUnicorn": "Dziękujemy również wszystkim, którzy nas wspierali i motywowali na tej drodze.",
         "specialThanks": "Specjalne podziękowania dla:",
         "thanksAppreciation": "Bez nich nic z tego nie byłoby możliwe. 💛"

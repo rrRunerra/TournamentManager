@@ -242,3 +242,47 @@
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+/* Mobile Poker Styles */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .poker-table-container {
+    width: 100%;
+    flex: none;
+    height: 250px; /* Fixed height for mobile */
+  }
+
+  .player-info {
+    width: 100%;
+    flex: none;
+  }
+
+  .hand img {
+    height: 140px; /* Smaller cards on mobile */
+  }
+
+  .player-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .player-actions button {
+    width: 100%;
+  }
+
+  .community-cards-on-table {
+    width: 80%;
+    justify-content: center;
+  }
+
+  .community-card-img {
+    width: 20%; /* Responsive width */
+    max-width: 70px;
+  }
+}

@@ -53,8 +53,15 @@ export default function LoginPage() {
 
     try {
       const res = await Calls.player.create({ name: username, password: password });
+
+      // Store token in localStorage
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+
+        window.dispatchEvent(new Event("storage"));
+      }
+
       setUser(res);
-      localStorage.setItem("player", JSON.stringify(res));
       setRoute("home");
       console.log(res);
       localStorage.setItem(`user_avatar_${res.id}`, res?.profilePicture ?? "");

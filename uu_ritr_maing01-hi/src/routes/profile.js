@@ -50,6 +50,7 @@ const StatCard = ({ label, value, color }) => (
 );
 
 const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title, ownedAvatars = [] }) => {
+  const lsi = useLsi(importLsi, ["Profile"]);
   if (!isOpen) return null;
 
   const BROKEN_IMAGE_ID = "ZBK7b4vHYyb0n70zJq";
@@ -95,7 +96,7 @@ const AvatarModal = ({ isOpen, onClose, onSelect, currentAvatar, title, ownedAva
         </div>
         <div className="avatar-modal-actions">
           <Button onClick={onClose} type="secondary">
-            Close
+            {lsi.close}
           </Button>
         </div>
       </div>
@@ -285,7 +286,7 @@ export default function ProfilePage() {
               <div className="profile-tournament-card-name">{t.name}</div>
               <div className="profile-tournament-card-date">{new Date(t.endDate).toLocaleDateString()}</div>
               <div style={{ marginTop: "1rem" }}>
-                <div className="profile-tournament-card-team-label">Tím</div>
+                <div className="profile-tournament-card-team-label">{lsi.team}</div>
                 <div className="profile-tournament-card-team-name">{t.teamName}</div>
               </div>
             </div>

@@ -247,7 +247,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
           "👤"
         )}{" "}
         {player?.name || "---"}
-        {isCurrentUser && <span style={{ marginLeft: "auto", fontSize: "0.8em", color: "#ff8e53" }}>(Ty)</span>}
+        {isCurrentUser && <span style={{ marginLeft: "auto", fontSize: "0.8em", color: "#ff8e53" }}>{lsi.you}</span>}
       </div>
     );
   };
@@ -284,24 +284,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                     {lsi.winner}
                   </label>
                 </div>
-                <select
-                  className="status-select"
-                  value={status1 || ""}
-                  onChange={(e) => setStatus1(e.target.value || null)}
-                  disabled={!isMatchReady}
-                >
-                  <option value="">{lsi.statusNone}</option>
-                  {STATUS_OPTIONS.filter((s) => s).map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
               </>
             ) : (
               <div className="score-display-container">
                 <span className="score-display">{score1}</span>
-                {status1 && <span className="status-display">{status1}</span>}
                 {match.participants[0]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
@@ -339,24 +325,10 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
                     {lsi.winner}
                   </label>
                 </div>
-                <select
-                  className="status-select"
-                  value={status2 || ""}
-                  onChange={(e) => setStatus2(e.target.value || null)}
-                  disabled={!isMatchReady}
-                >
-                  <option value="">{lsi.statusNone}</option>
-                  {STATUS_OPTIONS.filter((s) => s).map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
               </>
             ) : (
               <div className="score-display-container">
                 <span className="score-display">{score2}</span>
-                {status2 && <span className="status-display">{status2}</span>}
                 {match.participants[1]?.isWinner && <span className="winner-badge">{lsi.winnerBadge}</span>}
               </div>
             )}
@@ -377,7 +349,7 @@ const MatchDetailPopup = ({ match, onClose, isOwner, onMatchUpdate, tournamentIn
             </button>
           )}
           <button className="save-btn" onClick={onClose} disabled={loading}>
-            Close
+            {lsi.close}
           </button>
         </div>
       </div>

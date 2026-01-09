@@ -15,7 +15,15 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  /* For absolute logo */
+}
+
+@media (min-width: 601px) {
+  .cards-section {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 1.2rem 2rem;
+    gap: 1rem;
+  }
 }
 
 .cards-container {
@@ -31,17 +39,28 @@
   .cards-container {
     grid-template-columns: repeat(5, 1fr);
     max-width: 900px;
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 767px) {
+  .cards-container {
+    grid-column: 2;
   }
 }
 
 /* Card styles moved to Card.css */
 
 .nav-logo-wrapper {
-  position: absolute;
-  left: 25px;
-  top: 50%;
-  transform: translateY(-50%);
   padding: 0;
+}
+
+@media (min-width: 601px) {
+  .nav-logo-wrapper {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .nav-logo-wrapper img {
@@ -95,7 +114,7 @@
     top: 100%;
     right: -10px;
     width: 200px;
-    z-index: 100;
+    z-index: 50;
   }
 
   /* Hamburger Button */
@@ -179,11 +198,36 @@
 
 /* Language Switcher Styles */
 .language-selector-wrapper {
-  position: absolute;
-  right: 85px;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 2;
+  position: relative;
+}
+
+.desktop-controls-wrapper {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.language-selector-wrapper.mobile-only {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .language-selector-wrapper.mobile-only {
+    display: block;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-right: 8px;
+  }
+
+  .language-selector-wrapper.mobile-only .lang-dropdown {
+    right: -50px; /* Adjust dropdown position for mobile */
+    top: 110%;
+  }
 }
 
 .lang-btn {
@@ -266,14 +310,11 @@
 
 /* Account Icon Styles */
 .account-icon-wrapper {
-  position: absolute;
-  right: 25px;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .account-icon {
@@ -304,6 +345,7 @@
   min-width: 180px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.2s ease;
+  z-index: 11;
 }
 
 .account-popup-header {

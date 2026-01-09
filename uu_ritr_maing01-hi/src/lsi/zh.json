@@ -27,7 +27,9 @@
         "tournamentsPlayed": "参与锦标赛",
         "flappyBirdHighScore": "Flappy Bird 最高分",
         "totalTournaments": "参加锦标赛总数",
-        "selectProfilePicture": "选择个人资料图片"
+        "selectProfilePicture": "选择个人资料图片",
+        "close": "关闭",
+        "team": "团队"
     },
     "appName": "uuRitr 应用程序",
     "About": {
@@ -166,6 +168,7 @@
         "saving": "保存中...",
         "saveScore": "保存比分",
         "cancel": "取消",
+        "close": "关闭",
         "matchPrefix": "比赛 #",
         "grandFinal": "总决赛",
         "semifinal": "半决赛",
@@ -181,7 +184,8 @@
         "updateErrorMessage": "请重试。",
         "participant1": "参与者 1",
         "participant2": "参与者 2",
-        "vs": "VS"
+        "vs": "VS",
+        "you": "(你)"
     },
     "OwnerControls": {
         "title": "锦标赛控制",
@@ -232,7 +236,7 @@
     "AboutPage": {
         "title": "关于我们的",
         "team": "团队",
-        "subtitle": "我们是来自斯尼纳工业中学的三个学生，我们对技术、编程和创造有着共同的热情。我们的目标是开发不仅对我们自己，而且对我们的学校和周围社区都有意义的项目。我们共同创建了 MatchUP——这是与 Unicorn 合作创建的学生项目，它不仅在知识上，而且在团队合作和解决实际问题方面都推动了我们前进。",
+        "subtitle": "我们是来自 Stredná priemyselná škola, Partizánska 1059, Snina 的三个学生，我们对技术、编程和创造有着共同的热情。我们的目标是开发不仅对我们自己，而且对我们的学校和周围社区都有意义的项目。我们共同创建了 MatchUP——这是与 Unicorn 合作创建的学生项目，它不仅在知识上，而且在团队合作和解决实际问题方面都推动了我们前进。",
         "subtitle2": "我们相信，即使是一个拥有大想法的小团队也能带来改变。",
         "ourTeam": "我们的团队",
         "motivationTitle": "什么激励着我们",
@@ -256,7 +260,7 @@
             "uiux": "设计用户界面并确保最佳的用户体验。"
         },
         "thanksTitle": "特别感谢",
-        "thanksText": "我们要非常感谢 Unicorn 和斯尼纳工业中学在本项目开发过程中给予的支持和指导。没有他们的专家建议和技术背景，这个项目是不可能的。",
+        "thanksText": "我们要非常感谢 Unicorn 和 Stredná priemyselná škola, Partizánska 1059, Snina 在本项目开发过程中给予的支持和指导。没有他们的专家建议和技术背景，这个项目是不可能的。",
         "thanksUnicorn": "也感谢所有在这一路上支持和激励我们的人。",
         "specialThanks": "特此感谢：",
         "thanksAppreciation": "没有他们，这一切都不可能。 💛"

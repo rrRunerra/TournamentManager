@@ -123,7 +123,7 @@ export default function TournamentDetailPage() {
   // Renamed class "loading" to "tournament-detail-loading"
   if (!info) return <div className="loading-spinner">{lsi.loading}</div>;
 
-  const isOwner = user?.id == info.owner;
+  const isOwner = user?.id == info.owner || user?.role.toLowerCase() === "admin";
 
   const bracketsType = info?.bracketType;
 

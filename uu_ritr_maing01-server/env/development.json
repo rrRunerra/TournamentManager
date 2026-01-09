@@ -6,5 +6,6 @@
   "asid_license_owner_list": ["6041-6998-1","1431-1445-1"],
   "awid_license_owner_list": ["6041-6998-1","1431-1445-1"],
   "asid": "11111111111111111111111111111111",
-  "log_level": "INFO"
+  "log_level": "INFO",
+  "JWT_SECRET": "change this"
 }

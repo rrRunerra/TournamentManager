@@ -11,7 +11,9 @@
     "flappyBirdHighScore": "Flappy Bird Score",
     "totalTournaments": "Total Tournaments Played",
     "lastTournaments": "Last Played Tournaments",
-    "selectProfilePicture": "Select Profile Picture"
+    "selectProfilePicture": "Select Profile Picture",
+    "close": "Close",
+    "team": "Team"
   },
   "Leaderboard": {
     "title": "Leaderboard",
@@ -154,6 +156,7 @@
     "saving": "Saving...",
     "saveScore": "Save Score",
     "cancel": "Cancel",
+    "close": "Close",
     "matchPrefix": "Match #",
     "grandFinal": "Grand Final",
     "semifinal": "Semifinal",
@@ -169,7 +172,8 @@
     "updateErrorMessage": "Please try again.",
     "participant1": "Participant 1",
     "participant2": "Participant 2",
-    "vs": "VS"
+    "vs": "VS",
+    "you": "(You)"
   },
   "OwnerControls": {
     "title": "Tournament Controls",
@@ -220,7 +224,7 @@
   "AboutPage": {
     "title": "About Our",
     "team": "Team",
-    "subtitle": "We are a trio of students from the Secondary Industrial School in Snina who combine a passion for technology, coding, and creation. Our goal is to develop projects that are meaningful not only for us but also for our school and the community around it. Together we form MatchUP – a student project created in collaboration with Unicorn, which pushes us forward not only in knowledge but also in teamwork and real-world problem solving.",
+    "subtitle": "We are a trio of students from the Stredná priemyselná škola, Partizánska 1059, Snina who combine a passion for technology, coding, and creation. Our goal is to develop projects that are meaningful not only for us but also for our school and the community around it. Together we form MatchUP – a student project created in collaboration with Unicorn, which pushes us forward not only in knowledge but also in teamwork and real-world problem solving.",
     "subtitle2": "We believe that even a small team with big ideas can make a difference.",
     "ourTeam": "Our Team",
     "motivationTitle": "What Motivates Us",
@@ -244,7 +248,7 @@
       "uiux": "Designs user interfaces and ensures optimal user experience."
     },
     "thanksTitle": "Special Thanks",
-    "thanksText": "We would like to express our great gratitude to Unicorn and the Secondary Industrial School in Snina for their support and mentorship during the development of this project. Without their expert advice and technological background, this project would not have been possible.",
+    "thanksText": "We would like to express our great gratitude to Unicorn and the Stredná priemyselná škola, Partizánska 1059, Snina for their support and mentorship during the development of this project. Without their expert advice and technological background, this project would not have been possible.",
     "thanksUnicorn": "We also thank everyone who supported and motivated us on this journey.",
     "specialThanks": "Special thanks goes to:",
     "thanksAppreciation": "Without them, none of this would be possible. 💛"

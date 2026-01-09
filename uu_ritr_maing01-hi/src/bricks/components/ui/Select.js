@@ -38,7 +38,11 @@ const Select = ({ label, value, onChange, options = [], className = "", style = 
       style={{ ...style, marginBottom: noMargin ? 0 : "1rem" }}
       ref={selectRef}
     >
-      {label && <label className="select-label">{label}</label>}
+      {label && (
+        <label className="select-label" style={{ color: "#e0e0e0" }}>
+          {label}
+        </label>
+      )}
       <div className={`custom-select-container ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
         <div className="custom-select-trigger">
           <span>{selectedOption ? selectedOption.label : "Select..."}</span>

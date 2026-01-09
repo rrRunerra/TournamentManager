@@ -73,17 +73,19 @@ export default function Home() {
     if (feedback.trim()) {
       localStorage.setItem("matchup_feedback", feedback);
     }
-    emailjs.send(
-      "service_mekjy8j",              // 👈 tvoj service ID
-      "template_tr4crjo",      // 👈 tvoj template ID
-      {
-        rating: `${rating}/5`,
-        feedback: feedback.trim() || lsi?.Home?.noFeedback || "No feedback"
-      },
-      "KvZ1fkPgcBSFTuJDw"              // 👈 tvoj public key
-    ).catch((err) => {
-      console.error("EmailJS rating error:", err);
-    });
+    emailjs
+      .send(
+        "service_mekjy8j", // 👈 tvoj service ID
+        "template_tr4crjo", // 👈 tvoj template ID
+        {
+          rating: `${rating}/5`,
+          feedback: feedback.trim() || lsi?.Home?.noFeedback || "No feedback",
+        },
+        "KvZ1fkPgcBSFTuJDw", // 👈 tvoj public key
+      )
+      .catch((err) => {
+        console.error("EmailJS rating error:", err);
+      });
   };
 
   return (
@@ -208,20 +210,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sponsors Section */}
-      <section className="sponsors-section">
-        <h3 className="sponsors-title animate-on-scroll">
+      {/* Partners Section */}
+      <section className="partners-section">
+        <h3 className="partners-title animate-on-scroll">
           <Lsi import={importLsi} path={["Home", "partnersTitle"]} />
         </h3>
-        <div className="sponsors-grid animate-on-scroll delay-1">
-          <a href="https://sps-snina.edupage.org/" target="_blank" rel="noopener noreferrer" className="sponsor-link">
-            <img src="../assets/SPS_Snina.png" alt="SPŠ SNINA" className="sponsor-logo" />
+        <div className="partners-grid animate-on-scroll delay-1">
+          <a href="https://sps-snina.edupage.org/" target="_blank" rel="noopener noreferrer" className="partner-link">
+            <img src="../assets/SPS_Snina.png" alt="SPŠ SNINA" className="partner-logo" />
           </a>
-          <a href="https://unicorn.com/sk" target="_blank" rel="noopener noreferrer" className="sponsor-link">
+          <a href="https://unicorn.com/sk" target="_blank" rel="noopener noreferrer" className="partner-link">
             <img
               src="https://uuapp.plus4u.net/uu-appbinarystore-maing02/8c84c39b5ef84fa2acba4fe8b05a0f42/binary/getData?accessKey=7d7d62c73e9e0d0b428db10242fca111.27436112.a2ec90f90ee597d5ea466446608e4b88d6d55c1d&clientAwid=d2a80094d8d24287befb333201f98edb&dataKey=prod2-small_logo_unicorn_552x60"
               alt="UNICORN"
-              className="sponsor-logo"
+              className="partner-logo"
             />
           </a>
         </div>

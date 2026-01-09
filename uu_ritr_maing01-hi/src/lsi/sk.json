@@ -11,7 +11,9 @@
         "flappyBirdHighScore": "Flappy Bird skóre",
         "totalTournaments": "Celkom odohraných turnajov",
         "lastTournaments": "Posledné odohrané turnaje",
-        "selectProfilePicture": "Vyberte profilovú fotku"
+        "selectProfilePicture": "Vyberte profilovú fotku",
+        "close": "Zavrieť",
+        "team": "Tím"
     },
     "Leaderboard": {
         "title": "Rebríček",
@@ -89,7 +91,7 @@
         "tournaments": "Turnaje",
         "history": "História",
         "about": "O nás",
-    "leaderboard": "Rebríček",
+        "leaderboard": "Rebríček",
         "logout": "Odhlásiť sa",
         "loggedInAs": "Prihlásený ako",
         "profile": "Môj profil",
@@ -154,6 +156,7 @@
         "saving": "Ukladám...",
         "saveScore": "Uložiť skóre",
         "cancel": "Zrušiť",
+        "close": "Zavrieť",
         "matchPrefix": "Zápas #",
         "grandFinal": "Veľké finále",
         "semifinal": "Semifinále",
@@ -169,7 +172,8 @@
         "updateErrorMessage": "Skúste to prosím znova.",
         "participant1": "Účastník 1",
         "participant2": "Účastník 2",
-        "vs": "VS"
+        "vs": "VS",
+        "you": "(Ty)"
     },
     "OwnerControls": {
         "title": "Ovládanie turnaja",
@@ -220,7 +224,7 @@
     "AboutPage": {
         "title": "O našom",
         "team": "tíme",
-        "subtitle": "Sme trojica študentov zo Strednej priemyselnej školy v Snine, ktorí spájajú vášeň pre technológie, kódovanie a tvorbu. Naším cieľom je rozvíjať projekty, ktoré majú význam nielen pre nás, ale aj pre našu školu a komunitu okolo nej. Spoločne tvoríme MatchUP – študentský projekt, ktorý vznikol v spolupráci s firmou Unicorn a ktorý nás posúva vpred nielen vo vedomostiach, ale aj v tímovej spolupráci a reálnom riešení úloh.",
+        "subtitle": "Sme trojica študentov zo Strednej priemyselnej školy, Partizánska 1059, Snina, ktorí spájajú vášeň pre technológie, kódování a tvorbu. Naším cieľom je rozvíjať projekty, ktoré majú význam nielen pre nás, ale aj pre našu školu a komunitu okolo nej. Spoločne tvoríme MatchUP – študentský projekt, ktorý vznikol v spolupráci s firmou Unicorn a ktorý nás posúva vpred nielen vo vedomostiach, ale aj v tímovej spolupráci a reálnom riešení úloh.",
         "subtitle2": "Veríme, že aj malý tím s veľkými nápadmi môže niečo zmeniť.",
         "ourTeam": "Náš tím",
         "motivationTitle": "Čo nás motivuje",
@@ -244,7 +248,7 @@
             "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
         },
         "thanksTitle": "Špeciálne poďakovanie",
-        "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn a Strednej Priemyselnej škole v Snine za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemia by tento projekt nebol možný.",
+        "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn a Strednej priemyselnej škole, Partizánska 1059, Snina za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemia by tento projekt nebol možný.",
         "thanksUnicorn": "Ďakujeme tiež všetkým, ktorí nás podporovali a motivovali na tejto ceste.",
         "specialThanks": "Špeciálne poďakovanie patrí:",
         "thanksAppreciation": "Bez nich by nič z toho nebolo možné. 💛"

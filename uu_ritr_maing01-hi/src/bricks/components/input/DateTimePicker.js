@@ -3,7 +3,7 @@ import "../../../styles/bricks/components/input/DateTimePicker.css";
 
 export default function DateTimePicker({ value, onChange, label, locale = "en", direction = "down" }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(value ? new Date(value) : new Date());
+  const [selectedDate, setSelectedDate] = useState(value ? new Date(value) : null);
   const [viewDate, setViewDate] = useState(value ? new Date(value) : new Date());
   const containerRef = useRef(null);
 
@@ -38,6 +38,8 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
         setSelectedDate(date);
         setViewDate(date);
       }
+    } else {
+      setSelectedDate(null);
     }
   }, [value]);
 
@@ -61,7 +63,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
   };
 
   const handleDateClick = (day) => {
-    const newDate = new Date(selectedDate);
+    const newDate = selectedDate ? new Date(selectedDate) : new Date();
     newDate.setFullYear(viewDate.getFullYear());
     newDate.setMonth(viewDate.getMonth());
     newDate.setDate(day);
@@ -71,7 +73,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
   };
 
   const handleTimeChange = (type, val) => {
-    const newDate = new Date(selectedDate);
+    const newDate = selectedDate ? new Date(selectedDate) : new Date();
 
     if (type === "hour" || type === "minute") {
       let newVal = parseInt(val);
@@ -136,7 +138,10 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
 
     for (let day = 1; day <= daysInMonth; day++) {
       const isSelected =
-        selectedDate.getDate() === day && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
+        selectedDate &&
+        selectedDate.getDate() === day &&
+        selectedDate.getMonth() === month &&
+        selectedDate.getFullYear() === year;
 
       calendarDays.push(
         <div key={day} className={`calendar-day ${isSelected ? "selected" : ""}`} onClick={() => handleDateClick(day)}>
@@ -161,7 +166,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
   };
 
   const getDisplayHour = () => {
-    const hours = selectedDate.getHours();
+    const hours = (selectedDate || new Date()).getHours();
     if (is12Hour) {
       if (hours === 0) return 12;
       if (hours > 12) return hours - 12;
@@ -172,7 +177,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
 
   return (
     <div className="date-time-picker-container" ref={containerRef}>
-      {label && <label>{label}</label>}
+      {label && <label style={{ color: "#e0e0e0" }}>{label}</label>}
       <div className="date-input-wrapper" onClick={() => setIsOpen(!isOpen)}>
         <input
           type="text"
@@ -227,16 +232,18 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
                   type="number"
                   min="0"
                   max="59"
-                  value={selectedDate.getMinutes().toString().padStart(2, "0")}
+                  value={(selectedDate || new Date()).getMinutes().toString().padStart(2, "0")}
                   onChange={(e) => handleTimeChange("minute", e.target.value)}
                 />
                 {is12Hour && (
                   <button
                     type="button"
                     className="ampm-toggle"
-                    onClick={() => handleTimeChange("ampm", selectedDate.getHours() >= 12 ? "AM" : "PM")}
+                    onClick={() =>
+                      handleTimeChange("ampm", (selectedDate || new Date()).getHours() >= 12 ? "AM" : "PM")
+                    }
                   >
-                    {selectedDate.getHours() >= 12 ? "PM" : "AM"}
+                    {(selectedDate || new Date()).getHours() >= 12 ? "PM" : "AM"}
                   </button>
                 )}
               </div>

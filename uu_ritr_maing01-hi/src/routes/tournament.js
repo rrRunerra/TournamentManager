@@ -51,7 +51,7 @@ export default function TournamentsPage() {
   const { showError, showSuccess } = useNotification();
   const lsi = useLsi(importLsi, ["Tournaments"]);
 
-  const isTeacher = user?.role.toLowerCase() === "teacher";
+  const isTeacher = user?.role.toLowerCase() === "teacher" || user?.role.toLowerCase() === "admin";
 
   const fetchTournaments = async (pageNum) => {
     if (loading || !user) return;

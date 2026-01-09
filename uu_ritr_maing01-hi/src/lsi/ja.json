@@ -27,7 +27,9 @@
         "tournamentsPlayed": "参加トーナメント",
         "flappyBirdHighScore": "Flappy Bird ハイスコア",
         "totalTournaments": "総トーナメント数",
-        "selectProfilePicture": "プロフィール写真を選択"
+        "selectProfilePicture": "プロフィール写真を選択",
+        "close": "閉じる",
+        "team": "チーム"
     },
     "appName": "uuRitr アプリケーション",
     "About": {
@@ -153,6 +155,7 @@
         "saving": "保存中...",
         "saveScore": "スコアを保存",
         "cancel": "キャンセル",
+        "close": "閉じる",
         "matchPrefix": "マッチ #",
         "grandFinal": "グランドファイナル",
         "semifinal": "準決勝",
@@ -168,7 +171,8 @@
         "updateErrorMessage": "もう一度お試しください。",
         "participant1": "参加者 1",
         "participant2": "参加者 2",
-        "vs": "対"
+        "vs": "対",
+        "you": "(あなた)"
     },
     "OwnerControls": {
         "title": "トーナメント管理",
@@ -219,7 +223,7 @@
     "AboutPage": {
         "title": "私たちの",
         "team": "チームについて",
-        "subtitle": "私たちは、スニナ産業高校の3人の学生で、技術、コーディング、創造への情熱を共有しています。私たちの目標は、自分たちだけでなく、学校やその周りのコミュニティにとっても意味のあるプロジェクトを開発することです。私たちは一緒にMatchUPを作成しました。これは、Unicornと協力して作成された学生プロジェクトであり、知識だけでなく、チームワークや実際の問題解決においても私たちを前進させます。",
+        "subtitle": "私たちは、Stredná priemyselná škola, Partizánska 1059, Snina の3人の学生で、技術、コーディング、創造への情熱を共有しています。私たちの目標は、自分たちだけでなく、学校やその周りのコミュニティにとっても意味のあるプロジェクトを開発することです。私たちは一緒にMatchUPを作成しました。これは、Unicornと協力して作成された学生プロジェクトであり、知識だけでなく、チームワークや実際の問題解決においても私たちを前進させます。",
         "subtitle2": "小さなチームでも大きなアイデアがあれば変化を起こせると信じています。",
         "ourTeam": "私たちのチーム",
         "motivationTitle": "私たちのモチベーション",
@@ -243,7 +247,7 @@
             "uiux": "ユーザーインターフェースを設計し、最適なユーザー体験を保証します。"
         },
         "thanksTitle": "特別なお礼",
-        "thanksText": "このプロジェクトの開発中のサポートと指導に対して、Unicornとスニナ産業高校に深く感謝いたします。彼らの専門的なアドバイスと技術的なバックグラウンドがなければ、このプロジェクトは不可能でした。",
+        "thanksText": "このプロジェクトの開発中のサポートと指導に対して、Unicornと Stredná priemyselná škola, Partizánska 1059, Snina に深く感謝いたします。彼らの専門的なアドバイスと技術的なバックグラウンドがなければ、このプロジェクトは不可能でした。",
         "thanksUnicorn": "この道のりで私たちをサポートし、動機づけてくれたすべての人にも感謝します。",
         "specialThanks": "特別な感謝:",
         "thanksAppreciation": "彼らがいなければ、これは何も不可能でした。 💛"

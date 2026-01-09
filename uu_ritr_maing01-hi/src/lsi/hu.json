@@ -27,7 +27,9 @@
         "tournamentsPlayed": "Lejátszott versenyek",
         "flappyBirdHighScore": "Flappy Bird pontszám",
         "totalTournaments": "Összes lejátszott verseny",
-        "selectProfilePicture": "Válasszon profilképet"
+        "selectProfilePicture": "Válasszon profilképet",
+        "close": "Bezárás",
+        "team": "Csapat"
     },
     "appName": "uuRitr alkalmazás",
     "About": {
@@ -153,6 +155,7 @@
         "saving": "Mentés...",
         "saveScore": "Eredmény mentése",
         "cancel": "Mégse",
+        "close": "Bezárás",
         "matchPrefix": "Mérkőzés #",
         "grandFinal": "Nagy döntő",
         "semifinal": "Elődöntő",
@@ -168,7 +171,8 @@
         "updateErrorMessage": "Kérjük, próbálja újra.",
         "participant1": "1. résztvevő",
         "participant2": "2. résztvevő",
-        "vs": "VS"
+        "vs": "VS",
+        "you": "(Te)"
     },
     "OwnerControls": {
         "title": "Versenyvezérlés",
@@ -219,7 +223,7 @@
     "AboutPage": {
         "title": "A mi",
         "team": "Csapatunkról",
-        "subtitle": "Három diák vagyunk a Sninai Ipari Szakközépiskolából, akiket összeköt a technológia, a kódolás és az alkotás iránti szenvedély. Célunk olyan projektek fejlesztése, amelyek nemcsak számunkra, hanem iskolánk és a körülötte lévő közösség számára is értelmesek. Együtt alkotjuk a MatchUP-ot – egy diákprojektet, amely a Unicornnal együttműködésben jött létre, és amely nemcsak tudásban, hanem csapatmunkában és valós problémamegoldásban is előrevisz minket.",
+        "subtitle": "Három diák vagyunk a Stredná priemyselná škola, Partizánska 1059, Snina, akiket összeköt a technológia, a kódolás és az alkotás iránti szenvedély. Célunk olyan projektek fejlesztése, amelyek nemcsak számunkra, hanem iskolánk és a körülötte lévő közösség számára is értelmesek. Együtt alkotjuk a MatchUP-ot – egy diákprojektet, amely a Unicornnal együttműködésben jött létre, és amely nemcsak tudásban, hanem csapatmunkában és valós problémamegoldásban is előrevisz minket.",
         "subtitle2": "Hisszük, hogy még egy kis csapat is nagy ötletekkel képes változást elérni.",
         "ourTeam": "Csapatunk",
         "motivationTitle": "Mi motivál minket",
@@ -243,7 +247,7 @@
             "uiux": "Tervezi a felhasználói felületeket és biztosítja az optimális felhasználói élményt."
         },
         "thanksTitle": "Különleges köszönet",
-        "thanksText": "Nagy köszönettel tartozunk a Unicornnak és a Sninai Ipari Szakközépiskolának a projekt fejlesztése során nyújtott támogatásukért és mentorálásukért. Az ő szakértői tanácsaik és technológiai háttér nélkül ez a projekt nem lett volna lehetséges.",
+        "thanksText": "Nagy köszönettel tartozunk a Unicornnak és a Stredná priemyselná škola, Partizánska 1059, Snina a projekt fejlesztése során nyújtott támogatásukért és mentorálásukért. Az ő szakértői tanácsaik és technológiai háttér nélkül ez a projekt nem lett volna lehetséges.",
         "thanksUnicorn": "Köszönünk mindenkinek, aki támogatott és motivált minket ezen az úton.",
         "specialThanks": "Különleges köszönet illeti:",
         "thanksAppreciation": "Nélkülük semmi sem lett volna lehetséges. 💛"

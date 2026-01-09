@@ -11,7 +11,9 @@
     "flappyBirdHighScore": "Flappy Bird skóre",
     "totalTournaments": "Celkem odehraných turnajů",
     "lastTournaments": "Posledné odehrané turnaje",
-    "selectProfilePicture": "Vyberte profilový obrázek"
+    "selectProfilePicture": "Vyberte profilový obrázek",
+    "close": "Zavřít",
+    "team": "Tým"
   },
   "Leaderboard": {
     "title": "Žebříček",
@@ -167,6 +169,7 @@
     "saving": "Ukládám...",
     "saveScore": "Uložit skóre",
     "cancel": "Zrušit",
+    "close": "Zavřít",
     "matchPrefix": "Zápas #",
     "grandFinal": "Velké finále",
     "semifinal": "Semifinále",
@@ -182,7 +185,8 @@
     "updateErrorMessage": "Zkuste to prosím znovu.",
     "participant1": "Účastník 1",
     "participant2": "Účastník 2",
-    "vs": "VS"
+    "vs": "VS",
+    "you": "(Ty)"
   },
   "OwnerControls": {
     "title": "Ovládání turnaje",
@@ -233,7 +237,7 @@
   "AboutPage": {
     "title": "O našem",
     "team": "týmu",
-    "subtitle": "Jsme trojice studentů ze Střední průmyslové školy v Snině, kteří spojují vášeň pro technologie, kódování a tvorbu. Naším cílem je rozvíjet projekty, které mají význam nejen pro nás, ale i pro naši školu a komunitu kolem ní. Společně tvoříme MatchUP – studentský projekt, který vznikl ve spolupráci s firmou Unicorn a který nás posouvá vpřed nejen ve vědomostech, ale i v týmové spolupráci a reálném řešení úkolů.",
+    "subtitle": "Jsme trojice studentů ze Stredná priemyselná škola, Partizánska 1059, Snina, kteří spojují vášeň pro technologie, kódování a tvorbu. Naším cílem je rozvíjet projekty, které mají význam nejen pro nás, ale i pro naši školu a komunitu kolem ní. Společně tvoříme MatchUP – studentský projekt, který vznikl ve spolupráci s firmou Unicorn a který nás posouvá vpřed nejen ve vědomostech, ale i v týmové spolupráci a reálném řešení úkolů.",
     "subtitle2": "Věříme, že i malý tým s velkými nápady může něco změnit.",
     "ourTeam": "Náš tým",
     "motivationTitle": "Co nás motivuje",
@@ -257,7 +261,7 @@
       "uiux": "Navrhuje uživatelská rozhraní a zajišťuje optimální uživatelskou zkušenost."
     },
     "thanksTitle": "Speciální poděkování",
-    "thanksText": "Chtěli bychom vyjádřit velké poděkování firmě Unicorn a Střední průmyslové škole v Snině za jejich podporu a mentorství během vývoje tohoto projektu. Bez jejich odborných rad a technologického zázemí by tento projekt nebyl možný.",
+    "thanksText": "Chtěli bychom vyjádřit velké poděkování firmě Unicorn a Stredná priemyselná škola, Partizánska 1059, Snina za jejich podporu a mentorství během vývoje tohoto projektu. Bez jejich odborných rad a technologického zázemí by tento projekt nebyl možný.",
     "thanksUnicorn": "Děkujeme také všem, kteří nás podporovali a motivovali na této cestě.",
     "specialThanks": "Speciální poděkování patří:",
     "thanksAppreciation": "Bez nich by nic z toho nebylo možné. 💛"

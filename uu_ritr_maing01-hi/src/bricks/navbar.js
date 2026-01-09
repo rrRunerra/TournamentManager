@@ -79,7 +79,7 @@ export default function Navbar() {
 
     if (confirmed) {
       setUser(null);
-      localStorage.removeItem("player");
+      localStorage.removeItem("token");
       setAvatar(null);
       setRoute("home");
     }
@@ -182,6 +182,29 @@ export default function Navbar() {
         </div>
 
         <div className="mobile-controls">
+          {/* Mobile Language Switcher */}
+          <div className="language-selector-wrapper mobile-only" ref={langPopupRef}>
+            <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
+              <span className="lang-icon">{LANGUAGES.find((l) => l.code === lang)?.icon || "🌐"}</span>
+              <span className="lang-text">{LANGUAGES.find((l) => l.code === lang)?.label || lang.toUpperCase()}</span>
+              <span className={`lang-arrow ${isLangOpen ? "open" : ""}`}>▼</span>
+            </div>
+
+            {isLangOpen && (
+              <div className="lang-dropdown">
+                {LANGUAGES.map((l) => (
+                  <div
+                    key={l.code}
+                    className={`lang-option ${lang === l.code ? "active" : ""}`}
+                    onClick={() => handleLanguageChange(l.code)}
+                  >
+                    <span className="lang-icon">{l.icon}</span> {l.label}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           {user && (
             <div className="account-icon-wrapper mobile-account-icon" ref={mobileAccountRef}>
               {avatar ? (
@@ -272,104 +295,159 @@ export default function Navbar() {
           <img src="../assets/MatchUPlogo.png" />
         </div>
 
-        {/* Language Switcher (Desktop) */}
-        <div className="language-selector-wrapper desktop-only" ref={langPopupRef}>
-          <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
-            <span className="lang-icon">{LANGUAGES.find((l) => l.code === lang)?.icon || "🌐"}</span>
-            <span className="lang-text">{LANGUAGES.find((l) => l.code === lang)?.label || lang.toUpperCase()}</span>
-            <span className={`lang-arrow ${isLangOpen ? "open" : ""}`}>▼</span>
-          </div>
+        <div className="cards-container">
+          <Card type="navbar" className={activeLink === "home" ? "active" : ""} onClick={() => handleCardClick("home")}>
+            <CardIcon>🏠</CardIcon>
+            <h2>
+              <Lsi import={importLsi} path={["Navbar", "home"]} />
+            </h2>
+          </Card>
 
-          {isLangOpen && (
-            <div className="lang-dropdown">
-              {LANGUAGES.map((l) => (
-                <div
-                  key={l.code}
-                  className={`lang-option ${lang === l.code ? "active" : ""}`}
-                  onClick={() => handleLanguageChange(l.code)}
-                >
-                  <span className="lang-icon">{l.icon}</span> {l.label}
-                </div>
-              ))}
-            </div>
-          )}
+          <Card
+            type="navbar"
+            className={activeLink === "tournaments" || activeLink === "tournamentDetail" ? "active" : ""}
+            onClick={() => handleCardClick("tournaments")}
+          >
+            <CardIcon>🏆</CardIcon>
+            <h2>
+              <Lsi import={importLsi} path={["Navbar", "tournaments"]} />
+            </h2>
+          </Card>
+
+          <Card
+            type="navbar"
+            className={activeLink === "history" ? "active" : ""}
+            onClick={() => handleCardClick("history")}
+          >
+            <CardIcon>📜</CardIcon>
+            <h2>
+              <Lsi import={importLsi} path={["Navbar", "history"]} />
+            </h2>
+          </Card>
+
+          <Card
+            type="navbar"
+            className={activeLink === "leaderboard" ? "active" : ""}
+            onClick={() => handleCardClick("leaderboard")}
+          >
+            <CardIcon>📊</CardIcon>
+            <h2>
+              <Lsi import={importLsi} path={["Navbar", "leaderboard"]} />
+            </h2>
+          </Card>
+
+          <Card
+            type="navbar"
+            className={`${user ? "card-logout" : ""} ${activeLink === "login" ? "active" : ""}`}
+            onClick={user ? handleLogout : () => setRoute("login")}
+          >
+            <CardIcon>{user ? "🚪" : "🔑"}</CardIcon>
+            <h2>
+              <Lsi import={importLsi} path={user ? ["Navbar", "logout"] : ["Login", "login"]} />
+            </h2>
+          </Card>
         </div>
 
-        {/* Account Icon (Desktop) */}
-        {user && (
-          <div className="account-icon-wrapper desktop-only" ref={accountPopupRef}>
-            {avatar ? (
-              <img
-                src={avatar}
-                alt="Avatar"
-                className="account-icon"
-                style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }}
-                onClick={() => setIsAccountOpen(!isAccountOpen)}
-              />
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="account-icon"
-                onClick={() => setIsAccountOpen(!isAccountOpen)}
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-              </svg>
-            )}
+        <div className="desktop-controls-wrapper desktop-only">
+          {/* Language Switcher (Desktop) */}
+          <div className="language-selector-wrapper" ref={langPopupRef}>
+            <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
+              <span className="lang-icon">{LANGUAGES.find((l) => l.code === lang)?.icon || "🌐"}</span>
+              <span className="lang-text">{LANGUAGES.find((l) => l.code === lang)?.label || lang.toUpperCase()}</span>
+              <span className={`lang-arrow ${isLangOpen ? "open" : ""}`}>▼</span>
+            </div>
 
-            {isAccountOpen && user && (
-              <div className="account-popup">
-                <div className="account-popup-header">
-                  <Lsi import={importLsi} path={["Navbar", "loggedInAs"]} />
-                </div>
-                <div className="account-popup-name">{user.name || user.username || "User"}</div>
-                <div className="account-popup-divider"></div>
-                <div
-                  className="account-popup-item"
-                  onClick={() => {
-                    setActiveLink("home");
-                    setIsAccountOpen(false);
-                    setRoute("profile", { id: user.id });
-                  }}
-                >
-                  <span className="account-popup-icon">👤</span>
-                  <Lsi import={importLsi} path={["Navbar", "profile"]} />
-                </div>
-                <div
-                  className="account-popup-item"
-                  onClick={() => {
-                    setIsAccountOpen(false);
-                    setIsOfficialShopOpen(true);
-                  }}
-                >
-                  <span className="account-popup-icon">🛒</span>
-                  <Lsi import={importLsi} path={["Navbar", "shop"]} />
-                </div>
-                <div
-                  className="account-popup-item"
-                  onClick={() => {
-                    setIsAccountOpen(false);
-                    setIsSettingsOpen(true);
-                  }}
-                >
-                  <span className="account-popup-icon">🔤</span>
-                  <Lsi import={importLsi} path={["Navbar", "fontSize"]} />
-                </div>
-                <div
-                  className="account-popup-item"
-                  onClick={() => {
-                    setIsAccountOpen(false);
-                    setIsContactOpen(true);
-                  }}
-                >
-                  <span className="account-popup-icon">❓</span>
-                  <Lsi import={importLsi} path={["Navbar", "contactUs"]} />
-                </div>
+            {isLangOpen && (
+              <div className="lang-dropdown">
+                {LANGUAGES.map((l) => (
+                  <div
+                    key={l.code}
+                    className={`lang-option ${lang === l.code ? "active" : ""}`}
+                    onClick={() => handleLanguageChange(l.code)}
+                  >
+                    <span className="lang-icon">{l.icon}</span> {l.label}
+                  </div>
+                ))}
               </div>
             )}
           </div>
-        )}
+
+          {/* Account Icon (Desktop) */}
+          {user && (
+            <div className="account-icon-wrapper" ref={accountPopupRef}>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  className="account-icon"
+                  style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }}
+                  onClick={() => setIsAccountOpen(!isAccountOpen)}
+                />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="account-icon"
+                  onClick={() => setIsAccountOpen(!isAccountOpen)}
+                >
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                </svg>
+              )}
+
+              {isAccountOpen && user && (
+                <div className="account-popup">
+                  <div className="account-popup-header">
+                    <Lsi import={importLsi} path={["Navbar", "loggedInAs"]} />
+                  </div>
+                  <div className="account-popup-name">{user.name || user.username || "User"}</div>
+                  <div className="account-popup-divider"></div>
+                  <div
+                    className="account-popup-item"
+                    onClick={() => {
+                      setActiveLink("home");
+                      setIsAccountOpen(false);
+                      setRoute("profile", { id: user.id });
+                    }}
+                  >
+                    <span className="account-popup-icon">👤</span>
+                    <Lsi import={importLsi} path={["Navbar", "profile"]} />
+                  </div>
+                  <div
+                    className="account-popup-item"
+                    onClick={() => {
+                      setIsAccountOpen(false);
+                      setIsOfficialShopOpen(true);
+                    }}
+                  >
+                    <span className="account-popup-icon">🛒</span>
+                    <Lsi import={importLsi} path={["Navbar", "shop"]} />
+                  </div>
+                  <div
+                    className="account-popup-item"
+                    onClick={() => {
+                      setIsAccountOpen(false);
+                      setIsSettingsOpen(true);
+                    }}
+                  >
+                    <span className="account-popup-icon">🔤</span>
+                    <Lsi import={importLsi} path={["Navbar", "fontSize"]} />
+                  </div>
+                  <div
+                    className="account-popup-item"
+                    onClick={() => {
+                      setIsAccountOpen(false);
+                      setIsContactOpen(true);
+                    }}
+                  >
+                    <span className="account-popup-icon">❓</span>
+                    <Lsi import={importLsi} path={["Navbar", "contactUs"]} />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Settings Popup */}
         {isSettingsOpen && (
@@ -433,59 +511,6 @@ export default function Navbar() {
             </div>
           </div>
         )}
-
-        <div className="cards-container">
-          <Card type="navbar" className={activeLink === "home" ? "active" : ""} onClick={() => handleCardClick("home")}>
-            <CardIcon>🏠</CardIcon>
-            <h2>
-              <Lsi import={importLsi} path={["Navbar", "home"]} />
-            </h2>
-          </Card>
-
-          <Card
-            type="navbar"
-            className={activeLink === "tournaments" || activeLink === "tournamentDetail" ? "active" : ""}
-            onClick={() => handleCardClick("tournaments")}
-          >
-            <CardIcon>🏆</CardIcon>
-            <h2>
-              <Lsi import={importLsi} path={["Navbar", "tournaments"]} />
-            </h2>
-          </Card>
-
-          <Card
-            type="navbar"
-            className={activeLink === "history" ? "active" : ""}
-            onClick={() => handleCardClick("history")}
-          >
-            <CardIcon>📜</CardIcon>
-            <h2>
-              <Lsi import={importLsi} path={["Navbar", "history"]} />
-            </h2>
-          </Card>
-
-          <Card
-            type="navbar"
-            className={activeLink === "leaderboard" ? "active" : ""}
-            onClick={() => handleCardClick("leaderboard")}
-          >
-            <CardIcon>📊</CardIcon>
-            <h2>
-              <Lsi import={importLsi} path={["Navbar", "leaderboard"]} />
-            </h2>
-          </Card>
-
-          <Card
-            type="navbar"
-            className={`${user ? "card-logout" : ""} ${activeLink === "login" ? "active" : ""}`}
-            onClick={user ? handleLogout : () => setRoute("login")}
-          >
-            <CardIcon>{user ? "🚪" : "🔑"}</CardIcon>
-            <h2>
-              <Lsi import={importLsi} path={user ? ["Navbar", "logout"] : ["Login", "login"]} />
-            </h2>
-          </Card>
-        </div>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
       <Shop isOpen={isOfficialShopOpen} onClose={() => setIsOfficialShopOpen(false)} user={user} items={shopItems} />

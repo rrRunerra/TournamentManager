@@ -956,3 +956,97 @@
     font-size: 1.1rem;
   }
 }
+
+/* Mobile Roulette Styles */
+@media (max-width: 768px) {
+  .roulette-container {
+    padding: 0.5rem;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .game-board {
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .wheel-wrapper {
+    transform: scale(0.55);
+    margin-right: 0;
+    margin-bottom: -60px;
+    margin-top: -40px;
+  }
+
+  .table-wrapper {
+    transform: scale(0.6);
+    transform-origin: top center;
+    width: 140%; /* Compensate for scale down */
+    margin-left: -10%; /* Center the scaled element */
+    margin-top: -20px;
+    overflow-x: visible; /* Allow seeing the whole table */
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Target the inner table container from the library if possible, or just the wrapper */
+  .roulette-table-container {
+    transform-origin: top center;
+  }
+
+  .controls-area {
+    flex-direction: column;
+    gap: 1rem;
+    transform: scale(0.9);
+    margin-top: -80px; /* Pull controls up closer to table */
+    width: 100%;
+  }
+
+  .chip-list-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .casino-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .back-button-container {
+    top: 1rem; /* Align with credits */
+    left: 1rem;
+    z-index: 100;
+  }
+
+  .back-button-container button {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .right-controls {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .credits-container {
+    padding: 0.3rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .shop-button {
+    width: 40px;
+    height: 40px;
+  }
+}

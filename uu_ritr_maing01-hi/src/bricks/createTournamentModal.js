@@ -30,6 +30,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
   const [lang] = useLanguage();
   const [classes, setClasses] = useState([]);
   const [classRoom, setClassRoom] = useState("");
+  const [userClassRooms, setUserClassRooms] = useState([]);
 
   // Auto-resize description textarea
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
     }
   }, [description, currentStep]);
 
-  // Check if user is teacher in db | fix for localstorage bypass
+  // Check if user is teacher in db
   useEffect(() => {
     if (!isOpen) return;
 
@@ -48,11 +49,12 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
         Calls.player
           .get({ id: user.id })
           .then((pDb) => {
-            // if (pDb.role.toLowerCase() !== "teacher") {
-            //   showError(lsi.errorTitle, lsi.errorUnauthorized);
-            //   onClose();
-            // }
+            if (pDb.role.toLowerCase() !== "teacher" && pDb.role.toLowerCase() !== "admin") {
+              showError(lsi.errorTitle, lsi.errorUnauthorized);
+              onClose();
+            }
             setClasses(pDb.classes);
+            setUserClassRooms(pDb.classRooms);
           })
           .catch((error) => {
             console.error("Failed to verify user role:", error);
@@ -184,7 +186,7 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               label={lsi.classRoom}
               value={classRoom}
               onChange={setClassRoom}
-              options={(user.classRooms || []).map((c) => c.name).sort((a, b) => a.localeCompare(b))}
+              options={(userClassRooms || []).map((c) => c.name).sort((a, b) => a.localeCompare(b))}
               required
             />
           </>
@@ -211,14 +213,14 @@ export default function CreateModal({ isOpen, onClose, onSave, owner }) {
               ]}
             />
 
-            <label>{lsi.teamSize}</label>
+            <label style={{ color: "#e0e0e0" }}>{lsi.teamSize}</label>
             <Input type="number" value={teamSize} onChange={setTeamSize} min="1" required />
           </>
         );
       case 4:
         return (
           <>
-            <label>{lsi.teams}</label>
+            <label style={{ color: "#e0e0e0" }}>{lsi.teams}</label>
             <div className="helper-text">
               {bracketType === "single" && (lsi.helperSingle || "Minimum 3 teams required.")}
               {bracketType === "double" && (lsi.helperDouble || "Number of teams must be a multiple of 4.")}
