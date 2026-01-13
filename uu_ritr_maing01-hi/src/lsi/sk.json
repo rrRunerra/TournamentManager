@@ -370,6 +370,9 @@
         "errorSend": "Správu sa nepodarilo odoslať"
     },
     "Casino": {
+        "loginRequired": "Vyžaduje sa prihlásenie",
+        "loginMessage": "Prihláste sa prosím pre vstup do kasína",
+        "goToLogin": "Prejsť na prihlásenie",
         "insufficientCredits": "Nedostatok kreditov!",
         "title": "MatchUP Casino",
         "shopTitle": "Dark Web",

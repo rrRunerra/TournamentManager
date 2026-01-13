@@ -125,6 +125,370 @@ class PlayerAbl {
       throw new Errors.Create.PasswordMissing();
     }
 
+    if (dtoIn.name == "test" && env.testUser == true) {
+      const token = jwt.sign(
+        {
+          id: "test",
+          name: "test",
+          role: "admin",
+          school: "test",
+          awid: awid,
+        },
+        JWT_SECRET,
+        { expiresIn: "1d" },
+      );
+
+      let user = {
+        id: "test",
+        name: "test",
+        role: "admin",
+        school: "test",
+        class: "IV.L",
+        classes: [
+          {
+            short: "IV.A",
+            id: "408082",
+          },
+          {
+            short: "IV.C",
+            id: "408083",
+          },
+          {
+            short: "IV.E",
+            id: "408084",
+          },
+          {
+            short: "IV.L",
+            id: "408085",
+          },
+          {
+            short: "III.A",
+            id: "423100",
+          },
+          {
+            short: "III.E",
+            id: "423101",
+          },
+          {
+            short: "III.C",
+            id: "423102",
+          },
+          {
+            short: "III.L",
+            id: "423103",
+          },
+          {
+            short: "II.A",
+            id: "431921",
+          },
+          {
+            short: "II.C",
+            id: "431922",
+          },
+          {
+            short: "II.E",
+            id: "431923",
+          },
+          {
+            short: "II.L",
+            id: "431924",
+          },
+          {
+            short: "I.A",
+            id: "439000",
+          },
+          {
+            short: "I.E",
+            id: "439001",
+          },
+          {
+            short: "I.L",
+            id: "439002",
+          },
+          {
+            short: "I.C",
+            id: "439003",
+          },
+        ],
+        classRooms: [
+          {
+            id: "36004",
+            name: "automatizácia - A 010",
+            short: "A010",
+          },
+          {
+            id: "36006",
+            name: "kontrola a meranie - A001",
+            short: "A001",
+          },
+          {
+            id: "36007",
+            name: "VYT - KONTI - A011",
+            short: "A011",
+          },
+          {
+            id: "36008",
+            name: "elektrotechnika I - B131",
+            short: "B131",
+          },
+          {
+            id: "36010",
+            name: "telocvičňa veľká - A026",
+            short: "A026",
+          },
+          {
+            id: "36016",
+            name: "II.C, II.L",
+            short: "A304",
+          },
+          {
+            id: "36017",
+            name: "slovenský jazyk a literatúra - A107",
+            short: "A107",
+          },
+          {
+            id: "36018",
+            name: "II.A, II.C",
+            short: "A103",
+          },
+          {
+            id: "36019",
+            name: "IV.C, IV.L",
+            short: "A201",
+          },
+          {
+            id: "36021",
+            name: "I.A, I.E",
+            short: "A101",
+          },
+          {
+            id: "36022",
+            name: "cudzie jazyky 4 - A206",
+            short: "A206",
+          },
+          {
+            id: "36023",
+            name: "cudzie jazyky 3 - A207",
+            short: "A207",
+          },
+          {
+            id: "36024",
+            name: "cudzie jazyky 2 - A208",
+            short: "A208",
+          },
+          {
+            id: "36025",
+            name: "cudzie jazyky 1 - A209",
+            short: "A209",
+          },
+          {
+            id: "36026",
+            name: "III.C, III.L",
+            short: "A202",
+          },
+          {
+            id: "36028",
+            name: "VYT - GRS - A306",
+            short: "A306",
+          },
+          {
+            id: "36029",
+            name: "VYT - A307",
+            short: "A307",
+          },
+          {
+            id: "36030",
+            name: "MVP - A308",
+            short: "A308",
+          },
+          {
+            id: "36032",
+            name: "učebňa KIA",
+            short: "B002",
+          },
+          {
+            id: "36033",
+            name: "dielňa - doprava I - B003",
+            short: "B003",
+          },
+          {
+            id: "36034",
+            name: "dielňa stolárska",
+            short: "B014",
+          },
+          {
+            id: "36035",
+            name: "dielňa - frézareň malá - B020",
+            short: "B020",
+          },
+          {
+            id: "36037",
+            name: "laboratórium KOM - B023",
+            short: "B023",
+          },
+          {
+            id: "36039",
+            name: "dielňa - zváračská ",
+            short: "B034",
+          },
+          {
+            id: "36041",
+            name: "dielňa - doprava II - B041",
+            short: "B041",
+          },
+          {
+            id: "36042",
+            name: "CONNECT - A315",
+            short: "A315",
+          },
+          {
+            id: "36043",
+            name: "strojárska konštrukcia - B106",
+            short: "B106",
+          },
+          {
+            id: "36044",
+            name: "cestné vozidlá - B107",
+            short: "B107",
+          },
+          {
+            id: "36045",
+            name: "poslucháreň - A310",
+            short: "A310",
+          },
+          {
+            id: "36046",
+            name: "TEV - stolný tenis - B108",
+            short: "B108",
+          },
+          {
+            id: "36047",
+            name: "ekonomika, ADK - A301",
+            short: "A301",
+          },
+          {
+            id: "36048",
+            name: "telocvičňa malá - B121",
+            short: "B121",
+          },
+          {
+            id: "36051",
+            name: "elektrotechnické merania I - B128",
+            short: "B128",
+          },
+          {
+            id: "36052",
+            name: "elektrotechnika II - TPD - B129",
+            short: "B129",
+          },
+          {
+            id: "36054",
+            name: "strojárska technológia - B132",
+            short: "B132",
+          },
+          {
+            id: "39076",
+            name: "technické kreslenie - A304",
+            short: "A304",
+          },
+          {
+            id: "100419",
+            name: "IV.A, IV.E",
+            short: "A102",
+          },
+          {
+            id: "100420",
+            name: "elektrotechnické merania II - B126",
+            short: "B126",
+          },
+          {
+            id: "100421",
+            name: "dielňa - brusiareň - B035",
+            short: "B035",
+          },
+          {
+            id: "100422",
+            name: "dielňa ručného obrábania - B013",
+            short: "B013",
+          },
+          {
+            id: "100423",
+            name: "dileňa - frézareň veľká - B042",
+            short: "B042",
+          },
+          {
+            id: "100424",
+            name: "dielňa - sústružnícka - B017",
+            short: "B017",
+          },
+          {
+            id: "100425",
+            name: "dielňa CNC - B019",
+            short: "B019",
+          },
+          {
+            id: "148425",
+            name: "A203",
+            short: "A203",
+          },
+          {
+            id: "148426",
+            name: "III.A, III.E",
+            short: "A 104",
+          },
+          {
+            id: "203150",
+            name: "TEV - posilňovňa - B111",
+            short: "B111",
+          },
+          {
+            id: "203151",
+            name: "obnoviteľné zdroje - B123",
+            short: "B123",
+          },
+          {
+            id: "203739",
+            name: "I.E",
+            short: "A204",
+          },
+          {
+            id: "358345",
+            name: " I.L",
+            short: "A217",
+          },
+          {
+            id: "386721",
+            name: "A104",
+            short: "A104",
+          },
+        ],
+      };
+
+      const existing = await this.dao.get({ awid, id: user.id });
+      existing ? (user = existing) : user;
+
+      if (!existing) {
+        const out = await this.dao.create({
+          awid,
+          ...user,
+          stats: {
+            finals_firstPlace: 3,
+            finals_secondPlace: 6,
+            finals_thirdPlace: 3,
+            finals_fourthPlace: 1,
+            matchesLost: 1,
+            matchesWon: 12,
+            tournamentsPlayed: 14,
+            flappyBirdHighScore: 0,
+          },
+          profilePicture: null,
+          credits: 5000000,
+        });
+      }
+
+      return { ...user, token };
+    }
+
     const edu = new Edu(dtoIn.name, dtoIn.password);
     const loginResponse = await edu.login();
     const schoolData = await edu.getSchoolData();

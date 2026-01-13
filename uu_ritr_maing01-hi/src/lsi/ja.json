@@ -369,6 +369,9 @@
         "errorSend": "メッセージを送信できませんでした"
     },
     "Casino": {
+        "loginRequired": "ログインが必要です",
+        "loginMessage": "このページを表示するにはログインしてください",
+        "goToLogin": "ログインへ",
         "insufficientCredits": "クレジットが不足しています！",
         "title": "MatchUP Casino",
         "shopTitle": "Dark Web",

@@ -27,13 +27,14 @@ change mongo address in development.json in server env
 {
   "port": 8080,
   "uuSubAppDataStoreMap": {
-    "primary": "mongodb://127.0.0.1:27017/ritrMainPrimary"
+    "primary": "mongodb://192.168.0.109:27017/matchup"
   },
   "asid_license_owner_list": ["6041-6998-1","1431-1445-1"],
   "awid_license_owner_list": ["6041-6998-1","1431-1445-1"],
   "asid": "11111111111111111111111111111111",
   "log_level": "INFO",
-  "JWT_SECRET": "change this"
+  "JWT_SECRET": "lec8VULXUcDtjleoP3oBl41hYcp7Dpov3AjkY62bkx0",
+  "testUser": true
 }
 
 

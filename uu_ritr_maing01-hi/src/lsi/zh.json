@@ -382,6 +382,9 @@
         "errorSend": "无法发送消息"
     },
     "Casino": {
+        "loginRequired": "需要登录",
+        "loginMessage": "请登录以查看此页面",
+        "goToLogin": "前往登录",
         "insufficientCredits": "积分不足！",
         "title": "MatchUP Casino",
         "shopTitle": "Dark Web",

@@ -370,6 +370,9 @@
     "errorSend": "Failed to send message"
   },
   "Casino": {
+    "loginRequired": "Login Required",
+    "loginMessage": "Please log in to play in the casino",
+    "goToLogin": "Go to Login",
     "insufficientCredits": "Insufficient credits!",
     "title": "MatchUP Casino",
     "shopTitle": "Dark Web",

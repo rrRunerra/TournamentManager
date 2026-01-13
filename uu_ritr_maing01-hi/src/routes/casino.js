@@ -15,6 +15,7 @@ import "../styles/routes/poker.css";
 import Shop from "../bricks/shop/shop.js";
 import darkShopItems from "../bricks/shop/dark_shop_items.json";
 import { useRoute } from "uu5g05";
+import LoginRequired from "../bricks/LoginRequired.js";
 
 const chips = {
   1: "../assets/white-chip.png",
@@ -80,6 +81,10 @@ export default function CasinoPage(props) {
     setCredits(newCredits);
     setOwnedProfilePics(newOwnedProfilePics);
   };
+
+  if (!user) {
+    return <LoginRequired lsi={lsi}></LoginRequired>;
+  }
 
   return (
     <div className={`casino-container ${!selectedGame ? "game-selection-bg" : ""}`}>

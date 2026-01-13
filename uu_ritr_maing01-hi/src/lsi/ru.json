@@ -382,6 +382,9 @@
         "errorSend": "Не удалось отправить сообщение"
     },
     "Casino": {
+        "loginRequired": "Требуется вход",
+        "loginMessage": "Пожалуйста, войдите, чтобы просмотреть эту страницу",
+        "goToLogin": "Войти",
         "insufficientCredits": "Недостаточно кредитов!",
         "title": "MatchUP Casino",
         "shopTitle": "Dark Web",

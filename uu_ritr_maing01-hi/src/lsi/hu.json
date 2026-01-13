@@ -369,6 +369,9 @@
         "errorSend": "Nem sikerült elküldeni az üzenetet"
     },
     "Casino": {
+        "loginRequired": "Bejelentkezés szükséges",
+        "loginMessage": "Kérjük, jelentkezzen be az oldal megtekintéséhez",
+        "goToLogin": "Bejelentkezés",
         "insufficientCredits": "Nincs elég kredit!",
         "title": "MatchUP Casino",
         "shopTitle": "Dark Web",
