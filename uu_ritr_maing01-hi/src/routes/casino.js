@@ -634,11 +634,11 @@ function SlotMachine({ credits, updateCredits, userId }) {
                 <span>x5</span>
               </div>
               <div className="paytable-item two-match">
-                <span>🍉 🍉</span>
+                <span>💎 💎</span>
                 <span>x4</span>
               </div>
               <div className="paytable-item two-match">
-                <span>💎 💎</span>
+                <span>🍉 🍉</span>
                 <span>x4</span>
               </div>
               <div className="paytable-item two-match">
