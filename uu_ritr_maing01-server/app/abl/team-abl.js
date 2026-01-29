@@ -4,6 +4,7 @@ const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/team-error.js");
+const AuthHelper = require("./auth-helper.js");
 
 const WARNINGS = {};
 
@@ -40,6 +41,12 @@ class TeamAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.Remove.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     // dtoIn.tournamentId
@@ -98,6 +105,12 @@ class TeamAbl {
     const validationResult = this.validator.validate("TeamUpdateDtoInType", dtoIn);
     if (!validationResult.isValid()) {
       throw new Errors.Update.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     // Get the existing team
@@ -181,6 +194,12 @@ class TeamAbl {
     const validationResult = this.validator.validate("TeamRemovePlayerDtoInType", dtoIn);
     if (!validationResult.isValid()) {
       throw new Errors.RemovePlayer.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     const team = await this.dao.get({ awid, id: dtoIn.teamId });

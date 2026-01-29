@@ -60,4 +60,5 @@ module.exports = {
   List,
   Create,
   Create,
+  AuthenticationRequired: RitrMainUseCaseError.AuthenticationRequired,
 };

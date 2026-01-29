@@ -7,6 +7,7 @@ const Errors = require("../api/errors/tournament-error.js");
 const generateSingleBracket = require("./brackets/generate-single-bracket.js");
 const generateDoubleBracket = require("./brackets/generate-double-bracket.js");
 const generateRoundRobin = require("./brackets/generate-round-robin.js");
+const AuthHelper = require("./auth-helper.js");
 
 const WARNINGS = {};
 
@@ -63,6 +64,12 @@ class TournamentAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.Delete.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     const tournament = await this.dao.get({ awid, id: dtoIn.id });
@@ -263,6 +270,12 @@ class TournamentAbl {
     const validationResult = this.validator.validate("TournamentUpdateDtoInType", dtoIn);
     if (!validationResult.isValid()) throw new Errors.Update.InvalidDtoIn();
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     const tournament = await this.dao.get({ awid, id: dtoIn.id });
     if (!tournament) throw new Errors.Update.TournamentNotFound();
 
@@ -386,6 +399,12 @@ class TournamentAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.Create.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
     if (!dtoIn.name) {
       throw new Errors.Create.NameMissing();

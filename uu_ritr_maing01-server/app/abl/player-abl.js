@@ -7,6 +7,7 @@ const Errors = require("../api/errors/player-error.js");
 const { Edu } = require("../edu.js");
 const jwt = require("jsonwebtoken");
 const env = require("../../env/development.json");
+const AuthHelper = require("./auth-helper.js");
 
 const WARNINGS = {};
 
@@ -100,6 +101,12 @@ class PlayerAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.Update.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
   }
 
@@ -568,6 +575,12 @@ class PlayerAbl {
       throw new Errors.UpdateStats.InvalidDtoIn();
     }
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     //console.log(dtoIn);
     //     {
     //   tournamentId: 'rsmqy3e1e0h246boknzjky',
@@ -645,6 +658,12 @@ class PlayerAbl {
       throw new Errors.UpdateMatchStats.InvalidDtoIn();
     }
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     // Get team DAO to find all players in the team
     const teamDao = DaoFactory.getDao("team");
     const team = await teamDao.get({ awid, id: dtoIn.participantId });
@@ -700,6 +719,12 @@ class PlayerAbl {
       throw new Errors.UpdateFlappyBirdScore.InvalidDtoIn();
     }
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     const playerObj = await this.dao.get({ awid, id: dtoIn.playerId });
     if (!playerObj) {
       throw new Errors.UpdateFlappyBirdScore.PlayerNotFound();
@@ -745,6 +770,12 @@ class PlayerAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.IncrementTournamentsPlayed.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     // Get team DAO to iterate through all teams in tournament
@@ -805,6 +836,12 @@ class PlayerAbl {
       throw new Errors.Update.InvalidDtoIn();
     }
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     const player = await this.dao.get({ awid, id: dtoIn.id });
     if (!player) {
       throw new Errors.Get.PlayerNotFound();
@@ -835,6 +872,12 @@ class PlayerAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.Update.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     const player = await this.dao.get({ awid, id: dtoIn.id });
@@ -873,6 +916,12 @@ class PlayerAbl {
       throw new Errors.Update.InvalidDtoIn();
     }
 
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
+    }
+
     const player = await this.dao.get({ awid, id: dtoIn.id });
     if (!player) {
       throw new Errors.Get.PlayerNotFound();
@@ -900,6 +949,12 @@ class PlayerAbl {
 
     if (!validationResult.isValid()) {
       throw new Errors.BuyProfilePic.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     const player = await this.dao.get({ awid, id: dtoIn.id });

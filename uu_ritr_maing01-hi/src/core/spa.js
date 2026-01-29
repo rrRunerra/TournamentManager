@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 //@@viewOn:imports
 import { createVisualComponent, Utils, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
@@ -47,6 +48,24 @@ const Spa = createVisualComponent({
   uu5Tag: Config.TAG + "Spa",
 
   render() {
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const now = Date.now() / 1000;
+          if (payload.exp && payload.exp < now) {
+            console.log("Token expired, logging out...");
+            localStorage.removeItem("token");
+            window.location.reload();
+          }
+        } catch (e) {
+          console.error("Invalid token format", e);
+          localStorage.removeItem("token");
+        }
+      }
+    }, []);
+
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "zh", "ru", "de", "pl", "hu"]}>
         <NotificationProvider>

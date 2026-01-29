@@ -4,6 +4,7 @@ const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/match-error.js");
+const AuthHelper = require("./auth-helper.js");
 
 const WARNINGS = {};
 
@@ -66,6 +67,12 @@ class MatchAbl {
     const validationResult = this.validator.validate("MatchUpdateDtoInType", dtoIn);
     if (!validationResult.isValid()) {
       throw new Errors.Update.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     const match = await this.dao.get({ awid, matchId: dtoIn.matchId, tournamentId: dtoIn.tournamentId });
@@ -169,6 +176,12 @@ class MatchAbl {
     const validationResult = this.validator.validate("MatchCreateDtoInType", dtoIn);
     if (!validationResult.isValid()) {
       throw new Errors.Create.InvalidDtoIn();
+    }
+
+    try {
+      AuthHelper.verifyToken(dtoIn.token);
+    } catch (e) {
+      throw new Errors.AuthenticationRequired();
     }
 
     return await this.dao.create({ awid, ...dtoIn });

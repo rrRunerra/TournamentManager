@@ -10,6 +10,12 @@ import Plus4U5 from "uu_plus4u5g02";
 
 const Calls = {
   async call(method, url, dtoIn, clientOptions) {
+    if (method.toLowerCase() === "post") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        dtoIn = { ...dtoIn, token };
+      }
+    }
     const response = await Plus4U5.Utils.AppClient[method](url, dtoIn, clientOptions);
     return response.data;
   },

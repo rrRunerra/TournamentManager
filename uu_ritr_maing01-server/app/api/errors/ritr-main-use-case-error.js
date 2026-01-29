@@ -6,13 +6,22 @@ class RitrMainUseCaseError extends UseCaseError {
     return "uu-ritr-main/";
   }
 
-  constructor(dtoOut, paramMap = {}, cause = null) {
+  constructor(dtoOut, paramMap = {}, cause = null, status = 400) {
     if (paramMap instanceof Error) {
       cause = paramMap;
       paramMap = {};
     }
-    super({ dtoOut, paramMap, status: 400 }, cause);
+    super({ dtoOut, paramMap, status }, cause);
   }
 }
+
+RitrMainUseCaseError.AuthenticationRequired = class extends RitrMainUseCaseError {
+  constructor() {
+    super(...arguments);
+    this.code = `${RitrMainUseCaseError.ERROR_PREFIX}authenticatedRequired`;
+    this.message = "User is not authenticated.";
+    this.status = 401;
+  }
+};
 
 module.exports = RitrMainUseCaseError;
