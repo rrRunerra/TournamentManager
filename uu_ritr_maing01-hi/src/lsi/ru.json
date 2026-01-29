@@ -90,7 +90,7 @@
         "tournaments": "Турниры",
         "history": "История",
         "about": "О нас",
-    "leaderboard": "Таблица лидеров",
+        "leaderboard": "Таблица лидеров",
         "logout": "Выйти",
         "loggedInAs": "Вы вошли как",
         "profile": "Мой профиль",
@@ -269,7 +269,8 @@
         "username": "Имя пользователя",
         "password": "Пароль",
         "login": "Войти",
-        "loading": "Загрузка..."
+        "loading": "Загрузка...",
+        "error": "Неверные данные для входа"
     },
     "TournamentDetail": {
         "loading": "Загрузка...",

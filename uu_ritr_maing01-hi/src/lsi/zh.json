@@ -90,7 +90,7 @@
         "tournaments": "锦标赛",
         "history": "历史",
         "about": "关于我们",
-    "leaderboard": "排行榜",
+        "leaderboard": "排行榜",
         "logout": "注销",
         "loggedInAs": "登录为",
         "profile": "我的个人资料",
@@ -269,7 +269,8 @@
         "username": "用户名",
         "password": "密码",
         "login": "登录",
-        "loading": "加载中..."
+        "loading": "加载中...",
+        "error": "登录信息不正确"
     },
     "TournamentDetail": {
         "loading": "加载中...",

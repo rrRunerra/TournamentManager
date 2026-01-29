@@ -90,7 +90,7 @@
         "tournaments": "Versenyek",
         "history": "Előzmények",
         "about": "Rólunk",
-    "leaderboard": "Ranglista",
+        "leaderboard": "Ranglista",
         "logout": "Kijelentk ezés",
         "loggedInAs": "Bejelentkezve mint",
         "profile": "Saját profil",
@@ -256,7 +256,8 @@
         "username": "Felhasználónév",
         "password": "Jelszó",
         "login": "Bejelentkezés",
-        "loading": "Betöltés..."
+        "loading": "Betöltés...",
+        "error": "Érvénytelen bejelentkezési adatok"
     },
     "TournamentDetail": {
         "loading": "Betöltés...",

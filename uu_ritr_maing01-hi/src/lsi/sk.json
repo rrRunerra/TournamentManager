@@ -257,7 +257,8 @@
         "username": "Používateľské meno",
         "password": "Heslo",
         "login": "Prihlásiť sa",
-        "loading": "Načítavam..."
+        "loading": "Načítavam...",
+        "error": "Nesprávne prihlasovacie údaje"
     },
     "TournamentDetail": {
         "loading": "Načítavam...",

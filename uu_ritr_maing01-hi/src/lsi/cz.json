@@ -270,7 +270,8 @@
     "username": "Uživatelské jméno",
     "password": "Heslo",
     "login": "Přihlásit se",
-    "loading": "Načítám..."
+    "loading": "Načítám...",
+    "error": "Nesprávné přihlašovací údaje"
   },
   "TournamentDetail": {
     "loading": "Načítám...",

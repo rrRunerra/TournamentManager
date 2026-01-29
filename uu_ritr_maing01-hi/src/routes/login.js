@@ -67,7 +67,7 @@ export default function LoginPage() {
       localStorage.setItem(`user_avatar_${res.id}`, res?.profilePicture ?? "");
     } catch (e) {
       console.error(e);
-      setError(e.message);
+      setError(lsi.error);
     }
 
     setLoading(false);

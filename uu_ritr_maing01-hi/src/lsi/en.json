@@ -257,7 +257,8 @@
     "username": "Username",
     "password": "Password",
     "login": "Login",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "error": "Invalid credentials"
   },
   "TournamentDetail": {
     "loading": "Loading...",

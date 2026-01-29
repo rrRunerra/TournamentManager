@@ -90,7 +90,7 @@
         "tournaments": "Turniere",
         "history": "Verlauf",
         "about": "Über uns",
-    "leaderboard": "Rangliste",
+        "leaderboard": "Rangliste",
         "logout": "Abmelden",
         "loggedInAs": "Angemeldet als",
         "profile": "Mein Profil",
@@ -256,7 +256,8 @@
         "username": "Benutzername",
         "password": "Passwort",
         "login": "Anmelden",
-        "loading": "Laden..."
+        "loading": "Laden...",
+        "error": "Ungültige Anmeldeinformationen"
     },
     "TournamentDetail": {
         "loading": "Laden...",
