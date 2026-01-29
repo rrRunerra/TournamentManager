@@ -341,7 +341,7 @@ function BigWinOverlay({ amount }) {
 }
 
 // Slot Machine Symbols
-const SLOT_SYMBOLS = ["🍒", "🍋", "🔔", "💎", "7️⃣", "⭐"];
+const SLOT_SYMBOLS = ["🍒", "🍋", "🔔", "💎", "7️⃣", "⭐", "🍀", "🍉"];
 
 // Payout table (multipliers for matching symbols)
 const PAYOUTS = {
@@ -358,6 +358,10 @@ const PAYOUTS = {
   "💎💎": 4,
   "⭐⭐": 5,
   "7️⃣7️⃣": 10,
+  "🍀🍀🍀": 15,
+  "🍉🍉🍉": 20,
+  "🍀🍀": 3,
+  "🍉🍉": 4,
 };
 
 function SlotMachine({ credits, updateCredits, userId }) {
@@ -368,7 +372,6 @@ function SlotMachine({ credits, updateCredits, userId }) {
   const [spinning, setSpinning] = useState([false, false, false]);
   const [bet, setBet] = useState(10);
   const [showBigWin, setShowBigWin] = useState(false);
-  const [winAmount, setWinAmount] = useState(0);
   const [lastWin, setLastWin] = useState(0);
 
   const getRandomSymbol = () => {
@@ -481,6 +484,36 @@ function SlotMachine({ credits, updateCredits, userId }) {
     };
   }, [isSpinning, spin]);
 
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+
+  const adjustBet = (amount) => {
+    setBet((prev) => {
+      const next = prev + amount;
+      return Math.max(10, Math.min(credits, next));
+    });
+  };
+
+  const startChangingBet = (amount) => {
+    if (isSpinning) return;
+    adjustBet(amount);
+
+    timeoutRef.current = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        adjustBet(amount);
+      }, 50);
+    }, 400);
+  };
+
+  const stopChangingBet = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+
+  useEffect(() => {
+    return () => stopChangingBet();
+  }, []);
+
   return (
     <>
       <h1 className="casino-title">{lsi.games.slots.title}</h1>
@@ -523,13 +556,21 @@ function SlotMachine({ credits, updateCredits, userId }) {
           <div className="slot-controls">
             <div className="slot-bet-control">
               <span>{lsi.games.slots.bet}:</span>
-              <button className="bet-btn" onClick={() => setBet((b) => Math.max(10, b - 10))} disabled={isSpinning}>
+              <button
+                className="bet-btn"
+                onMouseDown={() => startChangingBet(-10)}
+                onMouseUp={stopChangingBet}
+                onMouseLeave={stopChangingBet}
+                disabled={isSpinning}
+              >
                 -
               </button>
               <span className="bet-amount">${bet}</span>
               <button
                 className="bet-btn"
-                onClick={() => setBet((b) => Math.min(credits, b + 10))}
+                onMouseDown={() => startChangingBet(10)}
+                onMouseUp={stopChangingBet}
+                onMouseLeave={stopChangingBet}
                 disabled={isSpinning}
               >
                 +
@@ -563,6 +604,14 @@ function SlotMachine({ credits, updateCredits, userId }) {
                 <span>x25</span>
               </div>
               <div className="paytable-item">
+                <span>🍉 🍉 🍉</span>
+                <span>x20</span>
+              </div>
+              <div className="paytable-item">
+                <span>🍀 🍀 🍀</span>
+                <span>x15</span>
+              </div>
+              <div className="paytable-item">
                 <span>🔔 🔔 🔔</span>
                 <span>x15</span>
               </div>
@@ -585,8 +634,16 @@ function SlotMachine({ credits, updateCredits, userId }) {
                 <span>x5</span>
               </div>
               <div className="paytable-item two-match">
+                <span>🍉 🍉</span>
+                <span>x4</span>
+              </div>
+              <div className="paytable-item two-match">
                 <span>💎 💎</span>
                 <span>x4</span>
+              </div>
+              <div className="paytable-item two-match">
+                <span>🍀 🍀</span>
+                <span>x3</span>
               </div>
               <div className="paytable-item two-match">
                 <span>🔔 🔔</span>
