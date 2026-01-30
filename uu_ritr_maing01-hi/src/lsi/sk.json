@@ -238,13 +238,13 @@
         "roles": {
             "backend": "Backend vývojár",
             "fullstack": "Fullstack vývojár",
-            "frontend": "Frontend vývojár",
+            "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX dizajnér"
         },
         "bios": {
             "backend": "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu.",
-            "fullstack": "Vyvinul celý backend, vlastné hooky, pavúky a väčšinu komponentov.",
-            "frontend": "Zodpovedný za vývoj používateľského rozhrania a interaktívnych komponentov.",
+            "fullstack": "Nedavaj si tu ze si urobil vsetko sebo",
+            "frontend": "Navrhol celý dizajn aplikácie – stránky, layouty, komponenty a UI flow.",
             "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
         },
         "thanksTitle": "Špeciálne poďakovanie",

@@ -238,13 +238,13 @@
     "roles": {
       "backend": "Backend Developer",
       "fullstack": "Fullstack Developer",
-      "frontend": "Frontend Developer",
+      "frontend": "UI/UX dizajnér",
       "uiux": "UI/UX Designer"
     },
     "bios": {
       "backend": "Manages server logic, databases, and API integrations for our application.",
-      "fullstack": "Developed the entire backend, custom hooks, brackets, and most of the components.",
-      "frontend": "Responsible for developing the user interface and interactive components.",
+      "fullstack": "Don't put here that you did everything Sebo",
+      "frontend": "Designed the entire application – pages, layouts, components and UI flow.",
       "uiux": "Designs user interfaces and ensures optimal user experience."
     },
     "thanksTitle": "Special Thanks",

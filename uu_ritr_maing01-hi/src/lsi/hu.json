@@ -237,13 +237,13 @@
         "roles": {
             "backend": "Backend fejlesztő",
             "fullstack": "Fullstack fejlesztő",
-            "frontend": "Frontend fejlesztő",
+            "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX tervező"
         },
         "bios": {
             "backend": "Kezeli a szerver logikát, az adatbázisokat és az API integrációkat alkalmazásunkhoz.",
-            "fullstack": "A teljes backendet, egyedi hookokat, ágrajzokat és a legtöbb komponenst fejlesztette.",
-            "frontend": "Felelős a felhasználói felület és az interaktív komponensek fejlesztéséért.",
+            "fullstack": "Sebo, ne írd ide, hogy te csináltál mindent",
+            "frontend": "Megtervezte az egész alkalmazás dizájnját – oldalakat, elrendezéseket, komponenseket és UI flow-t.",
             "uiux": "Tervezi a felhasználói felületeket és biztosítja az optimális felhasználói élményt."
         },
         "thanksTitle": "Különleges köszönet",

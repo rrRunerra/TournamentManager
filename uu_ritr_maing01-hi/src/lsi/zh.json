@@ -250,13 +250,13 @@
         "roles": {
             "backend": "后端开发人员",
             "fullstack": "全栈开发人员",
-            "frontend": "前端开发人员",
+            "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX 设计师"
         },
         "bios": {
             "backend": "管理我们应用程序的服务器逻辑、数据库和 API 集成。",
-            "fullstack": "开发了整个后端、自定义钩子、对阵表以及大部分组件。",
-            "frontend": "负责开发用户界面和交互式组件。",
+            "fullstack": "Sebo，别在这儿写你做了所有的事",
+            "frontend": "设计了整个应用程序——页面、布局、组件和 UI 流程。",
             "uiux": "设计用户界面并确保最佳的用户体验。"
         },
         "thanksTitle": "特别感谢",
