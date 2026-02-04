@@ -285,7 +285,8 @@
     "joining": "Připojování...",
     "bracketType": "Typ pavouka:",
     "owner": "Vlastník:",
-    "classRoom": "Učebna:"
+    "classRoom": "Učebna:",
+    "onlyFor": "Jen pro:"
   },
   "Tournaments": {
     "createErrorTitle": "Chyba",

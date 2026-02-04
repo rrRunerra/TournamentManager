@@ -271,7 +271,8 @@
         "joining": "参加中...",
         "bracketType": "ブラケットタイプ:",
         "owner": "所有者:",
-        "classRoom": "教室:"
+        "classRoom": "教室:",
+        "onlyFor": "専用："
     },
     "Tournaments": {
         "createErrorTitle": "エラー",

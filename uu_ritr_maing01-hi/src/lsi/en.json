@@ -272,7 +272,8 @@
     "joining": "Joining...",
     "bracketType": "Bracket Type:",
     "owner": "Owner:",
-    "classRoom": "Classroom:"
+    "classRoom": "Classroom:",
+    "onlyFor": "Only for:"
   },
   "Tournaments": {
     "createErrorTitle": "Error",

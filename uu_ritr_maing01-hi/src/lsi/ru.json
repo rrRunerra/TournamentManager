@@ -284,7 +284,8 @@
         "joining": "Присоединение...",
         "bracketType": "Тип сетки:",
         "owner": "Владелец:",
-        "classRoom": "Аудитория:"
+        "classRoom": "Аудитория:",
+        "onlyFor": "Только для:"
     },
     "Tournaments": {
         "createErrorTitle": "Ошибка",

@@ -271,7 +271,8 @@
         "joining": "Beitreten...",
         "bracketType": "Turnierbaum-Typ:",
         "owner": "Besitzer:",
-        "classRoom": "Klassenzimmer:"
+        "classRoom": "Klassenzimmer:",
+        "onlyFor": "Nur für:"
     },
     "Tournaments": {
         "createErrorTitle": "Fehler",

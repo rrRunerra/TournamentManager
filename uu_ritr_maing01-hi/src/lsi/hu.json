@@ -271,7 +271,8 @@
         "joining": "Csatlakozás...",
         "bracketType": "Ágrajz típusa:",
         "owner": "Tulajdonos:",
-        "classRoom": "Tanterem:"
+        "classRoom": "Tanterem:",
+        "onlyFor": "Csak a következőkhöz:"
     },
     "Tournaments": {
         "createErrorTitle": "Hiba",

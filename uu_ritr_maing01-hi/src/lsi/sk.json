@@ -272,7 +272,8 @@
         "joining": "Pripájam sa...",
         "bracketType": "Typ pavúka:",
         "owner": "Vlastník:",
-        "classRoom": "Učebňa:"
+        "classRoom": "Učebňa:",
+        "onlyFor": "Len pre:"
     },
     "Tournaments": {
         "createErrorTitle": "Chyba",

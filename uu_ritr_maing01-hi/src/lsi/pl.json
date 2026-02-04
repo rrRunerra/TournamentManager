@@ -271,7 +271,8 @@
         "joining": "Dołączanie...",
         "bracketType": "Typ drabinki:",
         "owner": "Właściciel:",
-        "classRoom": "Sala lekcyjna:"
+        "classRoom": "Sala lekcyjna:",
+        "onlyFor": "Tylko dla:"
     },
     "Tournaments": {
         "createErrorTitle": "Błąd",

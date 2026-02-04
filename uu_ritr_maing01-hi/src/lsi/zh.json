@@ -284,7 +284,8 @@
         "joining": "加入中...",
         "bracketType": "赛制类型:",
         "owner": "拥有者:",
-        "classRoom": "教室:"
+        "classRoom": "教室:",
+        "onlyFor": "仅限："
     },
     "Tournaments": {
         "createErrorTitle": "错误",

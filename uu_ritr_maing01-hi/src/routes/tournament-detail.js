@@ -348,7 +348,7 @@ export default function TournamentDetailPage() {
               {!canJoin && !isJoined && !isFull && (
                 <CardFooter style={{ color: "red", fontSize: "0.8rem" }}>
                   {team.allowedClasses && team.allowedClasses.length > 0
-                    ? `Only for: ${team.allowedClasses.join(", ")}`
+                    ? `${lsi.onlyFor} ${team.allowedClasses.join(", ")}`
                     : "Cannot join"}
                 </CardFooter>
               )}
