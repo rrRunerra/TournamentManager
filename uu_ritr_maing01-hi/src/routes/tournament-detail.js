@@ -126,7 +126,7 @@ export default function TournamentDetailPage() {
   const isOwner = user?.id == info.owner || user?.role.toLowerCase() === "admin";
 
   const bracketsType = info?.bracketType;
-
+  console.log(user)
   const handleExportBracket = async () => {
     if (!bracketRef.current) return;
     setIsExporting(true);

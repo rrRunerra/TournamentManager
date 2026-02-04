@@ -1,5 +1,11 @@
 [
   {
+    "id": 8,
+    "name": "Svalovec",
+    "price": 250,
+    "image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXkyODNkODFtbmNudnNvbnIxcmd3dTY2YXkwYWtrbDZ6eTRwZzFsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26xBT4cndFDE38Pcs/giphy.gif"
+  },
+  {
     "id": 3,
     "name": "Boxer",
     "price": 500,
