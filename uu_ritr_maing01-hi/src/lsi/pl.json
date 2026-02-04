@@ -236,13 +236,13 @@
         "contactUs": "Skontaktuj się z nami",
         "roles": {
             "backend": "Programista Backend",
-            "fullstack": "Programista Fullstack",
+            "fullstack": "Programista Backend",
             "frontend": "UI/UX dizajnér",
             "uiux": "Projektant UI/UX"
         },
         "bios": {
             "backend": "Zarządza logiką serwera, bazami danych i integracjami API dla naszej aplikacji.",
-            "fullstack": "Sebo, nie wpisuj tutaj, że zrobiłeś wszystko",
+            "fullstack": "Stworzył cały backend dla aplikacji.",
             "frontend": "Zaprojektował cały design aplikacji – strony, układy, komponenty i UI flow.",
             "uiux": "Projektuje interfejsy użytkownika i zapewnia optymalne wrażenia użytkownika."
         },

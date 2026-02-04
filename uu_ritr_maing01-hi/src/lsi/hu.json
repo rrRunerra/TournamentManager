@@ -236,13 +236,13 @@
         "contactUs": "Lépjen kapcsolatba velünk",
         "roles": {
             "backend": "Backend fejlesztő",
-            "fullstack": "Fullstack fejlesztő",
+            "fullstack": "Backend fejlesztő",
             "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX tervező"
         },
         "bios": {
             "backend": "Kezeli a szerver logikát, az adatbázisokat és az API integrációkat alkalmazásunkhoz.",
-            "fullstack": "Sebo, ne írd ide, hogy te csináltál mindent",
+            "fullstack": "Létrehozta az alkalmazás teljes backendjét.",
             "frontend": "Megtervezte az egész alkalmazás dizájnját – oldalakat, elrendezéseket, komponenseket és UI flow-t.",
             "uiux": "Tervezi a felhasználói felületeket és biztosítja az optimális felhasználói élményt."
         },

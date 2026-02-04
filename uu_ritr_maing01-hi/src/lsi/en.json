@@ -237,13 +237,13 @@
     "contactUs": "Contact Us",
     "roles": {
       "backend": "Backend Developer",
-      "fullstack": "Fullstack Developer",
+      "fullstack": "Backend Developer",
       "frontend": "UI/UX dizajnér",
       "uiux": "UI/UX Designer"
     },
     "bios": {
       "backend": "Manages server logic, databases, and API integrations for our application.",
-      "fullstack": "Don't put here that you did everything Sebo",
+      "fullstack": "Created the entire backend for the application.",
       "frontend": "Designed the entire application – pages, layouts, components and UI flow.",
       "uiux": "Designs user interfaces and ensures optimal user experience."
     },

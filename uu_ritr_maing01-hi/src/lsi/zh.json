@@ -249,13 +249,13 @@
         "contactUs": "联系我们",
         "roles": {
             "backend": "后端开发人员",
-            "fullstack": "全栈开发人员",
+            "fullstack": "后端开发人员",
             "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX 设计师"
         },
         "bios": {
             "backend": "管理我们应用程序的服务器逻辑、数据库和 API 集成。",
-            "fullstack": "Sebo，别在这儿写你做了所有的事",
+            "fullstack": "创建了应用程序的整个后端。",
             "frontend": "设计了整个应用程序——页面、布局、组件和 UI 流程。",
             "uiux": "设计用户界面并确保最佳的用户体验。"
         },

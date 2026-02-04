@@ -237,13 +237,13 @@
         "contactUs": "Kontaktuj nás",
         "roles": {
             "backend": "Backend vývojár",
-            "fullstack": "Fullstack vývojár",
+            "fullstack": "Backend vývojár",
             "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX dizajnér"
         },
         "bios": {
             "backend": "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu.",
-            "fullstack": "Nedavaj si tu ze si urobil vsetko sebo",
+            "fullstack": "Vytvoril celý backend pre aplikáciu.",
             "frontend": "Navrhol celý dizajn aplikácie – stránky, layouty, komponenty a UI flow.",
             "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
         },

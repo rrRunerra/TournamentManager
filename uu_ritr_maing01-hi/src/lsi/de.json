@@ -236,13 +236,13 @@
         "contactUs": "Kontaktieren Sie uns",
         "roles": {
             "backend": "Backend-Entwickler",
-            "fullstack": "Fullstack-Entwickler",
+            "fullstack": "Backend-Entwickler",
             "frontend": "UI/UX dizajnér",
             "uiux": "UI/UX-Designer"
         },
         "bios": {
             "backend": "Verwaltet Serverlogik, Datenbanken und API-Integrationen für unsere Anwendung.",
-            "fullstack": "Sebo, schreib hier nicht rein, dass du alles gemacht hast",
+            "fullstack": "Hat das gesamte Backend für die Anwendung erstellt.",
             "frontend": "Entwarf das gesamte Anwendungsdesign – Seiten, Layouts, Komponenten und UI-Flow.",
             "uiux": "Entwirft Benutzeroberflächen und sorgt für eine optimale Benutzererfahrung."
         },
