@@ -505,11 +505,16 @@ class PlayerAbl {
       throw new Errors.Create.UserNotFound();
     }
 
+    // replace ucitel with teacher
+    let role = loginResponse.users[0].userid?.replace(/\d+/g, "")?.trim()?.toLowerCase() ?? "a";
+
+    role == "ucitel" ? (role = "teacher") : role;
+
     let user = {
       id: loginResponse.users[0].userid.replace(/\D+/g, ""),
       name: `${loginResponse.users[0].firstname} ${loginResponse.users[0].lastname}`,
       school: loginResponse.users[0].edupage.toLowerCase(),
-      role: loginResponse.users[0].userid?.replace(/\d+/g, "")?.trim()?.toLowerCase() ?? "a",
+      role: role ?? "unknown",
       class: schoolData.class,
       classes: schoolData.classes,
       classRooms: schoolData.classRooms,

@@ -45,9 +45,6 @@ export class Edu {
       //console.log("Login Response:", JSON.stringify(json, null, 2));
 
       if (json.users && json.users.length > 0) {
-        console.log("Login Successful!");
-        console.log("User ID:", json.users[0].userid);
-        console.log("Session ID:", json.users[0].esid);
         this.edupageLink = json.users[0].edupage;
         this.typ = json.users[0].typ;
         this.esid = json.users[0].esid;
@@ -69,7 +66,14 @@ export class Edu {
       },
     });
     const content = await response.text();
-    const e = this.eduParse(content);
+
+    let e;
+
+    try {
+      e = this.eduParse(content);
+    } catch (error) {
+      console.error("Error parsing school data:", error);
+    }
     // e object keys
     //     [
     //   'items',          'introurl',
@@ -89,8 +93,16 @@ export class Edu {
     // ]
 
     const user = e.userrow;
-    const classes = e.dbi.classes;
-    const classRooms = e.dbi.classrooms;
+    if (!user) {
+      console.error("Parsed data is missing userrow:", e);
+      throw new Error("Failed to extract user information (userrow missing)");
+    }
+
+    const classes = e.dbi?.classes || {};
+    const classRooms = e.dbi?.classrooms || {};
+
+    console.log("Classes:", classes);
+    console.log("ClassRooms:", classRooms);
 
     const classList = [];
     for (const key in classes) {
@@ -112,7 +124,7 @@ export class Edu {
     }
 
     return {
-      class: classes[user.TriedaID].short,
+      class: user.role === "student" ? classes[user.TriedaID].short : null,
       classes: classList,
       classRooms: classRoomList.filter((n) => n.name != ""),
     };
@@ -122,7 +134,10 @@ export class Edu {
     const data = {};
     const matches = [...html.matchAll(/ASC\.([a-zA-Z0-9_$]+)\s?=\s?([\s\S]+?);/g)];
 
-    if (!matches.length) return FatalError.throw(new ParseError("Failed to parse ASC data from html"), { html });
+    if (!matches.length) {
+      console.error("Failed to parse ASC data from html (no matches)");
+      return {};
+    }
 
     for (const [match, key, value] of matches) {
       if (value.startsWith("function")) continue;
@@ -130,14 +145,9 @@ export class Edu {
       try {
         data[key] = JSON.parse(value);
       } catch (e) {
-        return FatalError.throw(new ParseError("Failed to parse JSON from ASC html"), {
-          html,
-          matches,
-          match,
-          key,
-          value,
-          e,
-        });
+        console.error(`Failed to parse JSON for key ${key}:`, e);
+        // Don't throw here, just continue with other keys if some fail
+        continue;
       }
     }
 
@@ -149,23 +159,32 @@ export class Edu {
       _edubar: {},
     };
 
-    const match = (html.match(/\.userhome\((.+?)\);$/m) || "")[1];
-    if (!match) return FatalError.throw(new ParseError("Failed to parse Edupage data from html"), { html });
+    // Use a more robust regex that anchors to the end of the line (multiline mode)
+    // This prevents cutting off at ); inside JSON strings.
+    const match = (html.match(/\.userhome\(([\s\S]+?)\);\s*$/m) || html.match(/\.userhome\(([\s\S]+?)\);/) || "")[1];
+    if (!match) {
+      throw new Error("Failed to parse Edupage data from html (userhome match not found)");
+    }
 
     try {
       data = { ...JSON.parse(match) };
     } catch (e) {
-      return FatalError.throw(new ParseError("Failed to parse JSON from Edupage html"), { html, match, e });
+      console.error("JSON parse error in userhome data:", e);
+      throw new Error("Failed to parse JSON from Edupage html (.userhome)");
     }
 
-    //Parse additional edubar data
-    const match2 = (html.match(/edubar\(([\s\S]*?)\);/) || "")[1];
-    if (!match2) return FatalError.throw(new ParseError("Failed to parse edubar data from html"), { html });
-
-    try {
-      data._edubar = JSON.parse(match2) || {};
-    } catch (e) {
-      return FatalError.throw(new ParseError("Failed to parse JSON from edubar html"), { html, match2, e });
+    // Parse additional edubar data
+    // Again, anchor to end of line to handle ); inside strings
+    const match2 = (html.match(/edubar\(([\s\S]*?)\);\s*$/m) || html.match(/edubar\(([\s\S]*?)\);/) || "")[1];
+    if (!match2) {
+      console.warn("edubar data not found in html");
+    } else {
+      try {
+        data._edubar = JSON.parse(match2) || {};
+      } catch (e) {
+        console.error("JSON parse error in edubar data:", e);
+        // It's possible edubar is just too complex or broken, we can continue without it if userhome worked
+      }
     }
 
     return data;
