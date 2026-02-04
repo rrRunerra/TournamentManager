@@ -245,7 +245,7 @@
             "backend": "Spravuje serverovú logiku, databázy a API integrácie pre našu aplikáciu.",
             "fullstack": "Vytvoril celý backend pre aplikáciu.",
             "frontend": "Navrhol celý dizajn aplikácie – stránky, layouty, komponenty a UI flow.",
-            "uiux": "Navrhuje používateľské rozhrania a zabezpečuje optimálnu používateľskú skúsenosť."
+            "uiux": "Navrhol a realizoval časti webu so zameraním na UI/UX, funkcionalitu a používateľský flow."
         },
         "thanksTitle": "Špeciálne poďakovanie",
         "thanksText": "Chceli by sme vyjadriť veľké poďakovanie firme Unicorn a Strednej priemyselnej škole, Partizánska 1059, Snina za ich podporu a mentorstvo počas vývoja tohto projektu. Bez ich odborných rád a technologického zázemia by tento projekt nebol možný.",
