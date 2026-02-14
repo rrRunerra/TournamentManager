@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import "../../../styles/bricks/components/input/DateTimePicker.css";
+import { useLsi } from "uu5g05";
+import importLsi from "../../../lsi/import-lsi.js";
 
 export default function DateTimePicker({ value, onChange, label, locale = "en", direction = "down" }) {
   const [isOpen, setIsOpen] = useState(false);
+  const lsi = useLsi(importLsi, ["DateTimePicker"]);
   const [selectedDate, setSelectedDate] = useState(value ? new Date(value) : null);
   const [viewDate, setViewDate] = useState(value ? new Date(value) : new Date());
   const containerRef = useRef(null);
@@ -184,7 +187,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
           readOnly
           className="form-control"
           value={formatDisplayDate(selectedDate)}
-          placeholder="Select date and time"
+          placeholder={lsi.placeholder}
         />
         <span className="calendar-icon">📅</span>
       </div>
@@ -218,7 +221,7 @@ export default function DateTimePicker({ value, onChange, label, locale = "en", 
 
           <div className="time-selector">
             <div className="time-input-group">
-              <label>Time</label>
+              <label>{lsi.time}</label>
               <div className="time-inputs">
                 <input
                   type="number"

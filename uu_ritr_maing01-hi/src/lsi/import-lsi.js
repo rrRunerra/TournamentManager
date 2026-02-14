@@ -15,10 +15,10 @@ const importLsi = (lang) => import(`./${lang}.json`);
 importLsi.libraryCode = libraryCode;
 
 Utils.Lsi.setDefaultLsi(libraryCode, {
-  en: lsiEn,
+  gb: lsiEn,
   cz: lsiCz,
   sk: lsiSk,
-  ja: lsiJa,
+  jp: lsiJa,
   zh: lsiZh,
   ru: lsiRu,
   de: lsiDe,

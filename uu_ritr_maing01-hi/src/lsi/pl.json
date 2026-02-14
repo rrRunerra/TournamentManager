@@ -140,7 +140,14 @@
         "errorRobin": "Każdy z każdym wymaga parzystej liczby drużyn.",
         "errorDouble": "Podwójna eliminacja wymaga, aby liczba drużyn była podzielna przez 4.",
         "errorUnauthorized": "Nie masz uprawnień do tworzenia turnieju. Tylko nauczyciele mogą tworzyć turnieje.",
-        "classRoom": "Sala lekcyjna"
+        "classRoom": "Sala lekcyjna",
+        "school": "Szkoła",
+        "step": "Krok",
+        "back": "Wstecz",
+        "next": "Dalej",
+        "helperSingle": "Wymagane są co najmniej 3 drużyny.",
+        "helperDouble": "Liczba drużyn musi być wielokrotnością 4.",
+        "helperRobin": "Liczba drużyn musi być wielokrotnością 2."
     },
     "Pagination": {
         "previous": "Poprzedni",
@@ -434,5 +441,9 @@
         "purchaseError": "Zakup nieudany",
         "insufficientCredits": "Niewystarczająca ilość kredytov!",
         "alreadyOwned": "Już posiadasz"
+    },
+    "DateTimePicker": {
+        "placeholder": "Wybierz datę i godzinę",
+        "time": "Czas"
     }
 }

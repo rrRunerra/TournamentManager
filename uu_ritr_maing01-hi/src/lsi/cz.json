@@ -154,7 +154,14 @@
     "errorRobin": "Každý s každým vyžaduje sudý počet týmů.",
     "errorDouble": "Dvojitá eliminace vyžaduje, aby počet týmů byl dělitelný 4.",
     "errorUnauthorized": "Nemáte oprávnění k vytvoření turnaje. Pouze učitelé mohou vytvářet turnaje.",
-    "classRoom": "Učebna"
+    "classRoom": "Učebna",
+    "school": "Škola",
+    "step": "Krok",
+    "back": "Zpět",
+    "next": "Další",
+    "helperSingle": "Jsou vyžadovány alespoň 3 týmy.",
+    "helperDouble": "Počet týmů musí být násobek 4.",
+    "helperRobin": "Počet týmů musí být násobek 2."
   },
   "Pagination": {
     "previous": "Předchozí",
@@ -435,5 +442,9 @@
         "lastWin": "Poslední výhra"
       }
     }
+  },
+  "DateTimePicker": {
+    "placeholder": "Vyberte datum a čas",
+    "time": "Čas"
   }
 }

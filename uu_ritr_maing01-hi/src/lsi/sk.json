@@ -141,7 +141,14 @@
         "errorRobin": "Každý s každým vyžaduje párny počet tímov.",
         "errorDouble": "Dvojitá eliminácia vyžaduje, aby počet tímov bol deliteľný 4.",
         "errorUnauthorized": "Nemáte oprávnenie vytvoriť turnaj. Iba učitelia môžu vytvárať turnaje.",
-        "classRoom": "Učebňa"
+        "classRoom": "Učebňa",
+        "school": "Škola",
+        "step": "Krok",
+        "back": "Späť",
+        "next": "Ďalej",
+        "helperSingle": "Sú vyžadované aspoň 3 tímy.",
+        "helperDouble": "Počet tímov musí byť násobok 4.",
+        "helperRobin": "Počet tímov musí byť násobok 2."
     },
     "Pagination": {
         "previous": "Predchádzajúci",
@@ -435,5 +442,9 @@
         "purchaseError": "Nákup zlyhal",
         "insufficientCredits": "Nedostatok kreditov!",
         "alreadyOwned": "Už vlastnené"
+    },
+    "DateTimePicker": {
+        "placeholder": "Vyberte dátum a čas",
+        "time": "Čas"
     }
 }

@@ -141,7 +141,14 @@
     "errorRobin": "Round Robin requires an even number of teams.",
     "errorDouble": "Double elimination requires the number of teams to be divisible by 4.",
     "errorUnauthorized": "You are not authorized to create a tournament. Only teachers can create tournaments.",
-    "classRoom": "Classroom"
+    "school": "School",
+    "classRoom": "Classroom",
+    "step": "Step",
+    "back": "Back",
+    "next": "Next",
+    "helperSingle": "Minimum 3 teams required.",
+    "helperDouble": "Number of teams must be a multiple of 4.",
+    "helperRobin": "Number of teams must be a multiple of 2."
   },
   "Pagination": {
     "previous": "Previous",
@@ -238,7 +245,7 @@
     "roles": {
       "backend": "Backend Developer",
       "fullstack": "Backend Developer",
-      "frontend": "UI/UX dizajnér",
+      "frontend": "UI/UX Designer",
       "uiux": "UI/UX Designer"
     },
     "bios": {
@@ -435,5 +442,9 @@
     "purchaseError": "Purchase Failed",
     "insufficientCredits": "Insufficient Credits!",
     "alreadyOwned": "Already Owned"
+  },
+  "DateTimePicker": {
+    "placeholder": "Select date and time",
+    "time": "Time"
   }
 }

@@ -140,7 +140,14 @@
         "errorRobin": "A körmérkőzéshez páros számú csapat szükséges.",
         "errorDouble": "A dupla kieséses rendszerhez a csapatok számának oszthatónak kell lennie 4-gyel.",
         "errorUnauthorized": "Nincs jogosultsága versenyt létrehozni. Csak a tanárok hozhatnak létre versenyeket.",
-        "classRoom": "Tanterem"
+        "classRoom": "Tanterem",
+        "school": "Iskola",
+        "step": "Lépés",
+        "back": "Vissza",
+        "next": "Tovább",
+        "helperSingle": "Legalább 3 csapat szükséges.",
+        "helperDouble": "A csapatok számának oszthatónak kell lennie 4-gyel.",
+        "helperRobin": "A csapatok számának oszthatónak kell lennie 2-vel."
     },
     "Pagination": {
         "previous": "Előző",
@@ -434,5 +441,9 @@
         "purchaseError": "Sikertelen vásárlás",
         "insufficientCredits": "Nincs elég kredited!",
         "alreadyOwned": "Már megvan"
+    },
+    "DateTimePicker": {
+        "placeholder": "Válasszon dátumot és időt",
+        "time": "Idő"
     }
 }

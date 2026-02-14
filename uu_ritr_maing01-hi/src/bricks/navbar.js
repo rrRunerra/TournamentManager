@@ -8,16 +8,16 @@ import ContactModal from "./ContactModal.js";
 import { Card, CardIcon } from "../bricks/components/ui/Card.js";
 import Shop from "./shop/shop.js";
 import shopItems from "./shop/shop_items.json";
-
+import { Flag } from "uu5g05-elements";
 const LANGUAGES = [
-  { code: "en", label: "EN", icon: "🇬🇧" },
+  { code: "gb", label: "EN", icon: "🇬🇧" },
   { code: "cz", label: "CZ", icon: "🇨🇿" },
   { code: "sk", label: "SK", icon: "🇸🇰" },
   { code: "de", label: "DE", icon: "🇩🇪" },
   { code: "pl", label: "PL", icon: "🇵🇱" },
   { code: "hu", label: "HU", icon: "🇭🇺" },
   { code: "ru", label: "RU", icon: "🇷🇺" },
-  { code: "ja", label: "JA", icon: "🇯🇵" },
+  { code: "jp", label: "JA", icon: "🇯🇵" },
   { code: "zh", label: "ZH", icon: "🇨🇳" },
 ];
 
@@ -42,6 +42,7 @@ export default function Navbar() {
   const accountPopupRef = useRef(null);
   const mobileAccountRef = useRef(null);
   const langPopupRef = useRef(null);
+  const mobileLangPopupRef = useRef(null);
   const settingsPopupRef = useRef(null);
 
   useEffect(() => {
@@ -121,7 +122,10 @@ export default function Navbar() {
   // Close language dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (langPopupRef.current && !langPopupRef.current.contains(event.target)) {
+      const isOutsideDesktop = !langPopupRef.current || !langPopupRef.current.contains(event.target);
+      const isOutsideMobile = !mobileLangPopupRef.current || !mobileLangPopupRef.current.contains(event.target);
+
+      if (isOutsideDesktop && isOutsideMobile) {
         setIsLangOpen(false);
       }
     };
@@ -164,6 +168,7 @@ export default function Navbar() {
 
   const handleLanguageChange = (lang) => {
     setLang(lang);
+    console.log("Setting language");
     localStorage.setItem("language", lang);
     setIsLangOpen(false);
   };
@@ -183,9 +188,11 @@ export default function Navbar() {
 
         <div className="mobile-controls">
           {/* Mobile Language Switcher */}
-          <div className="language-selector-wrapper mobile-only" ref={langPopupRef}>
+          <div className="language-selector-wrapper mobile-only" ref={mobileLangPopupRef}>
             <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
-              <span className="lang-icon">{LANGUAGES.find((l) => l.code === lang)?.icon || "🌐"}</span>
+              <span className="lang-icon">
+                {<Flag code={LANGUAGES.find((l) => l.code === lang)?.code} height={12} /> || "🌐"}
+              </span>
               <span className="lang-text">{LANGUAGES.find((l) => l.code === lang)?.label || lang.toUpperCase()}</span>
               <span className={`lang-arrow ${isLangOpen ? "open" : ""}`}>▼</span>
             </div>
@@ -196,9 +203,14 @@ export default function Navbar() {
                   <div
                     key={l.code}
                     className={`lang-option ${lang === l.code ? "active" : ""}`}
-                    onClick={() => handleLanguageChange(l.code)}
+                    onClick={() => {
+                      handleLanguageChange(l.code);
+                    }}
                   >
-                    <span className="lang-icon">{l.icon}</span> {l.label}
+                    <span className="lang-icon">
+                      <Flag code={l.code} height={12} />
+                    </span>{" "}
+                    {l.label}
                   </div>
                 ))}
               </div>
@@ -352,7 +364,7 @@ export default function Navbar() {
           {/* Language Switcher (Desktop) */}
           <div className="language-selector-wrapper" ref={langPopupRef}>
             <div className="lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
-              <span className="lang-icon">{LANGUAGES.find((l) => l.code === lang)?.icon || "🌐"}</span>
+              <span className="lang-icon">{<Flag code={lang} height={12} /> || "🌐"}</span>
               <span className="lang-text">{LANGUAGES.find((l) => l.code === lang)?.label || lang.toUpperCase()}</span>
               <span className={`lang-arrow ${isLangOpen ? "open" : ""}`}>▼</span>
             </div>
@@ -365,7 +377,7 @@ export default function Navbar() {
                     className={`lang-option ${lang === l.code ? "active" : ""}`}
                     onClick={() => handleLanguageChange(l.code)}
                   >
-                    <span className="lang-icon">{l.icon}</span> {l.label}
+                    <span className="lang-icon">{<Flag code={l.code} height={12} />}</span> {l.label}
                   </div>
                 ))}
               </div>

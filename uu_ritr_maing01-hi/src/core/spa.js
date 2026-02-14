@@ -67,7 +67,7 @@ const Spa = createVisualComponent({
     }, []);
 
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cz", "sk", "ja", "zh", "ru", "de", "pl", "hu"]}>
+      <Plus4U5.SpaProvider initialLanguageList={["gb", "cz", "sk", "jp", "zh", "ru", "de", "pl", "hu"]}>
         <NotificationProvider>
           <ConfirmProvider>
             <Uu5Elements.ModalBus>

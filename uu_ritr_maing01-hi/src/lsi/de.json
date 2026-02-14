@@ -140,7 +140,14 @@
         "errorRobin": "Jeder gegen Jeden erfordert eine gerade Anzahl von Teams.",
         "errorDouble": "Doppel-Eliminierung erfordert, dass die Anzahl der Teams durch 4 teilbar ist.",
         "errorUnauthorized": "Sie sind nicht berechtigt, ein Turnier zu erstellen. Nur Lehrer können Turniere erstellen.",
-        "classRoom": "Klassenzimmer"
+        "classRoom": "Klassenzimmer",
+        "school": "Schule",
+        "step": "Schritt",
+        "back": "Zurück",
+        "next": "Weiter",
+        "helperSingle": "Mindestens 3 Teams sind erforderlich.",
+        "helperDouble": "Die Anzahl der Teams muss durch 4 teilbar sein.",
+        "helperRobin": "Die Anzahl der Teams muss durch 2 teilbar sein."
     },
     "Pagination": {
         "previous": "Zurück",
@@ -434,5 +441,9 @@
         "purchaseError": "Kauf fehlgeschlagen",
         "insufficientCredits": "Unzureichende Credits!",
         "alreadyOwned": "Bereits im Besitz"
+    },
+    "DateTimePicker": {
+        "placeholder": "Datum und Uhrzeit wählen",
+        "time": "Zeit"
     }
 }

@@ -140,7 +140,14 @@
         "errorRobin": "ラウンドロビンには偶数のチーム数が必要です。",
         "errorDouble": "ダブルエリミネーションには、チーム数が4で割り切れる必要があります。",
         "errorUnauthorized": "トーナメントを作成する権限がありません。教師のみがトーナメントを作成できます。",
-        "classRoom": "教室"
+        "school": "学校",
+    "classRoom": "教室",
+    "step": "ステップ",
+    "back": "戻る",
+    "next": "次へ",
+    "helperSingle": "最低3チームが必要です。",
+    "helperDouble": "チーム数は4の倍数である必要があります。",
+    "helperRobin": "チーム数は2の倍数である必要があります。"
     },
     "Pagination": {
         "previous": "前へ",
@@ -237,7 +244,7 @@
         "roles": {
             "backend": "バックエンド開発者",
             "fullstack": "バックエンド開発者",
-            "frontend": "UI/UX dizajnér",
+            "frontend": "UI/UX デザイナー",
             "uiux": "UI/UX デザイナー"
         },
         "bios": {
@@ -434,5 +441,9 @@
         "purchaseError": "購入に失敗しました",
         "insufficientCredits": "クレジットが不足しています！",
         "alreadyOwned": "既に所有しています"
+    },
+    "DateTimePicker": {
+        "placeholder": "日付と時刻を選択",
+        "time": "時間"
     }
 }
