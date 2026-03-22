@@ -190,3 +190,36 @@ export class Edu {
     return data;
   }
 }
+/* https://mermaid.ai/live/
+
+sequenceDiagram
+    autonumber
+    participant User as PlayerABL
+    participant SDK as Edu Class
+    participant Web as Edupage Servers
+
+    Note over User, Web: PHASE 1: Authentication
+    User->>SDK: login(user, pass)
+    activate SDK
+    SDK->>Web: POST /mauth
+    Web-->>SDK: session data (esid)
+    SDK->>SDK: Store session & school URL
+    SDK-->>User: Login Success
+    deactivate SDK
+
+    Note over User, Web: PHASE 2: Data Extraction
+    User->>SDK: getSchoolData()
+    activate SDK
+    SDK->>Web: GET /user/ (with Cookie)
+    Web-->>SDK: Raw HTML Page
+    
+    rect rgb(40, 45, 55)
+        Note right of SDK: Internal Parsing Logic
+        SDK->>SDK: Run Regex on HTML
+        SDK->>SDK: JSON.parse(extracted_strings)
+    end
+
+    SDK-->>User: Final { classes, rooms }
+    deactivate SDK
+
+*/

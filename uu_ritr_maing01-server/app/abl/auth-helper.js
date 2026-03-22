@@ -26,3 +26,19 @@ class AuthHelper {
 }
 
 module.exports = AuthHelper;
+
+/*  https://mermaid.ai/live/
+
+graph TD
+    A[Request arrives with Token] --> B{Is Token there?}
+    B -- No --> C[<b>Error:</b> Token required]
+    B -- Yes --> D{Is Token valid?}
+    D -- No --> E[<b>Error:</b> Invalid or Expired]
+    D -- Yes --> F[<b>Success:</b> User is verified]
+
+    style F fill:#00ff0055,stroke:#333
+    style C fill:#ff000033,stroke:#333
+    style E fill:#ff000033,stroke:#333
+
+
+*/
