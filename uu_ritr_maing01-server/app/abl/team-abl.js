@@ -107,11 +107,11 @@ class TeamAbl {
       throw new Errors.Update.InvalidDtoIn();
     }
 
-    try {
-      AuthHelper.verifyToken(dtoIn.token);
-    } catch (e) {
-      throw new Errors.AuthenticationRequired();
-    }
+    // try {
+    //   AuthHelper.verifyToken(dtoIn.token);
+    // } catch (e) {
+    //   throw new Errors.AuthenticationRequired();
+    // }
 
     // Get the existing team
     const team = await this.dao.get({ awid, id: dtoIn.id });

@@ -101,8 +101,8 @@ export class Edu {
     const classes = e.dbi?.classes || {};
     const classRooms = e.dbi?.classrooms || {};
 
-    console.log("Classes:", classes);
-    console.log("ClassRooms:", classRooms);
+    // console.log("Classes:", classes);
+    // console.log("ClassRooms:", classRooms);
 
     const classList = [];
     for (const key in classes) {
