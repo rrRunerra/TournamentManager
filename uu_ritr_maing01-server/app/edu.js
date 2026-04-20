@@ -123,8 +123,10 @@ export class Edu {
       });
     }
 
+    user.role = user.UserID.replace(user.StudentID, "").toLowerCase();
+
     return {
-      class: user.role === "student" ? classes[user.TriedaID].short : null,
+      class: user.role === "student" ? classList.find((n) => n.id === user.TriedaID)?.short : null,
       classes: classList,
       classRooms: classRoomList.filter((n) => n.name != ""),
     };
